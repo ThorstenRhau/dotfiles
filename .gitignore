@@ -1,0 +1,5 @@
+fish/.config/fish/fish_variables
+fish/.config/fish/local.fish
+fish/.config/fish/secrets.fish
+
+yazi/.config/yazi/theme.toml
