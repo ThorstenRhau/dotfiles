@@ -1,0 +1,8 @@
+[manager]
+ratio          = [1, 2, 5] # Configuration in 1/8 of screen width
+scolloff       = 8
+show_hidden    = true
+show_symlinks  = true
+sort_by        = "natural"
+sort_dir_first = true
+sort_sensitive = true
