@@ -19,7 +19,7 @@ format   = "[󰌘  $hostname](bold green) "
 ssh_only = true
 
 [username]
-detect_env_vars = ["SSH_CLIENT", "SSH_CONNECTION", "SSH_TTY"]
+detect_env_vars = ["SSH_CLIENT", "SSH_CONNECTION", "SSH_TTY", "SUDO_USER"]
 format          = "[$user]($style) "
 show_always     = true
 style_root      = "bold red"
