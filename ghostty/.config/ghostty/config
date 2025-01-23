@@ -23,6 +23,7 @@ cursor-opacity                 = 0.8
 link-url                       = true
 mouse-hide-while-typing        = true
 theme                          = dark:tokyonight_night,light:tokyonight_day
+window-padding-balance         = true
 window-vsync                   = true
 
 # Other
