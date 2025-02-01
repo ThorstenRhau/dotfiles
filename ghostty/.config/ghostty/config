@@ -1,15 +1,13 @@
 # ghostty +show-config --default --docs
 # ghostty +list-themes
+# ghostty +list-fonts
 
-font-family                    = Symbols Nerd Font Mono
 font-family                    = PragmataPro Liga
 font-family-bold               = PragmataPro Liga
 font-family-italic             = PragmataPro Liga
 font-family-bold-italic        = PragmataPro Liga
 
-font-feature                   = calt
-font-feature                   = liga
-font-feature                   = ss13
+font-feature                   = calt, liga, ss13
 
 font-size                      = 15
 window-inherit-font-size       = true
