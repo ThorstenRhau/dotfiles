@@ -112,7 +112,7 @@ if status is-interactive
         end
 
         set -gx DELTA_THEME "$theme"
-        alias cat "bat --theme $theme --paging never"
+        alias cat "bat --theme $theme --paging=never"
     end
 
     # Set fzf theme
