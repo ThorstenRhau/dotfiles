@@ -19,7 +19,7 @@ if status is-interactive
     # Homebrew
     if test -d /opt/homebrew
         set -gx ARCHFLAGS "-arch arm64"
-        set -gx HOMEBREW_PREFIX "/opt/homebrew"
+        set -gx HOMEBREW_PREFIX /opt/homebrew
         set -gx HOMEBREW_NO_ANALYTICS 1
         fish_add_path -p /opt/homebrew/sbin
         fish_add_path -p /opt/homebrew/bin
@@ -35,12 +35,14 @@ if status is-interactive
 
     # Eza (ls replacement)
     if type -q eza
-        alias ls "eza --header --git"
+        function ls --wraps eza --description "ls using eza with git info"
+            eza --header --git $argv
+        end
     end
 
     # Neovim
-    if type nvim > /dev/null
-        abbr nv 'nvim'
+    if type nvim >/dev/null
+        abbr nv nvim
         set -gx EDITOR (which nvim)
         set -gx VISUAL $EDITOR
         set -gx SUDO_EDITOR $EDITOR
@@ -48,7 +50,7 @@ if status is-interactive
     end
 
     # Abbreviations and aliases
-    abbr gc 'git commit' 
+    abbr gc 'git commit'
     abbr gca 'git commit -a'
     abbr gd 'git diff'
     abbr gl 'git pull'
@@ -56,20 +58,26 @@ if status is-interactive
     abbr gp 'git push'
     abbr gpristine 'git reset --hard && git clean --force -dfx'
     abbr gst 'git status'
-    abbr pip 'pip3'
-    abbr python 'python3'
-    alias mosh "TERM=xterm-256color command mosh"
-    alias ssh "TERM=xterm-256color command ssh"
+    abbr pip pip3
+    abbr python python3
+    function mosh --wraps mosh --description "mosh with 256color support"
+        env TERM=xterm-256color command mosh $argv
+    end
+    function ssh --wraps ssh --description "ssh with 256color support"
+        env TERM=xterm-256color command ssh $argv
+    end
 
     # Zoxide
-    if type zoxide > /dev/null
+    if type zoxide >/dev/null
         zoxide init fish | source
-        bind \cz zi 
-        alias cd z
+        bind \cz zi
+        function cd --wraps=z --description "zoxide directory jumping"
+            z $argv
+        end
     end
 
     # FZF
-    if type fzf > /dev/null
+    if type fzf >/dev/null
         fzf --fish | source
         set -gx FZF_DEFAULT_COMMAND 'fd --type f --hidden --exclude .git'
         set -gx FZF_CTRL_T_COMMAND 'fd --type f --hidden --exclude .git'
@@ -89,34 +97,36 @@ if status is-interactive
         set -gx appearance (defaults read -g AppleInterfaceStyle 2>/dev/null)
     else
         # Fallback to Dark theme of not on macOS
-        set -gx appearance "Dark"
+        set -gx appearance Dark
     end
 
     # Set fish theme
-    if test "$appearance" = "Dark"
+    if test "$appearance" = Dark
         # Dark theme stuff
-        fish_config theme choose "tokyonight_night"
+        fish_config theme choose tokyonight_night
     else
         # Light theme stuff
-        fish_config theme choose "tokyonight_day"
+        fish_config theme choose tokyonight_day
     end
 
     # Check if bat exists and set theme, also for the delta pager
     if type -q bat
-        set -gx BAT_STYLE "changes" #Check man-page for further options
+        set -gx BAT_STYLE changes #Check man-page for further options
 
-        if test "$appearance" = "Dark"
+        if test "$appearance" = Dark
             set theme '"tokyonight_night"'
         else
             set theme '"tokyonight_day"'
         end
 
         set -gx DELTA_THEME "$theme"
-        alias cat "bat --theme $theme --paging=never"
+        function cat --wraps=bat --description "bat with theme and no paging"
+            bat --theme $theme --paging=never $argv
+        end
     end
 
     # Set fzf theme
-    if test "$appearance" = "Dark"
+    if test "$appearance" = Dark
         source "$HOME/.config/fish/themes/fzf/tokyonight_night.sh"
     else
         source "$HOME/.config/fish/themes/fzf/tokyonight_day.sh"
@@ -124,11 +134,11 @@ if status is-interactive
 
     # LazyGit
     if type -q lazygit
-        abbr lg 'lazygit'
+        abbr lg lazygit
         abbr lgs "lazygit status"
         abbr lgl "lazygit log"
 
-        if test "$appearance" = "Dark"
+        if test "$appearance" = Dark
             set -gx LG_CONFIG_FILE "$HOME/.config/fish/themes/lazygit/tokyonight_night.yml"
         else
             set -gx LG_CONFIG_FILE "$HOME/.config/fish/themes/lazygit/tokyonight_day.yml"
@@ -138,11 +148,11 @@ if status is-interactive
 
     # Yazi file manager
     if type -q yazi
-        abbr ya 'yazi'
+        abbr ya yazi
         if not test -d "$HOME/.config/yazi/"
             mkdir -p "$HOME/.config/yazi/"
         end
-        if test "$appearance" = "Dark"
+        if test "$appearance" = Dark
             ln -sf "$HOME/.config/fish/themes/yazi/tokyonight_night.toml" "$HOME/.config/yazi/theme.toml"
         else
             ln -sf "$HOME/.config/fish/themes/yazi/tokyonight_day.toml" "$HOME/.config/yazi/theme.toml"
