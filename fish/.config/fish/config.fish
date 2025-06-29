@@ -41,7 +41,7 @@ if status is-interactive
     end
 
     # Neovim
-    if type nvim >/dev/null
+    if type -q  nvim >/dev/null
         abbr nv nvim
         set -gx EDITOR (which nvim)
         set -gx VISUAL $EDITOR
@@ -68,7 +68,7 @@ if status is-interactive
     end
 
     # Zoxide
-    if type zoxide >/dev/null
+    if type -q  zoxide >/dev/null
         zoxide init fish | source
         bind \cz zi
         function cd --wraps=z --description "zoxide directory jumping"
@@ -77,7 +77,7 @@ if status is-interactive
     end
 
     # FZF
-    if type fzf >/dev/null
+    if type -q  fzf >/dev/null
         fzf --fish | source
         set -gx FZF_DEFAULT_COMMAND 'fd --type f --hidden --exclude .git'
         set -gx FZF_CTRL_T_COMMAND 'fd --type f --hidden --exclude .git'
