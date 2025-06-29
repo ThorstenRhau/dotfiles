@@ -146,19 +146,6 @@ if status is-interactive
 
     end
 
-    # Yazi file manager
-    if type -q yazi
-        abbr ya yazi
-        if not test -d "$HOME/.config/yazi/"
-            mkdir -p "$HOME/.config/yazi/"
-        end
-        if test "$appearance" = Dark
-            ln -sf "$HOME/.config/fish/themes/yazi/tokyonight_night.toml" "$HOME/.config/yazi/theme.toml"
-        else
-            ln -sf "$HOME/.config/fish/themes/yazi/tokyonight_day.toml" "$HOME/.config/yazi/theme.toml"
-        end
-    end
-
     # Sourcing local files
     set secrets_file "$HOME/.config/fish/secrets.fish"
     if test -r $secrets_file
