@@ -121,7 +121,7 @@ if status is-interactive
 
         set -gx DELTA_THEME "$theme"
         function cat --wraps bat --description "bat with theme and no paging"
-            command bat --theme="$theme" --paging=never $argv
+            bat --theme="$theme" --paging=never $argv
         end
     end
 
