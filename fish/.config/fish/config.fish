@@ -41,7 +41,7 @@ if status is-interactive
     end
 
     # Neovim
-    if type -q  nvim >/dev/null
+    if type -q nvim >/dev/null
         abbr nv nvim
         set -gx EDITOR (which nvim)
         set -gx VISUAL $EDITOR
@@ -68,7 +68,7 @@ if status is-interactive
     end
 
     # Zoxide
-    if type -q  zoxide >/dev/null
+    if type -q zoxide >/dev/null
         zoxide init fish | source
         bind \cz zi
         function cd --wraps=z --description "zoxide directory jumping"
@@ -77,7 +77,7 @@ if status is-interactive
     end
 
     # FZF
-    if type -q  fzf >/dev/null
+    if type -q fzf >/dev/null
         fzf --fish | source
         set -gx FZF_DEFAULT_COMMAND 'fd --type f --hidden --exclude .git'
         set -gx FZF_CTRL_T_COMMAND 'fd --type f --hidden --exclude .git'
@@ -114,14 +114,14 @@ if status is-interactive
         set -gx BAT_STYLE changes #Check man-page for further options
 
         if test "$appearance" = Dark
-            set theme '"tokyonight_night"'
+            set theme tokyonight_night
         else
-            set theme '"tokyonight_day"'
+            set theme tokyonight_day
         end
 
         set -gx DELTA_THEME "$theme"
-        function cat --wraps=bat --description "bat with theme and no paging"
-            bat --theme $theme --paging=never $argv
+        function cat --wraps bat --description "bat with theme and no paging"
+            command bat --theme="$theme" --paging=never $argv
         end
     end
 
