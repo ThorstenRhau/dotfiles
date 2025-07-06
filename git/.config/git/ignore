@@ -1,0 +1,53 @@
+# ── OS ─────────────────────────────────────────────────────────────────────────
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~                                  # backup/temp files
+*.swp                               # vim swap files
+
+# ── Shell scripts (bash, fish) ────────────────────────────────────────────────
+*.tmp
+*.bak
+# session/history
+command.log
+fish_history
+bash_history
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+build/
+dist/
+*.egg
+env/
+.env/
+venv/
+.venv/
+
+# ── Lua ───────────────────────────────────────────────────────────────────────
+*.luac
+luac.out
+
+# ── General ───────────────────────────────────────────────────────────────────
+# lock files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# editor swap / lock files
+*.sw?
+*.swo
+*.swn
+*.lock
