@@ -15,7 +15,7 @@ window-inherit-font-size       = true
 
 # Look and Feel
 adjust-cursor-thickness        = 3
-adjust-underline-position      = 3
+adjust-underline-position      = 0
 bold-color                     = bright
 cursor-invert-fg-bg            = true
 cursor-opacity                 = 0.8
