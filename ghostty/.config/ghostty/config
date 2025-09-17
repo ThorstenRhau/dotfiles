@@ -3,14 +3,14 @@
 # ghostty +list-themes
 # ghostty +list-fonts
 
-font-family                    = PragmataPro Liga
-font-family-bold               = PragmataPro Liga
-font-family-italic             = PragmataPro Liga
-font-family-bold-italic        = PragmataPro Liga
+font-family                    = PragmataPro VF Liga
+font-family-bold               = PragmataPro VF Liga
+font-family-italic             = PragmataPro VF Liga
+font-family-bold-italic        = PragmataPro VF Liga
 
 font-feature                   = calt, liga, ss13, ss18
 
-font-size                      = 15
+font-size                      = 16
 window-inherit-font-size       = true
 
 # Look and Feel
