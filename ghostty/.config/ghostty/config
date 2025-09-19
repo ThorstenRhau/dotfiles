@@ -4,9 +4,11 @@
 # ghostty +list-fonts
 
 font-family                    = PragmataPro VF Liga
-font-family-bold               = PragmataPro VF Liga
-font-family-italic             = PragmataPro VF Liga
-font-family-bold-italic        = PragmataPro VF Liga
+
+font-variation                 = wght=450
+font-variation-italic          = wght=450
+font-variation-bold            = wght=700
+font-variation-bold-italic     = wght=700
 
 font-feature                   = calt, liga, ss13, ss18
 
