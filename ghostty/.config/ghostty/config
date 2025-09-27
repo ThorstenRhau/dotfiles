@@ -18,6 +18,8 @@ window-inherit-font-size       = true
 # Look and Feel
 adjust-cursor-thickness        = 3
 adjust-underline-position      = 0
+background-blur                = true
+background-opacity             = 0.85
 bold-color                     = bright
 cursor-invert-fg-bg            = true
 cursor-opacity                 = 0.8
@@ -25,6 +27,7 @@ link-previews                  = osc8
 link-url                       = true
 mouse-hide-while-typing        = true
 theme                          = dark:tokyonight_night,light:tokyonight_day
+unfocused-split-fill           = BLACK
 window-padding-balance         = true
 window-padding-x               = 3
 window-padding-y               = 3
