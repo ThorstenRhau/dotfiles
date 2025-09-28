@@ -26,12 +26,13 @@ if status is-interactive
     end
 
     # Variables
-    set -gx fish_greeting # Disable greeting function
-    set -gx fish_history_limit 10000
+    set -gx CXXFLAGS "-std=gnu++20"
     set -gx GREP_OPTIONS "--color=auto"
-    set -gx LC_CTYPE "en_US.UTF-8"
     set -gx LANG "en_US.UTF-8"
+    set -gx LC_CTYPE "en_US.UTF-8"
     set -gx XDG_CONFIG_HOME "$HOME/.config"
+    set -gx fish_greeting
+    set -gx fish_history_limit 10000
 
     # Eza (ls replacement)
     if type -q eza
