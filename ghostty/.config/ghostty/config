@@ -1,4 +1,4 @@
-# NOTE
+# [NOTE]
 # ghostty +show-config --default --docs
 # ghostty +list-themes
 # ghostty +list-fonts
@@ -10,7 +10,7 @@ font-variation-italic          = wght=450
 font-variation-bold            = wght=700
 font-variation-bold-italic     = wght=700
 
-font-feature                   = calt, liga, ss13, ss18
+font-feature                   = calt, liga, ss13, ss15
 
 font-size                      = 16
 window-inherit-font-size       = true
