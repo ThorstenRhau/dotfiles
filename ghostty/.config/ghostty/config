@@ -37,7 +37,7 @@ quick-terminal-position        = center
 quick-terminal-size            = 500px
 scrollback-limit               = 16777216
 shell-integration              = fish
-shell-integration-features     = cursor,sudo,title,no-ssh-env,no-ssh-terminfo,path
+shell-integration-features     = cursor,sudo,title,ssh-env,ssh-terminfo
 
 # Key bindings
 keybind                        = ctrl+h=goto_split:left
