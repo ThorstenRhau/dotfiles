@@ -13,7 +13,6 @@ font-variation-bold-italic     = wght=700
 font-feature                   = calt, liga, ss13, ss15
 
 font-size                      = 16
-window-inherit-font-size       = true
 
 # Look and Feel
 adjust-cursor-thickness        = 3
@@ -21,35 +20,29 @@ adjust-underline-position      = 0
 background-blur                = true
 background-opacity             = 0.90
 bold-color                     = bright
-cursor-invert-fg-bg            = true
+cursor-color                   = cell-foreground
+cursor-text                    = cell-background
 cursor-opacity                 = 0.8
 link-previews                  = osc8
-link-url                       = true
 mouse-hide-while-typing        = true
 theme                          = dark:tokyonight_night,light:tokyonight_day
 unfocused-split-fill           = BLACK
 window-padding-balance         = true
 window-padding-x               = 3
 window-padding-y               = 3
-window-vsync                   = true
 
 # Other
-clipboard-paste-protection     = true
-clipboard-trim-trailing-spaces = true
 copy-on-select                 = clipboard
-macos-auto-secure-input        = true
-macos-secure-input-indication  = true
 quick-terminal-position        = center
 quick-terminal-size            = 500px
-quit-after-last-window-closed  = false
 scrollback-limit               = 16777216
 shell-integration              = fish
-shell-integration-features     = cursor,sudo,title
+shell-integration-features     = cursor,sudo,title,no-ssh-env,no-ssh-terminfo,path
 
 # Key bindings
 keybind                        = ctrl+h=goto_split:left
-keybind                        = ctrl+j=goto_split:bottom
-keybind                        = ctrl+k=goto_split:top
+keybind                        = ctrl+j=goto_split:down
+keybind                        = ctrl+k=goto_split:up
 keybind                        = ctrl+l=goto_split:right
 keybind                        = ctrl+shift+h=new_split:left
 keybind                        = ctrl+shift+j=new_split:down
