@@ -21,6 +21,7 @@ if status is-interactive
         set -gx ARCHFLAGS "-arch arm64"
         set -gx HOMEBREW_PREFIX /opt/homebrew
         set -gx HOMEBREW_NO_ANALYTICS 1
+        set -gx HOMEBREW_BAT 1
         fish_add_path -p /opt/homebrew/sbin
         fish_add_path -p /opt/homebrew/bin
     end
