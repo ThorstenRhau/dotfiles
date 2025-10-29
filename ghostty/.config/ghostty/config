@@ -35,22 +35,5 @@ window-padding-y               = 3
 copy-on-select                 = clipboard
 quick-terminal-position        = center
 quick-terminal-size            = 500px
-scrollback-limit               = 16777216
 shell-integration              = fish
 shell-integration-features     = cursor,sudo,title,ssh-env,ssh-terminfo
-
-# Key bindings
-keybind                        = ctrl+h=goto_split:left
-keybind                        = ctrl+j=goto_split:down
-keybind                        = ctrl+k=goto_split:up
-keybind                        = ctrl+l=goto_split:right
-keybind                        = ctrl+shift+h=new_split:left
-keybind                        = ctrl+shift+j=new_split:down
-keybind                        = ctrl+shift+k=new_split:up
-keybind                        = ctrl+shift+l=new_split:right
-keybind                        = super+shift+enter=new_split:auto
-keybind                        = super+shift+i=inspector:toggle
-keybind                        = super+shift+r=reload_config
-keybind                        = super+t=new_tab
-keybind                        = super+shift+g=toggle_command_palette
-keybind                        = super+shift+t=toggle_quick_terminal
