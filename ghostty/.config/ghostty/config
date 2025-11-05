@@ -17,13 +17,8 @@ font-size                      = 16
 # Look and Feel
 adjust-cursor-thickness        = 3
 adjust-underline-position      = 0
-background-blur                = true
-background-opacity             = 0.90
 bold-color                     = bright
-cursor-color                   = cell-foreground
-cursor-text                    = cell-background
-cursor-opacity                 = 0.8
-link-previews                  = osc8
+link-previews                  = true
 mouse-hide-while-typing        = true
 theme                          = dark:tokyonight_night,light:tokyonight_day
 unfocused-split-fill           = BLACK
