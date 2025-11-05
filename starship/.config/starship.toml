@@ -1,15 +1,15 @@
-# Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
 $username$hostname$directory$git_branch$git_status$cmd_duration$python$line_break$jobs$character
 """
+
 [character]
 
 [hostname]
 disabled = false
-format   = "[󰌘  $hostname](bold green) "
 ssh_only = true
+format = "[󰒋 $hostname](bold green) "
 
 [username]
 detect_env_vars = ["SSH_CLIENT", "SSH_CONNECTION", "SSH_TTY", "SUDO_USER"]
@@ -20,12 +20,12 @@ style_user      = "bold purple"
 
 [jobs]
 number_threshold = 2
-symbol           = ''
+symbol           = "󰒱 "
 symbol_threshold = 1
 
 [directory]
 format            = "[$path]($style)[$read_only]($read_only_style) "
-read_only         = "  "
+read_only         = " "
 read_only_style   = "red"
 style             = "bold blue"
 truncation_length = 3
@@ -37,20 +37,25 @@ style  = "bold purple"
 
 [git_status]
 disabled          = false
-format            = '([\[$all_status$ahead_behind\]]($style) )'
+format            = "[${ahead_behind}${staged}${modified}${deleted}${conflicted}${renamed}${stashed}${untracked}]($style) "
 ignore_submodules = true
-style             = 'bold blue'
+style             = "bold blue"
 
-ahead      = '⇡${count}'
-behind     = '⇣${count}'
-conflicted = '[!${count}](bold red)'
-deleted    = '[✘${count}](bold red)'
-diverged   = '⇕⇡${ahead_count}⇣${behind_count}'
-modified   = '[~${count}](bold yellow)'
-renamed    = '[»${count}](bold cyan)'
-staged     = '[++${count}](bold green)'
-stashed    = '󱈎 ${count}'
-untracked  = '[?${count}](bold purple)'
+ahead      = " ⇡${count}"
+behind     = " ⇣${count}"
+conflicted = " ${count}"
+deleted    = " ✘${count}"
+diverged   = " ⇕⇡${ahead_count}⇣${behind_count}"
+modified   = " ~${count}"
+renamed    = " »${count}"
+staged     = " ${count}"
+stashed    = " 󱈎 ${count}"
+untracked  = " ?${count}"
+
+
+[cmd_duration]
+format = "[󰔛 $duration]($style) "
+style  = "bold yellow"
 
 [python]
 detect_extensions = []
