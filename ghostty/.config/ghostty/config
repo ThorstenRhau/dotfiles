@@ -32,3 +32,6 @@ quick-terminal-position        = center
 quick-terminal-size            = 500px
 shell-integration              = detect
 shell-integration-features     = cursor,sudo,title,ssh-env,ssh-terminfo
+
+# Key bindings
+keybind                        = option+backspace=text:\x1b\x7f
