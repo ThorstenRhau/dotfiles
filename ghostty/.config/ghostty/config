@@ -30,5 +30,5 @@ window-padding-y               = 3
 copy-on-select                 = clipboard
 quick-terminal-position        = center
 quick-terminal-size            = 500px
-shell-integration              = fish
+shell-integration              = detect
 shell-integration-features     = cursor,sudo,title,ssh-env,ssh-terminfo
