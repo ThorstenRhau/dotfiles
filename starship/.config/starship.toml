@@ -4,12 +4,10 @@ format = """
 $username$hostname$directory$git_branch$git_status$cmd_duration$python$line_break$jobs$character
 """
 
-[character]
-
 [hostname]
 disabled = false
+format   = "[󰒋 $hostname](bold green) "
 ssh_only = true
-format = "[󰒋 $hostname](bold green) "
 
 [username]
 detect_env_vars = ["SSH_CLIENT", "SSH_CONNECTION", "SSH_TTY", "SUDO_USER"]
@@ -51,7 +49,6 @@ renamed    = " »${count}"
 staged     = " ${count}"
 stashed    = " 󱈎 ${count}"
 untracked  = " ?${count}"
-
 
 [cmd_duration]
 format = "[󰔛 $duration]($style) "
