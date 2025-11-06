@@ -160,6 +160,12 @@ if status is-interactive
     end
 
     # Starship
-    starship init fish | source
+    if type -q starship
+        function starship_transient_prompt_func
+            starship module character
+        end
+        starship init fish | source
+        enable_transience
+    end
 
 end
