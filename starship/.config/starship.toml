@@ -1,16 +1,17 @@
 "$schema"         = 'https://starship.rs/config-schema.json'
 
 format            = """$username$hostname$directory$git_branch$git_status$cmd_duration$python$jobs$line_break$character"""
+right_format      = """$status"""
 
 add_newline       = false
 
 [character]
-error_symbol      = "[󰁔](bold red) "
-success_symbol    = "[󰁔](bold green) "
-vicmd_symbol      = "[󰁍](bold yellow) "
+error_symbol      = "[](bold red) "
+success_symbol    = "[](bold green) "
+vicmd_symbol      = "[](bold yellow) "
 
 [hostname]
-format            = "[󰒋 $hostname](bold green) "
+format            = "[ $hostname](bold green) "
 ssh_only          = true
 
 [username]
@@ -18,12 +19,12 @@ detect_env_vars   = ["SSH_CLIENT", "SSH_CONNECTION", "SSH_TTY", "SUDO_USER"]
 format            = "[$user]($style) "
 show_always       = false
 style_root        = "bold red"
-style_user        = "bold purple"
+style_user        = "bold green"
 
 [jobs]
 format            = "[$symbol$number]($style) "
 number_threshold  = 2
-symbol            = "󰒱 "
+symbol            = "󰢻 "
 symbol_threshold  = 1
 
 [directory]
@@ -37,6 +38,7 @@ truncation_symbol = "… /"
 [git_branch]
 format            = "[$symbol$branch]($style) "
 style             = "bold purple"
+symbol            = " "
 truncation_length = 24
 truncation_symbol = "… "
 
@@ -58,13 +60,19 @@ untracked         = '[?${count}](bold purple)'
 
 [cmd_duration]
 format            = "[󰔛 $duration]($style) "
-min_time          = 2000
-style             = "bold yellow"
+min_time          = 4000
+style             = "yellow"
 
 [python]
 detect_extensions = []
 detect_folders    = []
 disabled          = false
-format            = "[$symbol$virtualenv]($style) "
-style             = "bold yellow"
-symbol            = " "
+format            = "[$symbol$virtualenv $version]($style) "
+style             = "yellow"
+symbol            = " "
+
+[status]
+disabled          = false
+format            = "[󰩈 Exit $status ]($style)"
+pipestatus        = false
+style             = "bold red"
