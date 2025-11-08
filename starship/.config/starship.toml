@@ -13,7 +13,7 @@ success_symbol        = "[](bold green) "
 vicmd_symbol          = "[](bold yellow) "
 
 [hostname]
-format                = "[ $hostname](bold green) "
+format                = "[󰢩 $hostname](bold green) "
 ssh_only              = true
 
 [username]
