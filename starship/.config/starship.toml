@@ -1,78 +1,100 @@
-"$schema"         = 'https://starship.rs/config-schema.json'
+"$schema"             = "https://starship.rs/config-schema.json"
 
-format            = """$username$hostname$directory$git_branch$git_status$cmd_duration$python$jobs$line_break$character"""
-right_format      = """$status"""
+format                = """$username$hostname$directory$git_branch$git_state$git_status$git_metrics$cmd_duration$python$jobs$line_break$character"""
+right_format          = """$status"""
 
-add_newline       = false
+add_newline           = false
+command_timeout       = 1000
+scan_timeout          = 30
 
 [character]
-error_symbol      = "[](bold red) "
-success_symbol    = "[](bold green) "
-vicmd_symbol      = "[](bold yellow) "
+error_symbol          = "[](bold red) "
+success_symbol        = "[](bold green) "
+vicmd_symbol          = "[](bold yellow) "
 
 [hostname]
-format            = "[ $hostname](bold green) "
-ssh_only          = true
+format                = "[ $hostname](bold green) "
+ssh_only              = true
 
 [username]
-detect_env_vars   = ["SSH_CLIENT", "SSH_CONNECTION", "SSH_TTY", "SUDO_USER"]
-format            = "[$user]($style) "
-show_always       = false
-style_root        = "bold red"
-style_user        = "bold green"
-
-[jobs]
-format            = "[$symbol$number]($style) "
-number_threshold  = 2
-symbol            = "󰢻 "
-symbol_threshold  = 1
+detect_env_vars       = ["SSH_CLIENT", "SSH_CONNECTION", "SSH_TTY", "SUDO_USER"]
+format                = "[$user]($style) "
+show_always           = false
+style_root            = "bold red"
+style_user            = "bold green"
 
 [directory]
-format            = "[$path]($style)[$read_only]($read_only_style) "
-read_only         = " "
-read_only_style   = "red"
-style             = "bold blue"
-truncation_length = 3
-truncation_symbol = "… /"
+format                = "[$path]($style)[$read_only]($read_only_style) "
+read_only             = " "
+read_only_style       = "red"
+style                 = "bold blue"
+truncate_to_repo      = true
+truncation_length     = 3
+truncation_symbol     = "… /"
 
 [git_branch]
-format            = "[$symbol$branch]($style) "
-style             = "bold purple"
-symbol            = " "
-truncation_length = 24
-truncation_symbol = "… "
+format                = "[$symbol$branch]($style) "
+only_attached         = true
+style                 = "bold purple"
+symbol                = " "
+truncation_length     = 24
+truncation_symbol     = "… "
+
+[git_state]
+format                = "[$state $progress_current/$progress_total]($style) "
+style                 = "yellow"
 
 [git_status]
-ahead             = '⇡${count}'
-behind            = '⇣${count}'
-conflicted        = '[!${count}](bold red)'
-deleted           = '[✘${count}](bold red)'
-disabled          = false
-diverged          = '⇕⇡${ahead_count}⇣${behind_count}'
-format            = '([\[$all_status$ahead_behind\]]($style) )'
-ignore_submodules = true
-modified          = '[~${count}](bold yellow)'
-renamed           = '[»${count}](bold cyan)'
-staged            = '[++${count}](bold green)'
-stashed           = '[󱈎 ${count}](bold blue)'
-style             = "bold blue"
-untracked         = '[?${count}](bold purple)'
+ahead                 = "⇡${count}"
+behind                = "⇣${count}"
+conflicted            = "[!${count}](bold red)"
+deleted               = "[✘${count}](red)"
+disabled              = false
+diverged              = "⇕⇡${ahead_count}⇣${behind_count}"
+format                = "[$all_status$ahead_behind]($style) "
+ignore_submodules     = true
+modified              = "[~${count}](yellow)"
+renamed               = "[»${count}](cyan)"
+staged                = "[++${count}](green)"
+stashed               = "[󱈎 ${count}](blue)"
+style                 = "bold blue"
+untracked             = "[?${count}](purple)"
+
+[git_metrics]
+added_style           = "dimmed green"
+deleted_style         = "dimmed red"
+disabled              = false
+format                = "([▴$added]($added_style))([▾$deleted]($deleted_style)) "
+only_nonzero_diffs    = true
 
 [cmd_duration]
-format            = "[󰔛 $duration]($style) "
-min_time          = 4000
-style             = "yellow"
+format                = "[󰔛 $duration]($style) "
+min_time              = 1500
+show_milliseconds     = false
+style                 = "yellow"
 
 [python]
-detect_extensions = []
-detect_folders    = []
-disabled          = false
-format            = "[$symbol$virtualenv $version]($style) "
-style             = "yellow"
-symbol            = " "
+detect_extensions     = []
+detect_folders        = []
+format                = "[$symbol$virtualenv ($version)]($style) "
+pyenv_version_name    = false
+python_binary         = ["python", "python3"]
+style                 = "yellow"
+symbol                = " "
+version_format        = "v${major}.${minor}.${patch}"
+
+[jobs]
+format                = "[$symbol$number]($style) "
+number_threshold      = 2
+style                 = "cyan"
+symbol                = "󰢻 "
+symbol_threshold      = 1
 
 [status]
-disabled          = false
-format            = "[󰩈 Exit $status ]($style)"
-pipestatus        = false
-style             = "bold red"
+disabled              = false
+format                = "[$symbol$status]($style)"
+map_symbol            = true
+pipestatus            = true
+pipestatus_format     = "[[$pipestatus]](bold yellow) => [$symbol$common_meaning$signal_name$maybe_int]($style) "
+recognize_signal_code = true
+style                 = "bold red"
