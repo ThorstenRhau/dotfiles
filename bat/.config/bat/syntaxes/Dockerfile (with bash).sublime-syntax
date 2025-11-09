@@ -1,0 +1,7 @@
+%YAML 1.2
+---
+name: Dockerfile (with bash)
+scope: source.dockerfile.bash
+hidden: true
+contexts:
+  main: []
