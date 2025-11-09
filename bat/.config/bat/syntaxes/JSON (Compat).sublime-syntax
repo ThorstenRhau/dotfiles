@@ -1,0 +1,19 @@
+%YAML 1.2
+---
+name: JSON (Compat)
+scope: source.json
+hidden: true
+contexts:
+  main:
+    - include: arrays
+  arrays:
+    - match: '\['
+      scope: punctuation.section.sequence.begin.json
+      push:
+        - meta_scope: meta.sequence.json
+        - match: '\]'
+          scope: punctuation.section.sequence.end.json
+          pop: true
+        - match: ','
+          scope: punctuation.separator.sequence.json
+        - include: main
