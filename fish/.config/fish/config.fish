@@ -1,4 +1,4 @@
-if status is-interactive
+if status is-login; or status is-interactive
 
     # Initialize fish_user_paths if not already set
     set -q fish_user_paths; or set -x fish_user_paths
