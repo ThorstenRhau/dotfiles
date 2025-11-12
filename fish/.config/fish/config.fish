@@ -17,13 +17,15 @@ if status is-interactive
     safe_add_path /usr/local/bin
 
     # Homebrew
-    if test -d /opt/homebrew
+    if test -x /opt/homebrew/bin/brew
+        eval (/opt/homebrew/bin/brew shellenv fish)
         set -gx ARCHFLAGS "-arch arm64"
         set -gx HOMEBREW_PREFIX /opt/homebrew
         set -gx HOMEBREW_NO_ANALYTICS 1
         set -gx HOMEBREW_BAT 1
-        fish_add_path -p /opt/homebrew/sbin
-        fish_add_path -p /opt/homebrew/bin
+        set -gx HOMEBREW_USE_INTERNAL_API 1
+        set -gx HOMEBREW_EDITOR nvim
+        set -gx HOMEBREW_DOWNLOAD_CONCURRENCY "auto"
     end
 
     # Variables
