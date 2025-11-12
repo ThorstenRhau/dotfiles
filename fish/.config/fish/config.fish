@@ -23,7 +23,6 @@ if status is-login; or status is-interactive
         set -gx HOMEBREW_PREFIX /opt/homebrew
         set -gx HOMEBREW_NO_ANALYTICS 1
         set -gx HOMEBREW_BAT 1
-        set -gx HOMEBREW_USE_INTERNAL_API 1
         set -gx HOMEBREW_EDITOR nvim
         set -gx HOMEBREW_DOWNLOAD_CONCURRENCY "auto"
     end
