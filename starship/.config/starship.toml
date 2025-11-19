@@ -1,6 +1,6 @@
 "$schema"             = "https://starship.rs/config-schema.json"
 
-format                = """$username$hostname$directory$git_branch$git_state$git_status$git_metrics$cmd_duration$python$jobs$line_break$character"""
+format                = """$username$hostname$directory$git_branch$git_state$git_status$git_metrics$cmd_duration$python$line_break$jobs$character"""
 right_format          = """$status"""
 
 add_newline           = false
@@ -87,7 +87,7 @@ version_format        = "v${major}.${minor}.${patch}"
 format                = "[$symbol$number]($style) "
 number_threshold      = 2
 style                 = "cyan"
-symbol                = "󰢻 "
+symbol                = "  "
 symbol_threshold      = 1
 
 [status]
