@@ -8,6 +8,16 @@ function _theme_monitor --on-event fish_prompt
         return
     end
 
+    # Throttle: Check at most once every 3 seconds to reduce latency
+    set -l now (date +%s)
+    if set -q _theme_monitor_last_check
+        set -l time_since_check (math "$now - $_theme_monitor_last_check")
+        if test "$time_since_check" -lt 3
+            return
+        end
+    end
+    set -gx _theme_monitor_last_check $now
+
     set -l val (defaults read -g AppleInterfaceStyle 2>/dev/null)
     if test "$val" = "Dark"
         set val Dark
