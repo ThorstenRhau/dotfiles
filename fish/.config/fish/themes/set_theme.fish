@@ -38,9 +38,9 @@ end
 
 # Set fzf theme
 if test "$appearance" = Dark
-    source "$HOME/.config/fish/themes/fzf/tokyonight_night.sh"
+    source "$HOME/.config/fish/themes/fzf/tokyonight_night.fish"
 else
-    source "$HOME/.config/fish/themes/fzf/tokyonight_day.sh"
+    source "$HOME/.config/fish/themes/fzf/tokyonight_day.fish"
 end
 
 # LazyGit

@@ -1,9 +1,9 @@
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+set -gxa FZF_DEFAULT_OPTS " \
   --highlight-line \
   --info=inline-right \
   --ansi \
   --layout=reverse \
-  --border=none
+  --border=none \
   --color=bg+:#b7c1e3 \
   --color=bg:#d0d5e3 \
   --color=border:#4094a3 \
@@ -19,5 +19,4 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --color=query:#3760bf:regular \
   --color=scrollbar:#4094a3 \
   --color=separator:#b15c00 \
-  --color=spinner:#d20065 \
-"
+  --color=spinner:#d20065"

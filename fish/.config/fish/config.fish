@@ -1,20 +1,12 @@
 if status is-login; or status is-interactive
 
-    # Initialize fish_user_paths if not already set
-    set -q fish_user_paths; or set -x fish_user_paths
-
-    # Function to safely add a directory to PATH
-    function safe_add_path
-        if test -d $argv[1]
-            fish_add_path $argv[1]
-        end
-    end
-    safe_add_path $HOME/bin
-    safe_add_path $HOME/.local/bin
-    safe_add_path $HOME/.cache/lm-studio/bin
-    safe_add_path $HOME/.rd/bin
-    safe_add_path $HOME/.docker/bin
-    safe_add_path /usr/local/bin
+    # Add directories to PATH
+    fish_add_path $HOME/bin
+    fish_add_path $HOME/.local/bin
+    fish_add_path $HOME/.cache/lm-studio/bin
+    fish_add_path $HOME/.rd/bin
+    fish_add_path $HOME/.docker/bin
+    fish_add_path /usr/local/bin
 
     # Homebrew
     if test -x /opt/homebrew/bin/brew
@@ -29,7 +21,6 @@ if status is-login; or status is-interactive
 
     # Variables
     set -gx CXXFLAGS "-std=gnu++20"
-    set -gx GREP_OPTIONS "--color=auto"
     set -gx LANG "en_US.UTF-8"
     set -gx LC_CTYPE "en_US.UTF-8"
     set -gx XDG_CONFIG_HOME "$HOME/.config"
@@ -53,16 +44,16 @@ if status is-login; or status is-interactive
     end
 
     # Abbreviations and aliases
-    abbr gc 'git commit'
-    abbr gca 'git commit -a'
-    abbr gd 'git diff'
-    abbr gl 'git pull'
-    abbr glg 'git log --oneline --graph --decorate -n 20'
-    abbr gp 'git push'
-    abbr gpristine 'git reset --hard && git clean --force -dfx'
-    abbr gst 'git status'
-    abbr pip pip3
-    abbr python python3
+    abbr --add gc 'git commit'
+    abbr --add gca 'git commit -a'
+    abbr --add gd 'git diff'
+    abbr --add gl 'git pull'
+    abbr --add glg 'git log --oneline --graph --decorate -n 20'
+    abbr --add gp 'git push'
+    abbr --add gpristine 'git reset --hard && git clean --force -dfx'
+    abbr --add gst 'git status'
+    abbr --add pip pip3
+    abbr --add python python3
     function mosh --wraps mosh --description "mosh with 256color support"
         env TERM=xterm-256color command mosh $argv
     end
@@ -72,11 +63,8 @@ if status is-login; or status is-interactive
 
     # Zoxide
     if type -q zoxide >/dev/null
-        zoxide init fish | source
+        zoxide init fish --cmd cd | source
         bind \cz zi
-        function cd --wraps=z --description "zoxide directory jumping"
-            z $argv
-        end
     end
 
     # FZF
