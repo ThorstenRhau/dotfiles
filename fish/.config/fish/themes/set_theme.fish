@@ -1,6 +1,11 @@
 # macOS check for light/dark appearance
 if type -q defaults
-    set -gx appearance (defaults read -g AppleInterfaceStyle 2>/dev/null)
+    set -l val (defaults read -g AppleInterfaceStyle 2>/dev/null)
+    if test "$val" = "Dark"
+        set -gx appearance Dark
+    else
+        set -gx appearance Light
+    end
 else
     # Fallback to Dark theme of not on macOS
     set -gx appearance Dark
