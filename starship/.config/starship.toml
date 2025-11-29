@@ -30,6 +30,7 @@ style_user                = "bold green"
 format                    = "[$path]($style)[$read_only]($read_only_style) "
 read_only                 = " "
 read_only_style           = "red"
+repo_root_style           = "bold blue underline"
 style                     = "bold blue"
 truncate_to_repo          = true
 truncation_length         = 3
@@ -40,8 +41,6 @@ format                    = "[$symbol$branch]($style) "
 only_attached             = true
 style                     = "bold purple"
 symbol                    = " "
-truncation_length         = 24
-truncation_symbol         = "… "
 
 [git_state]
 format                    = "[$state $progress_current/$progress_total]($style) "
@@ -68,6 +67,7 @@ added_style               = "dimmed green"
 deleted_style             = "dimmed red"
 disabled                  = false
 format                    = "([▴$added]($added_style))([▾$deleted]($deleted_style)) "
+ignore_submodules         = true
 only_nonzero_diffs        = true
 
 [cmd_duration]
