@@ -81,9 +81,6 @@ if status is-login; or status is-interactive
         set -gx FZF_COMPLETION_TRIGGER '**'
     end
 
-    # Themes and appearance
-    source "$HOME/.config/fish/themes/set_theme.fish"
-
     # Sourcing local files
     set secrets_file "$HOME/.config/fish/secrets.fish"
     if test -r $secrets_file
