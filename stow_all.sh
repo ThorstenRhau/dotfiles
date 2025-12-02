@@ -12,7 +12,6 @@ bat
 fish
 ghostty
 git
-lazygit
 starship
 zsh
 "
