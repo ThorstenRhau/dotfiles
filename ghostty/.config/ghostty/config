@@ -15,7 +15,7 @@ font-variation-bold        = wght = 700
 font-variation-bold-italic = wght = 700
 font-variation-italic      = wght = 450
 link-previews              = true
-macos-option-as-alt        = true
+macos-option-as-alt        = left
 macos-titlebar-style       = tabs
 mouse-hide-while-typing    = true
 quick-terminal-position    = center
