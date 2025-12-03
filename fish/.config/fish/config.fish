@@ -102,6 +102,11 @@ if status is-login; or status is-interactive
         set -gx FZF_COMPLETION_TRIGGER '**'
     end
 
+    # Ghostty Shell Integration
+    if set -q GHOSTTY_RESOURCES_DIR
+        source "$GHOSTTY_RESOURCES_DIR/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish"
+    end
+
     # Sourcing local files
     set secrets_file "$HOME/.config/fish/secrets.fish"
     if test -r $secrets_file
