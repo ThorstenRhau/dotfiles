@@ -51,7 +51,7 @@ if status is-login; or status is-interactive
     # Bat (cat replacement)
     if type -q bat
         function cat --wraps bat --description "cat using bat"
-            bat --binary no-printing --plain  $argv
+            bat --binary no-printing --plain --pager=none  $argv
         end
 
         if test (get_appearance) = "dark"
