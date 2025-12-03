@@ -3,7 +3,7 @@
 # ghostty +list-themes
 # ghostty +list-fonts
 
-adjust-cursor-thickness    = 3
+adjust-cursor-thickness    = 2
 adjust-underline-position  = 0
 bold-color                 = bright
 copy-on-select             = clipboard
