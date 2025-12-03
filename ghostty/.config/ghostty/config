@@ -3,35 +3,27 @@
 # ghostty +list-themes
 # ghostty +list-fonts
 
-font-family                    = PragmataPro VF Liga
-
-font-variation                 = wght=450
-font-variation-italic          = wght=450
-font-variation-bold            = wght=700
-font-variation-bold-italic     = wght=700
-
-font-feature                   = calt, liga, ss13, ss15
-
-font-size                      = 16
-
-# Look and Feel
-adjust-cursor-thickness        = 3
-adjust-underline-position      = 0
-bold-color                     = bright
-link-previews                  = true
-mouse-hide-while-typing        = true
-theme                          = dark:Catppuccin Mocha,light:Catppuccin Latte
-unfocused-split-fill           = BLACK
-window-padding-balance         = true
-window-padding-x               = 3
-window-padding-y               = 3
-
-# Other
-copy-on-select                 = clipboard
-quick-terminal-position        = center
-quick-terminal-size            = 500px
-shell-integration              = detect
-shell-integration-features     = cursor,sudo,title,ssh-env,ssh-terminfo
-
-# Key bindings
-keybind                        = option+backspace=text:\x1b\x7f
+adjust-cursor-thickness    = 3
+adjust-underline-position  = 0
+bold-color                 = bright
+copy-on-select             = clipboard
+font-family                = PragmataPro VF Liga
+font-feature               = calt, liga, ss13, ss15
+font-size                  = 16
+font-variation             = wght = 450
+font-variation-bold        = wght = 700
+font-variation-bold-italic = wght = 700
+font-variation-italic      = wght = 450
+link-previews              = true
+macos-option-as-alt        = true
+macos-titlebar-style       = tabs
+mouse-hide-while-typing    = true
+quick-terminal-position    = center
+quick-terminal-size        = 500px
+shell-integration          = detect
+shell-integration-features = cursor,sudo,title,ssh-env,ssh-terminfo
+theme                      = dark:Catppuccin Mocha,light:Catppuccin Latte
+unfocused-split-fill       = BLACK
+window-padding-balance     = true
+window-padding-x           = 3
+window-padding-y           = 3
