@@ -118,6 +118,16 @@ if status is-login; or status is-interactive
         source $local_file
     end
 
+    # Set Neovim background based on macOS system appearance
+    # 'defaults read' takes ~35ms, so we do it here in the shell start, not inside Neovim.
+    if command -q defaults
+        if not defaults read -g AppleInterfaceStyle >/dev/null 2>&1
+            set -gx NEOVIM_BACKGROUND light
+        else
+            set -gx NEOVIM_BACKGROUND dark
+        end
+    end
+
     # Starship
     if type -q starship
         function starship_transient_prompt_func
