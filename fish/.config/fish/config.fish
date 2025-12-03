@@ -54,12 +54,6 @@ if status is-login; or status is-interactive
     abbr --add gst 'git status'
     abbr --add pip pip3
     abbr --add python python3
-    function mosh --wraps mosh --description "mosh with 256color support"
-        env TERM=xterm-256color command mosh $argv
-    end
-    function ssh --wraps ssh --description "ssh with 256color support"
-        env TERM=xterm-256color command ssh $argv
-    end
 
     # Zoxide
     if type -q zoxide >/dev/null
