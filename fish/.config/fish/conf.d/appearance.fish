@@ -5,9 +5,11 @@ function _appearance_change_handler --on-variable SYSTEM_APPEARANCE
     if test "$SYSTEM_APPEARANCE" = "dark"
         set -gx BAT_THEME "Catppuccin Mocha"
         source $HOME/.config/fzf/themes/catppuccin_mocha.fish
+        set -gx STARSHIP_CONFIG "$HOME/.config/starship_mocha.toml"
     else
         set -gx BAT_THEME "Catppuccin Latte"
         source $HOME/.config/fzf/themes/catppuccin_latte.fish
+        set -gx STARSHIP_CONFIG "$HOME/.config/starship_latte.toml"
     end
 end
 

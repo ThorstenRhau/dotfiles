@@ -1,0 +1,60 @@
+"$schema" = "https://starship.rs/config-schema.json"
+
+palette = "catppuccin_latte"
+
+add_newline     = true
+command_timeout = 500
+[character]
+error_symbol   = "[❯❯](bold red) "
+success_symbol = "[❯❯](bold green) "
+
+[hostname]
+format   = "[󰢩 $hostname](bold green) "
+ssh_only = true
+
+[username]
+detect_env_vars = ["SSH_CLIENT", "SSH_CONNECTION", "SSH_TTY", "SUDO_USER"]
+format          = "[$user]($style) "
+show_always     = false
+style_root      = "bold red"
+style_user      = "bold green"
+
+[git_status]
+disabled          = false
+ignore_submodules = true
+
+[git_metrics]
+disabled = true
+
+[python]
+detect_extensions = []
+detect_folders    = []
+format            = "[$symbol$virtualenv ($version)]($style) "
+
+[palettes.catppuccin_latte]
+rosewater = "#dc8a78"
+flamingo = "#dd7878"
+pink = "#ea76cb"
+mauve = "#8839ef"
+red = "#d20f39"
+maroon = "#e64553"
+peach = "#fe640b"
+yellow = "#df8e1d"
+green = "#40a02b"
+teal = "#179299"
+sky = "#04a5e5"
+sapphire = "#209fb5"
+blue = "#1e66f5"
+lavender = "#7287fd"
+text = "#4c4f69"
+subtext1 = "#5c5f77"
+subtext0 = "#6c6f85"
+overlay2 = "#7c7f93"
+overlay1 = "#8c8fa1"
+overlay0 = "#9ca0b0"
+surface2 = "#acb0be"
+surface1 = "#bcc0cc"
+surface0 = "#ccd0da"
+base = "#eff1f5"
+mantle = "#e6e9ef"
+crust = "#dce0e8"
