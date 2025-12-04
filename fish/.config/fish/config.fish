@@ -28,16 +28,14 @@ if status is-login; or status is-interactive
     set -gx fish_history_limit 10000
 
     # Helper function for system appearance
-    function get_appearance
+    # 'defaults read' takes ~35ms, so we call it once and reuse the value.
+    set -gx SYSTEM_APPEARANCE "dark" # Default
+    if command -q defaults
         if test (uname) = "Darwin"
             set -l val (defaults read -g AppleInterfaceStyle 2>/dev/null)
-            if test "$val" = "Dark"
-                echo "dark"
-            else
-                echo "light"
+            if test "$val" != "Dark"
+                set -gx SYSTEM_APPEARANCE "light"
             end
-        else
-            echo "dark" # Default
         end
     end
 
@@ -54,7 +52,7 @@ if status is-login; or status is-interactive
             bat --binary no-printing --plain --pager=none  $argv
         end
 
-        if test (get_appearance) = "dark"
+        if test "$SYSTEM_APPEARANCE" = "dark"
             set -gx BAT_THEME "Catppuccin Mocha"
         else
             set -gx BAT_THEME "Catppuccin Latte"
@@ -118,23 +116,7 @@ if status is-login; or status is-interactive
         source $local_file
     end
 
-    # Set Neovim background based on macOS system appearance
-    # 'defaults read' takes ~35ms, so we do it here in the shell start, not inside Neovim.
-    if command -q defaults
-        if not defaults read -g AppleInterfaceStyle >/dev/null 2>&1
-            set -gx NEOVIM_BACKGROUND light
-        else
-            set -gx NEOVIM_BACKGROUND dark
-        end
-    end
-
     # Starship
-    if type -q starship
-        function starship_transient_prompt_func
-            starship module character
-        end
-        starship init fish | source
-        enable_transience
-    end
+    starship init fish | source
 
 end
