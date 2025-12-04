@@ -25,7 +25,6 @@ if status is-login; or status is-interactive
     set -gx LC_CTYPE "en_US.UTF-8"
     set -gx XDG_CONFIG_HOME "$HOME/.config"
     set -gx fish_greeting
-    set -gx fish_history_limit 10000
 
 
     # Eza (ls replacement)
@@ -66,7 +65,7 @@ if status is-login; or status is-interactive
     # Zoxide
     if type -q zoxide >/dev/null
         zoxide init fish --cmd cd | source
-        bind \cz zi
+        bind \ez cdi
     end
 
     # FZF
