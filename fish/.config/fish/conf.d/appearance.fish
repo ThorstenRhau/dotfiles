@@ -4,6 +4,7 @@
 function _appearance_change_handler --on-variable SYSTEM_APPEARANCE
     if test "$SYSTEM_APPEARANCE" = "dark"
         set -gx BAT_THEME "Catppuccin Mocha"
+        set -gx DELTA_FEATURES "catppuccin-mocha"
         set -gx LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/catppuccin-mocha.yml"
         if test -r "$HOME/.config/fzf/themes/catppuccin_mocha.fish"
             source $HOME/.config/fzf/themes/catppuccin_mocha.fish
@@ -11,6 +12,7 @@ function _appearance_change_handler --on-variable SYSTEM_APPEARANCE
         set -gx STARSHIP_CONFIG "$HOME/.config/starship_mocha.toml"
     else
         set -gx BAT_THEME "Catppuccin Latte"
+        set -gx DELTA_FEATURES "catppuccin-latte"
         set -gx LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/catppuccin-latte.yml"
         if test -r "$HOME/.config/fzf/themes/catppuccin_latte.fish"
             source $HOME/.config/fzf/themes/catppuccin_latte.fish
