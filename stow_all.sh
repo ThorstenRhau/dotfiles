@@ -14,7 +14,6 @@ fzf
 ghostty
 git
 starship
-zsh
 "
 
 for package in $packages; do
