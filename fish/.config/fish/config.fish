@@ -27,17 +27,6 @@ if status is-login; or status is-interactive
     set -gx fish_greeting
     set -gx fish_history_limit 10000
 
-    # Helper function for system appearance
-    # 'defaults read' takes ~35ms, so we call it once and reuse the value.
-    set -gx SYSTEM_APPEARANCE "dark" # Default
-    if command -q defaults
-        if test (uname) = "Darwin"
-            set -l val (defaults read -g AppleInterfaceStyle 2>/dev/null)
-            if test "$val" != "Dark"
-                set -gx SYSTEM_APPEARANCE "light"
-            end
-        end
-    end
 
     # Eza (ls replacement)
     if type -q eza
@@ -50,12 +39,6 @@ if status is-login; or status is-interactive
     if type -q bat
         function cat --wraps bat --description "cat using bat"
             bat --binary no-printing --plain --pager=none  $argv
-        end
-
-        if test "$SYSTEM_APPEARANCE" = "dark"
-            set -gx BAT_THEME "Catppuccin Mocha"
-        else
-            set -gx BAT_THEME "Catppuccin Latte"
         end
     end
 
