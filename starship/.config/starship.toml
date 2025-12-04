@@ -1,19 +1,9 @@
 "$schema" = "https://starship.rs/config-schema.json"
 
-format       = """$username$hostname$directory$git_branch$git_state$git_status$git_metrics$cmd_duration$python$line_break$jobs$character"""
-right_format = """$status"""
-
-add_newline     = false
-command_timeout = 1000
-scan_timeout    = 500
-
+add_newline = false
 [character]
-error_symbol              = "[❯❯](bold red) "
-success_symbol            = "[❯❯](bold green) "
-vimcmd_replace_one_symbol = "[❮](bold purple) "
-vimcmd_replace_symbol     = "[❮](bold purple) "
-vimcmd_symbol             = "[❮](bold yellow) "
-vimcmd_visual_symbol      = "[❮](bold blue) "
+error_symbol   = "[❯❯](bold red) "
+success_symbol = "[❯❯](bold green) "
 
 [hostname]
 format   = "[󰢩 $hostname](bold green) "
@@ -25,37 +15,6 @@ format          = "[$user]($style) "
 show_always     = false
 style_root      = "bold red"
 style_user      = "bold green"
-
-[directory]
-format            = "[$path]($style)[$read_only]($read_only_style) "
-read_only         = " "
-read_only_style   = "red"
-repo_root_format  = "[$before_root_path]($style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
-repo_root_style   = "bold blue underline"
-style             = "bold blue"
-truncate_to_repo  = true
-truncation_length = 3
-truncation_symbol = "… /"
-use_logical_path  = false
-
-[git_branch]
-format        = "[$symbol$branch]($style) "
-only_attached = true
-style         = "bold purple"
-symbol        = " "
-
-[git_commit]
-commit_hash_length = 7
-disabled           = false
-format             = '[\($hash$tag\)]($style) '
-only_detached      = true
-style              = "bold yellow"
-tag_disabled       = false
-tag_symbol         = " 🏷  "
-
-[git_state]
-format = "[$state $progress_current/$progress_total]($style) "
-style  = "yellow"
 
 [git_status]
 ahead             = "⇡${count}"
@@ -81,34 +40,7 @@ format             = "([▴$added]($added_style))([▾$deleted]($deleted_style))
 ignore_submodules  = true
 only_nonzero_diffs = true
 
-[cmd_duration]
-format            = "[󰔛 $duration]($style) "
-min_time          = 1500
-show_milliseconds = false
-style             = "yellow"
-
 [python]
-detect_extensions  = []
-detect_folders     = []
-format             = "[$symbol$virtualenv ($version)]($style) "
-pyenv_version_name = false
-python_binary      = ["python", "python3"]
-style              = "yellow"
-symbol             = " "
-version_format     = "v${major}.${minor}.${patch}"
-
-[jobs]
-format           = "[$symbol$number]($style) "
-number_threshold = 2
-style            = "cyan"
-symbol           = "  "
-symbol_threshold = 1
-
-[status]
-disabled              = false
-format                = "[$symbol$status]($style)"
-map_symbol            = true
-pipestatus            = true
-pipestatus_format     = "[[$pipestatus]](bold yellow) => [$symbol$common_meaning$signal_name$maybe_int]($style) "
-recognize_signal_code = true
-style                 = "bold red"
+detect_extensions = []
+detect_folders    = []
+format            = "[$symbol$virtualenv ($version)]($style) "
