@@ -30,7 +30,7 @@ function _check_appearance_on_prompt --on-event fish_prompt
     # Rate limit: 5 seconds
     if test $time_diff -ge 5
         set -g _appearance_last_check $current_time
-        
+
         # Run check in background
         # We redirect all output to null to ensure no ghost output on the prompt
         fish -c '
@@ -40,7 +40,7 @@ function _check_appearance_on_prompt --on-event fish_prompt
             else
                 set mode "light"
             end
-            
+
             if test "$SYSTEM_APPEARANCE" != "$mode"
                 set -U SYSTEM_APPEARANCE "$mode"
             end
