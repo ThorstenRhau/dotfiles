@@ -84,7 +84,10 @@ if status is-login; or status is-interactive
 
     # Ghostty Shell Integration
     if set -q GHOSTTY_RESOURCES_DIR
-        source "$GHOSTTY_RESOURCES_DIR/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish"
+        set -l ghostty_integration_file "$GHOSTTY_RESOURCES_DIR/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish"
+        if test -r "$ghostty_integration_file"
+            source "$ghostty_integration_file"
+        end
     end
 
     # Sourcing local files
