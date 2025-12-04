@@ -78,7 +78,6 @@ if status is-login; or status is-interactive
         set -gx FZF_ALT_C_COMMAND 'fd --type d --hidden --exclude .git'
         set -gx FZF_ALT_C_OPTS '--preview "ls -al {}" --preview-window=down:40%'
         set -gx FZF_CTRL_R_OPTS '--height 40% --layout=reverse --info=inline --border=rounded'
-        set -gx FZF_DEFAULT_OPTS '--height 40% --layout=reverse --info=inline --border=rounded'
         set -gx FZF_TMUX 0
         set -gx FZF_COMPLETION_TRIGGER '**'
     end

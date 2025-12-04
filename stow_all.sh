@@ -10,6 +10,7 @@ fi
 packages="
 bat
 fish
+fzf
 ghostty
 git
 starship
