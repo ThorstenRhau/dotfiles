@@ -13,6 +13,7 @@ fish
 fzf
 ghostty
 git
+lazygit
 starship
 "
 

@@ -59,6 +59,7 @@ if status is-login; or status is-interactive
     abbr --add gp 'git push'
     abbr --add gpristine 'git reset --hard && git clean --force -dfx'
     abbr --add gst 'git status'
+    abbr --add lg 'lazygit'
     abbr --add pip pip3
     abbr --add python python3
 
