@@ -44,7 +44,7 @@ if status is-login; or status is-interactive
         end
 
         function lt --wraps eza --description "tree view using eza"
-            eza --tree --level=2 $_EZA_BASE_OPTS $argv
+            eza --tree $_EZA_BASE_OPTS $argv
         end
     end
 
