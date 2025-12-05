@@ -37,7 +37,7 @@ if status is-login; or status is-interactive
     # Bat (cat replacement)
     if type -q bat
         function cat --wraps bat --description "cat using bat"
-            bat --binary no-printing --plain --pager=none  $argv
+            bat --plain --pager=none $argv
         end
     end
 
