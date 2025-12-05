@@ -70,11 +70,32 @@ if status is-login; or status is-interactive
     # FZF
     if type -q fzf >/dev/null
         fzf --fish | source
+
+        # Base options (layout, info, etc.) to be preserved across theme changes
+        set -gx _FZF_BASE_OPTS "--height 40% --layout=reverse --info=inline --border=rounded --prompt='❯ ' --pointer='▶' --marker='✓'"
+
+        # Construct FZF_DEFAULT_OPTS (combining with theme if set)
+        set -gx FZF_DEFAULT_OPTS "$_FZF_BASE_OPTS $_FZF_THEME_OPTS"
+
         set -gx FZF_DEFAULT_COMMAND 'fd --type f --hidden --exclude .git'
         set -gx FZF_CTRL_T_COMMAND 'fd --type f --hidden --exclude .git'
-        set -gx FZF_CTRL_T_OPTS '--preview "bat --style=numbers --color=always {}" --preview-window=right:60% --border'
+
+        # Ctrl-T Preview
+        set -l preview_cmd "cat {}"
+        if type -q bat
+            set preview_cmd "bat --style=numbers --color=always --line-range :500 {}"
+        end
+        set -gx FZF_CTRL_T_OPTS "--preview '$preview_cmd' --preview-window=right:60% --border"
+
         set -gx FZF_ALT_C_COMMAND 'fd --type d --hidden --exclude .git'
-        set -gx FZF_ALT_C_OPTS '--preview "ls -al {}" --preview-window=down:40%'
+
+        # Alt-C Preview
+        set -l tree_cmd "ls -al {}"
+        if type -q eza
+            set tree_cmd "eza --tree --level=1 --color=always --icons=always {}"
+        end
+        set -gx FZF_ALT_C_OPTS "--preview '$tree_cmd' --preview-window=right:50%"
+
         set -gx FZF_CTRL_R_OPTS '--height 40% --layout=reverse --info=inline --border=rounded'
         set -gx FZF_TMUX 0
         set -gx FZF_COMPLETION_TRIGGER '**'

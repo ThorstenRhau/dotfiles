@@ -27,6 +27,9 @@ function _appearance_change_handler --on-variable SYSTEM_APPEARANCE
         end
         set -gx STARSHIP_CONFIG "$HOME/.config/starship_latte.toml"
     end
+
+    # Construct FZF_DEFAULT_OPTS
+    set -gx FZF_DEFAULT_OPTS "$_FZF_BASE_OPTS $_FZF_THEME_OPTS"
 end
 
 # Initialize if empty (default to dark safely)
