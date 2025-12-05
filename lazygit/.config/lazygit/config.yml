@@ -4,6 +4,7 @@ gui:
   nerdFontsVersion: "3"
   timeFormat: '2 Jan 2025 15:35:10 CET'
 git:
+  diffPager: "delta --color-only"
   pagers:
     - colorArg: always
 update:
