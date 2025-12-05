@@ -17,6 +17,9 @@ function _appearance_change_handler --on-variable SYSTEM_APPEARANCE
         if test -r "$HOME/.config/fzf/themes/catppuccin_mocha.fish"
             source $HOME/.config/fzf/themes/catppuccin_mocha.fish
         end
+        if type -q vivid
+            set -gx LS_COLORS (vivid generate catppuccin-mocha)
+        end
         set -gx STARSHIP_CONFIG "$HOME/.config/starship_mocha.toml"
     else
         set -gx BAT_THEME "Catppuccin Latte"
@@ -24,6 +27,9 @@ function _appearance_change_handler --on-variable SYSTEM_APPEARANCE
         set -gx LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/catppuccin-latte.yml"
         if test -r "$HOME/.config/fzf/themes/catppuccin_latte.fish"
             source $HOME/.config/fzf/themes/catppuccin_latte.fish
+        end
+        if type -q vivid
+            set -gx LS_COLORS (vivid generate catppuccin-latte)
         end
         set -gx STARSHIP_CONFIG "$HOME/.config/starship_latte.toml"
     end

@@ -29,8 +29,22 @@ if status is-login; or status is-interactive
 
     # Eza (ls replacement)
     if type -q eza
-        function ls --wraps eza --description "ls using eza with git info"
-            eza --header --git $argv
+        set -gx _EZA_BASE_OPTS --header --git --group-directories-first --time-style=long-iso
+
+        function ls --wraps eza --description "ls using eza"
+            eza $_EZA_BASE_OPTS $argv
+        end
+
+        function ll --wraps eza --description "long list using eza"
+            eza --long $_EZA_BASE_OPTS $argv
+        end
+
+        function la --wraps eza --description "list all using eza"
+            eza --long --all $_EZA_BASE_OPTS $argv
+        end
+
+        function lt --wraps eza --description "tree view using eza"
+            eza --tree --level=2 $_EZA_BASE_OPTS $argv
         end
     end
 
