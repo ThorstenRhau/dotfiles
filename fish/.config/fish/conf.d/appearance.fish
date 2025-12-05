@@ -2,6 +2,14 @@
 
 # Handler for variable change
 function _appearance_change_handler --on-variable SYSTEM_APPEARANCE
+    if test (uname) != "Darwin"
+        set -gx STARSHIP_CONFIG "$HOME/.config/starship.toml"
+        set -gx LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml"
+        set -e BAT_THEME
+        set -e DELTA_FEATURES
+        return
+    end
+
     if test "$SYSTEM_APPEARANCE" = "dark"
         set -gx BAT_THEME "Catppuccin Mocha"
         set -gx DELTA_FEATURES "catppuccin-mocha"
