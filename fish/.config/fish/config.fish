@@ -36,7 +36,7 @@ if status is-login; or status is-interactive
 
     # Bat (cat replacement)
     if type -q bat
-        abbr --add cat 'bat --plain --paging=never'
+        abbr --add cat 'bat'
     end
 
     # Neovim
