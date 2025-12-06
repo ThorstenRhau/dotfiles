@@ -27,6 +27,7 @@ shell-integration           = detect
 shell-integration-features  = cursor,sudo,title,ssh-env,ssh-terminfo
 theme                       = dark:catppuccin-mocha.conf,light:catppuccin-latte.conf
 unfocused-split-fill        = BLACK
+window-theme                = system
 window-padding-balance      = true
 window-padding-x            = 3
 window-padding-y            = 3
