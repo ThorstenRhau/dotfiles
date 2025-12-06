@@ -1,79 +1,80 @@
-if status is-login; or status is-interactive
+# Add directories to PATH
+fish_add_path $HOME/bin
+fish_add_path $HOME/.local/bin
+fish_add_path $HOME/.cache/lm-studio/bin
+fish_add_path $HOME/.rd/bin
+fish_add_path $HOME/.docker/bin
+fish_add_path /usr/local/bin
 
-    # Add directories to PATH
-    fish_add_path $HOME/bin
-    fish_add_path $HOME/.local/bin
-    fish_add_path $HOME/.cache/lm-studio/bin
-    fish_add_path $HOME/.rd/bin
-    fish_add_path $HOME/.docker/bin
-    fish_add_path /usr/local/bin
+# Homebrew
+if test -x /opt/homebrew/bin/brew
+    eval (/opt/homebrew/bin/brew shellenv fish)
+    set -gx ARCHFLAGS "-arch arm64"
+    set -gx HOMEBREW_PREFIX /opt/homebrew
+    set -gx HOMEBREW_NO_ANALYTICS 1
+    set -gx HOMEBREW_BAT 1
+    set -gx HOMEBREW_EDITOR nvim
+    set -gx HOMEBREW_DOWNLOAD_CONCURRENCY "auto"
+end
 
-    # Homebrew
-    if test -x /opt/homebrew/bin/brew
-        eval (/opt/homebrew/bin/brew shellenv fish)
-        set -gx ARCHFLAGS "-arch arm64"
-        set -gx HOMEBREW_PREFIX /opt/homebrew
-        set -gx HOMEBREW_NO_ANALYTICS 1
-        set -gx HOMEBREW_BAT 1
-        set -gx HOMEBREW_EDITOR nvim
-        set -gx HOMEBREW_DOWNLOAD_CONCURRENCY "auto"
-    end
+# Global Variables
+set -gx CXXFLAGS "-std=gnu++20"
+set -gx LANG "en_US.UTF-8"
+set -gx LC_CTYPE "en_US.UTF-8"
+set -gx XDG_CONFIG_HOME "$HOME/.config"
+set -gx fish_greeting
 
-    # Variables
-    set -gx CXXFLAGS "-std=gnu++20"
-    set -gx LANG "en_US.UTF-8"
-    set -gx LC_CTYPE "en_US.UTF-8"
-    set -gx XDG_CONFIG_HOME "$HOME/.config"
-    set -gx fish_greeting
+# Editor setup (Global)
+if type -q nvim >/dev/null
+    set -gx EDITOR (which nvim)
+    set -gx VISUAL $EDITOR
+    set -gx SUDO_EDITOR $EDITOR
+    set -gx MANPAGER "nvim +Man! -"
+end
 
+# Eza configuration (Global)
+if type -q eza
+    set -gx _EZA_BASE_OPTS --header --git --group-directories-first --time-style=long-iso
+end
 
-    # Eza (ls replacement)
-    if type -q eza
-        set -gx _EZA_BASE_OPTS --header --git --group-directories-first --time-style=long-iso
+# Sourcing local files (Global - secrets might contain env vars)
+set secrets_file "$HOME/.config/fish/secrets.fish"
+if test -r $secrets_file
+    source $secrets_file
+end
 
-        function ls --wraps eza --description "ls using eza"
-            eza $_EZA_BASE_OPTS $argv
-        end
+set local_file "$HOME/.config/fish/local.fish"
+if test -r $local_file
+    source $local_file
+end
 
-        function ll --wraps eza --description "long list using eza"
-            eza --long $_EZA_BASE_OPTS $argv
-        end
-
-        function la --wraps eza --description "list all using eza"
-            eza --long --all $_EZA_BASE_OPTS $argv
-        end
-
-        function lt --wraps eza --description "tree view using eza"
-            eza --tree $_EZA_BASE_OPTS $argv
-        end
-    end
+# Interactive Session Configuration
+if status is-interactive
 
     # Bat (cat replacement)
     if type -q bat
-        abbr --add cat 'bat'
+        abbr cat 'bat'
     end
 
-    # Neovim
+    # Neovim Abbreviations
     if type -q nvim >/dev/null
         abbr nv nvim
-        set -gx EDITOR (which nvim)
-        set -gx VISUAL $EDITOR
-        set -gx SUDO_EDITOR $EDITOR
-        set -gx MANPAGER "nvim +Man! -"
     end
 
-    # Abbreviations and aliases
-    abbr --add gc 'git commit'
-    abbr --add gca 'git commit -a'
-    abbr --add gd 'git diff'
-    abbr --add gl 'git pull'
-    abbr --add glg 'git log --oneline --graph --decorate -n 20'
-    abbr --add gp 'git push'
-    abbr --add gpristine 'git reset --hard && git clean --force -dfx'
-    abbr --add gst 'git status'
-    abbr --add lg 'lazygit'
-    abbr --add pip pip3
-    abbr --add python python3
+    # Git Abbreviations
+    abbr gc 'git commit'
+    abbr gca 'git commit -a'
+    abbr gd 'git diff'
+    abbr gl 'git pull'
+    abbr glg 'git log --oneline --graph --decorate -n 20'
+    abbr gp 'git push'
+    abbr gpristine 'git reset --hard && git clean --force -dfx'
+    abbr gst 'git status'
+    
+    # Utility Abbreviations
+    abbr lg 'lazygit'
+    abbr pip pip3
+    abbr python python3
 
     # Zoxide
     if type -q zoxide >/dev/null
@@ -115,17 +116,6 @@ if status is-login; or status is-interactive
         if test -r "$ghostty_integration_file"
             source "$ghostty_integration_file"
         end
-    end
-
-    # Sourcing local files
-    set secrets_file "$HOME/.config/fish/secrets.fish"
-    if test -r $secrets_file
-        source $secrets_file
-    end
-
-    set local_file "$HOME/.config/fish/local.fish"
-    if test -r $local_file
-        source $local_file
     end
 
     # Starship
