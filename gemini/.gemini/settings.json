@@ -1,59 +1,61 @@
 {
-  "model": {
-    "compressionThreshold": 0.5
-  },
-  "general": {
-    "previewFeatures": true,
-    "checkpointing": {
-      "enabled": true
+    "systemInstruction": "You are an expert technical assistant (Principal Engineer persona).\n\n- **Tone & Style:** Use precise, sincere American English. Be concise and direct. Avoid fluff, excessive politeness, or preaching.\n- **Problem Solving:** Solve problems autonomously. Only ask for clarification if essential requirements are missing or conflicting.\n- **Analysis:** Explicitly highlight key risks and trade-offs when proposing solutions. State confidence levels (High/Medium/Low) for complex analysis.\n- **External Documentation (Context7):** Aggressively utilize the 'context7' MCP tool when generating code for third-party libraries, frameworks, or APIs (e.g., Next.js, React, Cloud SDKs).\n  - *Trigger:* If a query involves specific library syntax, configurations, or \"latest\" features, invoke Context7 to fetch up-to-date docs before answering.\n  - *Goal:* Zero hallucinations on version-specific APIs.\n- **Environment:** Assume environment of macOS (Apple Silicon) unless specified otherwise.",
+    "model": {
+        "compressionThreshold": 0.8
     },
-    "disableAutoUpdate": false,
-    "enablePromptCompletion": false,
-    "sessionRetention": {
-      "enabled": true,
-      "maxAge": "14d"
+    "general": {
+        "previewFeatures": true,
+        "checkpointing": {
+            "enabled": true
+        },
+        "disableAutoUpdate": false,
+        "enablePromptCompletion": false,
+        "sessionRetention": {
+            "enabled": true,
+            "maxAge": "14d"
+        },
+        "preferredEditor": "neovim"
     },
-    "preferredEditor": "neovim"
-  },
-  "ui": {
-    "theme": "ANSI",
-    "hideTips": true,
-    "hideBanner": true,
-    "showMemoryUsage": true,
-    "showModelInfoInChat": true,
-    "showCitations": true,
-    "showLineNumbers": true,
-    "useAlternateBuffer": true,
-    "accessibility": {
-      "disableLoadingPhrases": true
+    "ui": {
+        "theme": "ANSI Light",
+        "hideTips": true,
+        "hideBanner": true,
+        "showMemoryUsage": true,
+        "showModelInfoInChat": true,
+        "showCitations": true,
+        "showLineNumbers": true,
+        "useAlternateBuffer": true,
+        "accessibility": {
+            "disableLoadingPhrases": true
+        },
+        "footer": {
+            "hideContextPercentage": false,
+            "hideModelInfo": false
+        }
     },
-    "footer": {
-      "hideContextPercentage": false,
-      "hideModelInfo": false
+    "context": {
+        "fileFiltering": {
+            "respectGitIgnore": true,
+            "enableRecursiveFileSearch": true,
+            "disableFuzzySearch": false
+        },
+        "loadMemoryFromIncludeDirectories": true
+    },
+    "tools": {
+        "useRipgrep": true,
+        "autoAccept": false,
+        "enableToolOutputTruncation": true,
+        "truncateToolOutputThreshold": 10000
+    },
+    "security": {
+        "disableYoloMode": true,
+        "blockGitExtensions": false,
+        "auth": {
+            "selectedType": "oauth-personal"
+        }
+    },
+    "ide": {
+        "enabled": false
     }
-  },
-  "context": {
-    "fileFiltering": {
-      "respectGitIgnore": true,
-      "enableRecursiveFileSearch": true,
-      "disableFuzzySearch": false
-    },
-    "loadMemoryFromIncludeDirectories": true
-  },
-  "tools": {
-    "useRipgrep": true,
-    "autoAccept": false,
-    "enableToolOutputTruncation": true,
-    "truncateToolOutputThreshold": 10000
-  },
-  "security": {
-    "disableYoloMode": true,
-    "blockGitExtensions": false,
-    "auth": {
-      "selectedType": "oauth-personal"
-    }
-  },
-  "ide": {
-    "enabled": false
-  }
 }
+
