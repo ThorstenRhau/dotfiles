@@ -39,6 +39,11 @@ function _appearance_change_handler --on-variable SYSTEM_APPEARANCE
 
     # Construct FZF_DEFAULT_OPTS
     set -gx FZF_DEFAULT_OPTS "$_FZF_BASE_OPTS $_FZF_THEME_OPTS"
+
+    # Force repaint if in interactive mode to update prompt immediately
+    if status is-interactive
+        commandline -f repaint 2>/dev/null
+    end
 end
 
 # Initialize if empty (default to dark safely)
