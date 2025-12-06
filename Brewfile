@@ -11,6 +11,7 @@
 cask "1password-cli"
 cask "basictex"
 cask "ghostty"
+#
 brew "bat"
 brew "carapace"
 brew "cmake"
@@ -57,4 +58,3 @@ brew "vivid"
 brew "wget"
 brew "xh"
 brew "zoxide"
-brew "zsh-syntax-highlighting"
