@@ -66,7 +66,7 @@ function _check_appearance_on_prompt --on-event fish_prompt
         # Run check in background
         # We redirect all output to null to ensure no ghost output on the prompt
         # We unconditionally set the variable; Fish only triggers events if the value actually changes.
-        fish --no-config -c '
+        fish -c '
             set -l val (defaults read -g AppleInterfaceStyle 2>/dev/null)
             if test "$val" = "Dark"
                 set -U SYSTEM_APPEARANCE "dark"
