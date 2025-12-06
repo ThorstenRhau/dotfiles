@@ -1,6 +1,6 @@
 {
   "model": {
-    "compressionThreshold": 0.8
+    "compressionThreshold": 0.5
   },
   "general": {
     "previewFeatures": true,
