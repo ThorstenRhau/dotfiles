@@ -85,12 +85,6 @@ if status is-login; or status is-interactive
     if type -q fzf >/dev/null
         fzf --fish | source
 
-        # Base options (layout, info, etc.) to be preserved across theme changes
-        set -gx _FZF_BASE_OPTS "--height 40% --layout=reverse --info=inline --border=rounded --prompt='❯ ' --pointer='▶' --marker='✓'"
-
-        # Construct FZF_DEFAULT_OPTS (combining with theme if set)
-        set -gx FZF_DEFAULT_OPTS "$_FZF_BASE_OPTS $_FZF_THEME_OPTS"
-
         set -gx FZF_DEFAULT_COMMAND 'fd --type f --hidden --exclude .git'
         set -gx FZF_CTRL_T_COMMAND 'fd --type f --hidden --exclude .git'
 

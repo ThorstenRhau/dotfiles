@@ -1,5 +1,8 @@
 # Appearance handling configuration
 
+# Base options (layout, info, etc.) to be preserved across theme changes
+set -gx _FZF_BASE_OPTS "--height 40% --layout=reverse --info=inline --border=rounded --prompt='❯ ' --pointer='▶' --marker='✓'"
+
 # Handler for variable change
 function _appearance_change_handler --on-variable SYSTEM_APPEARANCE
     if test (uname) != "Darwin"
