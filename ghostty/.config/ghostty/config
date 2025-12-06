@@ -3,27 +3,30 @@
 # ghostty +list-themes
 # ghostty +list-fonts
 
-adjust-cursor-thickness    = 2
-adjust-underline-position  = 0
-bold-color                 = bright
-copy-on-select             = clipboard
-font-family                = PragmataPro VF Liga
-font-feature               = calt, liga, ss13, ss15
-font-size                  = 16
-font-variation             = wght = 450
-font-variation-bold        = wght = 700
-font-variation-bold-italic = wght = 700
-font-variation-italic      = wght = 450
-link-previews              = true
-macos-option-as-alt        = left
-macos-titlebar-style       = tabs
-mouse-hide-while-typing    = true
-quick-terminal-position    = center
-quick-terminal-size        = 500px
-shell-integration          = detect
-shell-integration-features = cursor,sudo,title,ssh-env,ssh-terminfo
-theme                      = dark:catppuccin-mocha.conf,light:catppuccin-latte.conf
-unfocused-split-fill       = BLACK
-window-padding-balance     = true
-window-padding-x           = 3
-window-padding-y           = 3
+adjust-cursor-thickness     = 2
+adjust-underline-position   = 0
+auto-update                 = check
+bold-color                  = bright
+copy-on-select              = clipboard
+font-family                 = PragmataPro VF Liga
+font-feature                = calt, liga, ss13, ss15
+font-size                   = 16
+font-thicken                = false
+font-variation              = wght = 450
+font-variation-bold         = wght = 700
+font-variation-bold-italic  = wght = 700
+font-variation-italic       = wght = 450
+link-previews               = true
+macos-non-native-fullscreen = visible-menu
+macos-option-as-alt         = left
+macos-titlebar-style        = tabs
+mouse-hide-while-typing     = true
+quick-terminal-position     = center
+quick-terminal-size         = 500px
+shell-integration           = detect
+shell-integration-features  = cursor,sudo,title,ssh-env,ssh-terminfo
+theme                       = dark:catppuccin-mocha.conf,light:catppuccin-latte.conf
+unfocused-split-fill        = BLACK
+window-padding-balance      = true
+window-padding-x            = 3
+window-padding-y            = 3
