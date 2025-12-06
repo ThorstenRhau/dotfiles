@@ -20,7 +20,9 @@ if status is-interactive
     abbr gst 'git status'
     
     # Utility Abbreviations
-    abbr lg 'lazygit'
+    if type -q lazygit
+        abbr lg 'lazygit'
+    end
     abbr pip pip3
     abbr python python3
 end
