@@ -2,6 +2,7 @@
 fish/.config/fish/fish_variables
 fish/.config/fish/local.fish
 fish/.config/fish/secrets.fish
+fish/.config/fish/cache
 
 # Google Gemini-cli specific local files that are ignored
 gemini/.gemini/google_accounts.json

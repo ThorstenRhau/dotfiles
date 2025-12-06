@@ -21,7 +21,7 @@ function _appearance_change_handler --on-variable SYSTEM_APPEARANCE
             source $HOME/.config/fzf/themes/catppuccin_mocha.fish
         end
         if type -q vivid
-            _config_cache "$HOME/.config/fish/cache/lscolors_catppuccin-mocha.fish" "echo \"set -gx LS_COLORS '\"(vivid generate catppuccin-mocha)\"'\""
+            _config_cache "$HOME/.config/fish/cache/lscolors_catppuccin-mocha.fish" 'echo "set -gx LS_COLORS \'"(vivid generate catppuccin-mocha)"\'"'
         end
         set -gx STARSHIP_CONFIG "$HOME/.config/starship_mocha.toml"
     else
@@ -32,7 +32,7 @@ function _appearance_change_handler --on-variable SYSTEM_APPEARANCE
             source $HOME/.config/fzf/themes/catppuccin_latte.fish
         end
         if type -q vivid
-            _config_cache "$HOME/.config/fish/cache/lscolors_catppuccin-latte.fish" "echo \"set -gx LS_COLORS '\"(vivid generate catppuccin-latte)\"'\""
+            _config_cache "$HOME/.config/fish/cache/lscolors_catppuccin-latte.fish" 'echo "set -gx LS_COLORS \'"(vivid generate catppuccin-latte)"\'"'
         end
         set -gx STARSHIP_CONFIG "$HOME/.config/starship_latte.toml"
     end
@@ -65,16 +65,13 @@ function _check_appearance_on_prompt --on-event fish_prompt
 
         # Run check in background
         # We redirect all output to null to ensure no ghost output on the prompt
+        # We unconditionally set the variable; Fish only triggers events if the value actually changes.
         fish --no-config -c '
             set -l val (defaults read -g AppleInterfaceStyle 2>/dev/null)
             if test "$val" = "Dark"
-                set mode "dark"
+                set -U SYSTEM_APPEARANCE "dark"
             else
-                set mode "light"
-            end
-
-            if test "$SYSTEM_APPEARANCE" != "$mode"
-                set -U SYSTEM_APPEARANCE "$mode"
+                set -U SYSTEM_APPEARANCE "light"
             end
         ' >/dev/null 2>&1 &
         disown
