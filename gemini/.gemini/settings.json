@@ -1,58 +1,59 @@
 {
-    "model": {
-        "compressionThreshold": 0.8
+  "model": {
+    "compressionThreshold": 0.8
+  },
+  "general": {
+    "previewFeatures": true,
+    "checkpointing": {
+      "enabled": true
     },
-    "general": {
-        "previewFeatures": true,
-        "checkpointing": {
-            "enabled": true
-        },
-        "disableAutoUpdate": false,
-        "enablePromptCompletion": false,
-        "sessionRetention": {
-            "enabled": true,
-            "maxAge": "14d"
-        }
+    "disableAutoUpdate": false,
+    "enablePromptCompletion": false,
+    "sessionRetention": {
+      "enabled": true,
+      "maxAge": "14d"
     },
-    "ui": {
-        "theme": "Default Light",
-        "hideTips": true,
-        "hideBanner": true,
-        "showMemoryUsage": true,
-        "showModelInfoInChat": true,
-        "showCitations": true,
-        "showLineNumbers": true,
-        "useAlternateBuffer": true,
-        "accessibility": {
-            "disableLoadingPhrases": true
-        },
-        "footer": {
-            "hideContextPercentage": false,
-            "hideModelInfo": false
-        }
+    "preferredEditor": "neovim"
+  },
+  "ui": {
+    "theme": "ANSI",
+    "hideTips": true,
+    "hideBanner": true,
+    "showMemoryUsage": true,
+    "showModelInfoInChat": true,
+    "showCitations": true,
+    "showLineNumbers": true,
+    "useAlternateBuffer": true,
+    "accessibility": {
+      "disableLoadingPhrases": true
     },
-    "context": {
-        "fileFiltering": {
-            "respectGitIgnore": true,
-            "enableRecursiveFileSearch": true,
-            "disableFuzzySearch": false
-        },
-        "loadMemoryFromIncludeDirectories": true
-    },
-    "tools": {
-        "useRipgrep": true,
-        "autoAccept": false,
-        "enableToolOutputTruncation": true,
-        "truncateToolOutputThreshold": 10000
-    },
-    "security": {
-        "disableYoloMode": true,
-        "blockGitExtensions": false,
-        "auth": {
-            "selectedType": "oauth-personal"
-        }
-    },
-    "ide": {
-        "enabled": false
+    "footer": {
+      "hideContextPercentage": false,
+      "hideModelInfo": false
     }
+  },
+  "context": {
+    "fileFiltering": {
+      "respectGitIgnore": true,
+      "enableRecursiveFileSearch": true,
+      "disableFuzzySearch": false
+    },
+    "loadMemoryFromIncludeDirectories": true
+  },
+  "tools": {
+    "useRipgrep": true,
+    "autoAccept": false,
+    "enableToolOutputTruncation": true,
+    "truncateToolOutputThreshold": 10000
+  },
+  "security": {
+    "disableYoloMode": true,
+    "blockGitExtensions": false,
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "ide": {
+    "enabled": false
+  }
 }
