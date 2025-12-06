@@ -23,6 +23,12 @@ if status is-interactive
     if type -q lazygit
         abbr lg 'lazygit'
     end
-    abbr pip pip3
-    abbr python python3
+
+    if type -q pip3
+        abbr pip pip3
+    end
+
+    if type -q python3
+        abbr python python3
+    end
 end
