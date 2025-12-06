@@ -1,10 +1,13 @@
-# Fish specific local files that are not to be handled by git
+# Fish specific local files that are ignored
 fish/.config/fish/fish_variables
 fish/.config/fish/local.fish
 fish/.config/fish/secrets.fish
 
-# Yazi specific local files that are not to be handled by git
-yazi/.config/yazi/theme.toml
+# Google Gemini-cli specific local files that are ignored
+gemini/.gemini/google_accounts.json
+gemini/.gemini/history/
+gemini/.gemini/oauth_creds.json
+gemini/.gemini/tmp/
 
 # macOS specific
 **/.DS_Store
