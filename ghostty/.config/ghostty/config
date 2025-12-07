@@ -6,9 +6,7 @@
 adjust-cursor-thickness     = 2
 adjust-underline-position   = 0
 auto-update                 = check
-auto-update                 = check
 bold-color                  = bright
-copy-on-select              = clipboard
 copy-on-select              = clipboard
 font-family                 = PragmataPro VF Liga
 font-feature                = calt, liga, ss13, ss15
@@ -30,7 +28,6 @@ shell-integration-features  = cursor,sudo,title,ssh-env,ssh-terminfo
 theme                       = dark:catppuccin-mocha.conf,light:catppuccin-latte.conf
 unfocused-split-fill        = BLACK
 window-colorspace           = display-p3
-window-padding-balance      = true
 window-padding-balance      = true
 window-padding-x            = 4
 window-padding-y            = 4
