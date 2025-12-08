@@ -34,3 +34,5 @@ window-padding-x            = 6
 window-padding-y            = 4
 window-theme                = system
 window-width                = 120
+#
+keybind                     = shift+enter=text:\x1b\r
