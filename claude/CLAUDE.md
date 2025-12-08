@@ -1,4 +1,6 @@
-# Claude Rules
+# CLAUDE.md
+
+## Rules for Claude
 
 1. First think through the problem, read the codebase for relevant files, and
    write a plan to tasks/todo.md.
