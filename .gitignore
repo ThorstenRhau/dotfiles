@@ -12,3 +12,6 @@ gemini/.gemini/tmp/
 
 # macOS specific
 **/.DS_Store
+
+# Tasks directory
+tasks/
