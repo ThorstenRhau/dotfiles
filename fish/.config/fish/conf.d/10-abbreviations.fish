@@ -5,7 +5,7 @@ if status is-interactive
     end
 
     # Neovim Abbreviations
-    if type -q nvim >/dev/null
+    if type -q nvim
         abbr nv nvim
     end
 

@@ -7,7 +7,7 @@ set -gx fish_greeting
 set -gx FISH_CACHE_TTL 86400
 
 # Editor setup (Global)
-if type -q nvim >/dev/null
+if type -q nvim
     set -gx EDITOR (which nvim)
     set -gx VISUAL $EDITOR
     set -gx SUDO_EDITOR $EDITOR

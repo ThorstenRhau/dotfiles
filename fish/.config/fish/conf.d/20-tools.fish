@@ -5,13 +5,13 @@ end
 
 if status is-interactive
     # Zoxide
-    if type -q zoxide >/dev/null
+    if type -q zoxide
         zoxide init fish --cmd cd | source
         bind \ez cdi
     end
 
     # FZF
-    if type -q fzf >/dev/null
+    if type -q fzf
         fzf --fish | source
 
         set -gx FZF_DEFAULT_COMMAND 'fd --type f --hidden --exclude .git'

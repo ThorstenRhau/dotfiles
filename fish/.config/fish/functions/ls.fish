@@ -1,3 +1,7 @@
 function ls --wraps eza --description "ls using eza"
-    eza $_EZA_BASE_OPTS $argv
+    if type -q eza
+        eza $_EZA_BASE_OPTS $argv
+    else
+        command ls $argv
+    end
 end

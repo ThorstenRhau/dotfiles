@@ -1,11 +1,14 @@
 # Appearance handling configuration
 
+# Cache OS type to avoid repeated subshell calls
+set -g _OS_TYPE (uname)
+
 # Base options (layout, info, etc.) to be preserved across theme changes
 set -gx _FZF_BASE_OPTS "--height 40% --layout=reverse --info=inline --border=rounded --prompt='❯ ' --pointer='▶' --marker='✓'"
 
 # Handler for variable change
 function _appearance_change_handler --on-variable SYSTEM_APPEARANCE
-    if test (uname) != "Darwin"
+    if test $_OS_TYPE != "Darwin"
         set -gx STARSHIP_CONFIG "$HOME/.config/starship.toml"
         set -gx LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml"
         set -e BAT_THEME
@@ -57,7 +60,7 @@ set -g _appearance_last_check 0
 # Check appearance on prompt (async + rate limited)
 function _check_appearance_on_prompt --on-event fish_prompt
     # Check if we are on macOS
-    if test (uname) != "Darwin"
+    if test $_OS_TYPE != "Darwin"
         return
     end
 
