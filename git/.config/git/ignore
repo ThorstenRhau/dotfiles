@@ -51,3 +51,5 @@ yarn-error.log*
 *.swo
 *.swn
 *.lock
+
+**/.claude/settings.local.json
