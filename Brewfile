@@ -9,7 +9,6 @@
 
 # Core Homebrew packages
 cask "1password-cli"
-cask "basictex"
 cask "ghostty"
 #
 brew "bat"
