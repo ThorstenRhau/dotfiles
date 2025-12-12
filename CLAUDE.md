@@ -30,7 +30,7 @@ code in this repository.
 ## Repository Overview
 
 This is a personal dotfiles repository managed with GNU Stow. Each top-level
-directory (bat, fish, fzf, ghostty, git, lazygit, starship) represents a
+directory (bat, fish, fzf, ghostty, git, lazygit, starship, tmux) represents a
 "package" that mirrors the `$HOME` directory structure. Running `stow` creates
 symlinks from this repo into the home directory.
 
@@ -119,6 +119,8 @@ synchronizes themes across all tools:
 When adding new themed tools, update `_appearance_change_handler` to include
 them.
 
+Tmux has manual theme toggle on purpose
+
 ### Intelligent Caching Pattern
 
 The `_config_cache()` function in `/fish/.config/fish/conf.d/02-brew.fish`
@@ -163,7 +165,6 @@ Never commit these files. They're sourced last to override any defaults.
 
 - Font: PragmataPro VF Liga at 16pt (requires manual installation)
 - 16 color themes in `/ghostty/.config/ghostty/themes/`
-- Keybindings include custom Claude Code integration: `super+shift+k`
 - Auto theme switching via `GHOSTTY_RESOURCES_DIR` environment variable
 
 ### Starship Prompt
@@ -175,9 +176,18 @@ Never commit these files. They're sourced last to override any defaults.
 
 ### Bat (Code Viewer)
 
-- 14 custom color themes in `/bat/.config/bat/themes/`
+- 12 custom color themes in `/bat/.config/bat/themes/`
 - Custom syntax definitions in `/bat/.config/bat/syntaxes/`
 - Theme set via `BAT_THEME` environment variable
+
+### Tmux
+
+- Config: `/tmux/.config/tmux/tmux.conf`
+- Terminal: tmux-256color with Ghostty overrides
+- Theme toggle: `prefix + T` switches between Mocha (dark) and Latte (light)
+- Mouse toggle: `prefix + M`
+- Window/pane numbering starts at 1
+- Split keybindings: `|` (horizontal), `-` (vertical)
 
 ### FZF Integration
 
@@ -192,6 +202,6 @@ Never commit these files. They're sourced last to override any defaults.
   system
 - Non-macOS systems skip appearance checking and use default configs
 - The `stow_all.sh` script uses `--restow` to safely update existing symlinks
-- Brewfile contains 40+ packages; some are optional (check before running
+- Brewfile contains 45+ packages; some are optional (check before running
   `brew bundle`)
 - Font files must be installed manually (PragmataPro not in Homebrew)
