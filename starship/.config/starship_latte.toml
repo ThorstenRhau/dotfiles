@@ -10,7 +10,7 @@ error_symbol   = "[❯❯](bold red) "
 success_symbol = "[❯❯](bold green) "
 
 [hostname]
-format   = "[󰢩 $hostname](bold green) "
+format   = "[󰢩 $hostname](bold yellow) "
 ssh_only = true
 
 [username]
