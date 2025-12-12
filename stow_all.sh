@@ -15,6 +15,7 @@ ghostty
 git
 lazygit
 starship
+tmux
 "
 
 for package in $packages; do
