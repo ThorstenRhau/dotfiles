@@ -1,24 +1,15 @@
 ---
 name: git-skill
-description:
-  Handles git operations like commit and push. Use when the user requests git
-  commands such as "git commit", "git push", or other git operations. Creates
-  conventional commit messages following conventionalcommits.org format.
+description: Git operations with conventional commits.
+TRIGGER: git commit, git push, git status, commit changes
 ---
 
 # Git Operations
 
-## Instructions
+Handle git operations using
+[Conventional Commits v1.0.0](https://www.conventionalcommits.org/en/v1.0.0/).
 
-When the user requests git operations (commit, push, pull, status, etc.), handle
-them according to these guidelines:
-
-### Conventional Commits Format
-
-All commit messages MUST follow the Conventional Commits specification
-(https://www.conventionalcommits.org/en/v1.0.0/):
-
-**Structure:**
+## Commit Message Format
 
 ```
 <type>[optional scope]: <description>
@@ -28,97 +19,96 @@ All commit messages MUST follow the Conventional Commits specification
 [optional footer(s)]
 ```
 
-**Types:**
+### Types
 
-- `feat`: A new feature
-- `fix`: A bug fix
-- `docs`: Documentation only changes
-- `style`: Changes that don't affect code meaning (white-space, formatting,
-  etc.)
-- `refactor`: Code change that neither fixes a bug nor adds a feature
-- `perf`: Performance improvement
-- `test`: Adding missing tests or correcting existing tests
-- `build`: Changes affecting build system or external dependencies
-- `ci`: Changes to CI configuration files and scripts
-- `chore`: Other changes that don't modify src or test files
-- `revert`: Reverts a previous commit
+| Type       | Description                | SemVer |
+| ---------- | -------------------------- | ------ |
+| `feat`     | New feature                | MINOR  |
+| `fix`      | Bug fix                    | PATCH  |
+| `docs`     | Documentation only         |        |
+| `style`    | Formatting, no code change |        |
+| `refactor` | Neither fix nor feature    |        |
+| `perf`     | Performance improvement    |        |
+| `test`     | Adding/correcting tests    |        |
+| `build`    | Build system, dependencies |        |
+| `ci`       | CI configuration           |        |
+| `chore`    | Other non-src/test changes |        |
+| `revert`   | Reverts a previous commit  |        |
 
-**Rules:**
+### Rules
 
-1. Keep the description concise (50 characters or less preferred, 72 max)
-2. Use imperative mood ("add feature" not "added feature")
-3. Don't capitalize first letter of description
-4. No period at the end of description
-5. Body should explain what and why, not how (if needed)
+1. Description: imperative mood, lowercase, no period, ≤72 chars
+2. Scope: noun in parentheses describing affected area, e.g., `feat(parser):`
+3. Body: explain _what_ and _why_, not _how_ (blank line after description)
+4. Footer: use for breaking changes, issue refs, co-authors
 
-**Examples:**
+### Examples
 
 ```
 feat: add user authentication
+
 fix: resolve memory leak in data processor
-docs: update API documentation
-refactor: simplify validation logic
+
+docs: correct spelling of CHANGELOG
+
+feat(lang): add Polish language
+
+fix: prevent racing of requests
+
+Introduce a request id and a reference to latest request.
+Dismiss incoming responses other than from latest request.
+
+Refs: #123
+
+revert: let us never again speak of the noodle incident
+
+Refs: 676104e, a215868
 ```
+
+## Commit Workflow
+
+1. `git status` — review all changes
+2. `git diff [--staged]` — understand what changed
+3. **Analyze grouping** — split if changes are logically independent:
+   - Different types (`feat` + `fix` → 2 commits)
+   - Unrelated areas (frontend + backend for different features → 2 commits)
+   - Keep related changes together (one feature across multiple files → 1
+     commit)
+4. **For each logical group:**
+   - Stage specific files: `git add <files>` (never blind `git add .`)
+   - Commit: `git commit -m "<message>"`
+5. `git status` — verify completion
+
+## Rules
 
 ### No Attribution
 
-NEVER include attribution in commit messages:
+Never include:
 
-- No "Co-authored-by: Claude"
-- No "Generated with Claude Code"
-- No similar attribution or signatures
+- `Co-authored-by: Claude`
+- `Generated with Claude Code`
+- Any AI attribution
 
-### Grouping Changes into Commits
+### Pre-commit Checks
 
-When there are multiple changes, analyze whether they should be grouped into
-separate commits:
+Before committing, consider:
 
-**Consider both commit type AND file/area:**
+- Exclude `.env`, credentials, secrets
+- Run tests/linting if project has them
+- Check for unintended files with `git status`
 
-- **By type:** Separate different conventional commit types (`feat`, `fix`,
-  `docs`, `refactor`, etc.)
-- **By area:** Separate unrelated functionality (frontend vs backend, different
-  features, different components)
+### Amending
 
-**Guidelines:**
+```
+git commit --amend           # edit message and content
+git commit --amend --no-edit # keep message, add staged changes
+```
 
-- Create separate commits when changes are logically independent
-- Keep related changes together even if they span multiple files
-- A single feature touching multiple files = one commit
-- Multiple unrelated fixes = separate commits
-- Code changes vs documentation = separate commits
+⚠️ Warn user if commit was already pushed (requires `--force`).
 
-**Examples of splitting:**
+### Push
 
-- `feat: add user profile` + `fix: login bug` → 2 commits
-- `feat: dashboard` + `feat: settings page` → 2 commits
-- `refactor: auth logic` + `docs: update README` → 2 commits
-- Frontend component + backend API for same feature → 1 commit
-
-### Git Commit Process
-
-When creating commits:
-
-1. Run `git status` to see all changes
-2. Run `git diff` to review the changes
-3. **Analyze if changes should be split into multiple commits** (see "Grouping
-   Changes into Commits" above)
-4. **For each logical group:**
-   - Determine the appropriate conventional commit type
-   - Draft a concise commit message following the format above
-   - Add relevant files with `git add <files>`
-   - Create the commit with `git commit -m "<message>"`
-5. Verify all changes are committed with `git status`
-
-### Git Push Process
-
-When pushing:
-
-1. Verify there are commits to push with `git status`
-2. Push using `git push` or `git push -u origin <branch>` for new branches
-3. Report the result to the user
-
-### Other Git Operations
-
-Handle other git commands (pull, status, log, branch, etc.) as requested by the
-user with appropriate bash commands.
+```
+git push                        # existing upstream
+git push -u origin <branch>     # new branch
+```
