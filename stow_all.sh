@@ -9,6 +9,7 @@ fi
 
 packages="
 bat
+claude
 fish
 fzf
 ghostty
