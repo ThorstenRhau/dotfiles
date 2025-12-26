@@ -15,17 +15,17 @@ Run `stow <package>` or `./stow_all.sh` to create symlinks.
 
 ## Fish Shell
 
-Config lives in modular files under `conf.d/` (sourced alphabetically):
+Configuration is in `fish/.config/fish/config.fish` with organized sections:
 
-- `00-env.fish` - Environment variables
-- `01-path.fish` - PATH management
-- `02-brew.fish` - Homebrew integration
-- `10-abbreviations.fish` - Aliases
-- `15-appearance.fish` - Theme system
-- `20-tools.fish` - Tool integrations (zoxide, fzf, starship)
-- `99-locals.fish` - Sources git-ignored `secrets.fish` and `local.fish`
+- Environment Variables - Global environment settings, editor config
+- PATH - PATH management
+- Homebrew - Homebrew integration (macOS ARM)
+- Abbreviations - Shell abbreviations/aliases
+- Appearance & Theming - Catppuccin theme system (auto-switching dark/light)
+- Tool Integrations - zoxide, fzf, starship, ghostty
+- Local Configuration - Sources git-ignored `secrets.fish` and `local.fish`
 
-Edit `conf.d/*.fish` files, not `config.fish`.
+Additional functions live in `functions/` directory (autoloaded by Fish).
 
 ## Notes
 
