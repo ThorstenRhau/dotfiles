@@ -63,9 +63,9 @@ get_git_info() {
   unstaged=$(git -C "$project_dir" --no-optional-locks diff --numstat 2>/dev/null | wc -l | tr -d ' ')
   untracked=$(git -C "$project_dir" --no-optional-locks ls-files --others --exclude-standard 2>/dev/null | wc -l | tr -d ' ')
 
-  [ "$staged" -gt 0 ] && status_parts+=("●$staged")
-  [ "$unstaged" -gt 0 ] && status_parts+=("○$unstaged")
-  [ "$untracked" -gt 0 ] && status_parts+=("?$untracked")
+  [ "$staged" -gt 0 ] && status_parts+=("● $staged")
+  [ "$unstaged" -gt 0 ] && status_parts+=("○ $unstaged")
+  [ "$untracked" -gt 0 ] && status_parts+=("? $untracked")
 
   if [ ${#status_parts[@]} -gt 0 ]; then
     echo "$branch [${status_parts[*]}]"
