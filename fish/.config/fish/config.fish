@@ -96,7 +96,7 @@ set -gx _FZF_BASE_OPTS "--height 40% --layout=reverse --info=inline --border=rou
 
 # Initialize SYSTEM_APPEARANCE if empty (default to dark safely)
 if not set -q SYSTEM_APPEARANCE
-    set -U SYSTEM_APPEARANCE "dark"
+    set -gx SYSTEM_APPEARANCE "dark"
 end
 
 # State for rate limiting
