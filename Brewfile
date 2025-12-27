@@ -11,6 +11,7 @@
 cask "1password-cli"
 cask "ghostty"
 #
+brew "bash"
 brew "bat"
 brew "carapace"
 brew "cmake"
