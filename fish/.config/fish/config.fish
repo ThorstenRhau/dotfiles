@@ -42,7 +42,7 @@ if test -x /opt/homebrew/bin/brew
     set -gx HOMEBREW_NO_ANALYTICS 1
     set -gx HOMEBREW_BAT 1
     set -gx HOMEBREW_EDITOR nvim
-    set -gx HOMEBREW_DOWNLOAD_CONCURRENCY "auto"
+    set -gx HOMEBREW_DOWNLOAD_CONCURRENCY auto
 end
 
 # =============================================================================
@@ -52,7 +52,7 @@ end
 if status is-interactive
     # Bat (cat replacement)
     if type -q bat
-        abbr cat 'bat'
+        abbr cat bat
     end
 
     # Neovim Abbreviations
@@ -72,7 +72,7 @@ if status is-interactive
 
     # Utility Abbreviations
     if type -q lazygit
-        abbr lg 'lazygit'
+        abbr lg lazygit
     end
 
     if type -q pip3
@@ -99,7 +99,7 @@ set -gx _FZF_BASE_OPTS "--height 40% --layout=reverse --info=inline --border=rou
 
 # Initialize SYSTEM_APPEARANCE if empty (default to dark safely)
 if not set -q SYSTEM_APPEARANCE
-    set -gx SYSTEM_APPEARANCE "dark"
+    set -gx SYSTEM_APPEARANCE dark
 end
 
 # State for rate limiting
@@ -132,7 +132,7 @@ if type -q eza
     end
 
     function lt --wraps eza --description "tree view using eza"
-        eza --tree $_EZA_BASE_OPTS $argv
+        eza --tree --level 4 $_EZA_BASE_OPTS $argv
     end
 end
 
