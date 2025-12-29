@@ -118,6 +118,22 @@ _appearance_change_handler
 # Eza configuration (Global)
 if type -q eza
     set -gx _EZA_BASE_OPTS --header --git --group-directories-first --time-style=long-iso
+
+    function ls --wraps eza --description "ls using eza"
+        eza $_EZA_BASE_OPTS $argv
+    end
+
+    function ll --wraps eza --description "long list using eza"
+        eza --long $_EZA_BASE_OPTS $argv
+    end
+
+    function la --wraps eza --description "list all using eza"
+        eza --long --all $_EZA_BASE_OPTS $argv
+    end
+
+    function lt --wraps eza --description "tree view using eza"
+        eza --tree $_EZA_BASE_OPTS $argv
+    end
 end
 
 if status is-interactive
