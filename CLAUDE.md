@@ -31,3 +31,7 @@ Additional functions live in `functions/` directory (autoloaded by Fish).
 
 - macOS-focused with Linux fallbacks in appearance system
 - Catppuccin themes throughout (Mocha dark, Latte light)
+
+## Claude Skills
+
+Use the Claude Code skill **git-skill** for git operations.
