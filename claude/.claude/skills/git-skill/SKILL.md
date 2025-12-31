@@ -25,22 +25,25 @@ Handle git operations using
 | ---------- | -------------------------- | ------ |
 | `feat`     | New feature                | MINOR  |
 | `fix`      | Bug fix                    | PATCH  |
-| `docs`     | Documentation only         |        |
-| `style`    | Formatting, no code change |        |
-| `refactor` | Neither fix nor feature    |        |
-| `perf`     | Performance improvement    |        |
-| `test`     | Adding/correcting tests    |        |
-| `build`    | Build system, dependencies |        |
-| `ci`       | CI configuration           |        |
-| `chore`    | Other non-src/test changes |        |
-| `revert`   | Reverts a previous commit  |        |
+| `docs`     | Documentation only         | -      |
+| `style`    | Formatting, no code change | -      |
+| `refactor` | Neither fix nor feature    | -      |
+| `perf`     | Performance improvement    | PATCH  |
+| `test`     | Adding/correcting tests    | -      |
+| `build`    | Build system, dependencies | -      |
+| `ci`       | CI configuration           | -      |
+| `chore`    | Other non-src/test changes | -      |
+| `revert`   | Reverts a previous commit  | -      |
 
 ### Rules
 
-1. Description: imperative mood, lowercase, no period, ≤72 chars
-2. Scope: noun in parentheses describing affected area, e.g., `feat(parser):`
+1. Description: imperative mood, lowercase, no period, ≤50 chars (72 for body)
+2. Scope: noun in parentheses describing affected area, e.g., `feat(api):`, `fix(parser):`, `docs(readme):`
 3. Body: explain _what_ and _why_, not _how_ (blank line after description)
 4. Footer: use for breaking changes, issue refs, co-authors
+5. Breaking changes: append exclamation mark after type/scope OR add `BREAKING CHANGE:` footer (triggers MAJOR)
+   - Example: `feat!:` or `refactor(api)!:`
+   - Use double quotes in shell commands, not single quotes
 
 ### Examples
 
@@ -60,9 +63,23 @@ Dismiss incoming responses other than from latest request.
 
 Refs: #123
 
-revert: let us never again speak of the noodle incident
+feat!: drop support for Node 14
 
-Refs: 676104e, a215868
+BREAKING CHANGE: Node 14 has reached end-of-life. Minimum required version is now Node 18.
+
+refactor(api)!: rename endpoints for consistency
+
+/users → /api/users
+/posts → /api/posts
+
+BREAKING CHANGE: All REST endpoints now prefixed with /api
+
+revert: revert "feat: add experimental caching layer"
+
+This reverts commit 676104e.
+The caching implementation caused data inconsistencies in production.
+
+Refs: #456
 ```
 
 ## Commit Workflow
@@ -76,26 +93,23 @@ Refs: 676104e, a215868
      commit)
 4. **For each logical group:**
    - Stage specific files: `git add <files>` (never blind `git add .`)
-   - Commit: `git commit -m "<message>"`
+   - Commit:
+     - Simple: `git commit -m "type(scope): description"`
+     - With body: `git commit -m "type: description" -m "Body paragraph"`
+     - With editor: `git commit` (for complex messages with body/footer)
 5. `git status` — verify completion
 
 ## Rules
 
-### No Attribution
-
-Never include:
-
-- `Co-authored-by: Claude`
-- `Generated with Claude Code`
-- Any AI attribution
-
 ### Pre-commit Checks
 
-Before committing, consider:
+Before committing, verify:
 
-- Exclude `.env`, credentials, secrets
-- Run tests/linting if project has them
-- Check for unintended files with `git status`
+- **Secrets**: Exclude `.env`, `credentials.json`, API keys, tokens
+- **Tests**: Run `npm test`, `pytest`, `cargo test`, or project-specific commands
+- **Linting**: Run linters/formatters (`eslint`, `prettier`, `ruff`, etc.)
+- **Hooks**: Check if pre-commit hooks exist (`.git/hooks/pre-commit`)
+- **Unintended files**: Review `git status` output carefully
 
 ### Amending
 
