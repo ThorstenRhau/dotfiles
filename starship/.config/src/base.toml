@@ -80,9 +80,6 @@ symbol = " "
 [fennel]
 symbol = " "
 
-[fortran]
-symbol = " "
-
 [fossil_branch]
 symbol = " "
 
@@ -140,57 +137,6 @@ symbol = " "
 [os]
 disabled = false
 
-[os.symbols]
-AOSC             = " "
-AlmaLinux        = " "
-Alpaquita        = " "
-Alpine           = " "
-Amazon           = " "
-Android          = " "
-Arch             = " "
-Artix            = " "
-CachyOS          = " "
-CentOS           = " "
-Debian           = " "
-DragonFly        = " "
-Elementary       = " "
-Emscripten       = " "
-EndeavourOS      = " "
-Fedora           = " "
-FreeBSD          = " "
-Garuda           = "󰛓 "
-Gentoo           = " "
-HardenedBSD      = "󰞌 "
-Illumos          = "󰈸 "
-Ios              = "󰀷 "
-Kali             = " "
-Linux            = " "
-Mabox            = " "
-Macos            = " "
-Manjaro          = " "
-Mariner          = " "
-MidnightBSD      = " "
-Mint             = " "
-NetBSD           = " "
-NixOS            = " "
-Nobara           = " "
-OpenBSD          = "󰈺 "
-OracleLinux      = "󰌷 "
-Pop              = " "
-Raspbian         = " "
-RedHatEnterprise = " "
-Redhat           = " "
-Redox            = "󰀘 "
-RockyLinux       = " "
-SUSE             = " "
-Solus            = "󰠳 "
-Ubuntu           = " "
-Unknown          = " "
-Void             = " "
-Windows          = "󰍲 "
-Zorin            = " "
-openSUSE         = " "
-
 [package]
 symbol = "󰏗 "
 
@@ -230,9 +176,6 @@ symbol   = " "
 
 [swift]
 symbol = " "
-
-[xmake]
-symbol = " "
 
 [zig]
 symbol = " "
