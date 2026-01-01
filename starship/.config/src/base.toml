@@ -8,7 +8,7 @@ error_symbol   = "[❯❯](bold red)"
 success_symbol = "[❯❯](bold green)"
 
 [hostname]
-format     = "[$hostname](bold yellow) "
+format     = "[$hostname  ](bold yellow)"
 ssh_only   = true
 ssh_symbol = " "
 
