@@ -1,0 +1,71 @@
+colors:
+  base00: '292522'  # bg
+  base01: '34302C'  # float
+  base02: '403A36'  # sel
+  base03: '867462'  # ui
+  base04: 'C1A78E'  # com
+  base05: 'ECE1D7'  # fg
+  base06: 'ECE1D7'  # fg
+  base07: 'ECE1D7'  # fg
+  base08: 'D47766'  # red
+  base09: 'E49B5D'  # yellow_alt
+  base0A: 'EBC06D'  # yellow
+  base0B: '85B695'  # green
+  base0C: '89B3B6'  # cyan
+  base0D: 'A3A9CE'  # blue
+  base0E: 'CF9BC2'  # magenta
+  base0F: 'BD8183'  # red_alt
+
+core:
+  normal_text:  { foreground: base05 }
+  regular_file: { foreground: base05 }
+  directory: { foreground: base0D, font-style: bold }
+  symlink: { foreground: base0C }
+  multi_hard_link: {}
+  pipe: { foreground: base0A }
+  socket: { foreground: base0E }
+  door: { foreground: base0E }
+  block_device: { foreground: base0A, background: base00 }
+  char_device: { foreground: base0A, background: base00 }
+  broken_symlink: { foreground: base08, background: base00 }
+  missing_symlink_target: { foreground: base08, background: base00 }
+  setuid: { foreground: base05, background: base08 }
+  setgid: { foreground: base05, background: base0A }
+  file_with_capability: {}
+  sticky: { foreground: base05, background: base0E }
+  other_writable: { foreground: base0D, background: base00 }
+  sticky_other_writable: { foreground: base05, background: base0D }
+  executable_file: { foreground: base0B, font-style: bold }
+
+text:
+  special: { foreground: base0A }
+  todo: { foreground: base0A, font-style: bold }
+  licenses: { foreground: base03 }
+  configuration: { foreground: base0E }
+  other: { foreground: base05 }
+
+markup:
+  foreground: base0A
+
+programming:
+  source: { foreground: base0B }
+  tooling: { foreground: base03 }
+
+media:
+  image: { foreground: base0C }
+  audio: { foreground: base0E }
+  video: { foreground: base09 }
+  fonts: { foreground: base05 }
+
+office:
+  foreground: base08
+
+archives:
+  foreground: base09
+
+executable:
+  foreground: base0B
+  font-style: bold
+
+unimportant:
+  foreground: base03

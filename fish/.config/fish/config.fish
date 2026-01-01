@@ -91,8 +91,8 @@ end
 # Cache OS type to avoid repeated subshell calls
 set -g _OS_TYPE (uname)
 
-# Fish syntax highlighting theme (Catppuccin with auto light/dark switching)
-fish_config theme choose Catppuccin
+# Fish syntax highlighting theme (Melange with auto light/dark switching)
+fish_config theme choose Melange
 
 # Base options (layout, info, etc.) to be preserved across theme changes
 set -gx _FZF_BASE_OPTS "--height 40% --layout=reverse --info=inline --border=rounded --prompt='❯ ' --pointer='▶' --marker='✓'"

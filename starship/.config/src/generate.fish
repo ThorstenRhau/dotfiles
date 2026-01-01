@@ -9,17 +9,17 @@ set -l out_dir (dirname $script_dir)
 # Base config (no palette - fallback for non-macOS)
 cp $script_dir/base.toml $out_dir/starship.toml
 
-# Mocha (dark theme)
+# Dark theme
 # Insert palette directive after schema line, then append palette definition
-head -1 $script_dir/base.toml > $out_dir/starship_mocha.toml
-echo 'palette = "catppuccin_mocha"' >> $out_dir/starship_mocha.toml
-tail -n +2 $script_dir/base.toml >> $out_dir/starship_mocha.toml
-grep -A 100 '^\[palettes\.' $script_dir/palette_mocha.toml >> $out_dir/starship_mocha.toml
+head -1 $script_dir/base.toml > $out_dir/starship_dark.toml
+echo 'palette = "melange_dark"' >> $out_dir/starship_dark.toml
+tail -n +2 $script_dir/base.toml >> $out_dir/starship_dark.toml
+grep -A 100 '^\[palettes\.' $script_dir/palette_dark.toml >> $out_dir/starship_dark.toml
 
-# Latte (light theme)
-head -1 $script_dir/base.toml > $out_dir/starship_latte.toml
-echo 'palette = "catppuccin_latte"' >> $out_dir/starship_latte.toml
-tail -n +2 $script_dir/base.toml >> $out_dir/starship_latte.toml
-grep -A 100 '^\[palettes\.' $script_dir/palette_latte.toml >> $out_dir/starship_latte.toml
+# Light theme
+head -1 $script_dir/base.toml > $out_dir/starship_light.toml
+echo 'palette = "melange_light"' >> $out_dir/starship_light.toml
+tail -n +2 $script_dir/base.toml >> $out_dir/starship_light.toml
+grep -A 100 '^\[palettes\.' $script_dir/palette_light.toml >> $out_dir/starship_light.toml
 
 echo "Generated starship configs in $out_dir"

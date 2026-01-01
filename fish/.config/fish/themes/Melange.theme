@@ -1,0 +1,59 @@
+# name: 'Melange'
+
+[light]
+# Melange Light colors
+fish_color_normal 54433A
+fish_color_command 465AA4
+fish_color_param C77B8B
+fish_color_keyword 904180
+fish_color_quote 3A684A
+fish_color_redirection BE79BB
+fish_color_end BC5C00
+fish_color_comment 7D6658
+fish_color_error BF0021
+fish_color_gray A98A78
+fish_color_selection --background=D9D3CE
+fish_color_search_match --background=D9D3CE
+fish_color_option 3A684A
+fish_color_operator BE79BB
+fish_color_escape C77B8B
+fish_color_autosuggestion A98A78
+fish_color_cancel BF0021
+fish_color_cwd A06D00
+fish_color_user 3D6568
+fish_color_host 465AA4
+fish_color_host_remote 3A684A
+fish_color_status BF0021
+fish_pager_color_progress A98A78
+fish_pager_color_prefix BE79BB
+fish_pager_color_completion 54433A
+fish_pager_color_description A98A78
+
+[dark]
+# Melange Dark colors
+fish_color_normal ECE1D7
+fish_color_command A3A9CE
+fish_color_param BD8183
+fish_color_keyword CF9BC2
+fish_color_quote 85B695
+fish_color_redirection CF9BC2
+fish_color_end E49B5D
+fish_color_comment C1A78E
+fish_color_error D47766
+fish_color_gray 867462
+fish_color_selection --background=403A36
+fish_color_search_match --background=403A36
+fish_color_option 85B695
+fish_color_operator CF9BC2
+fish_color_escape BD8183
+fish_color_autosuggestion 867462
+fish_color_cancel D47766
+fish_color_cwd EBC06D
+fish_color_user 89B3B6
+fish_color_host A3A9CE
+fish_color_host_remote 85B695
+fish_color_status D47766
+fish_pager_color_progress 867462
+fish_pager_color_prefix CF9BC2
+fish_pager_color_completion ECE1D7
+fish_pager_color_description 867462

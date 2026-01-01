@@ -1,0 +1,22 @@
+
+palette = "melange_dark"
+
+[palettes.melange_dark]
+bg        = "#292522"
+float     = "#34302C"
+sel       = "#403A36"
+ui        = "#867462"
+com       = "#C1A78E"
+fg        = "#ECE1D7"
+red       = "#D47766"
+yellow    = "#EBC06D"
+green     = "#85B695"
+cyan      = "#89B3B6"
+blue      = "#A3A9CE"
+magenta   = "#CF9BC2"
+red_alt   = "#BD8183"
+yellow_alt = "#E49B5D"
+green_alt = "#78997A"
+cyan_alt  = "#7B9695"
+blue_alt  = "#7F91B2"
+magenta_alt = "#B380B0"
