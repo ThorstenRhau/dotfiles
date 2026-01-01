@@ -135,7 +135,7 @@ symbol = " "
 symbol = " "
 
 [os]
-disabled = false
+disabled = true
 
 [package]
 symbol = "󰏗 "
