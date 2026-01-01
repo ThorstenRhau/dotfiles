@@ -8,14 +8,10 @@ adjust-underline-position     = 0
 auto-update                   = check
 bold-color                    = bright
 copy-on-select                = clipboard
-font-family                   = PragmataPro VF Liga
-font-feature                  = calt, liga, ss13, ss15
-font-size                     = 16
+font-family                   = Berkeley Mono
+font-feature                  = +liga
+font-size                     = 13
 font-thicken                  = false
-font-variation                = wght = 450
-font-variation-bold           = wght = 700
-font-variation-bold-italic    = wght = 700
-font-variation-italic         = wght = 450
 link-previews                 = true
 macos-non-native-fullscreen   = visible-menu
 macos-option-as-alt           = left
@@ -27,13 +23,14 @@ quit-after-last-window-closed = true
 shell-integration             = detect
 shell-integration-features    = cursor,sudo,title,ssh-env,ssh-terminfo
 theme                         = dark:catppuccin-mocha.conf,light:catppuccin-latte.conf
-unfocused-split-fill          = BLACK
 window-colorspace             = display-p3
 window-height                 = 41
 window-padding-balance        = true
 window-padding-x              = 6
 window-padding-y              = 4
 window-theme                  = system
+window-vsync                  = true
 window-width                  = 120
-#
-keybind                     = shift+enter=text:\x1b\r
+
+# For Claude Code
+keybind                       = shift+enter=text:\x1b\r
