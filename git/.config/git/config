@@ -10,7 +10,7 @@
     ui = true
 
 [commit]
-    verbose = true
+    verbose = 2
 
 [core]
     autocrlf = input
