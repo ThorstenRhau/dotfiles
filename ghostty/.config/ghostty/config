@@ -2,16 +2,31 @@
 # ghostty +show-config --default --docs
 # ghostty +list-themes
 # ghostty +list-fonts
+#
+# ## Font sample
+# abcdefghijklmnopqrstuvwxyz
+# ABCDEFGHIJKLMNOPQRSTUVWXYZ
+# 0123456789 (){}[]
+# +-/= .,;:!? #&$%@ß|^~
+#
+# ## Ligatures:
+# <!-- -- != := === >= >- >=>
+# |-> -> <$> </> #[ ||> |=
+# ~@ ~- ~=
 
 adjust-cursor-thickness       = 2
 adjust-underline-position     = 0
 auto-update                   = check
 bold-color                    = bright
 copy-on-select                = clipboard
-font-family                   = Berkeley Mono
-font-feature                  = +liga
+font-family                   = MonoLisa Variable
+font-feature                  = +calt, +liga, +ss07, +ss08, +ss09, +ss11, +ss13, +ss17
 font-size                     = 13
 font-thicken                  = false
+font-variation                = wght = 450
+font-variation-bold           = wght = 800
+font-variation-bold-italic    = wght = 800
+font-variation-italic         = wght = 450
 link-previews                 = true
 macos-non-native-fullscreen   = visible-menu
 macos-option-as-alt           = left
