@@ -1,3 +1,8 @@
+# Starship generated configs (built from src/)
+starship/.config/starship.toml
+starship/.config/starship_mocha.toml
+starship/.config/starship_latte.toml
+
 # Fish specific local files that are ignored
 fish/.config/fish/fish_variables
 fish/.config/fish/local.fish

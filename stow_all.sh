@@ -7,6 +7,13 @@ if ! command -v stow >/dev/null; then
     exit 1
 fi
 
+# Generate starship configs from source files
+if command -v fish >/dev/null; then
+    fish starship/.config/src/generate.fish
+else
+    echo "Warning: fish not found, skipping starship config generation"
+fi
+
 packages="
 bat
 claude
