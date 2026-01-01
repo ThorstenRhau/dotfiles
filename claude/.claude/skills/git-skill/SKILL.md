@@ -1,5 +1,5 @@
 ---
-name: git-skill
+name: git-use
 description: Git operations with conventional commits.
 TRIGGER: git commit, git push, git status, commit changes
 ---
