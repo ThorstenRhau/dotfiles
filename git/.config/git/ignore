@@ -46,10 +46,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# editor swap / lock files
+# editor swap files
 *.sw?
 *.swo
 *.swn
-*.lock
 
 **/.claude/settings.local.json
