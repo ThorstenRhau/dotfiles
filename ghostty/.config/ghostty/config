@@ -23,10 +23,10 @@ font-family                   = MonoLisa Variable
 font-feature                  = +calt, +liga, +ss07, +ss08, +ss09, +ss11, +ss13, +ss17
 font-size                     = 13
 font-thicken                  = false
-font-variation                = wght = 450
-font-variation-bold           = wght = 800
-font-variation-bold-italic    = wght = 800
-font-variation-italic         = wght = 450
+font-variation                = wght=425
+font-variation-bold           = wght=800
+font-variation-bold-italic    = wght=800
+font-variation-italic         = wght=425
 link-previews                 = true
 macos-non-native-fullscreen   = visible-menu
 macos-option-as-alt           = left
