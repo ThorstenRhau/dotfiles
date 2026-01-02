@@ -21,7 +21,7 @@ Configuration is in `fish/.config/fish/config.fish` with organized sections:
 - PATH - PATH management
 - Homebrew - Homebrew integration (macOS ARM)
 - Abbreviations - Shell abbreviations/aliases
-- Appearance & Theming - Catppuccin theme system (auto-switching dark/light)
+- Appearance & Theming - Modus theme system (auto-switching dark/light)
 - Tool Integrations - zoxide, fzf, starship, ghostty
 - Local Configuration - Sources git-ignored `secrets.fish` and `local.fish`
 
@@ -30,7 +30,7 @@ Additional functions live in `functions/` directory (autoloaded by Fish).
 ## Notes
 
 - macOS-focused with Linux fallbacks in appearance system
-- Catppuccin themes throughout (Mocha dark, Latte light)
+- Modus themes throughout (Vivendi Tinted dark, Operandi Tinted light)
 
 ## Claude Skills
 

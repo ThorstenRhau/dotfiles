@@ -1,20 +1,20 @@
 colors:
-  base00: '292522'  # bg
-  base01: '34302C'  # float
-  base02: '403A36'  # sel
-  base03: '867462'  # ui
-  base04: 'C1A78E'  # com
-  base05: 'ECE1D7'  # fg
-  base06: 'ECE1D7'  # fg
-  base07: 'ECE1D7'  # fg
-  base08: 'D47766'  # red
-  base09: 'E49B5D'  # yellow_alt
-  base0A: 'EBC06D'  # yellow
-  base0B: '85B695'  # green
-  base0C: '89B3B6'  # cyan
-  base0D: 'A3A9CE'  # blue
-  base0E: 'CF9BC2'  # magenta
-  base0F: 'BD8183'  # red_alt
+  base00: 'fbf7f0'  # bg_main
+  base01: 'e0d6c0'  # bg_dim
+  base02: 'dfa0f0'  # selection
+  base03: 'cab9b2'  # ui
+  base04: '595959'  # fg_dim
+  base05: '000000'  # fg_main
+  base06: '000000'  # fg_main
+  base07: '000000'  # fg_main
+  base08: 'a60000'  # red
+  base09: '884900'  # orange
+  base0A: '6f5500'  # yellow
+  base0B: '006800'  # green
+  base0C: '005e8b'  # cyan
+  base0D: '3548cf'  # blue
+  base0E: '721045'  # magenta
+  base0F: '7f0000'  # comment
 
 core:
   normal_text:  { foreground: base05 }
