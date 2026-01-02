@@ -12,13 +12,13 @@ cp $script_dir/base.toml $out_dir/starship.toml
 # Dark theme
 # Insert palette directive after schema line, then append palette definition
 head -1 $script_dir/base.toml > $out_dir/starship_dark.toml
-echo 'palette = "melange_dark"' >> $out_dir/starship_dark.toml
+echo 'palette = "modus_vivendi_tinted"' >> $out_dir/starship_dark.toml
 tail -n +2 $script_dir/base.toml >> $out_dir/starship_dark.toml
 grep -A 100 '^\[palettes\.' $script_dir/palette_dark.toml >> $out_dir/starship_dark.toml
 
 # Light theme
 head -1 $script_dir/base.toml > $out_dir/starship_light.toml
-echo 'palette = "melange_light"' >> $out_dir/starship_light.toml
+echo 'palette = "modus_operandi_tinted"' >> $out_dir/starship_light.toml
 tail -n +2 $script_dir/base.toml >> $out_dir/starship_light.toml
 grep -A 100 '^\[palettes\.' $script_dir/palette_light.toml >> $out_dir/starship_light.toml
 

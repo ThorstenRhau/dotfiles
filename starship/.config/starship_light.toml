@@ -1,5 +1,5 @@
 "$schema" = "https://starship.rs/config-schema.json"
-palette = "melange_light"
+palette = "modus_operandi_tinted"
 
 add_newline     = true
 command_timeout = 500
