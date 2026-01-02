@@ -115,26 +115,6 @@ _appearance_change_handler
 # Tool Integrations
 # =============================================================================
 
-# Eza configuration (Global)
-if type -q eza
-    set -gx _EZA_BASE_OPTS --header --git --group-directories-first --time-style=long-iso
-
-    function ls --wraps eza --description "ls using eza"
-        eza $_EZA_BASE_OPTS $argv
-    end
-
-    function ll --wraps eza --description "long list using eza"
-        eza --long $_EZA_BASE_OPTS $argv
-    end
-
-    function la --wraps eza --description "list all using eza"
-        eza --long --all $_EZA_BASE_OPTS $argv
-    end
-
-    function lt --wraps eza --description "tree view using eza"
-        eza --tree --level 4 $_EZA_BASE_OPTS $argv
-    end
-end
 
 if status is-interactive
     # Zoxide
@@ -160,10 +140,7 @@ if status is-interactive
         set -gx FZF_ALT_C_COMMAND 'fd --type d --hidden --exclude .git'
 
         # Alt-C Preview
-        set -l tree_cmd "ls -al {}"
-        if type -q eza
-            set tree_cmd "eza --tree --level=1 --color=always --icons=always {}"
-        end
+        set -l tree_cmd "tree -C -L 1 {}"
         set -gx FZF_ALT_C_OPTS "--preview '$tree_cmd' --preview-window=right:50%"
 
         set -gx FZF_CTRL_R_OPTS '--height 40% --layout=reverse --info=inline --border=rounded'

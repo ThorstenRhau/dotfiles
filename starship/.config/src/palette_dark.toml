@@ -1,11 +1,11 @@
 
-palette = "modus_vivendi_tinted"
+palette = "modus_vivendi"
 
-[palettes.modus_vivendi_tinted]
-bg        = "#0d0e1c"
-float     = "#1d2235"
+[palettes.modus_vivendi]
+bg        = "#000000"
+float     = "#1e1e1e"
 sel       = "#7030af"
-ui        = "#61647a"
+ui        = "#646464"
 com       = "#ff9f80"
 fg        = "#ffffff"
 red       = "#ff5f59"
