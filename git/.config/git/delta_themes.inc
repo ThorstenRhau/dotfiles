@@ -13,21 +13,21 @@
 	line-numbers-plus-style = bold "#44bc44"
 	line-numbers-right-style = "#61647a"
 	line-numbers-zero-style = "#989898"
-	minus-style = syntax "#ffbfbf"
-	minus-non-emph-style = syntax "#ffbfbf"
-	minus-emph-style = bold syntax "#ffbfbf"
-	minus-empty-line-marker-style = syntax "#ffbfbf"
-	plus-style = syntax "#a0e0a0"
-	plus-non-emph-style = syntax "#a0e0a0"
-	plus-emph-style = bold syntax "#a0e0a0"
-	plus-empty-line-marker-style = syntax "#a0e0a0"
+	minus-style = syntax "#4f1127"
+	minus-non-emph-style = syntax "#4f1127"
+	minus-emph-style = bold syntax "#781a3a"
+	minus-empty-line-marker-style = syntax "#4f1127"
+	plus-style = syntax "#003a2f"
+	plus-non-emph-style = syntax "#003a2f"
+	plus-emph-style = bold syntax "#035542"
+	plus-empty-line-marker-style = syntax "#003a2f"
 	map-styles = \
 		bold purple => syntax "#5c4f6a", \
 		bold blue => syntax "#4f5a7a", \
 		bold cyan => syntax "#4f6066", \
 		bold yellow => syntax "#5d5740"
 	# Should match the name of the bat theme
-	syntax-theme = modus_vivendi_Tinted
+	syntax-theme = modus_vivendi_tinted
 
 [delta "modus-operandi-tinted"]
 	blame-palette = "#fbf7f0 #e0d6c0 #f1d5d0 #9f9690 #595959"
@@ -44,18 +44,18 @@
 	line-numbers-plus-style = bold "#006800"
 	line-numbers-right-style = "#9f9690"
 	line-numbers-zero-style = "#595959"
-	minus-style = syntax "#8f1313"
-	minus-non-emph-style = syntax "#8f1313"
-	minus-emph-style = bold syntax "#8f1313"
-	minus-empty-line-marker-style = syntax "#8f1313"
-	plus-style = syntax "#005000"
-	plus-non-emph-style = syntax "#005000"
-	plus-emph-style = bold syntax "#005000"
-	plus-empty-line-marker-style = syntax "#005000"
+	minus-style = syntax "#f4d0cf"
+	minus-non-emph-style = syntax "#f4d0cf"
+	minus-emph-style = bold syntax "#f3b5a7"
+	minus-empty-line-marker-style = syntax "#f4d0cf"
+	plus-style = syntax "#c3ebc1"
+	plus-non-emph-style = syntax "#c3ebc1"
+	plus-emph-style = bold syntax "#acd6a5"
+	plus-empty-line-marker-style = syntax "#c3ebc1"
 	map-styles = \
 		bold purple => syntax "#c6b7d0", \
 		bold blue => syntax "#c1cde3", \
 		bold cyan => syntax "#c1d7dc", \
 		bold yellow => syntax "#e0d5c0"
 	# Should match the name of the bat theme
-	syntax-theme = modus_operandi_Tinted
+	syntax-theme = modus_operandi_tinted

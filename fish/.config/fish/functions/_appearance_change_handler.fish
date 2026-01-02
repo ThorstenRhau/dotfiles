@@ -8,7 +8,7 @@ function _appearance_change_handler --on-variable SYSTEM_APPEARANCE
     end
 
     if test "$SYSTEM_APPEARANCE" = "dark"
-        set -gx BAT_THEME "modus_vivendi_Tinted"
+        set -gx BAT_THEME "modus_vivendi_tinted"
         set -gx DELTA_FEATURES "modus-vivendi-tinted"
         set -gx LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/modus-vivendi-tinted.yml"
         if test -r "$HOME/.config/fzf/themes/modus_vivendi_tinted.fish"
@@ -19,7 +19,7 @@ function _appearance_change_handler --on-variable SYSTEM_APPEARANCE
         end
         set -gx STARSHIP_CONFIG "$HOME/.config/starship_dark.toml"
     else
-        set -gx BAT_THEME "modus_operandi_Tinted"
+        set -gx BAT_THEME "modus_operandi_tinted"
         set -gx DELTA_FEATURES "modus-operandi-tinted"
         set -gx LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/modus-operandi-tinted.yml"
         if test -r "$HOME/.config/fzf/themes/modus_operandi_tinted.fish"
