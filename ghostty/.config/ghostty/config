@@ -54,6 +54,7 @@ quit-after-last-window-closed = true
 shell-integration             = detect
 shell-integration-features    = cursor,sudo,title,ssh-env,ssh-terminfo
 theme                         = dark:modus_vivendi,light:modus_operandi
+unfocused-split-opacity       = 100
 window-colorspace             = display-p3
 window-height                 = 41
 window-padding-balance        = true
