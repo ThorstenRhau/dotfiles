@@ -45,7 +45,8 @@ font-variation-italic         = wght=450
 link-previews                 = true
 macos-non-native-fullscreen   = visible-menu
 macos-option-as-alt           = left
-macos-titlebar-style          = tabs
+macos-titlebar-proxy-icon     = visible
+macos-titlebar-style          = native
 mouse-hide-while-typing       = true
 quick-terminal-position       = center
 quick-terminal-size           = 500px
