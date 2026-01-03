@@ -78,7 +78,11 @@
     date = iso  # Use ISO 8601 format for consistent timestamps
 
 [status]
-    short = true  # Use shorter status output format
+    short = false             # Use shorter status output format
+    statusHints = true        # Show hints for resolving status (e.g., "use git add")
+    showStash = true          # Display count of stashed entries
+    submoduleSummary = false  # Show summary of commits for modified submodules
+    showUntrackedFiles = all  # Show individual files in untracked directories
 
 [branch]
     sort = -committerdate  # Sort branches by most recently committed first
