@@ -15,6 +15,7 @@
 # ~@ ~- ~=
 #
 # ##Berkeley Mono Stylistic Sets:
+# calt: Ligatures
 # ss01: Slashed zero (0 with slash)
 # ss02: Dotted zero (0 with dot)
 # ss03: Gap zero (0 with gap/opening)
@@ -38,9 +39,9 @@ font-synthetic-style          = false
 font-thicken                  = false
 font-variation                = wdth=100
 font-variation                = wght=450
-font-variation-bold           = wght=700
-font-variation-bold-italic    = wght=700
-font-variation-italic         = wght=400
+font-variation-bold           = wght=750
+font-variation-bold-italic    = wght=750
+font-variation-italic         = wght=450
 link-previews                 = true
 macos-non-native-fullscreen   = visible-menu
 macos-option-as-alt           = left
