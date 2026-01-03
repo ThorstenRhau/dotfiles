@@ -53,6 +53,7 @@ quick-terminal-size           = 500px
 quit-after-last-window-closed = true
 shell-integration             = detect
 shell-integration-features    = cursor,sudo,title,ssh-env,ssh-terminfo
+split-divider-color           = 808080
 theme                         = dark:modus_vivendi,light:modus_operandi
 unfocused-split-opacity       = 100
 window-colorspace             = display-p3
