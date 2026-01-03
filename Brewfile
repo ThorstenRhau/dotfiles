@@ -9,6 +9,7 @@
 
 # Core Homebrew packages
 cask "1password-cli"
+cask "font-monaspace-var"
 cask "ghostty"
 #
 brew "bash"
