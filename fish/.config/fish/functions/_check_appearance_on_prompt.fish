@@ -1,6 +1,6 @@
 function _check_appearance_on_prompt --on-event fish_prompt
     # Check if we are on macOS
-    if test $_OS_TYPE != "Darwin"
+    if test $_OS_TYPE != Darwin
         return
     end
 
@@ -17,9 +17,9 @@ function _check_appearance_on_prompt --on-event fish_prompt
         fish -c '
             set -l val (defaults read -g AppleInterfaceStyle 2>/dev/null)
             if test "$val" = "Dark"
-                set -U SYSTEM_APPEARANCE "dark"
+                set -Ux SYSTEM_APPEARANCE "dark"
             else
-                set -U SYSTEM_APPEARANCE "light"
+                set -Ux SYSTEM_APPEARANCE "light"
             end
         ' >/dev/null 2>&1 &
         disown
