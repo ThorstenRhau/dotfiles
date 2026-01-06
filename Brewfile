@@ -10,7 +10,7 @@
 # Core Homebrew packages
 cask "1password-cli"
 cask "ghostty"
-#
+
 brew "bash"
 brew "bat"
 brew "carapace"
@@ -52,6 +52,7 @@ brew "stow"
 brew "stylua"
 brew "tealdeer"
 brew "tectonic"
+brew "tmux"
 brew "tree"
 brew "tree-sitter-cli"
 brew "unar"
