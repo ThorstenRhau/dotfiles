@@ -1,37 +1,26 @@
-# CLAUDE.md
+# Dotfiles
 
-Personal dotfiles repository managed with GNU Stow.
+Personal dotfiles managed with GNU Stow. macOS-focused, Modus themes throughout.
 
 ## Structure
 
-Each top-level directory (bat, fish, fzf, ghostty, git, lazygit, starship, tmux)
-is a "package" that mirrors `$HOME/.config/`:
+Packages: `bat`, `claude`, `fish`, `fzf`, `gemini`, `ghostty`, `git`, `lazygit`, `starship`, `tasks`, `tmux`
 
+Each mirrors `$HOME/.config/` (or `$HOME/` for dotfiles like `.gemini/`):
 ```
-dotfiles/fish/.config/fish/config.fish  →  ~/.config/fish/config.fish
+fish/.config/fish/config.fish  →  ~/.config/fish/config.fish
 ```
 
-Run `stow <package>` or `./stow_all.sh` to create symlinks.
+Run `stow <package>` or `./stow_all.sh` to symlink.
 
-## Fish Shell
+## Key Files
 
-Configuration is in `fish/.config/fish/config.fish` with organized sections:
-
-- Environment Variables - Global environment settings, editor config
-- PATH - PATH management
-- Homebrew - Homebrew integration (macOS ARM)
-- Abbreviations - Shell abbreviations/aliases
-- Appearance & Theming - Modus theme system (auto-switching dark/light)
-- Tool Integrations - zoxide, fzf, starship, ghostty
-- Local Configuration - Sources git-ignored `secrets.fish` and `local.fish`
-
-Additional functions live in `functions/` directory (autoloaded by Fish).
+- `fish/.config/fish/config.fish` - Main shell config
+- `fish/.config/fish/functions/` - Autoloaded fish functions
+- `ghostty/.config/ghostty/config` - Terminal config
+- `Brewfile` - Homebrew dependencies
 
 ## Notes
 
-- macOS-focused with Linux fallbacks in appearance system
-- Modus themes throughout (Vivendi Tinted dark, Operandi Tinted light)
-
-## Claude Skills
-
-Use the Claude Code skill **git-skill** for git operations.
+- Secrets in git-ignored `secrets.fish` and `local.fish`
+- Appearance auto-switches between Modus Vivendi (dark) and Operandi (light)
