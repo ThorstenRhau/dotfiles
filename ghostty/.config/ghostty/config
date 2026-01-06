@@ -26,11 +26,11 @@
 # wght 100-900
 # wdth 60-100
 # slnt 0 -16
+
 font-family                = Berkeley Mono Variable
 font-feature               = +calt
 font-size                  = 14
 font-synthetic-style       = false
-font-thicken               = false
 font-variation             = wdth=100
 font-variation             = wght=450
 font-variation-bold        = wght=750
@@ -38,47 +38,29 @@ font-variation-bold-italic = wght=750
 font-variation-italic      = wght=450
 
 adjust-cursor-thickness          = 2
-adjust-underline-position        = 0
-auto-update                      = check
 auto-update                      = check
 bold-color                       = bright
-clipboard-paste-bracketed-safe   = true
-clipboard-paste-protection       = true
 clipboard-read                   = allow
-clipboard-trim-trailing-spaces   = true
-clipboard-write                  = allow
-confirm-close-surface            = true
 copy-on-select                   = clipboard
-copy-on-select                   = clipboard
-link-previews                    = true
-link-url                         = true
 macos-non-native-fullscreen      = visible-menu
 macos-option-as-alt              = left
-macos-titlebar-proxy-icon        = visible
 macos-titlebar-style             = native
-minimum-contrast                 = 1.0
 mouse-hide-while-typing          = true
 mouse-shift-capture              = true
 quick-terminal-position          = center
 quick-terminal-size              = 500px
 quit-after-last-window-closed    = true
 scrollback-limit                 = 100000
-shell-integration                = detect
 shell-integration-features       = cursor,sudo,title,ssh-env,ssh-terminfo
 split-divider-color              = 808080
 theme                            = dark:modus_vivendi,light:modus_operandi
 unfocused-split-opacity          = 100
 window-colorspace                = display-p3
 window-height                    = 41
-window-inherit-font-size         = true
-window-inherit-working-directory = true
 window-padding-balance           = true
-window-padding-x                 = 2
-window-padding-y                 = 2
 window-save-state                = always
 window-step-resize               = true
 window-theme                     = system
-window-vsync                     = true
 window-width                     = 120
 
 # For Claude Code

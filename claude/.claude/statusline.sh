@@ -82,7 +82,7 @@ GIT_INFO=$(get_git_info)
 
 # Build output
 OUTPUT="󱙺  $MODEL |   ${DIR##*/}"
-[ -n "$GIT_INFO" ] && OUTPUT+=" |  $GIT_INFO"
+[ -n "$GIT_INFO" ] && OUTPUT+=" |  $GIT_INFO"
 OUTPUT+=" |   ${CONTEXT_PCT}%"
 
 echo "$OUTPUT"
