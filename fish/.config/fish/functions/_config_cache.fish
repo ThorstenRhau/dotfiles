@@ -14,7 +14,7 @@ function _config_cache --argument-names cache_file command_to_run
     else
         set -l mtime 0
         # Portable stat check
-        if string match -q "Darwin" (uname)
+        if string match -q Darwin $_OS_TYPE
             set mtime (stat -f %m "$cache_file" 2>/dev/null; or echo 0)
         else
             set mtime (stat -c %Y "$cache_file" 2>/dev/null; or echo 0)
