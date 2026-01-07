@@ -29,7 +29,7 @@
 
 font-family                = Berkeley Mono Variable
 font-feature               = +calt
-font-size                  = 14
+font-size                  = 13
 font-synthetic-style       = false
 font-variation             = wdth=100
 font-variation             = wght=450
