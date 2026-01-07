@@ -1,4 +1,19 @@
 # =============================================================================
+# Homebrew
+# =============================================================================
+
+if test -x /opt/homebrew/bin/brew
+    _config_cache "$HOME/.config/fish/cache/brew_shellenv.fish" "/opt/homebrew/bin/brew shellenv fish"
+
+    set -gx ARCHFLAGS "-arch arm64"
+    set -gx HOMEBREW_PREFIX /opt/homebrew
+    set -gx HOMEBREW_NO_ANALYTICS 1
+    set -gx HOMEBREW_BAT 1
+    set -gx HOMEBREW_EDITOR nvim
+    set -gx HOMEBREW_DOWNLOAD_CONCURRENCY auto
+end
+
+# =============================================================================
 # Environment Variables
 # =============================================================================
 
@@ -12,7 +27,7 @@ set -gx FISH_CACHE_TTL 86400
 
 # Editor setup (Global)
 if type -q nvim
-    set -gx EDITOR (which nvim)
+    set -gx EDITOR nvim
     set -gx VISUAL $EDITOR
     set -gx SUDO_EDITOR $EDITOR
     set -gx MANPAGER "nvim +Man! -"
@@ -30,21 +45,6 @@ fish_add_path $HOME/.rd/bin
 fish_add_path $HOME/.docker/bin
 fish_add_path $HOME/.opencode/bin
 fish_add_path /usr/local/bin
-
-# =============================================================================
-# Homebrew
-# =============================================================================
-
-if test -x /opt/homebrew/bin/brew
-    _config_cache "$HOME/.config/fish/cache/brew_shellenv.fish" "/opt/homebrew/bin/brew shellenv fish"
-
-    set -gx ARCHFLAGS "-arch arm64"
-    set -gx HOMEBREW_PREFIX /opt/homebrew
-    set -gx HOMEBREW_NO_ANALYTICS 1
-    set -gx HOMEBREW_BAT 1
-    set -gx HOMEBREW_EDITOR nvim
-    set -gx HOMEBREW_DOWNLOAD_CONCURRENCY auto
-end
 
 # =============================================================================
 # Abbreviations
@@ -103,9 +103,10 @@ fish_config theme choose Modus
 # Base options (layout, info, etc.) to be preserved across theme changes
 set -gx _FZF_BASE_OPTS "--height 40% --layout=reverse --info=inline --border=rounded --prompt='❯ ' --pointer='▶' --marker='✓'"
 
-# Initialize SYSTEM_APPEARANCE if empty (default to dark safely)
+# Initialize SYSTEM_APPEARANCE as universal if not set (required for neovim to inherit)
+# Universal variables are loaded before config.fish and sync across all sessions
 if not set -q SYSTEM_APPEARANCE
-    set -gx SYSTEM_APPEARANCE dark
+    set -Ux SYSTEM_APPEARANCE dark
 end
 
 # State for rate limiting
