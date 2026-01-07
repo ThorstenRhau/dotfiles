@@ -62,11 +62,6 @@ if status is-interactive
         abbr cat bat
     end
 
-    # Eza (ls replacement)
-    if type -q eza
-        abbr ls 'eza --git'
-    end
-
     # Neovim Abbreviations
     if type -q nvim
         abbr nv nvim
