@@ -22,6 +22,7 @@ fzf
 ghostty
 git
 lazygit
+ripgrep
 starship
 tmux
 "

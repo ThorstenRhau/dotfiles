@@ -11,6 +11,7 @@ function _appearance_change_handler --on-variable SYSTEM_APPEARANCE
         set -gx BAT_THEME "modus_vivendi"
         set -gx DELTA_FEATURES "modus-vivendi"
         set -gx LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/modus-vivendi.yml"
+        set -gx RIPGREP_CONFIG_PATH "$HOME/.config/ripgrep/themes/modus_vivendi"
         if test -r "$HOME/.config/fzf/themes/modus_vivendi.fish"
             source $HOME/.config/fzf/themes/modus_vivendi.fish
         end
@@ -19,6 +20,7 @@ function _appearance_change_handler --on-variable SYSTEM_APPEARANCE
         set -gx BAT_THEME "modus_operandi"
         set -gx DELTA_FEATURES "modus-operandi"
         set -gx LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/modus-operandi.yml"
+        set -gx RIPGREP_CONFIG_PATH "$HOME/.config/ripgrep/themes/modus_operandi"
         if test -r "$HOME/.config/fzf/themes/modus_operandi.fish"
             source $HOME/.config/fzf/themes/modus_operandi.fish
         end

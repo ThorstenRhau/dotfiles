@@ -4,7 +4,7 @@ Personal dotfiles managed with GNU Stow. macOS-focused, Modus themes throughout.
 
 ## Structure
 
-Packages: `bat`, `claude`, `fish`, `fzf`, `gemini`, `ghostty`, `git`, `lazygit`, `starship`, `tasks`, `tmux`
+Packages: `bat`, `claude`, `fish`, `fzf`, `gemini`, `ghostty`, `git`, `lazygit`, `ripgrep`, `starship`, `tasks`, `tmux`
 
 Each mirrors `$HOME/.config/` (or `$HOME/` for dotfiles like `.gemini/`):
 ```
