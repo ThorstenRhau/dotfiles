@@ -9,6 +9,8 @@
 
 # Core Homebrew packages
 cask "1password-cli"
+cask "font-jetbrains-mono"
+cask "font-symbols-only-nerd-font"
 cask "ghostty"
 
 brew "bash"
