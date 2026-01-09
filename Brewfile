@@ -7,8 +7,8 @@
 # Taps (Homebrew repositories)
 # Uncomment if you use any cask applications
 
-# Core Homebrew packages
 cask "1password-cli"
+cask "font-fira-code"
 cask "font-jetbrains-mono"
 cask "font-symbols-only-nerd-font"
 cask "ghostty"
