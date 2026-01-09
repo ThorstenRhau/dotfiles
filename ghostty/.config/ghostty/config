@@ -28,14 +28,16 @@
 # slnt 0 -16
 
 font-family                = Berkeley Mono Variable
+font-family                = Symbols Nerd Font Mono
 font-feature               = +calt
-font-size                  = 13
+font-size                  = 14
 font-synthetic-style       = false
-font-variation             = wdth=100
-font-variation             = wght=450
-font-variation-bold        = wght=750
-font-variation-bold-italic = wght=750
-font-variation-italic      = wght=450
+font-variation             = wdth = 100
+font-variation             = wght = 450
+font-variation-bold        = wght = 700
+font-variation-bold-italic = wght = 700
+font-variation-italic      = wght = 450
+adjust-box-thickness       = -1
 
 adjust-cursor-thickness          = 2
 auto-update                      = check
