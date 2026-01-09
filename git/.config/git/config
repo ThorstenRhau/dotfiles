@@ -55,7 +55,6 @@
 
 [pull]
     rebase = true  # Rebase instead of merge to maintain linear history
-    ff = only      # Only allow fast-forward pulls (prevents accidental merge commits)
 
 [push]
     default = current       # Push current branch to branch of same name
