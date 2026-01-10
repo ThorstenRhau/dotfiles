@@ -13,6 +13,9 @@
     # Simple tree view of all branches
     tree = log --graph --oneline --decorate --all
 
+    # Log with changed files listed for each commit
+    files = log --pretty=format:'%h %ad | %s%d [%an]' --date=short --name-status
+
 [color]
     ui = true  # Enable colors in git output
 
