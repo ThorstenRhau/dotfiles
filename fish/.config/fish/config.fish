@@ -31,14 +31,6 @@ set -gx XDG_CONFIG_HOME "$HOME/.config"
 set -gx fish_greeting
 set -gx FISH_CACHE_TTL 86400
 
-# Editor setup (Global)
-if type -q nvim
-    set -gx EDITOR nvim
-    set -gx VISUAL $EDITOR
-    set -gx SUDO_EDITOR $EDITOR
-    set -gx MANPAGER "nvim +Man! -"
-end
-
 # =============================================================================
 # PATH
 # =============================================================================
@@ -53,7 +45,7 @@ fish_add_path $HOME/.opencode/bin
 fish_add_path /usr/local/bin
 
 # =============================================================================
-# Abbreviations
+# Confit for interactive fish shells
 # =============================================================================
 
 if status is-interactive
@@ -62,8 +54,12 @@ if status is-interactive
         abbr cat bat
     end
 
-    # Neovim Abbreviations
+    # Editor setup
     if type -q nvim
+        set -gx EDITOR nvim
+        set -gx VISUAL $EDITOR
+        set -gx SUDO_EDITOR $EDITOR
+        set -gx MANPAGER "nvim +Man! -"
         abbr nv nvim
     end
 
@@ -77,7 +73,6 @@ if status is-interactive
     abbr gpristine 'git reset --hard && git clean --force -dfx'
     abbr gst 'git status'
 
-    # Utility Abbreviations
     if type -q lazygit
         abbr lg lazygit
     end
@@ -89,38 +84,29 @@ if status is-interactive
     if type -q python3
         abbr python python3
     end
-end
 
-# =============================================================================
-# Appearance & Theming
-# =============================================================================
+    # =============================================================================
+    # Appearance & Theming
+    # =============================================================================
 
-# Fish syntax highlighting theme (Modus with auto light/dark switching)
-fish_config theme choose Modus
+    # Fish syntax highlighting theme (Modus with auto light/dark switching)
+    fish_config theme choose Modus
 
-# Base options (layout, info, etc.) to be preserved across theme changes
-set -gx _FZF_BASE_OPTS "--height 40% --layout=reverse --info=inline --border=rounded --prompt='❯ ' --pointer='▶' --marker='✓'"
+    # Initialize SYSTEM_APPEARANCE as universal if not set (required for neovim to inherit)
+    # Universal variables are loaded before config.fish and sync across all sessions
+    if not set -q SYSTEM_APPEARANCE
+        # @fish-lsp-disable-next-line 2003
+        set -Ux SYSTEM_APPEARANCE dark
+    end
 
-# Initialize SYSTEM_APPEARANCE as universal if not set (required for neovim to inherit)
-# Universal variables are loaded before config.fish and sync across all sessions
-if not set -q SYSTEM_APPEARANCE
-    set -Ux SYSTEM_APPEARANCE dark
-end
+    # State for rate limiting
+    set -g _appearance_last_check 0
 
-# State for rate limiting
-set -g _appearance_last_check 0
+    # Load event-based functions (required for --on-event handlers to register)
+    functions -q _check_appearance_on_prompt
 
-# Load event-based functions (required for --on-event handlers to register)
-functions -q _check_appearance_on_prompt
-
-# Apply theme immediately on startup (also loads _appearance_change_handler)
-_appearance_change_handler
-
-# =============================================================================
-# Tool Integrations
-# =============================================================================
-
-if status is-interactive
+    # Apply theme immediately on startup (also loads _appearance_change_handler)
+    _appearance_change_handler
     # Zoxide
     if type -q zoxide
         zoxide init fish --cmd cd | source
@@ -130,6 +116,9 @@ if status is-interactive
     # FZF
     if type -q fzf
         fzf --fish | source
+
+        # Base options (layout, info, etc.) to be preserved across theme changes
+        set -gx _FZF_BASE_OPTS "--height 40% --layout=reverse --info=inline --border=rounded --prompt='❯ ' --pointer='▶' --marker='✓'"
 
         set -gx FZF_DEFAULT_COMMAND 'fd --type f --hidden --exclude .git'
         set -gx FZF_CTRL_T_COMMAND 'fd --type f --hidden --exclude .git'
