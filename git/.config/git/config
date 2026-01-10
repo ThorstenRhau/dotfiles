@@ -1,108 +1,108 @@
 [alias]
     # Amend last commit without editing message
-    amend = commit --amend --no-edit
+  amend = commit --amend --no-edit
 
     # Compact history view with dates
-    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+  hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
 
     # Detailed log with graph, timestamps, and author info
-    lg = log --graph --all --decorate --abbrev-commit \
-        --date=format-local:'%Y-%m-%d %H:%M' \
-        --format=format:'%C(auto)%h%C(reset) %C(dim cyan)%ad (%cr)%C(reset) %C(bold yellow)%d%Creset%n  %C(white)%<(72,trunc)%s%C(reset)%n  %C(dim white)- %an%C(reset)'
+  lg = log --graph --all --decorate --abbrev-commit \
+    --date=format-local:'%Y-%m-%d %H:%M' \
+    --format=format:'%C(auto)%h%C(reset) %C(dim cyan)%ad (%cr)%C(reset) %C(bold yellow)%d%Creset%n  %C(white)%<(72,trunc)%s%C(reset)%n  %C(dim white)- %an%C(reset)'
 
     # Simple tree view of all branches
-    tree = log --graph --oneline --decorate --all
+  tree = log --graph --oneline --decorate --all
 
     # Log with changed files listed for each commit
-    files = log --pretty=format:'%h %ad | %s%d [%an]' --date=short --name-status
+  files = log --pretty=format:'%h %ad | %s%d [%an]' --date=short --name-status
 
 [color]
-    ui = true  # Enable colors in git output
+  ui = true  # Enable colors in git output
 
 [commit]
-    verbose = 2  # Show full diff when writing commit messages (helps write better messages)
+  verbose = 2  # Show full diff when writing commit messages (helps write better messages)
 
 [core]
-    autocrlf = input      # Convert CRLF to LF on commit (Unix line endings)
-    editor = nvim         # Use Neovim for commit messages and interactive operations
-    excludesfile = ~/.config/git/ignore  # Global gitignore file
-    pager = delta         # Use delta for enhanced diff viewing
-    safecrlf = true       # Warn about irreversible line ending conversions
+  autocrlf = input      # Convert CRLF to LF on commit (Unix line endings)
+  editor = nvim         # Use Neovim for commit messages and interactive operations
+  excludesfile = ~/.config/git/ignore  # Global gitignore file
+  pager = delta         # Use delta for enhanced diff viewing
+  safecrlf = true       # Warn about irreversible line ending conversions
 
 [delta]
-    line-numbers = true     # Show line numbers in diffs
-    navigate = true         # Enable n/N navigation between diff sections
-    side-by-side = true     # Display diffs in split view
+  line-numbers = true     # Show line numbers in diffs
+  navigate = true         # Enable n/N navigation between diff sections
+  side-by-side = true     # Display diffs in split view
 
 [fetch]
-    prune = true  # Automatically remove deleted remote branches (keeps local clean)
+  prune = true  # Automatically remove deleted remote branches (keeps local clean)
 
 [filter "lfs"]
-    clean = git-lfs clean -- %f
-    process = git-lfs filter-process
-    required = true
-    smudge = git-lfs smudge -- %f
+  clean = git-lfs clean -- %f
+  process = git-lfs filter-process
+  required = true
+  smudge = git-lfs smudge -- %f
 
 [github]
-    user = ThorstenRhau
-    email = thorsten@rhau.se
+  user = ThorstenRhau
+  email = thorsten@rhau.se
 
 [init]
-    defaultbranch = main  # Use 'main' instead of 'master' for new repos
+  defaultbranch = main  # Use 'main' instead of 'master' for new repos
 
 [interactive]
-    diffFilter = delta --color-only  # Use delta for git add -p and similar commands
+  diffFilter = delta --color-only  # Use delta for git add -p and similar commands
 
 [merge]
-    conflictstyle = zdiff3  # Show common ancestor in conflicts (makes resolution easier)
+  conflictstyle = zdiff3  # Show common ancestor in conflicts (makes resolution easier)
 
 [pull]
-    rebase = true  # Rebase instead of merge to maintain linear history
+  rebase = true  # Rebase instead of merge to maintain linear history
 
 [push]
-    default = current       # Push current branch to branch of same name
-    autoSetupRemote = true  # Automatically set up remote tracking for new branches
+  default = current       # Push current branch to branch of same name
+  autoSetupRemote = true  # Automatically set up remote tracking for new branches
 
 [rebase]
-    autoStash = true  # Automatically stash and unstash changes when rebasing
+  autoStash = true  # Automatically stash and unstash changes when rebasing
 
 [user]
-    name = Thorsten Rhau
+  name = Thorsten Rhau
 
 [rerere]
-    enabled = true  # Remember how conflicts were resolved and auto-apply in future
+  enabled = true  # Remember how conflicts were resolved and auto-apply in future
 
 [diff]
-    algorithm = histogram  # Better diff algorithm (more intuitive results)
-    colorMoved = default   # Highlight moved code blocks in diffs
+  algorithm = histogram  # Better diff algorithm (more intuitive results)
+  colorMoved = default   # Highlight moved code blocks in diffs
 
 [log]
-    date = iso  # Use ISO 8601 format for consistent timestamps
+  date = iso  # Use ISO 8601 format for consistent timestamps
 
 [status]
-    short = false             # Use longer status output format
-    statusHints = true        # Show hints for resolving status (e.g., "use git add")
-    showStash = true          # Display count of stashed entries
-    submoduleSummary = false  # Show summary of commits for modified submodules
-    showUntrackedFiles = all  # Show individual files in untracked directories
+  short = false             # Use longer status output format
+  statusHints = true        # Show hints for resolving status (e.g., "use git add")
+  showStash = true          # Display count of stashed entries
+  submoduleSummary = false  # Show summary of commits for modified submodules
+  showUntrackedFiles = all  # Show individual files in untracked directories
 
 [branch]
-    sort = -committerdate  # Sort branches by most recently committed first
+  sort = -committerdate  # Sort branches by most recently committed first
 
 [column]
-    ui = auto  # Display branch/tag lists in columns when terminal is wide enough
+  ui = auto  # Display branch/tag lists in columns when terminal is wide enough
 
 [tag]
-    sort = version:refname  # Sort tags using semantic versioning (v1.2.3)
+  sort = version:refname  # Sort tags using semantic versioning (v1.2.3)
 
 [transfer]
-    fsckobjects = true  # Verify integrity of objects during push/pull
+  fsckobjects = true  # Verify integrity of objects during push/pull
 
 [receive]
-    fsckObjects = true  # Validate pushed objects (prevents corruption)
+  fsckObjects = true  # Validate pushed objects (prevents corruption)
 
 [include]
-    path = ~/.config/git/delta_themes.inc  # Delta color themes
+  path = ~/.config/git/delta_themes.inc  # Delta color themes
 
 [includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
-    path = ~/.config/git/github.inc #GitHub specific settings
+  path = ~/.config/git/github.inc #GitHub specific settings
