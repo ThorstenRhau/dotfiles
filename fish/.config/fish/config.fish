@@ -60,6 +60,7 @@ if status is-interactive
         set -gx VISUAL $EDITOR
         set -gx SUDO_EDITOR $EDITOR
         set -gx MANPAGER "nvim +Man! -"
+        set -gx MANCOLOR true
         abbr nv nvim
     end
 
