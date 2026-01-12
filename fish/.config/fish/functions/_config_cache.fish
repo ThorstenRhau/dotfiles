@@ -31,9 +31,14 @@ function _config_cache --argument-names cache_file command_to_run
     if test $refresh_cache -eq 1
         # Execute the command and save output to cache file
         # We use eval to handle pipes or complex commands if passed as a string
-        eval "$command_to_run" > "$cache_file"
+        if not eval "$command_to_run" > "$cache_file"
+            rm -f "$cache_file"
+            return 1
+        end
     end
 
     # Source the cached file
-    source "$cache_file"
+    if test -f "$cache_file"
+        source "$cache_file"
+    end
 end
