@@ -181,7 +181,7 @@ symbol = " "
 [zig]
 symbol = " "
 [palettes.everforest-light]
-bg0 = '#FDF6E3'
+bg0 = '#FFFBEF'
 bg1 = '#F8F5E4'
 fg = '#5C6A72'
 red = '#F85552'

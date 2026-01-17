@@ -181,7 +181,7 @@ symbol = " "
 [zig]
 symbol = " "
 [palettes.everforest-dark]
-bg0 = '#2D353B'
+bg0 = '#272E33'
 bg1 = '#2E383C'
 fg = '#D3C6AA'
 red = '#E67E80'

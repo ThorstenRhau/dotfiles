@@ -61,7 +61,7 @@
 	syntax-theme = rose_pine_dawn
 
 [delta "everforest-dark"]
-	blame-palette = "#2D353B #343F44 #3D484D #475258 #7A8478"
+	blame-palette = "#272E33 #343F44 #3D484D #475258 #7A8478"
 	commit-decoration-style = "#475258" bold box ul
 	dark = true
 	file-decoration-style = "#475258"
@@ -92,7 +92,7 @@
 	syntax-theme = everforest_dark
 
 [delta "everforest-light"]
-	blame-palette = "#FDF6E3 #F4F0D9 #EFEBD4 #E0DCC7 #A6B0A0"
+	blame-palette = "#FFFBEF #F4F0D9 #EFEBD4 #E0DCC7 #A6B0A0"
 	commit-decoration-style = "#A6B0A0" bold box ul
 	light = true
 	file-decoration-style = "#A6B0A0"
