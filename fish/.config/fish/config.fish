@@ -30,6 +30,7 @@ set -gx LC_CTYPE "en_US.UTF-8"
 set -gx XDG_CONFIG_HOME "$HOME/.config"
 set -gx fish_greeting
 set -gx FISH_CACHE_TTL 86400
+set -gx ENABLE_TOOL_SEARCH true # Claude Code
 
 # =============================================================================
 # PATH
