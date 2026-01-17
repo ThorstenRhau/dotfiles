@@ -59,3 +59,65 @@
 		bold yellow => syntax "#f5f0e8"
 	# Should match the name of the bat theme
 	syntax-theme = rose_pine_dawn
+
+[delta "everforest-dark"]
+	blame-palette = "#2D353B #343F44 #3D484D #475258 #7A8478"
+	commit-decoration-style = "#475258" bold box ul
+	dark = true
+	file-decoration-style = "#475258"
+	file-style = "#D3C6AA"
+	hunk-header-decoration-style = "#475258" box ul
+	hunk-header-file-style = bold
+	hunk-header-line-number-style = bold "#859289"
+	hunk-header-style = file line-number syntax
+	line-numbers-left-style = "#475258"
+	line-numbers-minus-style = bold "#E67E80"
+	line-numbers-plus-style = bold "#A7C080"
+	line-numbers-right-style = "#475258"
+	line-numbers-zero-style = "#7A8478"
+	minus-style = syntax "#3c2f32"
+	minus-non-emph-style = syntax "#3c2f32"
+	minus-emph-style = bold syntax "#4c3a3d"
+	minus-empty-line-marker-style = syntax "#3c2f32"
+	plus-style = syntax "#2d3b2e"
+	plus-non-emph-style = syntax "#2d3b2e"
+	plus-emph-style = bold syntax "#374d39"
+	plus-empty-line-marker-style = syntax "#2d3b2e"
+	map-styles = \
+		bold purple => syntax "#3d3644", \
+		bold blue => syntax "#374450", \
+		bold cyan => syntax "#2d4541", \
+		bold yellow => syntax "#48422d"
+	# Should match the name of the bat theme
+	syntax-theme = everforest_dark
+
+[delta "everforest-light"]
+	blame-palette = "#FDF6E3 #F4F0D9 #EFEBD4 #E0DCC7 #A6B0A0"
+	commit-decoration-style = "#A6B0A0" bold box ul
+	light = true
+	file-decoration-style = "#A6B0A0"
+	file-style = "#5C6A72"
+	hunk-header-decoration-style = "#A6B0A0" box ul
+	hunk-header-file-style = bold
+	hunk-header-line-number-style = bold "#829181"
+	hunk-header-style = file line-number syntax
+	line-numbers-left-style = "#A6B0A0"
+	line-numbers-minus-style = bold "#F85552"
+	line-numbers-plus-style = bold "#8DA101"
+	line-numbers-right-style = "#A6B0A0"
+	line-numbers-zero-style = "#829181"
+	minus-style = syntax "#fce8e6"
+	minus-non-emph-style = syntax "#fce8e6"
+	minus-emph-style = bold syntax "#fadbd8"
+	minus-empty-line-marker-style = syntax "#fce8e6"
+	plus-style = syntax "#e8f0d4"
+	plus-non-emph-style = syntax "#e8f0d4"
+	plus-emph-style = bold syntax "#dae8c4"
+	plus-empty-line-marker-style = syntax "#e8f0d4"
+	map-styles = \
+		bold purple => syntax "#f7e8f0", \
+		bold blue => syntax "#e4f0f5", \
+		bold cyan => syntax "#dcf0ea", \
+		bold yellow => syntax "#f5eedb"
+	# Should match the name of the bat theme
+	syntax-theme = everforest_light

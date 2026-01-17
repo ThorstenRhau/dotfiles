@@ -1,5 +1,5 @@
 "$schema" = "https://starship.rs/config-schema.json"
-palette = "everforest-light"
+palette = "everforest-dark"
 
 add_newline     = true
 command_timeout = 500
@@ -180,14 +180,14 @@ symbol = " "
 
 [zig]
 symbol = " "
-[palettes.everforest-light]
-bg0 = '#FDF6E3'
-bg1 = '#F8F5E4'
-fg = '#5C6A72'
-red = '#F85552'
-orange = '#F57D26'
-yellow = '#DFA000'
-green = '#8DA101'
-aqua = '#35A77C'
-blue = '#3A94C5'
-purple = '#DF69BA'
+[palettes.everforest-dark]
+bg0 = '#2D353B'
+bg1 = '#343F44'
+fg = '#D3C6AA'
+red = '#E67E80'
+orange = '#E69875'
+yellow = '#DBBC7F'
+green = '#A7C080'
+aqua = '#83C092'
+blue = '#7FBBB3'
+purple = '#D699B6'

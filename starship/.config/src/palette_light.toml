@@ -1,11 +1,14 @@
 
-palette = "rose-pine-dawn"
+palette = "everforest-light"
 
-[palettes.rose-pine-dawn]
-overlay = '#f2e9e1'
-love = '#b4637a'
-gold = '#ea9d34'
-rose = '#d7827e'
-pine = '#286983'
-foam = '#56949f'
-iris = '#907aa9'
+[palettes.everforest-light]
+bg0 = '#FDF6E3'
+bg1 = '#F8F5E4'
+fg = '#5C6A72'
+red = '#F85552'
+orange = '#F57D26'
+yellow = '#DFA000'
+green = '#8DA101'
+aqua = '#35A77C'
+blue = '#3A94C5'
+purple = '#DF69BA'
