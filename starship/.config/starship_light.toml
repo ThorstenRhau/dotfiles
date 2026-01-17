@@ -1,5 +1,5 @@
 "$schema" = "https://starship.rs/config-schema.json"
-palette = "modus_operandi"
+palette = "rose-pine-dawn"
 
 add_newline     = true
 command_timeout = 500
@@ -180,22 +180,11 @@ symbol = " "
 
 [zig]
 symbol = " "
-[palettes.modus_operandi]
-bg        = "#ffffff"
-float     = "#f2f2f2"
-sel       = "#dfa0f0"
-ui        = "#646464"
-com       = "#7f0000"
-fg        = "#000000"
-red       = "#a60000"
-yellow    = "#6f5500"
-green     = "#006800"
-cyan      = "#005e8b"
-blue      = "#3548cf"
-magenta   = "#721045"
-red_alt   = "#7f0000"
-yellow_alt = "#884900"
-green_alt = "#0f7f5f"
-cyan_alt  = "#1f6fbf"
-blue_alt  = "#0031a9"
-magenta_alt = "#531ab6"
+[palettes.rose-pine-dawn]
+overlay = '#f2e9e1'
+love = '#b4637a'
+gold = '#ea9d34'
+rose = '#d7827e'
+pine = '#286983'
+foam = '#56949f'
+iris = '#907aa9'

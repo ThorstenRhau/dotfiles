@@ -1,5 +1,5 @@
 "$schema" = "https://starship.rs/config-schema.json"
-palette = "modus_vivendi"
+palette = "rose-pine-moon"
 
 add_newline     = true
 command_timeout = 500
@@ -180,22 +180,11 @@ symbol = " "
 
 [zig]
 symbol = " "
-[palettes.modus_vivendi]
-bg        = "#000000"
-float     = "#1e1e1e"
-sel       = "#7030af"
-ui        = "#646464"
-com       = "#ff9f80"
-fg        = "#ffffff"
-red       = "#ff5f59"
-yellow    = "#d0bc00"
-green     = "#44bc44"
-cyan      = "#00d3d0"
-blue      = "#79a8ff"
-magenta   = "#feacd0"
-red_alt   = "#ff9f80"
-yellow_alt = "#fec43f"
-green_alt = "#00c06f"
-cyan_alt  = "#6ae4b9"
-blue_alt  = "#2fafff"
-magenta_alt = "#b6a0ff"
+[palettes.rose-pine-moon]
+overlay = '#393552'
+love = '#eb6f92'
+gold = '#f6c177'
+rose = '#ea9a97'
+pine = '#3e8fb0'
+foam = '#9ccfd8'
+iris = '#c4a7e7'
