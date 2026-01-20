@@ -8,6 +8,7 @@
 # Uncomment if you use any cask applications
 
 cask "1password-cli"
+cask "basictex"
 cask "font-fira-code"
 cask "font-jetbrains-mono"
 cask "font-symbols-only-nerd-font"
