@@ -51,4 +51,7 @@ yarn-error.log*
 *.swo
 *.swn
 
+# Assorted dot files that are not to be handled in this repo
 **/.claude/settings.local.json
+fish/.config/fish/conf.d/00_fig_pre.fish
+fish/.config/fish/conf.d/99_fig_post.fish
