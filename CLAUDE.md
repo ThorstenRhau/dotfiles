@@ -18,7 +18,6 @@ Symlink with `stow <package>` or `./stow_all.sh`.
 ## Key Files
 
 - `fish/.config/fish/config.fish` - Main shell configuration
-- `fish/.config/fish/functions/` - Autoloaded fish functions (event-driven)
 - `ghostty/.config/ghostty/config` - Terminal emulator configuration
 - `Brewfile` - Homebrew package dependencies
 
@@ -43,7 +42,7 @@ Symlink with `stow <package>` or `./stow_all.sh`.
 ### Security
 
 - NEVER commit secrets - use git-ignored `secrets.fish` or `local.fish`
-- Check for hardcoded credentials before any git operations
+- Check for hard coded credentials before any git operations
 - Use environment variables for sensitive configuration
 
 ### Dependencies
