@@ -1,17 +1,20 @@
 ---
-name: git-use
-description: Git operations with conventional commits.
-TRIGGER: git commit, git push, git status, commit changes
+name: git
+description:
+  MUST BE USED for all git commit, push, and routine git operations. Use
+  PROACTIVELY whenever committing code.
+tools: Bash
+model: haiku
 ---
 
-# Git Operations
+# Git
 
 Handle git operations using
 [Conventional Commits v1.0.0](https://www.conventionalcommits.org/en/v1.0.0/).
 
 ## Commit Message Format
 
-```
+```txt
 <type>[optional scope]: <description>
 
 [optional body]
@@ -38,16 +41,18 @@ Handle git operations using
 ### Rules
 
 1. Description: imperative mood, lowercase, no period, ≤50 chars (72 for body)
-2. Scope: noun in parentheses describing affected area, e.g., `feat(api):`, `fix(parser):`, `docs(readme):`
+2. Scope: noun in parentheses describing affected area, e.g., `feat(api):`,
+   `fix(parser):`, `docs(readme):`
 3. Body: explain _what_ and _why_, not _how_ (blank line after description)
 4. Footer: use for breaking changes, issue refs, co-authors
-5. Breaking changes: append exclamation mark after type/scope OR add `BREAKING CHANGE:` footer (triggers MAJOR)
+5. Breaking changes: append exclamation mark after type/scope OR add
+   `BREAKING CHANGE:` footer (triggers MAJOR)
    - Example: `feat!:` or `refactor(api)!:`
    - Use double quotes in shell commands, not single quotes
 
 ### Examples
 
-```
+```txt
 feat: add user authentication
 
 fix: resolve memory leak in data processor
@@ -106,14 +111,15 @@ Refs: #456
 Before committing, verify:
 
 - **Secrets**: Exclude `.env`, `credentials.json`, API keys, tokens
-- **Tests**: Run `npm test`, `pytest`, `cargo test`, or project-specific commands
+- **Tests**: Run `npm test`, `pytest`, `cargo test`, or project-specific
+  commands
 - **Linting**: Run linters/formatters (`eslint`, `prettier`, `ruff`, etc.)
 - **Hooks**: Check if pre-commit hooks exist (`.git/hooks/pre-commit`)
 - **Unintended files**: Review `git status` output carefully
 
 ### Amending
 
-```
+```bash
 git commit --amend           # edit message and content
 git commit --amend --no-edit # keep message, add staged changes
 ```
@@ -122,7 +128,7 @@ git commit --amend --no-edit # keep message, add staged changes
 
 ### Push
 
-```
+```bash
 git push                        # existing upstream
 git push -u origin <branch>     # new branch
 ```
