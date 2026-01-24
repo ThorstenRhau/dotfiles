@@ -1,21 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-input=$(cat)
+cat | jq -r '
+  # Format duration: ms → "Xm" or "XhYm"
+  def format_duration:
+    (. / 1000 | floor) as $secs |
+    ($secs / 60 | floor) as $mins |
+    ($mins / 60 | floor) as $hours |
+    ($mins % 60) as $rem_mins |
+    if $hours > 0 then "\($hours)h\($rem_mins)m"
+    elif $mins > 0 then "\($mins)m"
+    else "\($secs)s"
+    end;
 
-if ! echo "$input" | jq empty 2>/dev/null; then
-  echo "Invalid JSON input" >&2
-  exit 1
-fi
-
-echo "$input" | jq -r '
-  .model.display_name as $model |
-  (.workspace.current_dir | split("/") | last) as $dir |
-  (
-    if .context_window.current_usage and .context_window.context_window_size > 0 then
-      (.context_window.current_usage | .input_tokens + .cache_creation_input_tokens + .cache_read_input_tokens)
-      * 100 / .context_window.context_window_size | floor
-    else 0 end
-  ) as $pct |
-  "λ \($model) | ▶ \($dir) | ∑ \($pct)%"
+  "\(.model.display_name) · \(.workspace.project_dir | split("/") | last) · \(.context_window.used_percentage // 0 | floor)% · \((.cost.total_duration_ms // 0) | format_duration) · $\(.cost.total_cost_usd // 0 | . * 100 | floor / 100)"
 '
