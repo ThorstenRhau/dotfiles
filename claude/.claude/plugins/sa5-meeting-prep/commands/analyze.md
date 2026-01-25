@@ -1,0 +1,91 @@
+---
+description: Process 3GPP SA5 TDocs from a folder and generate a meeting preparation report
+allowed-tools: Bash, Read, Write, Glob, Task
+---
+
+# SA5 Meeting Preparation
+
+Process all TDocs in a folder and generate a prioritized meeting preparation report.
+
+## Usage
+
+```
+/sa5-meeting-prep:analyze <folder-path> [meeting-number]
+```
+
+Example:
+```
+/sa5-meeting-prep:analyze ~/3gpp/sa5-162 162
+```
+
+## Prerequisites
+
+- `pandoc` installed for .docx conversion (`sudo apt install pandoc` or `brew install pandoc`)
+- TDocs downloaded from ftp.3gpp.org and unzipped into the target folder
+- Documents should be .doc or .docx format (S5-XXXXXX.docx)
+
+## Pipeline Steps
+
+### Step 1: Validate Environment
+
+1. Check that pandoc is installed
+2. Verify the input folder exists
+3. Count .doc/.docx files and report to user
+
+### Step 2: Create Working Directory
+
+Create `/tmp/sa5-meeting-prep-<timestamp>/` for intermediate files:
+- `fragments/` - Individual TDoc extractions
+- `report/` - Final output
+
+### Step 3: Extract TDocs (Fan-out with Haiku)
+
+For each .doc/.docx file in the input folder:
+
+1. Use the `tdoc-extractor` agent (runs on Haiku) to process each document
+2. The agent will:
+   - Convert document to text using pandoc
+   - Extract structured information
+   - Write a fragment file to the fragments directory
+3. Process documents sequentially, reporting progress every 10 documents
+4. Log any extraction failures for the final report
+
+**Important**: Invoke the tdoc-extractor agent for EACH document individually:
+```
+Use the tdoc-extractor agent to extract information from [filepath] and write the fragment to [fragments-dir]/[TDoc-ID].md
+```
+
+### Step 4: Synthesize Report (Opus)
+
+Once all extractions complete:
+
+1. Use the `meeting-synthesizer` agent (runs on Opus) to create the final report
+2. The agent reads all fragments and produces a comprehensive meeting prep document
+3. Save the report to the working directory
+
+**Invocation**:
+```
+Use the meeting-synthesizer agent to synthesize all fragments in [fragments-dir] into a meeting preparation report for SA5#[meeting-number]
+```
+
+### Step 5: Deliver Results
+
+1. Copy the final report to the input folder as `SA5-[meeting]-prep-report.md`
+2. Present the report to the user
+3. Report summary statistics:
+   - Total documents processed
+   - Breakdown by relevance (HIGH/MEDIUM/LOW/NONE)
+   - Any extraction failures
+
+## Error Handling
+
+- If pandoc is missing: Provide installation instructions and abort
+- If a document fails extraction: Log it, continue with remaining documents
+- If folder is empty: Inform user and abort
+- Include failed documents in the final report appendix
+
+## Notes
+
+- The pipeline uses Haiku for extraction (fast, cost-effective) and Opus for synthesis (better reasoning)
+- Each subagent runs in its own context, preventing context pollution
+- Progress is reported to keep the user informed during long runs

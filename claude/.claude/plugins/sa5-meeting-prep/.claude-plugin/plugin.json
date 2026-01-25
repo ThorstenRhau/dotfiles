@@ -1,0 +1,8 @@
+{
+  "name": "sa5-meeting-prep",
+  "description": "3GPP SA5 meeting preparation pipeline. Processes TDocs from a folder, extracts key information using Haiku agents, and synthesizes a prioritized meeting prep report with Opus.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Thorsten"
+  }
+}
