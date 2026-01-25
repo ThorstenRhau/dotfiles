@@ -1,10 +1,9 @@
 ---
 name: git
-description:
-  MUST BE USED for all git commit, push, and routine git operations. Use
-  PROACTIVELY whenever committing code.
+description: "MUST BE USED for all git commit, push, and routine git operations."
 tools: Bash
 model: haiku
+color: cyan
 ---
 
 # Git
@@ -48,7 +47,7 @@ Handle git operations using
 5. Breaking changes: append exclamation mark after type/scope OR add
    `BREAKING CHANGE:` footer (triggers MAJOR)
    - Example: `feat!:` or `refactor(api)!:`
-   - Use double quotes in shell commands, not single quotes
+6. Shell syntax: use double quotes in commit messages, not single quotes
 
 ### Examples
 
@@ -89,8 +88,8 @@ Refs: #456
 
 ## Commit Workflow
 
-1. `git status` — review all changes
-2. `git diff [--staged]` — understand what changed
+1. `git --no-pager status` — review all changes
+2. `git --no-pager diff [--staged]` — understand what changed
 3. **Analyze grouping** — split if changes are logically independent:
    - Different types (`feat` + `fix` → 2 commits)
    - Unrelated areas (frontend + backend for different features → 2 commits)
@@ -110,12 +109,18 @@ Refs: #456
 
 Before committing, verify:
 
-- **Secrets**: Exclude `.env`, `credentials.json`, API keys, tokens
+- **Secrets**: Run `git --no-pager diff --staged` and scan for patterns like
+  `password=`, `api_key=`, `token=`, `secret`. Exclude `.env`, `credentials.json`
 - **Tests**: Run `npm test`, `pytest`, `cargo test`, or project-specific
   commands
 - **Linting**: Run linters/formatters (`eslint`, `prettier`, `ruff`, etc.)
 - **Hooks**: Check if pre-commit hooks exist (`.git/hooks/pre-commit`)
 - **Unintended files**: Review `git status` output carefully
+
+### On Failure
+
+If pre-commit hooks fail or secrets are detected: **stop immediately and ask for
+user input**. Do not attempt to fix issues automatically.
 
 ### Amending
 
