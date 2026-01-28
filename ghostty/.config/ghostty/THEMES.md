@@ -1,35 +1,32 @@
-# Everforest Theme Variants
+# Kanagawa Theme
 
-Custom Everforest themes with three contrast levels for both light and dark modes.
+Custom Kanagawa themes for both light and dark modes.
 
 ## Available Themes
 
 ### Dark Mode
-- `everforest-dark-hard` - Highest contrast (bg: #272e33)
-- `everforest-dark-medium` - Medium contrast (bg: #2d353b) **[Default]**
-- `everforest-dark-soft` - Lowest contrast (bg: #333c43)
+- `kanagawa-wave` - Default dark theme (bg: #1f1f28)
 
 ### Light Mode
-- `everforest-light-hard` - Highest contrast (bg: #fffbef)
-- `everforest-light-medium` - Medium contrast (bg: #fdf6e3) **[Default]**
-- `everforest-light-soft` - Lowest contrast (bg: #f3ead3)
+- `kanagawa-lotus` - Default light theme (bg: #f2ecbc)
 
 ## Usage
 
 To change themes, edit the `theme` line in your `config` file:
 
 ```
-# Medium contrast (default)
-theme = dark:everforest-dark-medium,light:everforest-light-medium
+# Default configuration
+theme = dark:kanagawa-wave,light:kanagawa-lotus
 
-# Hard contrast
-theme = dark:everforest-dark-hard,light:everforest-light-hard
+# Dark only
+theme = kanagawa-wave
 
-# Soft contrast
-theme = dark:everforest-dark-soft,light:everforest-light-soft
-
-# Mix and match
-theme = dark:everforest-dark-hard,light:everforest-light-soft
+# Light only
+theme = kanagawa-lotus
 ```
 
 Themes will automatically switch between dark and light variants based on your system appearance settings.
+
+## Color Palette
+
+Based on the [Kanagawa.nvim](https://github.com/rebelot/kanagawa.nvim) theme.

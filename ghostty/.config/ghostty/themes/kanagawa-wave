@@ -1,0 +1,28 @@
+# Kanagawa Wave
+# Based on https://github.com/rebelot/kanagawa.nvim
+
+background = 1f1f28
+foreground = dcd7ba
+cursor-color = dcd7ba
+selection-background = 2d4f67
+selection-foreground = dcd7ba
+
+# ANSI colors
+palette = 0=090618
+palette = 1=c34043
+palette = 2=98bb6c
+palette = 3=e6c384
+palette = 4=7e9cd8
+palette = 5=957fb8
+palette = 6=7aa89f
+palette = 7=dcd7ba
+
+# Bright colors
+palette = 8=727169
+palette = 9=e82424
+palette = 10=98bb6c
+palette = 11=e6c384
+palette = 12=7e9cd8
+palette = 13=957fb8
+palette = 14=7aa89f
+palette = 15=c8c093

@@ -8,23 +8,23 @@ function _appearance_change_handler --on-variable SYSTEM_APPEARANCE
     end
 
     if test "$SYSTEM_APPEARANCE" = "dark"
-        fish_config theme choose "Everforest Dark"
-        set -gx BAT_THEME "everforest_dark"
-        set -gx DELTA_FEATURES "everforest-dark"
-        set -gx LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/everforest-dark.yml"
-        set -gx RIPGREP_CONFIG_PATH "$HOME/.config/ripgrep/themes/everforest_dark"
-        if test -r "$HOME/.config/fzf/themes/everforest_dark.fish"
-            source $HOME/.config/fzf/themes/everforest_dark.fish
+        fish_config theme choose "Kanagawa Wave"
+        set -gx BAT_THEME "kanagawa_wave"
+        set -gx DELTA_FEATURES "kanagawa-wave"
+        set -gx LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/kanagawa-wave.yml"
+        set -gx RIPGREP_CONFIG_PATH "$HOME/.config/ripgrep/themes/kanagawa_wave"
+        if test -r "$HOME/.config/fzf/themes/kanagawa_wave.fish"
+            source $HOME/.config/fzf/themes/kanagawa_wave.fish
         end
         set -gx STARSHIP_CONFIG "$HOME/.config/starship_dark.toml"
     else
-        fish_config theme choose "Everforest Light"
-        set -gx BAT_THEME "everforest_light"
-        set -gx DELTA_FEATURES "everforest-light"
-        set -gx LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/everforest-light.yml"
-        set -gx RIPGREP_CONFIG_PATH "$HOME/.config/ripgrep/themes/everforest_light"
-        if test -r "$HOME/.config/fzf/themes/everforest_light.fish"
-            source $HOME/.config/fzf/themes/everforest_light.fish
+        fish_config theme choose "Kanagawa Lotus"
+        set -gx BAT_THEME "kanagawa_lotus"
+        set -gx DELTA_FEATURES "kanagawa-lotus"
+        set -gx LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/kanagawa-lotus.yml"
+        set -gx RIPGREP_CONFIG_PATH "$HOME/.config/ripgrep/themes/kanagawa_lotus"
+        if test -r "$HOME/.config/fzf/themes/kanagawa_lotus.fish"
+            source $HOME/.config/fzf/themes/kanagawa_lotus.fish
         end
         set -gx STARSHIP_CONFIG "$HOME/.config/starship_light.toml"
     end
