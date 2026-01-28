@@ -19,7 +19,29 @@ Symlink with `stow <package>` or `./stow_all.sh`.
 
 - `fish/.config/fish/config.fish` - Main shell configuration
 - `ghostty/.config/ghostty/config` - Terminal emulator configuration
+- `starship/.config/src/` - Starship theme source files
 - `Brewfile` - Homebrew package dependencies
+
+## Starship Theme Generation
+
+Theme configs are generated from source files in `starship/.config/src/`:
+
+```
+base.toml         # Shared config (symbols, settings)
+palette_dark.toml # Dark theme palette (defines palette name + colors)
+palette_light.toml# Light theme palette (defines palette name + colors)
+generate.fish     # Combines base + palette into final configs
+```
+
+**To change color themes:**
+
+1. Update `palette_dark.toml` and/or `palette_light.toml` with new palette name
+   and colors (the `palette = "name"` line is extracted automatically)
+2. Run `fish starship/.config/src/generate.fish`
+3. Regenerated files appear in `starship/.config/`
+
+The generator extracts the palette name from each palette file, so only the
+palette files need updating when switching themes.
 
 ## Development Guidelines
 
