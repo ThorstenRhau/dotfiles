@@ -48,7 +48,7 @@ font-variation-bold-italic     = wght = 700
 font-variation-italic          = wght = 450
 macos-non-native-fullscreen    = visible-menu
 macos-option-as-alt            = left
-macos-titlebar-style           = native
+macos-titlebar-style           = transparent
 mouse-hide-while-typing        = true
 mouse-shift-capture            = false
 quick-terminal-position        = center
