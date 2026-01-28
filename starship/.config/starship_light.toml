@@ -180,14 +180,14 @@ symbol = " "
 
 [zig]
 symbol = " "
-[palettes.everforest-light]
-bg0 = '#FFFBEF'
-bg1 = '#F8F5E4'
-fg = '#5C6A72'
-red = '#F85552'
-orange = '#F57D26'
-yellow = '#DFA000'
-green = '#8DA101'
-aqua = '#35A77C'
-blue = '#3A94C5'
-purple = '#DF69BA'
+[palettes.kanagawa-lotus]
+bg0 = '#f2ecbc'
+bg1 = '#e7dba0'
+fg = '#545464'
+red = '#c84053'
+orange = '#cc6d00'
+yellow = '#77713f'
+green = '#6f894e'
+aqua = '#597b75'
+blue = '#4d699b'
+purple = '#b35b79'
