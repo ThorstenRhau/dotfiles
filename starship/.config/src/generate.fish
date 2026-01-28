@@ -10,15 +10,17 @@ set -l out_dir (dirname $script_dir)
 cp $script_dir/base.toml $out_dir/starship.toml
 
 # Dark theme
-# Insert palette directive after schema line, then append palette definition
+# Extract palette name from palette file, insert after schema line, then append palette definition
+set -l dark_palette (grep '^palette = ' $script_dir/palette_dark.toml | head -1)
 head -1 $script_dir/base.toml > $out_dir/starship_dark.toml
-echo 'palette = "everforest-dark"' >> $out_dir/starship_dark.toml
+echo $dark_palette >> $out_dir/starship_dark.toml
 tail -n +2 $script_dir/base.toml >> $out_dir/starship_dark.toml
 grep -A 100 '^\[palettes\.' $script_dir/palette_dark.toml >> $out_dir/starship_dark.toml
 
 # Light theme
+set -l light_palette (grep '^palette = ' $script_dir/palette_light.toml | head -1)
 head -1 $script_dir/base.toml > $out_dir/starship_light.toml
-echo 'palette = "everforest-light"' >> $out_dir/starship_light.toml
+echo $light_palette >> $out_dir/starship_light.toml
 tail -n +2 $script_dir/base.toml >> $out_dir/starship_light.toml
 grep -A 100 '^\[palettes\.' $script_dir/palette_light.toml >> $out_dir/starship_light.toml
 

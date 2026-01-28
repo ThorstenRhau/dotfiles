@@ -1,5 +1,5 @@
 "$schema" = "https://starship.rs/config-schema.json"
-palette = "everforest-light"
+palette = "kanagawa-lotus"
 
 add_newline     = true
 command_timeout = 500
