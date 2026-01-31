@@ -43,7 +43,7 @@ claude --plugin-dir /path/to/sa5-meeting-prep
    brew install pandoc
    ```
 
-2. **TDocs downloaded** - Get documents from ftp.3gpp.org and unzip them
+2. **TDocs downloaded** - Get documents from ftp.3gpp.org (zip files are extracted automatically)
 
 ## Usage
 
@@ -54,14 +54,14 @@ claude --plugin-dir /path/to/sa5-meeting-prep
 ### Example
 
 ```bash
-# Download TDocs from 3GPP
-mkdir -p ~/3gpp/sa5-162
-cd ~/3gpp/sa5-162
-# Download and unzip documents...
+# Download TDocs from 3GPP (keep as zip files - plugin extracts them automatically)
+mkdir -p ~/3gpp/TSGS5_162
+cd ~/3gpp/TSGS5_162
+# Download meeting folder from ftp.3gpp.org/tsg_sa/WG5_TM/...
 
-# Run analysis
+# Run analysis (plugin finds and extracts all zip files automatically)
 claude
-> /sa5-meeting-prep:analyze ~/3gpp/sa5-162 162
+> /sa5-meeting-prep:analyze ~/3gpp/TSGS5_162 162
 ```
 
 ## Output
@@ -124,11 +124,12 @@ sa5-meeting-prep/
 
 The plugin uses a multi-stage optimization strategy:
 
-1. **Batch pandoc conversion**: All documents converted upfront (no per-agent overhead)
-2. **Batched extraction**: Process 40-100 docs per agent vs 1 doc per agent
-3. **Two-stage filtering**: Metadata-only for LOW/NONE relevance (~60-70% of docs)
-4. **Sonnet synthesis**: ~5x cheaper than Opus with excellent quality
-5. **Result**: ~75% cost reduction, 4x faster processing
+1. **Automatic zip extraction**: Recursively finds and extracts all .zip files from input folder
+2. **Batch pandoc conversion**: All documents converted upfront (no per-agent overhead)
+3. **Batched extraction**: Process 40-100 docs per agent vs 1 doc per agent
+4. **Two-stage filtering**: Metadata-only for LOW/NONE relevance (~60-70% of docs)
+5. **Sonnet synthesis**: ~5x cheaper than Opus with excellent quality
+6. **Result**: ~75% cost reduction, 4x faster processing
 
 ## License
 

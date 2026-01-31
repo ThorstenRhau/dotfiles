@@ -31,61 +31,129 @@ Example:
 
 ### Step 1: Validate Environment
 
-1. Check that pandoc is installed
+1. Check that pandoc is installed: `command -v pandoc`
 2. Verify the input folder exists
-3. Count .doc/.docx files and report to user
 
 ### Step 2: Create Working Directory
 
 Create `/tmp/sa5-meeting-prep-<timestamp>/` for intermediate files:
+
+```bash
+WORK_DIR="/tmp/sa5-meeting-prep-$(date +%s)"
+mkdir -p "$WORK_DIR"/{extracted,converted,metadata,fragments,report}
+```
+
+Subdirectories:
+- `extracted/` - Documents extracted from zip files
 - `converted/` - Converted text files from .doc/.docx
 - `metadata/` - Compact metadata-only extractions (Stage 3.1)
 - `fragments/` - Full TDoc extractions for HIGH/MEDIUM + metadata for LOW/NONE
 - `report/` - Final output
 
-### Step 2.5: Batch Convert Documents to Text
+### Step 2.5: Extract Zip Files (MANDATORY)
 
-Before extraction, convert ALL .doc/.docx files to plain text in a single batch operation.
+**CRITICAL**: 3GPP TDocs are distributed as zip files. This step MUST run before counting documents.
 
-**IMPORTANT**: The conversion script must be macOS-compatible and handle edge cases robustly.
+#### Zip Extraction Script
+
+Search the ENTIRE input folder (recursively) for zip files and extract them:
+
+```bash
+#!/bin/bash
+# Extract all zip files from input folder to working directory
+set -euo pipefail
+
+INPUT_FOLDER="$1"
+EXTRACT_DIR="$2"
+
+mkdir -p "$EXTRACT_DIR"
+
+zip_count=0
+extracted_count=0
+failed_count=0
+
+# Find ALL zip files recursively in the input folder
+while IFS= read -r -d '' zipfile; do
+    zip_count=$((zip_count + 1))
+
+    # Extract to the working directory (flat structure, overwrite existing)
+    if unzip -o -q "$zipfile" -d "$EXTRACT_DIR" 2>/dev/null; then
+        extracted_count=$((extracted_count + 1))
+    else
+        echo "Warning: Failed to extract $zipfile"
+        failed_count=$((failed_count + 1))
+    fi
+
+    # Progress every 100 zips
+    if (( zip_count % 100 == 0 )); then
+        echo "Zip extraction progress: $zip_count files processed..."
+    fi
+done < <(find "$INPUT_FOLDER" -type f -iname "*.zip" -print0)
+
+echo "Zip extraction complete: $extracted_count successful, $failed_count failed out of $zip_count total"
+```
+
+#### Execution
+
+1. Run the extraction script with `INPUT_FOLDER` and `WORK_DIR/extracted/` as arguments
+2. **MUST report** extraction statistics to user:
+   - Number of zip files found
+   - Number successfully extracted
+   - Number failed
+3. **If zero zip files found**, check for already-extracted .docx files in input folder
+
+### Step 2.6: Count and Validate Documents
+
+**AFTER** zip extraction, count available documents:
+
+```bash
+# Count documents in BOTH extracted folder AND original input folder
+doc_count=$(find "$WORK_DIR/extracted" "$INPUT_FOLDER" -type f \( -iname "*.doc" -o -iname "*.docx" \) 2>/dev/null | wc -l)
+echo "Found $doc_count .doc/.docx files to process"
+```
+
+**CRITICAL VALIDATION**:
+- If `doc_count` is 0: **ABORT** with error "No documents found. Check that the input folder contains .zip files or .docx files."
+- If `doc_count` < 10: **WARN** user "Only found X documents - this seems low for a 3GPP meeting. Expected 200-600 documents."
+
+### Step 3: Batch Convert Documents to Text
+
+Convert ALL .doc/.docx files to plain text.
+
+**IMPORTANT**: Search BOTH the extracted folder AND the original input folder.
 
 #### Conversion Script (macOS compatible)
-
-Create and run this conversion script:
 
 ```bash
 #!/bin/bash
 # macOS-compatible batch conversion script
 set -euo pipefail
 
-INPUT_FOLDER="$1"
-OUTPUT_FOLDER="$2"
+EXTRACTED_FOLDER="$1"
+INPUT_FOLDER="$2"
+OUTPUT_FOLDER="$3"
 
-# Create output directory
 mkdir -p "$OUTPUT_FOLDER"
 
-# Find all doc/docx files and convert them
-# Using find + while loop with process substitution to avoid subshell issues
 converted=0
 failed=0
 total=0
 
+# Search BOTH extracted folder and original input folder
 while IFS= read -r -d '' docfile; do
     total=$((total + 1))
 
-    # Extract base name without extension
     filename=$(basename "$docfile")
     tdoc_id="${filename%.*}"
     outfile="$OUTPUT_FOLDER/${tdoc_id}.txt"
 
-    # Convert with pandoc (skip if output already exists)
+    # Skip if already converted
     if [[ -f "$outfile" ]]; then
         converted=$((converted + 1))
         continue
     fi
 
     if pandoc -f docx -t plain "$docfile" -o "$outfile" 2>/dev/null; then
-        # Check if output is non-empty
         if [[ -s "$outfile" ]]; then
             converted=$((converted + 1))
         else
@@ -96,51 +164,28 @@ while IFS= read -r -d '' docfile; do
         failed=$((failed + 1))
     fi
 
-    # Progress reporting every 50 files
     if (( total % 50 == 0 )); then
-        echo "Progress: $total files processed (converted: $converted, failed: $failed)..."
+        echo "Conversion progress: $total files (converted: $converted, failed: $failed)..."
     fi
-done < <(find "$INPUT_FOLDER" -type f \( -iname "*.doc" -o -iname "*.docx" \) -print0)
+done < <(find "$EXTRACTED_FOLDER" "$INPUT_FOLDER" -type f \( -iname "*.doc" -o -iname "*.docx" \) -print0 2>/dev/null)
 
 echo "Conversion complete: $converted successful, $failed failed out of $total total"
 ```
 
-#### Execution Steps
+#### Execution
 
-1. Create the working directory with subdirectories:
-   ```bash
-   WORK_DIR="/tmp/sa5-meeting-prep-$(date +%s)"
-   mkdir -p "$WORK_DIR"/{converted,metadata,fragments,report}
-   ```
-
-2. If documents are in zip files (common for 3GPP), extract them first:
-   ```bash
-   cd "[input-folder]/Docs" && for z in *.zip; do [ -f "$z" ] && unzip -q -o "$z" 2>/dev/null || true; done
-   ```
-
-3. Run the conversion (either inline or save as script):
-   - The script handles `.doc` and `.docx` files automatically
-   - Uses `find` with `-print0` for safe filename handling
-   - Process substitution `< <(find ...)` avoids subshell variable scope issues
-   - No `timeout` command needed (pandoc is fast; hangs are rare)
-   - Skips already-converted files for resume capability
-
-4. Report conversion statistics to user:
-   - Total documents found
-   - Successfully converted
-   - Failed conversions
-   - Output directory location
-
-5. **Important**: Extraction agents will now receive paths to `.txt` files instead of `.docx` files
+1. Run conversion with `WORK_DIR/extracted/`, `INPUT_FOLDER`, and `WORK_DIR/converted/` as arguments
+2. Report conversion statistics to user
+3. **If converted count is 0**: ABORT with error
 
 #### Troubleshooting
 
 - **"no matches found" errors**: The script uses `find` instead of glob patterns to avoid zsh issues
-- **Hanging conversions**: If a file hangs, you can kill the pandoc process; the script will continue
-- **Corrupted files**: Files that produce empty output are counted as failures
+- **Hanging conversions**: If a file hangs, kill pandoc; the script continues
+- **Corrupted files**: Files producing empty output are counted as failures
 - **Resume after interruption**: Re-running skips already-converted files
 
-### Step 3: Extract TDocs (Two-Stage Filtered Extraction)
+### Step 4: Extract TDocs (Two-Stage Filtered Extraction)
 
 Use a two-stage process to minimize context size while preserving quality:
 
@@ -186,7 +231,7 @@ For LOW and NONE relevance documents:
 - Fragment size reduction: ~85% for filtered documents
 - Total context to synthesizer: ~50-70% smaller
 
-### Step 4: Synthesize Report (Sonnet)
+### Step 5: Synthesize Report (Sonnet)
 
 Once all extractions complete:
 
@@ -201,7 +246,7 @@ Use the meeting-synthesizer agent to synthesize all fragments in [fragments-dir]
 
 **Note**: Sonnet provides excellent synthesis quality at ~5x lower cost than Opus.
 
-### Step 5: Deliver Results
+### Step 6: Deliver Results
 
 1. Copy the final report to the input folder as `SA5-[meeting]-prep-report.md`
 2. Present the report to the user
