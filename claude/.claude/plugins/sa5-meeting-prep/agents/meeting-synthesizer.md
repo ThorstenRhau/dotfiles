@@ -46,6 +46,26 @@ A directory containing markdown fragment files (one per TDoc), each with:
 
 Use Glob to find all `.md` files in the fragments directory, then Read each one.
 
+**Chunked Processing for Large Batches (>200 fragments):**
+
+If the fragment count exceeds 200 documents, process in tiers to avoid context overflow:
+
+1. **First pass**: Read and synthesize HIGH relevance fragments only
+   - Build the "Must Read" section and thematic analysis for priority items
+   - Note document counts per relevance level
+
+2. **Second pass**: Add MEDIUM relevance analysis
+   - Integrate into thematic sections
+   - Build "Should Review" table
+
+3. **Third pass**: Process LOW/NONE for statistics and appendix
+   - Generate summary bullets for "For Awareness" section
+   - Complete the full TDoc index
+
+4. **Final assembly**: Combine all sections into the complete report
+
+For smaller batches (<200), read all fragments in a single pass.
+
 ### 2. Analyze and Cross-Reference
 
 - Group TDocs by relevance level

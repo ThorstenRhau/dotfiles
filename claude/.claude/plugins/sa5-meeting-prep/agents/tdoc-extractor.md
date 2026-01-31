@@ -19,13 +19,18 @@ You receive:
 
 ### 1. Convert Document to Text
 
-Use pandoc to convert the document:
+Use pandoc to convert the document. **IMPORTANT**: Use a unique temp file per document to avoid race conditions with parallel processing:
 
 ```bash
-pandoc -f docx -t plain "[input-file]" -o /tmp/tdoc-temp.txt
+# Extract TDoc ID from filename for unique temp file
+TDOC_ID=$(basename "[input-file]" .docx | sed 's/\.doc$//')
+timeout 60s pandoc -f docx -t plain "[input-file]" -o "/tmp/tdoc-${TDOC_ID}.txt"
 ```
 
-If pandoc fails, try with `.doc` format flag or report the failure.
+**Error handling:**
+- If pandoc times out (60s), log as "pandoc timeout" and continue
+- If pandoc fails, try with `.doc` format flag or report the failure
+- Clean up the temp file after reading its contents
 
 ### 2. Parse Document Content
 
@@ -57,16 +62,20 @@ Score relevance as HIGH, MEDIUM, LOW, or NONE based on these focus areas:
 **HIGH relevance triggers**:
 - Cloud management and orchestration
 - Correlation context / distributed tracing / OpenTelemetry
+- Predictable Root Cause Analysis / correlation context
 - O-RAN interfaces and integration
 - NRM IOCs in TS 28.541, 28.623, 28.532, 32.158
+- Intent-driven management (TS 28.312)
+- Closed Control Loop / CCL (TS 28.535, 28.536)
+- Management Data Analytics / MDA (TS 28.104)
 - Data management framework
 - Observability, telemetry pipelines
 
 **MEDIUM relevance triggers**:
 - General NRM changes to other specs
 - Performance management (PM) or fault management (FM) enhancements
-- Analytics or AI/ML management
-- Intent-driven management
+- Analytics or AI/ML management (TS 28.105, TR 28.824)
+- Assurance Notification Levels / AN Levels (TS 28.100)
 
 **LOW relevance triggers**:
 - Energy efficiency

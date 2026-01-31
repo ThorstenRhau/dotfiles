@@ -47,8 +47,8 @@ For each .doc/.docx file in the input folder:
    - Convert document to text using pandoc
    - Extract structured information
    - Write a fragment file to the fragments directory
-3. Process documents sequentially, reporting progress every 10 documents
-4. Log any extraction failures for the final report
+3. **Process documents in batches of 10 parallel agents**, reporting progress after each batch
+4. Log any extraction failures for the final report (see Error Tracking below)
 
 **Important**: Invoke the tdoc-extractor agent for EACH document individually:
 ```
@@ -77,12 +77,54 @@ Use the meeting-synthesizer agent to synthesize all fragments in [fragments-dir]
    - Breakdown by relevance (HIGH/MEDIUM/LOW/NONE)
    - Any extraction failures
 
+## Checkpoint & Resume
+
+To enable resume on failure during long runs:
+
+1. **After each batch of 10 documents**, write a checkpoint file:
+   ```json
+   // [working-dir]/checkpoint.json
+   {
+     "processed": ["S5-251001", "S5-251002", ...],
+     "last_batch": 3,
+     "timestamp": "2025-01-15T10:30:00Z"
+   }
+   ```
+
+2. **On restart**: Check for existing checkpoint.json in the working directory
+   - If found, read the list of processed TDoc IDs
+   - Skip any documents already in the processed list
+   - Resume from the next batch
+
+3. **On completion**: Remove checkpoint.json (processing complete)
+
+## Error Tracking
+
+Maintain structured error tracking throughout extraction:
+
+1. **For each failure**, record:
+   ```json
+   {
+     "tdoc_id": "S5-251234",
+     "error_type": "pandoc_timeout|format_unsupported|parse_failure|unknown",
+     "filepath": "/path/to/S5-251234.docx",
+     "message": "Brief error description"
+   }
+   ```
+
+2. **At end of extraction phase**, write errors to:
+   ```
+   [working-dir]/errors.json
+   ```
+
+3. **Pass error count** to the synthesizer agent for statistics
+
 ## Error Handling
 
 - If pandoc is missing: Provide installation instructions and abort
-- If a document fails extraction: Log it, continue with remaining documents
+- If a document fails extraction: Record in errors list, continue with remaining documents
 - If folder is empty: Inform user and abort
-- Include failed documents in the final report appendix
+- Include failed documents in the final report appendix (via errors.json)
 
 ## Notes
 

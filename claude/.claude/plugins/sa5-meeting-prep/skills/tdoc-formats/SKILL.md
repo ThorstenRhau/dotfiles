@@ -88,7 +88,13 @@ Spec: TS 28.XXX
 ## Specification Series
 
 ### TS 28.xxx - Management and Orchestration
+- 28.100: Assurance Notification Levels (AN Levels)
+- 28.104: Management Data Analytics (MDA)
+- 28.105: AI/ML management
+- 28.312: Intent-driven management
 - 28.532: Management services
+- 28.535: Closed Control Loop (CCL) - requirements
+- 28.536: Closed Control Loop (CCL) - data model
 - 28.541: 5G NRM
 - 28.622: Generic NRM IRP IS
 - 28.623: Generic NRM IRP SS (YANG/OpenAPI)
@@ -97,8 +103,12 @@ Spec: TS 28.XXX
 - 32.158: Management data collection integration reference point
 
 ### TR 28.xxx - Technical Reports
+- 28.824: AI/ML management study
 - Study items produce TRs
 - May become normative TS later
+
+### TR 32.xxx - 6G Studies
+- 32.801-01: 6G management studies (flag for awareness)
 
 ## Relevance Indicators for Cloud/Orchestration Focus
 
@@ -106,18 +116,23 @@ Spec: TS 28.XXX
 - "cloud-native", "cloud-based", "containerized"
 - "orchestration", "NFVO", "VNFM", "LCM"
 - "correlation", "trace", "tracing", "distributed"
+- "Predictable Root Cause Analysis", "correlation context"
 - "OpenTelemetry", "OTEL", "observability"
 - "O-RAN", "O1", "O2"
 - "NRM", "IOC", "information object class"
 - "management data", "PM", "FM", "CM"
+- "intent", "intent-driven", "TS 28.312"
+- "closed control loop", "CCL", "TS 28.535", "TS 28.536"
+- "MDA", "management data analytics", "TS 28.104"
 
 ### Medium-Priority Keywords
-- "analytics", "AI/ML", "AIML"
-- "intent", "intent-driven"
+- "analytics", "AI/ML", "AIML", "TS 28.105", "TR 28.824"
+- "AN Levels", "assurance notification", "TS 28.100"
 - "performance measurement", "KPI"
 - "fault management", "alarm"
 
 ### Context Keywords
 - "5G-Advanced", "Rel-19", "Rel-20"
+- "6G", "TR 32.801" (flag 6G studies for awareness)
 - "network function", "NF"
 - "service management", "network slice"
