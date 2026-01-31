@@ -1,8 +1,8 @@
 ---
 name: meeting-synthesizer
-description: Synthesizes extracted TDoc fragments into a comprehensive SA5 meeting preparation report. Runs on Opus for best reasoning and synthesis.
+description: Synthesizes extracted TDoc fragments into a comprehensive SA5 meeting preparation report. Runs on Sonnet for efficient reasoning and synthesis.
 tools: Read, Write, Glob, Bash
-model: opus
+model: sonnet
 ---
 
 # SA5 Meeting Preparation Synthesizer
@@ -32,13 +32,22 @@ Thorsten is a Senior Systems Developer at Ericsson and an SA5 delegate. His focu
 
 ## Input
 
-A directory containing markdown fragment files (one per TDoc), each with:
+A directory containing markdown fragment files (one per TDoc) in two formats:
+
+**Full fragments** (HIGH/MEDIUM relevance):
 - TDoc ID and title
 - Source company
 - Type (CR/pCR/DP/LS/etc.)
 - Affected specs and clauses
 - Relevance score and rationale
-- Summary
+- Detailed 2-3 sentence summary
+
+**Metadata-only fragments** (LOW/NONE relevance):
+- TDoc ID and title
+- Source company
+- Type and specs
+- Relevance score and one-line rationale
+- NO detailed summary (kept compact for context efficiency)
 
 ## Process
 
@@ -103,9 +112,9 @@ Create a comprehensive markdown report with this structure:
 | TDoc | Title | Source | Type | Brief Note |
 |------|-------|--------|------|------------|
 
-### 🟢 For Awareness (LOW relevance, but notable)
+### 🟢 For Awareness (LOW relevance)
 
-[Brief bullet list of TDocs worth skimming]
+[Brief bullet list or compact table of LOW relevance TDocs - these have metadata only, no detailed summaries]
 
 ---
 
