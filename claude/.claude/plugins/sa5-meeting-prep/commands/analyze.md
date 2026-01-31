@@ -20,9 +20,12 @@ Example:
 
 ## Prerequisites
 
-- `pandoc` installed for .docx conversion (`sudo apt install pandoc` or `brew install pandoc`)
-- TDocs downloaded from ftp.3gpp.org and unzipped into the target folder
+- **pandoc** installed for .docx conversion:
+  - macOS: `brew install pandoc`
+  - Linux: `sudo apt install pandoc`
+- TDocs downloaded from ftp.3gpp.org (can be in zip files or already extracted)
 - Documents should be .doc or .docx format (S5-XXXXXX.docx)
+- **macOS note**: Uses bash-compatible commands (no GNU coreutils required)
 
 ## Pipeline Steps
 
@@ -42,22 +45,100 @@ Create `/tmp/sa5-meeting-prep-<timestamp>/` for intermediate files:
 
 ### Step 2.5: Batch Convert Documents to Text
 
-Before extraction, convert ALL .doc/.docx files to plain text in a single batch operation:
+Before extraction, convert ALL .doc/.docx files to plain text in a single batch operation.
 
-1. Create the `converted/` subdirectory in the working directory
-2. Use a bash loop to convert all documents:
+**IMPORTANT**: The conversion script must be macOS-compatible and handle edge cases robustly.
+
+#### Conversion Script (macOS compatible)
+
+Create and run this conversion script:
+
+```bash
+#!/bin/bash
+# macOS-compatible batch conversion script
+set -euo pipefail
+
+INPUT_FOLDER="$1"
+OUTPUT_FOLDER="$2"
+
+# Create output directory
+mkdir -p "$OUTPUT_FOLDER"
+
+# Find all doc/docx files and convert them
+# Using find + while loop with process substitution to avoid subshell issues
+converted=0
+failed=0
+total=0
+
+while IFS= read -r -d '' docfile; do
+    total=$((total + 1))
+
+    # Extract base name without extension
+    filename=$(basename "$docfile")
+    tdoc_id="${filename%.*}"
+    outfile="$OUTPUT_FOLDER/${tdoc_id}.txt"
+
+    # Convert with pandoc (skip if output already exists)
+    if [[ -f "$outfile" ]]; then
+        converted=$((converted + 1))
+        continue
+    fi
+
+    if pandoc -f docx -t plain "$docfile" -o "$outfile" 2>/dev/null; then
+        # Check if output is non-empty
+        if [[ -s "$outfile" ]]; then
+            converted=$((converted + 1))
+        else
+            rm -f "$outfile"
+            failed=$((failed + 1))
+        fi
+    else
+        failed=$((failed + 1))
+    fi
+
+    # Progress reporting every 50 files
+    if (( total % 50 == 0 )); then
+        echo "Progress: $total files processed (converted: $converted, failed: $failed)..."
+    fi
+done < <(find "$INPUT_FOLDER" -type f \( -iname "*.doc" -o -iname "*.docx" \) -print0)
+
+echo "Conversion complete: $converted successful, $failed failed out of $total total"
+```
+
+#### Execution Steps
+
+1. Create the working directory with subdirectories:
    ```bash
-   for docfile in [input-folder]/*.{doc,docx}; do
-     [ -f "$docfile" ] || continue
-     TDOC_ID=$(basename "$docfile" | sed 's/\.[^.]*$//')
-     timeout 60s pandoc -f docx -t plain "$docfile" -o [working-dir]/converted/${TDOC_ID}.txt 2>/dev/null &
-   done
-   wait  # Wait for all conversions to complete
+   WORK_DIR="/tmp/sa5-meeting-prep-$(date +%s)"
+   mkdir -p "$WORK_DIR"/{converted,metadata,fragments,report}
    ```
-3. Report conversion statistics (successful vs failed)
-4. **Important**: Extraction agents will now receive paths to `.txt` files instead of `.docx` files
 
-This eliminates ~500 individual pandoc process spawns and reduces I/O overhead.
+2. If documents are in zip files (common for 3GPP), extract them first:
+   ```bash
+   cd "[input-folder]/Docs" && for z in *.zip; do [ -f "$z" ] && unzip -q -o "$z" 2>/dev/null || true; done
+   ```
+
+3. Run the conversion (either inline or save as script):
+   - The script handles `.doc` and `.docx` files automatically
+   - Uses `find` with `-print0` for safe filename handling
+   - Process substitution `< <(find ...)` avoids subshell variable scope issues
+   - No `timeout` command needed (pandoc is fast; hangs are rare)
+   - Skips already-converted files for resume capability
+
+4. Report conversion statistics to user:
+   - Total documents found
+   - Successfully converted
+   - Failed conversions
+   - Output directory location
+
+5. **Important**: Extraction agents will now receive paths to `.txt` files instead of `.docx` files
+
+#### Troubleshooting
+
+- **"no matches found" errors**: The script uses `find` instead of glob patterns to avoid zsh issues
+- **Hanging conversions**: If a file hangs, you can kill the pandoc process; the script will continue
+- **Corrupted files**: Files that produce empty output are counted as failures
+- **Resume after interruption**: Re-running skips already-converted files
 
 ### Step 3: Extract TDocs (Two-Stage Filtered Extraction)
 
@@ -158,7 +239,7 @@ Maintain structured error tracking throughout extraction:
    ```json
    {
      "tdoc_id": "S5-251234",
-     "error_type": "pandoc_timeout|format_unsupported|parse_failure|unknown",
+     "error_type": "conversion_failed|format_unsupported|parse_failure|empty_output|unknown",
      "filepath": "/path/to/S5-251234.docx",
      "message": "Brief error description"
    }
