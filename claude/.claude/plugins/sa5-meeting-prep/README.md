@@ -114,6 +114,8 @@ sa5-meeting-prep/
 │   ├── metadata-extractor.md    # Haiku: Stage 1 relevance scoring (80-100 docs/batch)
 │   ├── batch-extractor.md       # Haiku: Stage 2 full extraction (40-50 docs/batch)
 │   └── meeting-synthesizer.md   # Sonnet: Report synthesis
+├── scripts/
+│   └── preprocess.sh            # Bash: Zip extraction + pandoc conversion
 ├── skills/
 │   └── tdoc-formats/
 │       └── SKILL.md             # 3GPP document format reference
@@ -124,12 +126,29 @@ sa5-meeting-prep/
 
 The plugin uses a multi-stage optimization strategy:
 
-1. **Automatic zip extraction**: Recursively finds and extracts all .zip files from input folder
-2. **Batch pandoc conversion**: All documents converted upfront (no per-agent overhead)
+1. **Native preprocessing** (`scripts/preprocess.sh`): Single bash script handles zip extraction
+   and pandoc conversion (~60s for 500 docs) - no API calls needed
+2. **Predictable output**: Documents saved to `/tmp/sa5-prep-<meeting-number>/`
 3. **Batched extraction**: Process 40-100 docs per agent vs 1 doc per agent
 4. **Two-stage filtering**: Metadata-only for LOW/NONE relevance (~60-70% of docs)
 5. **Sonnet synthesis**: ~5x cheaper than Opus with excellent quality
 6. **Result**: ~75% cost reduction, 4x faster processing
+
+### Preprocessing Script
+
+The `scripts/preprocess.sh` can also be run standalone:
+
+```bash
+~/.claude/plugins/sa5-meeting-prep/scripts/preprocess.sh ~/3gpp/TSGS5_165
+# Output: /tmp/sa5-prep-165/
+```
+
+Features:
+- Extracts zips from `Docs/`, `LSin/`, `LSout/`, `Agenda/`
+- Converts `.doc`/`.docx` to plain text
+- Skips macOS resource forks (`._*` files)
+- Resume-safe (skips already-converted files)
+- Outputs `stats.json` with metrics
 
 ## License
 
