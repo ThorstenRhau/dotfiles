@@ -39,22 +39,28 @@ For each text file in the batch:
 
 3. **Assess relevance** using the same criteria as batch-extractor:
 
-**HIGH relevance triggers**:
+**HIGH relevance triggers** (Primary responsibilities):
 - Cloud management and orchestration
+- OAM Management Services (including R1 for OAM)
+- Orchestration
+- 5G Advanced NRM features
+- Network Resource Model
+- NRM IOCs in TS 28.541, 28.623, 28.532, 32.158
+- Data management framework
+- NF Management Services (O1 and A1)
+- Discovery & Exposure of OSS services and data
 - Correlation context / distributed tracing / OpenTelemetry
 - O-RAN interfaces and integration
-- NRM IOCs in TS 28.541, 28.623, 28.532, 32.158
+
+**MEDIUM relevance triggers**:
+- General NRM changes to other specs
 - Intent-driven management (TS 28.312)
 - Closed Control Loop (TS 28.535, 28.536)
 - Management Data Analytics (TS 28.104)
-- Data management framework
-- Observability, telemetry pipelines
-
-**MEDIUM relevance triggers**:
-- General NRM changes
 - PM/FM enhancements
 - Analytics or AI/ML management (TS 28.105, TR 28.824)
 - Assurance Notification Levels / AN Levels (TS 28.100)
+- Observability, telemetry pipelines
 
 **LOW relevance triggers**:
 - Energy efficiency

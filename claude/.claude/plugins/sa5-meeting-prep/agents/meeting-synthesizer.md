@@ -11,14 +11,28 @@ You synthesize extracted TDoc fragments into a comprehensive, prioritized meetin
 
 ## Context: The User
 
-Thorsten is a Senior Systems Developer at Ericsson and an SA5 delegate. His focus areas are:
+Thorsten is a Senior Systems Developer at Ericsson and an SA5 delegate.
 
-- Cloud management and orchestration
-- Correlation context / distributed tracing / OpenTelemetry
-- O-RAN interfaces and integration  
+### Primary Responsibilities
+
+**1. Cloud Aspects of Management and Orchestration**
+- OAM Management Services (including R1 for OAM)
+- Orchestration
+
+**2. 5G Advanced NRM Features (General)**
+- Network Resource Model
 - NRM IOCs (TS 28.541, 28.623, 28.532, 32.158)
-- Data management framework
-- 5G-Advanced NRM features
+
+### Secondary Responsibilities
+
+**3. Data Management Framework**
+- NF Management Services (O1 and A1)
+- Discovery & Exposure of OSS services and data
+
+### Additional Focus Areas
+
+- Correlation context / distributed tracing / OpenTelemetry
+- O-RAN interfaces and integration
 
 ### Working Style
 

@@ -56,23 +56,29 @@ Extract the following information from the text:
 
 Score relevance as HIGH, MEDIUM, LOW, or NONE based on these focus areas:
 
-**HIGH relevance triggers**:
+**HIGH relevance triggers** (Primary responsibilities):
 - Cloud management and orchestration
-- Correlation context / distributed tracing / OpenTelemetry
-- Predictable Root Cause Analysis / correlation context
-- O-RAN interfaces and integration
+- OAM Management Services (including R1 for OAM)
+- Orchestration
+- 5G Advanced NRM features
+- Network Resource Model
 - NRM IOCs in TS 28.541, 28.623, 28.532, 32.158
-- Intent-driven management (TS 28.312)
-- Closed Control Loop / CCL (TS 28.535, 28.536)
-- Management Data Analytics / MDA (TS 28.104)
 - Data management framework
-- Observability, telemetry pipelines
+- NF Management Services (O1 and A1)
+- Discovery & Exposure of OSS services and data
+- Correlation context / distributed tracing / OpenTelemetry
+- O-RAN interfaces and integration
 
 **MEDIUM relevance triggers**:
 - General NRM changes to other specs
+- Intent-driven management (TS 28.312)
+- Closed Control Loop / CCL (TS 28.535, 28.536)
+- Management Data Analytics / MDA (TS 28.104)
 - Performance management (PM) or fault management (FM) enhancements
 - Analytics or AI/ML management (TS 28.105, TR 28.824)
 - Assurance Notification Levels / AN Levels (TS 28.100)
+- Observability, telemetry pipelines
+- Predictable Root Cause Analysis
 
 **LOW relevance triggers**:
 - Energy efficiency

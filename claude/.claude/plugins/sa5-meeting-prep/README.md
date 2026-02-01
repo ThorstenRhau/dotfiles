@@ -79,13 +79,16 @@ The plugin generates a markdown report with:
 
 ### Focus Areas (edit agents/meeting-synthesizer.md)
 
-Default focus areas:
+Primary responsibilities:
 
-- Cloud management and orchestration
-- Correlation context / distributed tracing
-- O-RAN interfaces
-- NRM IOCs (TS 28.541, 28.623, 28.532, 32.158)
-- Data management framework
+- Cloud management and orchestration (OAM Management Services, R1 for OAM)
+- 5G Advanced NRM features (Network Resource Model, NRM IOCs)
+- Data management framework (NF Management Services O1/A1, Discovery & Exposure)
+
+Additional focus areas:
+
+- Correlation context / distributed tracing / OpenTelemetry
+- O-RAN interfaces and integration
 
 ### Model Selection
 
