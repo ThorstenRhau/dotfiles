@@ -112,7 +112,7 @@ if status is-interactive
     # Zoxide
     if type -q zoxide
         zoxide init fish --cmd cd | source
-        bind \ez cdi
+        bind alt-z cdi
     end
 
     # FZF
