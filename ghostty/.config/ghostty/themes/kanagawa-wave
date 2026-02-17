@@ -1,7 +1,7 @@
 # Kanagawa Wave
 # Based on https://github.com/rebelot/kanagawa.nvim
 
-background = 1f1f28
+background = 2b2a27
 foreground = dcd7ba
 cursor-color = dcd7ba
 selection-background = 2d4f67
