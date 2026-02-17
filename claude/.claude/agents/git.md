@@ -37,7 +37,7 @@ Handle git operations using
 | `chore`    | Other non-src/test changes | -      |
 | `revert`   | Reverts a previous commit  | -      |
 
-### Rules
+### Format Rules
 
 1. Description: imperative mood, lowercase, no period, ≤50 chars (72 for body)
 2. Scope: noun in parentheses describing affected area, e.g., `feat(api):`,
@@ -52,12 +52,6 @@ Handle git operations using
 ### Examples
 
 ```txt
-feat: add user authentication
-
-fix: resolve memory leak in data processor
-
-docs: correct spelling of CHANGELOG
-
 feat(lang): add Polish language
 
 fix: prevent racing of requests
@@ -70,20 +64,6 @@ Refs: #123
 feat!: drop support for Node 14
 
 BREAKING CHANGE: Node 14 has reached end-of-life. Minimum required version is now Node 18.
-
-refactor(api)!: rename endpoints for consistency
-
-/users → /api/users
-/posts → /api/posts
-
-BREAKING CHANGE: All REST endpoints now prefixed with /api
-
-revert: revert "feat: add experimental caching layer"
-
-This reverts commit 676104e.
-The caching implementation caused data inconsistencies in production.
-
-Refs: #456
 ```
 
 ## Commit Workflow
@@ -100,10 +80,18 @@ Refs: #456
    - Commit:
      - Simple: `git commit -m "type(scope): description"`
      - With body: `git commit -m "type: description" -m "Body paragraph"`
-     - With editor: `git commit` (for complex messages with body/footer)
+     - With HEREDOC (for complex messages with body/footer):
+       ```bash
+       git commit -m "$(cat <<'EOF'
+       type: description
+
+       Body paragraph
+       EOF
+       )"
+       ```
 5. `git status` — verify completion
 
-## Rules
+## Workflow Rules
 
 ### Pre-commit Checks
 
@@ -114,7 +102,6 @@ Before committing, verify:
 - **Tests**: Run `npm test`, `pytest`, `cargo test`, or project-specific
   commands
 - **Linting**: Run linters/formatters (`eslint`, `prettier`, `ruff`, etc.)
-- **Hooks**: Check if pre-commit hooks exist (`.git/hooks/pre-commit`)
 - **Unintended files**: Review `git status` output carefully
 
 ### On Failure
