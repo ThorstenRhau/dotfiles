@@ -2,8 +2,8 @@
 palette = "kanagawa-wave"
 
 [palettes.kanagawa-wave]
-bg0 = '#1F1F28'
-bg1 = '#16161D'
+bg0 = '#2B2A27'
+bg1 = '#1E1D1B'
 fg = '#DCD7BA'
 red = '#C34043'
 orange = '#FFA066'

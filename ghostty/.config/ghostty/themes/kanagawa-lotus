@@ -1,7 +1,7 @@
 # Kanagawa Lotus
 # Based on https://github.com/rebelot/kanagawa.nvim
 
-background = f2ecbc
+background = f5efe3
 foreground = 545464
 cursor-color = 545464
 selection-background = c9cbd1
