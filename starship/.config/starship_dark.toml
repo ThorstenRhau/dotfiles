@@ -181,8 +181,8 @@ symbol = " "
 [zig]
 symbol = " "
 [palettes.kanagawa-wave]
-bg0 = '#2B2A27'
-bg1 = '#1E1D1B'
+bg0 = '#262624'
+bg1 = '#191918'
 fg = '#DCD7BA'
 red = '#C34043'
 orange = '#FFA066'

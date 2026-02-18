@@ -2,8 +2,8 @@
 palette = "kanagawa-lotus"
 
 [palettes.kanagawa-lotus]
-bg0 = '#f5efe3'
-bg1 = '#e8e2d6'
+bg0 = '#FAF9F5'
+bg1 = '#EDECE8'
 fg = '#545464'
 red = '#c84053'
 orange = '#cc6d00'
