@@ -31,6 +31,7 @@ set -gx XDG_CONFIG_HOME "$HOME/.config"
 set -gx fish_greeting
 set -gx FISH_CACHE_TTL 86400
 set -gx ENABLE_TOOL_SEARCH true # Claude Code
+set -gx CLAUDE_CODE_DISABLE_1M_CONTEXT true # Claude Code
 
 # =============================================================================
 # PATH
