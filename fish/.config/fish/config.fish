@@ -125,6 +125,7 @@ if status is-interactive
     # FZF
     if type -q fzf
         fzf --fish | source
+        source ~/.config/fish/functions/fzf-history-widget.fish
 
         # Base options (layout, info, etc.) to be preserved across theme changes
         set -gx _FZF_BASE_OPTS "--height 40% --layout=reverse --info=inline --border=rounded --prompt='❯ ' --pointer='▶' --marker='✓'"
