@@ -5,8 +5,8 @@ function _fzf_format_history
     #
     # Format rules:
     #   < 0s ago (clock skew): "    +"
-    #   < 72000s (20h):        "HH:MM"
-    #   >= 72000s:             "  Xd"
+    #   < 86400s (24h):        "HH:MM"
+    #   >= 86400s:             "  Xd"
     # Field is 5 chars wide, right-aligned.
     perl -0 -ne '
         chomp;
@@ -16,7 +16,7 @@ function _fzf_format_history
         my $label;
         if ($age < 0) {
             $label = "    +";
-        } elsif ($age < 72000) {
+        } elsif ($age < 86400) {
             my @t = localtime($epoch);
             $label = sprintf("%02d:%02d", $t[2], $t[1]);
         } else {
