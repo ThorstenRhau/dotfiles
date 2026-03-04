@@ -106,3 +106,4 @@
 
 [includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
   path = ~/.config/git/github.inc #GitHub specific settings
+
