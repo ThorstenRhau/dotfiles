@@ -106,3 +106,6 @@
 
 [includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
   path = ~/.config/git/github.inc #GitHub specific settings
+
+[includeIf "hasconfig:remote.*.url:*@*ericsson.com:*/**"]
+  path = ~/.config/git/gitlab.inc #GitLab specific settings
