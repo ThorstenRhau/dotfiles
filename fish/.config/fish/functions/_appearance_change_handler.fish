@@ -8,23 +8,23 @@ function _appearance_change_handler --on-variable SYSTEM_APPEARANCE
     end
 
     if test "$SYSTEM_APPEARANCE" = "dark"
-        fish_config theme choose "Kanagawa Wave"
-        set -gx BAT_THEME "kanagawa_wave"
-        set -gx DELTA_FEATURES "kanagawa-wave"
-        set -gx LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/kanagawa-wave.yml"
-        set -gx RIPGREP_CONFIG_PATH "$HOME/.config/ripgrep/themes/kanagawa_wave"
-        if test -r "$HOME/.config/fzf/themes/kanagawa_wave.fish"
-            source $HOME/.config/fzf/themes/kanagawa_wave.fish
+        fish_config theme choose "Claude Dark"
+        set -gx BAT_THEME "claude_dark"
+        set -gx DELTA_FEATURES "claude-dark"
+        set -gx LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/claude-dark.yml"
+        set -gx RIPGREP_CONFIG_PATH "$HOME/.config/ripgrep/themes/claude_dark"
+        if test -r "$HOME/.config/fzf/themes/claude_dark.fish"
+            source $HOME/.config/fzf/themes/claude_dark.fish
         end
         set -gx STARSHIP_CONFIG "$HOME/.config/starship_dark.toml"
     else
-        fish_config theme choose "Kanagawa Lotus"
-        set -gx BAT_THEME "kanagawa_lotus"
-        set -gx DELTA_FEATURES "kanagawa-lotus"
-        set -gx LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/kanagawa-lotus.yml"
-        set -gx RIPGREP_CONFIG_PATH "$HOME/.config/ripgrep/themes/kanagawa_lotus"
-        if test -r "$HOME/.config/fzf/themes/kanagawa_lotus.fish"
-            source $HOME/.config/fzf/themes/kanagawa_lotus.fish
+        fish_config theme choose "Claude Light"
+        set -gx BAT_THEME "claude_light"
+        set -gx DELTA_FEATURES "claude-light"
+        set -gx LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/claude-light.yml"
+        set -gx RIPGREP_CONFIG_PATH "$HOME/.config/ripgrep/themes/claude_light"
+        if test -r "$HOME/.config/fzf/themes/claude_light.fish"
+            source $HOME/.config/fzf/themes/claude_light.fish
         end
         set -gx STARSHIP_CONFIG "$HOME/.config/starship_light.toml"
     end

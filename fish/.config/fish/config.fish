@@ -92,7 +92,7 @@ if status is-interactive
     # Appearance & Theming
     # =============================================================================
 
-    # Fish syntax highlighting theme (Rose Pine with auto light/dark switching)
+    # Fish syntax highlighting theme (Claude with auto light/dark switching)
     # Theme is set by _appearance_change_handler based on SYSTEM_APPEARANCE
 
     # Initialize SYSTEM_APPEARANCE as universal if not set (required for neovim to inherit)
