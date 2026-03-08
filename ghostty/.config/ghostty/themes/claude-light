@@ -1,0 +1,27 @@
+# Claude Light
+
+background = faf9f5
+foreground = 2a2920
+cursor-color = 2a2920
+selection-background = dddcd6
+selection-foreground = 2a2920
+
+# ANSI colors
+palette = 0=2a2920
+palette = 1=B05555
+palette = 2=5B8A58
+palette = 3=A89040
+palette = 4=5A7FA0
+palette = 5=8B6FA8
+palette = 6=A67842
+palette = 7=edece8
+
+# Bright colors
+palette = 8=8b8780
+palette = 9=B05555
+palette = 10=5B8A58
+palette = 11=A89040
+palette = 12=5A7FA0
+palette = 13=8B6FA8
+palette = 14=A67842
+palette = 15=faf9f5
