@@ -46,11 +46,13 @@ font-variation                 = wght = 450
 font-variation-bold            = wght = 700
 font-variation-bold-italic     = wght = 700
 font-variation-italic          = wght = 450
+macos-icon                     = xray
 macos-non-native-fullscreen    = visible-menu
 macos-option-as-alt            = left
 macos-titlebar-style           = transparent
 mouse-hide-while-typing        = true
 mouse-shift-capture            = false
+notify-on-command-finish       = unfocused
 quick-terminal-position        = center
 quick-terminal-size            = 500px
 quit-after-last-window-closed  = true
