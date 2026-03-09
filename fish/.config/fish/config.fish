@@ -116,6 +116,12 @@ if status is-interactive
         bind alt-z cdi
     end
 
+    # Carapace
+    if type -q carapace
+        set -gx CARAPACE_BRIDGES bash,zsh,fish,inshellisense,cobra
+        carapace _carapace | source
+    end
+
     # FZF
     if type -q fzf
         fzf --fish | source
