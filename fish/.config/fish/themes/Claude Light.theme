@@ -7,7 +7,7 @@ fish_color_quote 527E50
 fish_color_redirection 527594
 fish_color_end 7d7870
 fish_color_error B05555
-fish_color_param BB5C3A
+fish_color_param 527594
 fish_color_comment 7d7870
 # fish_color_match --background=brblue
 fish_color_selection --reverse
@@ -22,7 +22,7 @@ fish_color_host 996E3C
 fish_color_host_remote 82669D
 fish_color_cancel 2a2920
 fish_color_search_match --background=dddcd6
-fish_color_valid_path
+fish_color_valid_path --underline
 
 # pager color variables
 # https://fishshell.com/docs/current/interactive.html#pager-color-variables

@@ -16,7 +16,6 @@ cask "ghostty"
 
 brew "bash"
 brew "bat"
-brew "carapace"
 brew "chafa"
 brew "cmake"
 brew "doggo"
