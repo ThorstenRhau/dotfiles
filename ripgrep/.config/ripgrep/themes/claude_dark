@@ -22,7 +22,7 @@
 --max-columns=150
 --color=auto
 --colors=match:none
---colors=match:fg:0xc0,0x70,0x70
+--colors=match:fg:0xc6,0x77,0x77
 --colors=match:style:bold
 --colors=path:none
 --colors=path:fg:0x7b,0x9e,0xbd

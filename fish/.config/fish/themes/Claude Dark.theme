@@ -6,7 +6,7 @@ fish_color_keyword C4956A
 fish_color_quote 7DA47A
 fish_color_redirection 7B9EBD
 fish_color_end 8b8780
-fish_color_error C07070
+fish_color_error C67777
 fish_color_param 7B9EBD
 fish_color_comment 8b8780
 # fish_color_match --background=brblue
@@ -43,7 +43,7 @@ fish_pager_color_selected_description e8e4dc
 # custom color variables
 fish_color_subtle 8b8780
 fish_color_text e8e4dc
-fish_color_red C07070
+fish_color_red C67777
 fish_color_orange D97757
 fish_color_yellow C4A855
 fish_color_green 7DA47A
