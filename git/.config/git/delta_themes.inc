@@ -30,20 +30,20 @@
 	syntax-theme = claude_dark
 
 [delta "claude-light"]
-	blame-palette = "#faf9f5 #edece8 #eae9e5 #c4c0b8 #8b8780"
-	commit-decoration-style = "#8b8780" bold box ul
+	blame-palette = "#faf9f5 #edece8 #eae9e5 #c4c0b8 #7d7870"
+	commit-decoration-style = "#7d7870" bold box ul
 	light = true
-	file-decoration-style = "#8b8780"
+	file-decoration-style = "#7d7870"
 	file-style = "#2a2920"
-	hunk-header-decoration-style = "#8b8780" box ul
+	hunk-header-decoration-style = "#7d7870" box ul
 	hunk-header-file-style = bold
-	hunk-header-line-number-style = bold "#8b8780"
+	hunk-header-line-number-style = bold "#7d7870"
 	hunk-header-style = file line-number syntax
-	line-numbers-left-style = "#8b8780"
+	line-numbers-left-style = "#7d7870"
 	line-numbers-minus-style = bold "#B05555"
-	line-numbers-plus-style = bold "#5B8A58"
-	line-numbers-right-style = "#8b8780"
-	line-numbers-zero-style = "#8b8780"
+	line-numbers-plus-style = bold "#527E50"
+	line-numbers-right-style = "#7d7870"
+	line-numbers-zero-style = "#7d7870"
 	minus-style = syntax "#f0d0d0"
 	minus-non-emph-style = syntax "#f0d0d0"
 	minus-emph-style = bold syntax "#e8b8b8"
