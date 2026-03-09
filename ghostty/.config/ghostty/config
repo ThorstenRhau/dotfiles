@@ -29,6 +29,8 @@
 
 adjust-box-thickness           = -1
 adjust-cursor-thickness        = 2
+cursor-color                   = cell-foreground
+cursor-text                    = cell-background
 adjust-overline-thickness      = -1
 adjust-strikethrough-thickness = -1
 adjust-underline-thickness     = -1
