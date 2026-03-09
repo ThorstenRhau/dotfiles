@@ -34,7 +34,7 @@ gui:
       - "#C4A855"
 
     unstagedChangesColor:
-      - "#C07070"
+      - "#C67777"
 
     defaultFgColor:
       - "#e8e4dc"

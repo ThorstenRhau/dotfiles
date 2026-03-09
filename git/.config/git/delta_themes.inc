@@ -9,7 +9,7 @@
 	hunk-header-line-number-style = bold "#8b8780"
 	hunk-header-style = file line-number syntax
 	line-numbers-left-style = "#5a5955"
-	line-numbers-minus-style = bold "#C07070"
+	line-numbers-minus-style = bold "#C67777"
 	line-numbers-plus-style = bold "#7DA47A"
 	line-numbers-right-style = "#5a5955"
 	line-numbers-zero-style = "#8b8780"
@@ -41,7 +41,7 @@
 	hunk-header-style = file line-number syntax
 	line-numbers-left-style = "#7d7870"
 	line-numbers-minus-style = bold "#B05555"
-	line-numbers-plus-style = bold "#527E50"
+	line-numbers-plus-style = bold "#3F643C"
 	line-numbers-right-style = "#7d7870"
 	line-numbers-zero-style = "#7d7870"
 	minus-style = syntax "#f0d0d0"
