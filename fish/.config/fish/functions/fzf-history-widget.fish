@@ -24,7 +24,7 @@ function fzf-history-widget -d "Show command history"
       set -p -- FZF_DEFAULT_OPTS \
         '--bind="focus,resize:bg-transform:if test \\"$FZF_COLUMNS\\" -gt 100 -a \\\\( \\"$FZF_SELECT_COUNT\\" -gt 0 -o \\\\( -z \\"$FZF_WRAP\\" -a (string length -- {}) -gt (math $FZF_COLUMNS - 4) \\\\) -o (string collect -- {2..} | fish_indent | count) -gt 1 \\\\); echo show-preview; else echo hide-preview; end"' \
         '--preview="string collect -- (test \\"$FZF_SELECT_COUNT\\" -gt 0; and string collect -- {+2..}) \\"\\n\\" {2..} | fish_indent --ansi"' \
-        '--preview-window="right,50%,wrap-word,follow,info,hidden"'
+        '--preview-window="right,50%,wrap,follow,info,hidden"'
     end
 
     set -lx FZF_DEFAULT_OPTS_FILE
