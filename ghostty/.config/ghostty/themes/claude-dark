@@ -2,25 +2,25 @@
 
 background = 262624
 foreground = e8e4dc
-selection-background = 3d3d3a
+selection-background = 4a4946
 selection-foreground = e8e4dc
 
 # ANSI colors
-palette = 0=191918
+palette = 0=1d1d1c
 palette = 1=C67777
 palette = 2=7DA47A
 palette = 3=C4A855
 palette = 4=7B9EBD
 palette = 5=A68BBF
-palette = 6=C4956A
-palette = 7=e8e4dc
+palette = 6=6BA8A8
+palette = 7=d4cfc6
 
 # Bright colors
-palette = 8=8b8780
-palette = 9=C67777
+palette = 8=5a5955
+palette = 9=D97757
 palette = 10=7DA47A
-palette = 11=C4A855
+palette = 11=C4956A
 palette = 12=7B9EBD
 palette = 13=A68BBF
-palette = 14=C4956A
-palette = 15=d4cfc6
+palette = 14=6BA8A8
+palette = 15=e8e4dc
