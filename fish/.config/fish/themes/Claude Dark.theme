@@ -5,16 +5,16 @@ fish_color_command A68BBF
 fish_color_keyword C4956A
 fish_color_quote 7DA47A
 fish_color_redirection 7B9EBD
-fish_color_end 8b8780
+fish_color_end 938e87
 fish_color_error C67777
 fish_color_param 7B9EBD
-fish_color_comment 8b8780
+fish_color_comment 938e87
 # fish_color_match --background=brblue
 fish_color_selection --reverse
 # fish_color_history_current --bold
 fish_color_operator e8e4dc
 fish_color_escape 7B9EBD
-fish_color_autosuggestion 8b8780
+fish_color_autosuggestion 938e87
 fish_color_cwd D97757
 # fish_color_cwd_root red
 fish_color_user C4A855
@@ -27,7 +27,7 @@ fish_color_valid_path --underline
 # pager color variables
 # https://fishshell.com/docs/current/interactive.html#pager-color-variables
 fish_pager_color_progress 7DA47A
-fish_pager_color_background --background=383835
+fish_pager_color_background --background=2f2f2d
 fish_pager_color_prefix C4956A
 fish_pager_color_completion e8e4dc
 fish_pager_color_description d4cfc6
@@ -35,13 +35,13 @@ fish_pager_color_secondary_background
 fish_pager_color_secondary_prefix
 fish_pager_color_secondary_completion
 fish_pager_color_secondary_description
-fish_pager_color_selected_background --background=3d3d3a
-fish_pager_color_selected_prefix C4956A
-fish_pager_color_selected_completion e8e4dc
+fish_pager_color_selected_background --background=504e48
+fish_pager_color_selected_prefix C4956A --bold
+fish_pager_color_selected_completion e8e4dc --bold
 fish_pager_color_selected_description e8e4dc
 
 # custom color variables
-fish_color_subtle 8b8780
+fish_color_subtle 938e87
 fish_color_text e8e4dc
 fish_color_red C67777
 fish_color_orange D97757
