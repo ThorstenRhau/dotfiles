@@ -1,18 +1,18 @@
 [delta "claude-dark"]
-	blame-palette = "#191918 #262624 #383835 #5a5955 #8b8780"
+	blame-palette = "#191918 #262624 #383835 #5a5955 #938e87"
 	commit-decoration-style = "#5a5955" bold box ul
 	dark = true
 	file-decoration-style = "#5a5955"
 	file-style = "#e8e4dc"
 	hunk-header-decoration-style = "#5a5955" box ul
 	hunk-header-file-style = bold
-	hunk-header-line-number-style = bold "#8b8780"
+	hunk-header-line-number-style = bold "#938e87"
 	hunk-header-style = file line-number syntax
 	line-numbers-left-style = "#5a5955"
 	line-numbers-minus-style = bold "#C67777"
 	line-numbers-plus-style = bold "#7DA47A"
 	line-numbers-right-style = "#5a5955"
-	line-numbers-zero-style = "#8b8780"
+	line-numbers-zero-style = "#938e87"
 	minus-style = syntax "#4d2020"
 	minus-non-emph-style = syntax "#4d2020"
 	minus-emph-style = bold syntax "#6e2828"
