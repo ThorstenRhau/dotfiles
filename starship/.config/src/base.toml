@@ -131,7 +131,8 @@ symbol = " "
 symbol = " "
 
 [lua]
-symbol = " "
+disabled = true
+symbol   = " "
 
 [memory_usage]
 symbol = "󰍛 "
