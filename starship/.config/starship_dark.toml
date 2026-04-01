@@ -3,6 +3,7 @@ palette = "claude-dark"
 
 add_newline     = true
 command_timeout = 500
+right_format    = "$cmd_duration"
 
 [character]
 error_symbol   = "[❯❯](bold red)"
@@ -24,7 +25,7 @@ style_user      = "green bold"
 symbol = " "
 
 [cmd_duration]
-format = "   [$duration]($style) "
+format = "took [$duration]($style)"
 
 [git_commit]
 tag_disabled = false
