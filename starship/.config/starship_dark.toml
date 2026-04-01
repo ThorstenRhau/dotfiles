@@ -29,6 +29,7 @@ tag_symbol = '  '
 [git_status]
 disabled          = false
 ignore_submodules = true
+ahead             = "↑"
 
 [git_metrics]
 added_style   = "bold green"
