@@ -16,25 +16,40 @@ ssh_symbol = " "
 detect_env_vars = ["SSH_CLIENT", "SSH_CONNECTION", "SSH_TTY", "SUDO_USER"]
 format          = "[$user]($style) "
 show_always     = false
-style_root      = "bold red"
-style_user      = "bold green"
+style_root      = "red bold"
+style_user      = "green bold"
 
 [git_branch]
 symbol = " "
 
+[cmd_duration]
+format = "  took [$duration]($style) "
+
 [git_commit]
-tag_symbol = '  '
+tag_disabled       = false
+tag_symbol         = '  '
 
 [git_status]
+ahead             = "[](green)"
+behind            = "[](red)"
+conflicted        = "[](red bold)"
+deleted           = "[](red)"
 disabled          = false
+diverged          = "[](yellow)"
+format            = "($all_status$ahead_behind )"
 ignore_submodules = true
-ahead             = "↑"
+modified          = "[](yellow)"
+renamed           = "[](purple)"
+staged            = "[](green)"
+stashed           = "[](dimmed)"
+style             = "red"
+untracked         = "[](blue)"
 
 [git_metrics]
-added_style   = "bold green"
-deleted_style = "bold red"
+added_style   = "green"
+deleted_style = "red"
 disabled      = false
-format        = "([ $added]($added_style) )([ $deleted]($deleted_style) )"
+format        = "([ $added]($added_style) )([ $deleted]($deleted_style) )"
 
 [aws]
 symbol = " "
