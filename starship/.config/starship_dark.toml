@@ -24,27 +24,27 @@ style_user      = "green bold"
 symbol = " "
 
 [cmd_duration]
-format = "  took [$duration]($style) "
+format = "   [$duration]($style) "
 
 [git_commit]
-tag_disabled       = false
-tag_symbol         = '  '
+tag_disabled = false
+tag_symbol   = '  '
 
 [git_status]
-ahead             = "[](green)"
-behind            = "[](red)"
-conflicted        = "[](red bold)"
-deleted           = "[](red)"
+ahead             = "[ ](green)"
+behind            = "[ ](red)"
+conflicted        = "[ ](red bold)"
+deleted           = "[ ](red)"
 disabled          = false
-diverged          = "[](yellow)"
+diverged          = "[ ](yellow)"
 format            = "($all_status$ahead_behind )"
 ignore_submodules = true
-modified          = "[](yellow)"
-renamed           = "[](purple)"
-staged            = "[](green)"
-stashed           = "[](dimmed)"
+modified          = "[ ](yellow)"
+renamed           = "[ ](purple)"
+staged            = "[ ](green)"
+stashed           = "[ ](dimmed)"
 style             = "red"
-untracked         = "[](blue)"
+untracked         = "[ ](blue)"
 
 [git_metrics]
 added_style   = "green"
