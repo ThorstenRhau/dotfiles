@@ -1,14 +1,15 @@
+palette = "token"
 
-palette = "claude-light"
-
-[palettes.claude-light]
-bg0 = '#faf9f5'
-bg1 = '#edece8'
-fg = '#2a2920'
-red = '#B05555'
-orange = '#9A4929'
-yellow = '#6E5C20'
-green = '#3F643C'
-aqua = '#876032'
-blue = '#527594'
-purple = '#7C619A'
+[palettes.token]
+bg      = "#faf9f5"
+fg      = "#2a2920"
+muted   = "#7d7870"
+subtle  = "#c4c0b8"
+accent  = "#9A4929"
+accent2 = "#876032"
+blue    = "#527594"
+green   = "#3F643C"
+red     = "#B05555"
+yellow  = "#6E5C20"
+purple  = "#7C619A"
+cyan    = "#2D6C6C"
