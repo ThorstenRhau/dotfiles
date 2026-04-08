@@ -93,8 +93,9 @@ if status is-interactive
     # Fish syntax highlighting theme (token with auto light/dark switching)
     # Theme is set by _appearance_change_handler based on SYSTEM_APPEARANCE
 
-    # Initialize SYSTEM_APPEARANCE as universal if not set (required for neovim to inherit)
+    # Initialize SYSTEM_APPEARANCE as universal if not set 
     # Universal variables are loaded before config.fish and sync across all sessions
+
     if not set -q SYSTEM_APPEARANCE
         # @fish-lsp-disable-next-line 2003
         set -Ux SYSTEM_APPEARANCE dark
