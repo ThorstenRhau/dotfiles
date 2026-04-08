@@ -29,3 +29,10 @@ tmux
 for package in $packages; do
   stow --target "$HOME" --restow -v "$package"
 done
+
+# Rebuild bat cache so custom themes are available
+if command -v bat >/dev/null; then
+  bat cache --clear && bat cache --build
+else
+  echo "Warning: bat not found, skipping cache rebuild"
+fi
