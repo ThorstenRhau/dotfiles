@@ -9,10 +9,9 @@ set -g _OS_TYPE (uname)
 # =============================================================================
 
 if test -x /opt/homebrew/bin/brew
-    _config_cache "$HOME/.config/fish/cache/brew_shellenv.fish" "/opt/homebrew/bin/brew shellenv fish"
+    _config_cache "$HOME/.config/fish/cache/brew_shellenv.fish" /opt/homebrew/bin/brew shellenv fish
 
     set -gx ARCHFLAGS "-arch arm64"
-    set -gx HOMEBREW_PREFIX /opt/homebrew
     set -gx HOMEBREW_NO_ANALYTICS 1
     set -gx HOMEBREW_BAT 1
     set -gx HOMEBREW_EDITOR nvim
@@ -28,8 +27,8 @@ set -gx CXXFLAGS "-std=gnu++20"
 set -gx LANG "en_US.UTF-8"
 set -gx LC_CTYPE "en_US.UTF-8"
 set -gx XDG_CONFIG_HOME "$HOME/.config"
-set -gx fish_greeting
-set -gx FISH_CACHE_TTL 86400
+set -g fish_greeting
+set -g FISH_CACHE_TTL 86400
 
 # =============================================================================
 # PATH
@@ -45,7 +44,7 @@ fish_add_path $HOME/.opencode/bin
 fish_add_path /usr/local/bin
 
 # =============================================================================
-# Confit for interactive fish shells
+# Config for interactive fish shells
 # =============================================================================
 
 if status is-interactive
@@ -108,21 +107,22 @@ if status is-interactive
 
     # Apply theme immediately on startup (also loads _appearance_change_handler)
     _appearance_change_handler
+
     # Zoxide
     if type -q zoxide
-        zoxide init fish --cmd cd | source
+        _config_cache "$HOME/.config/fish/cache/zoxide_init.fish" zoxide init fish --cmd cd
         bind alt-z cdi
     end
 
     # Carapace
     if type -q carapace
         set -gx CARAPACE_BRIDGES bash,zsh,fish,inshellisense,cobra
-        carapace _carapace | source
+        _config_cache "$HOME/.config/fish/cache/carapace_init.fish" carapace _carapace
     end
 
     # FZF
     if type -q fzf
-        fzf --fish | source
+        _config_cache "$HOME/.config/fish/cache/fzf_init.fish" fzf --fish
         source ~/.config/fish/functions/fzf-history-widget.fish
 
         # Base options (layout, info, etc.) to be preserved across theme changes
@@ -159,7 +159,7 @@ if status is-interactive
 
     # Starship
     if type -q starship
-        starship init fish | source
+        _config_cache "$HOME/.config/fish/cache/starship_init.fish" starship init fish
     end
 end
 

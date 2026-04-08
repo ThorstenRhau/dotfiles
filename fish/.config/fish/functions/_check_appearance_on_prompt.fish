@@ -12,17 +12,12 @@ function _check_appearance_on_prompt --on-event fish_prompt
     if test $time_diff -ge 5
         set -g _appearance_last_check $current_time
 
-        # Run check in background
-        # Redirect all output to null to ensure no ghost output on the prompt
-        # Unconditionally set the variable; Fish only triggers events if the value actually changes.
-        fish -c '
-            set -l val (defaults read -g AppleInterfaceStyle 2>/dev/null)
-            if test "$val" = "Dark"
-                set -Ux SYSTEM_APPEARANCE "dark"
-            else
-                set -Ux SYSTEM_APPEARANCE "light"
-            end
-        ' >/dev/null 2>&1 &
-        disown
+        # Unconditionally set the variable; fish only triggers events if the value actually changes.
+        set -l val (defaults read -g AppleInterfaceStyle 2>/dev/null)
+        if test "$val" = Dark
+            set -Ux SYSTEM_APPEARANCE dark
+        else
+            set -Ux SYSTEM_APPEARANCE light
+        end
     end
 end
