@@ -21,10 +21,10 @@
 --column
 --max-columns=150
 --colors=match:none
---colors=match:fg:0xd1,0x7c,0x61
+--colors=match:fg:0xbb,0x87,0x77
 --colors=match:style:bold
 --colors=path:none
---colors=path:fg:0x71,0x9f,0xc7
+--colors=path:fg:0x81,0x9e,0xb7
 --colors=path:style:nobold
 --colors=line:none
 --colors=line:fg:0x93,0x8e,0x87
