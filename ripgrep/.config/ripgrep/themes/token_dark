@@ -21,14 +21,14 @@
 --column
 --max-columns=150
 --colors=match:none
---colors=match:fg:0xbb,0x87,0x77
+--colors=match:fg:0xd9,0x77,0x57
 --colors=match:style:bold
 --colors=path:none
---colors=path:fg:0x81,0x9e,0xb7
+--colors=path:fg:0x7b,0x9e,0xbd
 --colors=path:style:nobold
 --colors=line:none
 --colors=line:fg:0x93,0x8e,0x87
 --colors=line:style:nobold
 --colors=column:none
---colors=column:fg:0x87,0x86,0x81
+--colors=column:fg:0x5a,0x59,0x55
 --colors=column:style:nobold
