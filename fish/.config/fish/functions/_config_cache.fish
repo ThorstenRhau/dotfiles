@@ -1,4 +1,7 @@
-function _config_cache --argument-names cache_file command_to_run
+function _config_cache --argument-names cache_file
+    # Usage: _config_cache <cache_file> <command> [args...]
+    set -l cmd $argv[2..-1]
+
     # Default TTL to 24 hours if not set
     set -q FISH_CACHE_TTL; or set -l FISH_CACHE_TTL 86400
     set -l refresh_cache 0
@@ -19,19 +22,17 @@ function _config_cache --argument-names cache_file command_to_run
         else
             set mtime (stat -c %Y "$cache_file" 2>/dev/null; or echo 0)
         end
-        
+
         set -l now (date +%s)
         set -l age (math "$now - $mtime")
-        
+
         if test $age -gt $FISH_CACHE_TTL
             set refresh_cache 1
         end
     end
 
     if test $refresh_cache -eq 1
-        # Execute the command and save output to cache file
-        # We use eval to handle pipes or complex commands if passed as a string
-        if not eval "$command_to_run" > "$cache_file"
+        if not $cmd > "$cache_file"
             rm -f "$cache_file"
             return 1
         end
