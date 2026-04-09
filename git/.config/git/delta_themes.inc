@@ -31,7 +31,7 @@
 [delta "token-light"]
 	light = true
 	syntax-theme = token-light
-	blame-palette = "#f1f0ec #f5f4f1 #faf9f5 #f0efeb #eae9e5"
+	blame-palette = "#fdfcf8 #fbfaf6 #faf9f5 #f0efeb #eae9e5"
 	commit-decoration-style = "#858179" bold box ul
 	file-style = "#2a2920"
 	file-decoration-style = "#858179"
