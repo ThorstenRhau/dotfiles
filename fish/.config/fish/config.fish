@@ -126,7 +126,7 @@ if status is-interactive
         # Base options (layout, behavior) preserved across theme changes
         set -gx _FZF_BASE_OPTS "\
 --height=40% --layout=reverse --info=inline --cycle \
---style=full:sharp --scrollbar='│' \
+--border=sharp --scrollbar='│' \
 --prompt='❯ ' --pointer='▶' --marker='✓' \
 --ghost='Type to search...' \
 --bind='ctrl-/:toggle-preview'"
