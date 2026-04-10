@@ -162,7 +162,6 @@ if status is-interactive
         # Ctrl-R: history search (shift-delete to remove entry is built-in)
         set -gx FZF_CTRL_R_OPTS "\
 --scheme=history --with-nth=3.. \
---header='⌃Y copy, ⇧fn⌫ delete, ⌥R raw' \
 --bind='ctrl-y:execute-silent(echo -n {3..} | pbcopy)+abort'"
     end
 
