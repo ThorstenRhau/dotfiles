@@ -107,9 +107,6 @@ if status is-interactive
     # Load event-based functions (required for --on-event handlers to register)
     functions -q _check_appearance_on_prompt
 
-    # Apply theme immediately on startup (also loads _appearance_change_handler)
-    _appearance_change_handler
-
     # Zoxide
     if type -q zoxide
         _config_cache "$HOME/.config/fish/cache/zoxide_init.fish" zoxide init fish --cmd cd
@@ -168,6 +165,9 @@ if status is-interactive
 --header='⌃Y copy, ⇧fn⌫ delete, ⌥R raw' \
 --bind='ctrl-y:execute-silent(echo -n {3..} | pbcopy)+abort'"
     end
+
+    # Apply theme on startup (after fzf base opts are defined)
+    _appearance_change_handler
 
     # Ghostty Shell Integration
     if set -q GHOSTTY_RESOURCES_DIR
