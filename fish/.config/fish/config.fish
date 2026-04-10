@@ -126,28 +126,47 @@ if status is-interactive
     if type -q fzf
         _config_cache "$HOME/.config/fish/cache/fzf_init.fish" fzf --fish
 
-        # Base options (layout, info, etc.) to be preserved across theme changes
-        set -gx _FZF_BASE_OPTS "--height 40% --layout=reverse --info=inline --border=rounded --prompt='❯ ' --pointer='▶' --marker='✓'"
+        # Base options (layout, behavior) preserved across theme changes
+        set -gx _FZF_BASE_OPTS "\
+--height=40% --layout=reverse --info=inline --cycle \
+--style=full:sharp --scrollbar='│' \
+--prompt='❯ ' --pointer='▶' --marker='✓' \
+--ghost='Type to search...' \
+--bind='ctrl-/:toggle-preview'"
 
         set -gx FZF_DEFAULT_COMMAND 'fd --type f --hidden --exclude .git'
         set -gx FZF_CTRL_T_COMMAND 'fd --type f --hidden --exclude .git'
 
-        # Ctrl-T Preview
+        # Ctrl-T: file finder with bat preview
         set -l preview_cmd "cat {}"
         if type -q bat
             set preview_cmd "bat --style=numbers --color=always --line-range :500 {}"
         end
-        set -gx FZF_CTRL_T_OPTS "--preview '$preview_cmd' --preview-window=right:60% --border"
+        set -gx FZF_CTRL_T_OPTS "\
+--scheme=path --multi \
+--preview '$preview_cmd' \
+--preview-window='right:60%:wrap' \
+--preview-label=' Preview ' \
+--header='ctrl-/ preview, ctrl-a all, ctrl-d none' \
+--bind='ctrl-a:select-all,ctrl-d:deselect-all' \
+--bind='alt-h:change-preview-window(hidden|right:60%:wrap)'"
 
         set -gx FZF_ALT_C_COMMAND 'fd --type d --hidden --exclude .git'
 
-        # Alt-C Preview
-        set -l tree_cmd "tree -C -L 1 {}"
-        set -gx FZF_ALT_C_OPTS "--preview '$tree_cmd' --preview-window=right:50%"
+        # Alt-C: directory finder with tree preview
+        set -l tree_cmd "tree -C -L 2 {}"
+        set -gx FZF_ALT_C_OPTS "\
+--scheme=path \
+--preview '$tree_cmd' \
+--preview-window='right:50%' \
+--preview-label=' Directory ' \
+--header='ctrl-/ toggle preview'"
 
-        set -gx FZF_CTRL_R_OPTS '--height 40% --layout=reverse --info=inline --border=rounded'
-        set -gx FZF_TMUX 0
-        set -gx FZF_COMPLETION_TRIGGER '**'
+        # Ctrl-R: history search (shift-delete to remove entry is built-in)
+        set -gx FZF_CTRL_R_OPTS "\
+--scheme=history --with-nth=3.. \
+--header='⌃Y copy, ⇧fn⌫ delete, ⌥R raw' \
+--bind='ctrl-y:execute-silent(echo -n {3..} | pbcopy)+abort'"
     end
 
     # Ghostty Shell Integration
