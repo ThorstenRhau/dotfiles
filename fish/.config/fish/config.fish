@@ -135,7 +135,7 @@ if status is-interactive
         # Ctrl-T: file finder with bat preview
         set -l preview_cmd "cat {}"
         if type -q bat
-            set preview_cmd "bat --style=numbers --color=always --line-range :500 {}"
+            set preview_cmd "bat --color=always --line-range :500 {}"
         end
         set -gx FZF_CTRL_T_OPTS "\
 --scheme=path --multi \
