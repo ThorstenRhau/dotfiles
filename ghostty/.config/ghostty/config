@@ -29,8 +29,6 @@
 
 adjust-box-thickness           = -1
 adjust-cursor-thickness        = 2
-cursor-color                   = cell-foreground
-cursor-text                    = cell-background
 adjust-overline-thickness      = -1
 adjust-strikethrough-thickness = -1
 adjust-underline-thickness     = -1
@@ -38,16 +36,19 @@ auto-update                    = check
 bold-color                     = bright
 clipboard-read                 = allow
 copy-on-select                 = clipboard
+cursor-color                   = cell-foreground
+cursor-text                    = cell-background
 font-family                    = Berkeley Mono Variable
 font-family                    = Symbols Nerd Font Mono
 font-feature                   = +calt
 font-size                      = 14
-font-synthetic-style           = false
 font-variation                 = wdth = 100
 font-variation                 = wght = 450
 font-variation-bold            = wght = 700
 font-variation-bold-italic     = wght = 700
+font-variation-bold-italic     = slnt = -12
 font-variation-italic          = wght = 450
+font-variation-italic          = slnt = -12
 macos-icon                     = xray
 macos-non-native-fullscreen    = visible-menu
 macos-option-as-alt            = left
@@ -63,7 +64,6 @@ shell-integration-features     = cursor,sudo,title,ssh-env,ssh-terminfo
 split-divider-color            = 808080
 theme                          = dark:token-dark,light:token-light
 unfocused-split-opacity        = 100
-window-colorspace              = display-p3
 window-height                  = 42
 window-padding-balance         = true
 window-save-state              = always
