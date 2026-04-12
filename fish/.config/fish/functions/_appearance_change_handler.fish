@@ -7,27 +7,20 @@ function _appearance_change_handler --on-variable SYSTEM_APPEARANCE
         return
     end
 
-    if test "$SYSTEM_APPEARANCE" = "dark"
-        fish_config theme choose token
-        set -gx BAT_THEME "token-dark"
-        set -gx DELTA_FEATURES "token-dark"
-        set -gx LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/token-dark.yml"
-        set -gx RIPGREP_CONFIG_PATH "$HOME/.config/ripgrep/themes/token_dark"
-        if test -r "$HOME/.config/fzf/themes/token_dark.fish"
-            source $HOME/.config/fzf/themes/token_dark.fish
-        end
-        set -gx STARSHIP_CONFIG "$HOME/.config/starship_dark.toml"
-    else
-        fish_config theme choose token
-        set -gx BAT_THEME "token-light"
-        set -gx DELTA_FEATURES "token-light"
-        set -gx LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/token-light.yml"
-        set -gx RIPGREP_CONFIG_PATH "$HOME/.config/ripgrep/themes/token_light"
-        if test -r "$HOME/.config/fzf/themes/token_light.fish"
-            source $HOME/.config/fzf/themes/token_light.fish
-        end
-        set -gx STARSHIP_CONFIG "$HOME/.config/starship_light.toml"
+    set -l suffix light
+    if test "$SYSTEM_APPEARANCE" = dark
+        set suffix dark
     end
+
+    fish_config theme choose token
+    set -gx BAT_THEME "token-$suffix"
+    set -gx DELTA_FEATURES "token-$suffix"
+    set -gx LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/token-$suffix.yml"
+    set -gx RIPGREP_CONFIG_PATH "$HOME/.config/ripgrep/themes/token_$suffix"
+    if test -r "$HOME/.config/fzf/themes/token_$suffix.fish"
+        source "$HOME/.config/fzf/themes/token_$suffix.fish"
+    end
+    set -gx STARSHIP_CONFIG "$HOME/.config/starship_$suffix.toml"
 
     # Construct FZF_DEFAULT_OPTS
     set -gx FZF_DEFAULT_OPTS "$_FZF_BASE_OPTS $_FZF_THEME_OPTS"

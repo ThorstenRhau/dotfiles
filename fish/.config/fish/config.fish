@@ -3,14 +3,13 @@
 # =============================================================================
 
 set -g _OS_TYPE (uname)
-set -g FISH_CACHE_TTL 86400
 
 # =============================================================================
 # Homebrew
 # =============================================================================
 
 if test -x /opt/homebrew/bin/brew
-    _config_cache "$HOME/.config/fish/cache/brew_shellenv.fish" /opt/homebrew/bin/brew shellenv fish
+    /opt/homebrew/bin/brew shellenv fish | source
 
     set -gx ARCHFLAGS "-arch arm64"
     set -gx HOMEBREW_BAT 1
@@ -101,26 +100,26 @@ if status is-interactive
     end
 
     # State for rate limiting
-    set -g _appearance_last_check 0
+    set -g _appearance_prompt_count 0
 
     # Load event-based functions (required for --on-event handlers to register)
     functions -q _check_appearance_on_prompt
 
     # Zoxide
     if type -q zoxide
-        _config_cache "$HOME/.config/fish/cache/zoxide_init.fish" zoxide init fish --cmd cd
+        zoxide init fish --cmd cd | source
         bind alt-z cdi
     end
 
     # Carapace
     if type -q carapace
         set -gx CARAPACE_BRIDGES bash,zsh,fish,inshellisense,cobra
-        _config_cache "$HOME/.config/fish/cache/carapace_init.fish" carapace _carapace
+        carapace _carapace | source
     end
 
     # FZF
     if type -q fzf
-        _config_cache "$HOME/.config/fish/cache/fzf_init.fish" fzf --fish
+        fzf --fish | source
 
         # Base options (layout, behavior) preserved across theme changes
         set -gx _FZF_BASE_OPTS "\
@@ -177,7 +176,7 @@ if status is-interactive
 
     # Starship
     if type -q starship
-        _config_cache "$HOME/.config/fish/cache/starship_init.fish" starship init fish
+        starship init fish | source
     end
 end
 
