@@ -72,7 +72,7 @@ export CLICOLOR=1
 export LSCOLORS='ExfxcxdxBxgxgxBxDxCxex'
 
 # Completion
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}" "ma=48;2;51;51;49;38;2;232;228;220"
 zstyle ':completion:*:descriptions' format '%F{#938e87}-- %d --%f'
 zstyle ':completion:*:messages' format '%F{#938e87}-- %d --%f'
 zstyle ':completion:*:warnings' format '%F{#c67777}-- no matches --%f'
