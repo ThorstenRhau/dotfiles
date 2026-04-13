@@ -64,6 +64,9 @@ FAST_HIGHLIGHT_STYLES[correct-subtle]='fg=#7b9ebd'
 FAST_HIGHLIGHT_STYLES[incorrect-subtle]='fg=#c67777'
 FAST_HIGHLIGHT_STYLES[subtle-separator]='fg=#7da47a'
 
+# zsh-autosuggestions
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#585855'
+
 # LS_COLORS (GNU ls, tree, zsh completion)
 export LS_COLORS='di=1;38;2;123;158;189:ln=38;2;166;139;191:or=38;2;198;119;119:mi=9;38;2;198;119;119:so=38;2;125;164;122:pi=38;2;196;168;85:ex=38;2;217;119;87:bd=38;2;107;168;168:cd=38;2;107;168;168:su=1;38;2;198;119;119:sg=1;38;2;196;168;85:tw=1;38;2;125;164;122:ow=4;38;2;123;158;189:st=1;38;2;123;158;189'
 
