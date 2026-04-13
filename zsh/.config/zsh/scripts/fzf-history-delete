@@ -1,0 +1,30 @@
+#!/usr/bin/env perl
+# Remove matching command entries from zsh history file.
+# Handles both plain and extended (": timestamp:duration;cmd") formats.
+# Usage: fzf-history-delete <histfile> <command...>
+
+use strict;
+use warnings;
+
+my $hf  = shift @ARGV;
+my $cmd = join(' ', @ARGV);
+exit 1 unless length($cmd) && defined($hf) && -f $hf;
+
+my $tmp = "$hf.tmp.$$";
+
+open my $in,  '<', $hf  or exit 1;
+open my $out, '>', $tmp or exit 1;
+
+while (my $line = <$in>) {
+    chomp(my $l = $line);
+    if ($l =~ /^: \d+:\d+;(.*)/) {
+        next if $1 eq $cmd;
+    } else {
+        next if $l eq $cmd;
+    }
+    print $out $line;
+}
+
+close $in;
+close $out;
+rename $tmp, $hf or do { unlink $tmp; exit 1 };
