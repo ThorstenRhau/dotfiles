@@ -8,11 +8,7 @@ if ! command -v stow >/dev/null; then
 fi
 
 # Generate starship configs from source files
-if command -v fish >/dev/null; then
-  fish starship/.config/src/generate.fish
-else
-  echo "Warning: fish not found, skipping starship config generation"
-fi
+sh starship/.config/src/generate.sh
 
 packages="
 bat

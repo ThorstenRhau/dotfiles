@@ -207,7 +207,7 @@ for variant in dark light; do
     fi
 
     # Token contrib has [palettes.token] section but no top-level palette directive.
-    # The generate.fish script expects a palette = "..." line at the top.
+    # The generate.sh script expects a palette = "..." line at the top.
     palette_section=$(grep -A 100 '^\[palettes\.' "$src")
     if [ -z "$palette_section" ]; then
         err "no [palettes.*] section found in $src"
@@ -220,12 +220,8 @@ for variant in dark light; do
 done
 
 # Regenerate starship configs from source
-if command -v fish >/dev/null; then
-    fish "$DOTFILES_DIR/starship/.config/src/generate.fish"
-    info "starship configs regenerated"
-else
-    err "fish not found, skipping starship config generation"
-fi
+sh "$DOTFILES_DIR/starship/.config/src/generate.sh"
+info "starship configs regenerated"
 
 # ------------------------------------------------------------------
 # Tmux
