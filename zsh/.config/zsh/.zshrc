@@ -5,8 +5,7 @@
 HISTFILE="$ZDOTDIR/.zsh_history"
 HISTSIZE=50000
 SAVEHIST=50000
-setopt HIST_IGNORE_DUPS HIST_IGNORE_SPACE SHARE_HISTORY APPEND_HISTORY
-setopt INC_APPEND_HISTORY HIST_REDUCE_BLANKS
+setopt HIST_IGNORE_DUPS HIST_IGNORE_SPACE SHARE_HISTORY HIST_REDUCE_BLANKS
 
 # =============================================================================
 # Completion
@@ -22,7 +21,13 @@ fpath=("$ZDOTDIR/functions" $fpath)
 autoload -Uz "$ZDOTDIR/functions"/*(.:t)
 
 autoload -Uz compinit
-compinit -d "$ZDOTDIR/.zcompdump"
+if [[ -n $ZDOTDIR/.zcompdump(#qN.mh-1) ]]; then
+    compinit -C -d "$ZDOTDIR/.zcompdump"
+else
+    compinit -d "$ZDOTDIR/.zcompdump"
+fi
+
+[[ -d "$ZDOTDIR/.zcompcache" ]] || mkdir -p "$ZDOTDIR/.zcompcache"
 
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
@@ -182,6 +187,14 @@ if [[ -n "$GHOSTTY_RESOURCES_DIR" ]]; then
 fi
 
 # =============================================================================
+# Starship
+# =============================================================================
+
+if (( $+commands[starship] )); then
+    eval "$(starship init zsh)"
+fi
+
+# =============================================================================
 # Plugins
 # =============================================================================
 
@@ -195,14 +208,6 @@ local _plugin_dir="/opt/homebrew/share"
 # Fast syntax highlighting (must be sourced last among plugins)
 local _fsh="/opt/homebrew/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 [[ -r "$_fsh" ]] && source "$_fsh"
-
-# =============================================================================
-# Starship
-# =============================================================================
-
-if (( $+commands[starship] )); then
-    eval "$(starship init zsh)"
-fi
 
 # =============================================================================
 # Local Configuration
