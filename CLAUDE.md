@@ -10,15 +10,15 @@ Packages: `bat`, `claude`, `fish`, `fzf`, `gemini`, `ghostty`, `git`, `lazygit`,
 Each package mirrors `$HOME/.config/` structure:
 
 ```
-fish/.config/fish/config.fish → ~/.config/fish/config.fish
+zsh/.config/zsh/.zshrc → ~/.config/zsh/.zshrc
 ```
 
 Symlink with `stow <package>` or `./stow_all.sh`.
 
 ## Key Files
 
-- `fish/.config/fish/config.fish` - Fish shell configuration
-- `zsh/.config/zsh/.zshrc` - Zsh shell configuration
+- `zsh/.config/zsh/.zshrc` - Zsh shell configuration (primary shell)
+- `fish/.config/fish/config.fish` - Fish shell configuration (legacy, maintained)
 - `ghostty/.config/ghostty/config` - Terminal emulator configuration
 - `starship/.config/src/` - Starship theme source files
 - `Brewfile` - Homebrew package dependencies
@@ -31,14 +31,14 @@ Theme configs are generated from source files in `starship/.config/src/`:
 base.toml         # Shared config (symbols, settings)
 palette_dark.toml # Dark theme palette (defines palette name + colors)
 palette_light.toml# Light theme palette (defines palette name + colors)
-generate.fish     # Combines base + palette into final configs
+generate.sh       # Combines base + palette into final configs
 ```
 
 **To change color themes:**
 
 1. Update `palette_dark.toml` and/or `palette_light.toml` with new palette name
    and colors (the `palette = "name"` line is extracted automatically)
-2. Run `fish starship/.config/src/generate.fish`
+2. Run `sh starship/.config/src/generate.sh`
 3. Regenerated files appear in `starship/.config/`
 
 The generator extracts the palette name from each palette file, so only the
@@ -46,15 +46,7 @@ palette files need updating when switching themes.
 
 ## Development Guidelines
 
-### Fish Shell
-
-- Use event-driven patterns (see `fish_prompt.fish`, `on_variable_PWD.fish`)
-- Keep functions focused and single-purpose in separate files
-- Prefer `command -v` over `which` for command existence checks
-- Use proper error handling for external commands
-- Test shell changes with `fish -c "source ~/.config/fish/config.fish"`
-
-### Zsh Shell
+### Zsh Shell (primary)
 
 - ZDOTDIR is `~/.config/zsh`, bootstrapped via `~/.zshenv`
 - Plugins sourced from Homebrew (`/opt/homebrew/share/` and `/opt/homebrew/opt/`)
@@ -64,13 +56,25 @@ palette files need updating when switching themes.
 - Zsh syntax highlighting themes in `zsh/.config/zsh/themes/` (synced from token contrib)
 - Validate syntax: `zsh -n <file>`
 
+### Fish Shell (legacy, maintained)
+
+- Use event-driven patterns (see `fish_prompt.fish`, `on_variable_PWD.fish`)
+- Keep functions focused and single-purpose in separate files
+- Prefer `command -v` over `which` for command existence checks
+- Use proper error handling for external commands
+- Test shell changes with `fish -c "source ~/.config/fish/config.fish"`
+
+### Standalone Scripts
+
+- Write in POSIX sh or bash, not fish or zsh
+- Keep portable: avoid shell-specific syntax in utility scripts
+
 ### File Modifications
 
 - Preserve stow-compatible directory structure
 - Maintain existing color scheme logic (Modus Vivendi/Operandi auto-switching)
-- Keep function files in `fish/.config/fish/functions/` with `.fish` extension
-- Use descriptive function names matching filename (e.g., `my_function.fish`
-  contains `function my_function`)
+- Zsh autoloaded functions go in `zsh/.config/zsh/functions/`
+- Fish function files go in `fish/.config/fish/functions/` with `.fish` extension
 
 ### Security
 
@@ -86,6 +90,7 @@ palette files need updating when switching themes.
 
 ### Testing
 
+- Validate zsh syntax: `zsh -n <file>`
 - Validate fish syntax: `fish -n <file>`
 - Test functions in isolated shell before committing
 - Verify stow symlinks don't conflict: `stow -n <package>`
