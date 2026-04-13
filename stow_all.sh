@@ -34,6 +34,7 @@ done
 # Fix Homebrew share dir permissions so zsh compinit doesn't complain
 if [ -d /opt/homebrew/share ]; then
   chmod go-w /opt/homebrew/share
+  chmod -R go-w /opt/homebrew/share/zsh
 fi
 
 # Rebuild bat cache so custom themes are available
