@@ -29,6 +29,7 @@ fi
 
 [[ -d "$ZDOTDIR/.zcompcache" ]] || mkdir -p "$ZDOTDIR/.zcompcache"
 
+setopt MENU_COMPLETE
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' group-name ''
@@ -116,7 +117,7 @@ fi
 # =============================================================================
 
 if (($+commands[carapace])); then
-  export CARAPACE_BRIDGES='bash,zsh,fish,inshellisense,cobra'
+  export CARAPACE_BRIDGES='zsh,cobra'
   source <(carapace _carapace)
 fi
 

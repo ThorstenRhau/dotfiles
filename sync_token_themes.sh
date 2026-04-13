@@ -72,6 +72,16 @@ copy_file "$CONTRIB/bat/token-light.tmTheme" \
           "$DOTFILES_DIR/bat/.config/bat/themes/token-light.tmTheme"
 
 # ------------------------------------------------------------------
+# Carapace (completion styling)
+# ------------------------------------------------------------------
+
+printf "carapace:\n"
+copy_file "$CONTRIB/carapace/token-dark.json" \
+          "$DOTFILES_DIR/zsh/.config/zsh/themes/carapace-token-dark.json"
+copy_file "$CONTRIB/carapace/token-light.json" \
+          "$DOTFILES_DIR/zsh/.config/zsh/themes/carapace-token-light.json"
+
+# ------------------------------------------------------------------
 # Delta (git)
 # ------------------------------------------------------------------
 
@@ -124,15 +134,8 @@ done
 
 printf "fzf (zsh):\n"
 for variant in dark light; do
-    fish_src="$DOTFILES_DIR/fzf/.config/fzf/themes/token_${variant}.fish"
-    zsh_dst="$DOTFILES_DIR/fzf/.config/fzf/themes/token_${variant}.zsh"
-    if ! require_file "$fish_src"; then
-        continue
-    fi
-
-    # Convert fish syntax (set -gx VAR "val") to zsh syntax (export VAR="val")
-    sed 's/^set -gx \([A-Za-z_][A-Za-z_0-9]*\) /export \1=/' "$fish_src" > "$zsh_dst"
-    info "$zsh_dst"
+    copy_file "$CONTRIB/fzf/token-${variant}.zsh" \
+              "$DOTFILES_DIR/fzf/.config/fzf/themes/token_${variant}.zsh"
 done
 
 # ------------------------------------------------------------------
