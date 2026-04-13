@@ -1,0 +1,22 @@
+# Rate-limited macOS appearance check (every 3rd prompt).
+# Registered via: add-zsh-hook precmd _check_appearance
+
+[[ "$_OS_TYPE" != "Darwin" ]] && return
+
+(( _appearance_prompt_count++ ))
+(( _appearance_prompt_count < 3 )) && return
+_appearance_prompt_count=0
+
+local val new_appearance
+val=$(defaults read -g AppleInterfaceStyle 2>/dev/null)
+
+if [[ "$val" == "Dark" ]]; then
+    new_appearance=dark
+else
+    new_appearance=light
+fi
+
+if [[ "$new_appearance" != "$SYSTEM_APPEARANCE" ]]; then
+    export SYSTEM_APPEARANCE="$new_appearance"
+    _apply_appearance
+fi

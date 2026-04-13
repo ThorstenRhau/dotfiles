@@ -1,0 +1,29 @@
+# Apply token theme to all tools based on $SYSTEM_APPEARANCE.
+# Mirrors fish/_appearance_change_handler.fish
+
+if [[ "$_OS_TYPE" != "Darwin" ]]; then
+    export STARSHIP_CONFIG="$HOME/.config/starship.toml"
+    export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml"
+    unset BAT_THEME DELTA_FEATURES
+    return
+fi
+
+local suffix=light
+[[ "$SYSTEM_APPEARANCE" == "dark" ]] && suffix=dark
+
+export BAT_THEME="token-$suffix"
+export DELTA_FEATURES="token-$suffix"
+export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/token-$suffix.yml"
+export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/themes/token_$suffix"
+export STARSHIP_CONFIG="$HOME/.config/starship_$suffix.toml"
+
+# Zsh syntax highlighting and completion colors
+local zsh_theme="$ZDOTDIR/themes/token-$suffix.zsh"
+[[ -r "$zsh_theme" ]] && source "$zsh_theme"
+
+# FZF theme colors
+local fzf_theme="$HOME/.config/fzf/themes/token_${suffix}.zsh"
+[[ -r "$fzf_theme" ]] && source "$fzf_theme"
+
+# Reconstruct FZF_DEFAULT_OPTS from base + theme
+export FZF_DEFAULT_OPTS="$_FZF_BASE_OPTS $_FZF_THEME_OPTS"
