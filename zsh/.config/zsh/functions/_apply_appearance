@@ -25,7 +25,9 @@ local zsh_theme="$ZDOTDIR/themes/token-$suffix.zsh"
 # Carapace completion colors
 local carapace_theme="$ZDOTDIR/themes/carapace-token-$suffix.json"
 local carapace_dir="${XDG_CONFIG_HOME:-$HOME/.config}/carapace"
-[[ -r "$carapace_theme" ]] && mkdir -p "$carapace_dir" && cp "$carapace_theme" "$carapace_dir/styles.json"
+[[ -r "$carapace_theme" ]] && mkdir -p "$carapace_dir" \
+    && ! cmp -s "$carapace_theme" "$carapace_dir/styles.json" \
+    && cp "$carapace_theme" "$carapace_dir/styles.json"
 
 # FZF theme colors
 local fzf_theme="$HOME/.config/fzf/themes/token_${suffix}.zsh"
