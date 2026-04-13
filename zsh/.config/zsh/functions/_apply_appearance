@@ -22,6 +22,10 @@ export STARSHIP_CONFIG="$HOME/.config/starship_$suffix.toml"
 local zsh_theme="$ZDOTDIR/themes/token-$suffix.zsh"
 [[ -r "$zsh_theme" ]] && source "$zsh_theme"
 
+# Carapace completion colors
+local carapace_theme="$ZDOTDIR/themes/carapace-token-$suffix.json"
+[[ -r "$carapace_theme" ]] && cp "$carapace_theme" "${XDG_CONFIG_HOME:-$HOME/.config}/carapace/styles.json"
+
 # FZF theme colors
 local fzf_theme="$HOME/.config/fzf/themes/token_${suffix}.zsh"
 [[ -r "$fzf_theme" ]] && source "$fzf_theme"
