@@ -21,11 +21,7 @@ fpath=("$ZDOTDIR/functions" $fpath)
 autoload -Uz "$ZDOTDIR/functions"/*(.:t)
 
 autoload -Uz compinit
-if [[ -n $ZDOTDIR/.zcompdump(#qN.mh-1) ]]; then
-  compinit -C -d "$ZDOTDIR/.zcompdump"
-else
-  compinit -d "$ZDOTDIR/.zcompdump"
-fi
+compinit -d "$ZDOTDIR/.zcompdump"
 
 [[ -d "$ZDOTDIR/.zcompcache" ]] || mkdir -p "$ZDOTDIR/.zcompcache"
 
