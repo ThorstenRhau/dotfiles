@@ -5,7 +5,7 @@ Personal dotfiles for macOS Tahoe 26.2, managed with GNU Stow.
 ## Repository Structure
 
 Packages: `bat`, `claude`, `fish`, `fzf`, `gemini`, `ghostty`, `git`, `lazygit`,
-`ripgrep`, `starship`, `tasks`, `tmux`
+`ripgrep`, `starship`, `tasks`, `tmux`, `zsh`
 
 Each package mirrors `$HOME/.config/` structure:
 
@@ -17,7 +17,8 @@ Symlink with `stow <package>` or `./stow_all.sh`.
 
 ## Key Files
 
-- `fish/.config/fish/config.fish` - Main shell configuration
+- `fish/.config/fish/config.fish` - Fish shell configuration
+- `zsh/.config/zsh/.zshrc` - Zsh shell configuration
 - `ghostty/.config/ghostty/config` - Terminal emulator configuration
 - `starship/.config/src/` - Starship theme source files
 - `Brewfile` - Homebrew package dependencies
@@ -53,6 +54,16 @@ palette files need updating when switching themes.
 - Use proper error handling for external commands
 - Test shell changes with `fish -c "source ~/.config/fish/config.fish"`
 
+### Zsh Shell
+
+- ZDOTDIR is `~/.config/zsh`, bootstrapped via `~/.zshenv`
+- Plugins sourced from Homebrew (`/opt/homebrew/share/` and `/opt/homebrew/opt/`)
+- Autoloaded functions go in `zsh/.config/zsh/functions/`
+- Fast-syntax-highlighting must be sourced last in `.zshrc`
+- FZF theme files have both `.fish` and `.zsh` variants in `fzf/.config/fzf/themes/`
+- Zsh syntax highlighting themes in `zsh/.config/zsh/themes/` (synced from token contrib)
+- Validate syntax: `zsh -n <file>`
+
 ### File Modifications
 
 - Preserve stow-compatible directory structure
@@ -63,7 +74,7 @@ palette files need updating when switching themes.
 
 ### Security
 
-- NEVER commit secrets - use git-ignored `secrets.fish` or `local.fish`
+- NEVER commit secrets - use git-ignored `secrets.fish`/`local.fish` or `secrets.zsh`/`local.zsh`
 - Check for hard coded credentials before any git operations
 - Use environment variables for sensitive configuration
 

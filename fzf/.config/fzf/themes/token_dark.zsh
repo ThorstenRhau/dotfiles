@@ -1,0 +1,9 @@
+# Token dark theme for FZF (synced from token contrib)
+
+export _FZF_THEME_OPTS="\
+--color=fg:#e8e4dc,bg:#262624,hl:#d97757 \
+--color=fg+:#e8e4dc,bg+:#333331,hl+:#d97757 \
+--color=border:#5a5955,header:#7b9ebd,gutter:#262624 \
+--color=spinner:#c4956a,info:#938e87 \
+--color=pointer:#d97757,marker:#7da47a,prompt:#d97757
+"

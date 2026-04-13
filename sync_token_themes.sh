@@ -119,6 +119,33 @@ for variant in dark light; do
 done
 
 # ------------------------------------------------------------------
+# FZF (zsh variants)
+# ------------------------------------------------------------------
+
+printf "fzf (zsh):\n"
+for variant in dark light; do
+    fish_src="$DOTFILES_DIR/fzf/.config/fzf/themes/token_${variant}.fish"
+    zsh_dst="$DOTFILES_DIR/fzf/.config/fzf/themes/token_${variant}.zsh"
+    if ! require_file "$fish_src"; then
+        continue
+    fi
+
+    # Convert fish syntax (set -gx VAR "val") to zsh syntax (export VAR="val")
+    sed 's/^set -gx \([A-Za-z_][A-Za-z_0-9]*\) /export \1=/' "$fish_src" > "$zsh_dst"
+    info "$zsh_dst"
+done
+
+# ------------------------------------------------------------------
+# Zsh (syntax highlighting + completion theme)
+# ------------------------------------------------------------------
+
+printf "zsh:\n"
+copy_file "$CONTRIB/zsh/token-dark.zsh" \
+          "$DOTFILES_DIR/zsh/.config/zsh/themes/token-dark.zsh"
+copy_file "$CONTRIB/zsh/token-light.zsh" \
+          "$DOTFILES_DIR/zsh/.config/zsh/themes/token-light.zsh"
+
+# ------------------------------------------------------------------
 # Ghostty
 # ------------------------------------------------------------------
 

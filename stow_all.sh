@@ -24,11 +24,17 @@ lazygit
 ripgrep
 starship
 tmux
+zsh
 "
 
 for package in $packages; do
   stow --target "$HOME" --restow -v "$package"
 done
+
+# Fix Homebrew share dir permissions so zsh compinit doesn't complain
+if [ -d /opt/homebrew/share ]; then
+  chmod go-w /opt/homebrew/share
+fi
 
 # Rebuild bat cache so custom themes are available
 if command -v bat >/dev/null; then
