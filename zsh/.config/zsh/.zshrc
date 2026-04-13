@@ -31,7 +31,6 @@ fi
 
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' use-cache yes
 zstyle ':completion:*' cache-path "$ZDOTDIR/.zcompcache"
@@ -60,7 +59,6 @@ fi
 # Aliases
 # =============================================================================
 
-export LSCOLORS="Exfxcxdxbxegedabagacad"
 alias ls='ls -G'
 (( $+commands[bat] ))     && alias cat=bat
 (( $+commands[lazygit] )) && alias lg=lazygit
