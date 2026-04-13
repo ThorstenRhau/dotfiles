@@ -43,6 +43,9 @@ zstyle ':completion:*' cache-path "$ZDOTDIR/.zcompcache"
 bindkey -e
 bindkey '^[[Z' reverse-menu-complete
 
+# Treat / as a word boundary so Option+Backspace stops at path separators
+WORDCHARS=${WORDCHARS/\//}
+
 # =============================================================================
 # Editor
 # =============================================================================
