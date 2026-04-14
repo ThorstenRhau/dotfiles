@@ -39,6 +39,11 @@ bindkey -e
 # Treat / as a word boundary so Option+Backspace stops at path separators
 WORDCHARS=${WORDCHARS/\//}
 
+# Option+E: edit command line in $EDITOR
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '\ee' edit-command-line
+
 # =============================================================================
 # Editor
 # =============================================================================
