@@ -208,7 +208,7 @@ fi
 
 # Autosuggestions (fish-like ghost text)
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=25
 local _plugin_dir="/opt/homebrew/share"
 [[ -r "$_plugin_dir/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] &&
   source "$_plugin_dir/zsh-autosuggestions/zsh-autosuggestions.zsh"
