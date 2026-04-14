@@ -113,7 +113,7 @@ fi
 # =============================================================================
 
 if (($+commands[carapace])); then
-  export CARAPACE_BRIDGES='zsh,cobra'
+  export CARAPACE_BRIDGES='cobra'
   source <(carapace _carapace)
 fi
 
