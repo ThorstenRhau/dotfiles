@@ -25,8 +25,6 @@ compinit -d "$ZDOTDIR/.zcompdump"
 
 [[ -d "$ZDOTDIR/.zcompcache" ]] || mkdir -p "$ZDOTDIR/.zcompcache"
 
-setopt MENU_COMPLETE
-zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' use-cache yes
@@ -37,7 +35,6 @@ zstyle ':completion:*' cache-path "$ZDOTDIR/.zcompcache"
 # =============================================================================
 
 bindkey -e
-bindkey '^[[Z' reverse-menu-complete
 
 # Treat / as a word boundary so Option+Backspace stops at path separators
 WORDCHARS=${WORDCHARS/\//}
@@ -118,6 +115,14 @@ fi
 if (($+commands[carapace])); then
   export CARAPACE_BRIDGES='zsh,cobra'
   source <(carapace _carapace)
+fi
+
+# =============================================================================
+# fzf-tab (must be after compinit and carapace)
+# =============================================================================
+
+if [[ -f /opt/homebrew/opt/fzf-tab/share/fzf-tab/fzf-tab.zsh ]]; then
+  source /opt/homebrew/opt/fzf-tab/share/fzf-tab/fzf-tab.zsh
 fi
 
 # =============================================================================
