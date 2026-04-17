@@ -2,8 +2,8 @@
 
 This repository contains my consolidated personal dot files.
 
-The dot files are managed with [GNU stow](https://www.gnu.org/software/stow/) in
-macOS and FreeBSD.
+The dot files are managed with [GNU stow](https://www.gnu.org/software/stow/)
+on macOS.
 
 To link individual packages with stow use the following syntax
 

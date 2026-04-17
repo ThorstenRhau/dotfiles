@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -eu
+
 # This script links all dot files with the GNU stow command
 
 if ! command -v stow >/dev/null; then
@@ -30,12 +32,15 @@ done
 # Fix Homebrew share dir permissions so zsh compinit doesn't complain
 if [ -d /opt/homebrew/share ]; then
   chmod go-w /opt/homebrew/share
-  chmod -R go-w /opt/homebrew/share/zsh
+  if [ -d /opt/homebrew/share/zsh ]; then
+    chmod -R go-w /opt/homebrew/share/zsh
+  fi
 fi
 
 # Rebuild bat cache so custom themes are available
 if command -v bat >/dev/null; then
-  bat cache --clear && bat cache --build
+  bat cache --clear
+  bat cache --build
 else
   echo "Warning: bat not found, skipping cache rebuild"
 fi
