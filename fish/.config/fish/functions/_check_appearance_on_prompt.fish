@@ -4,7 +4,7 @@ function _check_appearance_on_prompt --on-event fish_prompt
         return
     end
 
-    # Rate limit: check every 5th prompt
+    # Rate limit: check every 3rd prompt
     set -g _appearance_prompt_count (math $_appearance_prompt_count + 1)
     if test $_appearance_prompt_count -lt 3
         return

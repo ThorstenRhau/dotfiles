@@ -4,8 +4,8 @@ Personal dotfiles for macOS Tahoe 26.2, managed with GNU Stow.
 
 ## Repository Structure
 
-Packages: `bat`, `claude`, `fish`, `fzf`, `gemini`, `ghostty`, `git`, `lazygit`,
-`ripgrep`, `starship`, `tasks`, `tmux`, `zsh`
+Packages: `bat`, `fish`, `fzf`, `ghostty`, `git`, `lazygit`, `ripgrep`,
+`starship`, `tmux`, `zsh`
 
 Each package mirrors `$HOME/.config/` structure:
 
