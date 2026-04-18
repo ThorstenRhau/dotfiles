@@ -7,6 +7,10 @@ HISTSIZE=50000
 SAVEHIST=50000
 setopt HIST_IGNORE_DUPS HIST_IGNORE_SPACE SHARE_HISTORY HIST_REDUCE_BLANKS
 
+# Keep shell history private even though it lives under the repo-managed config tree.
+[[ -e "$HISTFILE" ]] || : >| "$HISTFILE"
+chmod 600 "$HISTFILE" 2>/dev/null
+
 # =============================================================================
 # Completion
 # =============================================================================
@@ -22,8 +26,10 @@ autoload -Uz "$ZDOTDIR/functions"/*(.:t)
 
 autoload -Uz compinit
 compinit -d "$ZDOTDIR/.zcompdump"
+chmod 600 "$ZDOTDIR/.zcompdump" 2>/dev/null
 
-[[ -d "$ZDOTDIR/.zcompcache" ]] || mkdir -p "$ZDOTDIR/.zcompcache"
+[[ -d "$ZDOTDIR/.zcompcache" ]] || mkdir -m 700 -p "$ZDOTDIR/.zcompcache"
+chmod 700 "$ZDOTDIR/.zcompcache" 2>/dev/null
 
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' group-name ''
