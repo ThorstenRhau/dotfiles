@@ -182,7 +182,7 @@ if (($+commands[fzf])); then
 --scheme=history --with-nth=2.. \
 --header='shift-del: delete | ctrl-y: copy' \
 --bind='ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' \
---bind='shift-delete:execute-silent(perl $HOME/.config/zsh/scripts/fzf-history-delete $HOME/.config/zsh/.zsh_history {2..})+down'"
+--bind='shift-delete:execute-silent($HOME/.config/zsh/scripts/fzf-history-delete $HOME/.config/zsh/.zsh_history {2..})+down'"
 fi
 
 # =============================================================================
