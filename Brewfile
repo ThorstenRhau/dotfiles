@@ -7,7 +7,6 @@
 # Taps (Homebrew repositories)
 # Uncomment if you use any cask applications
 
-cask "1password-cli"
 cask "basictex"
 cask "font-symbols-only-nerd-font"
 
@@ -46,6 +45,7 @@ brew "luacheck"
 brew "markdownlint-cli"
 brew "marksman"
 brew "mercurial"
+brew "mole"
 brew "mosh"
 brew "neovim"
 brew "node"
