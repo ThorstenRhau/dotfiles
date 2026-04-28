@@ -2,6 +2,11 @@
     # Amend last commit without editing message
   amend = commit --amend --no-edit
 
+    # Conflict and diffview aliases
+  conflicts = !nvim -c DiffviewOpen
+  dv = !nvim -c DiffviewOpen
+  dh = !nvim -c DiffviewFileHistory
+
     # Compact history view with dates
   hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
 
