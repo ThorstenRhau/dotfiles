@@ -16,6 +16,15 @@
     # Log with changed files listed for each commit
   files = log --pretty=format:'%h %ad | %s%d [%an]' --date=short --name-status
 
+    # Structural diff using difftastic
+  difft = -c core.pager='less -R' -c diff.external='difft --color=always' diff
+
+    # Show commit with difftastic
+  dshow = -c core.pager='less -R' -c diff.external='difft --color=always' show --ext-diff
+
+    # Log patches with difftastic
+  dlog = -c core.pager='less -R' -c diff.external='difft --color=always' log -p --ext-diff
+
 [color]
   ui = true  # Enable colors in git output
 
@@ -24,6 +33,7 @@
 
 [core]
   autocrlf = input      # Convert CRLF to LF on commit (Unix line endings)
+  attributesFile = ~/.config/git/attributes  # Global attributes for merge drivers
   editor = nvim         # Use Neovim for commit messages and interactive operations
   excludesfile = ~/.config/git/ignore  # Global gitignore file
   pager = delta         # Use delta for enhanced diff viewing
@@ -54,7 +64,28 @@
   diffFilter = delta --color-only  # Use delta for git add -p and similar commands
 
 [merge]
-  conflictstyle = zdiff3  # Show common ancestor in conflicts (makes resolution easier)
+  conflictStyle = diff3  # Required for mergiraf merge driver compatibility
+  tool = nvimdiff2       # Manual conflict fallback in Neovim
+
+[mergetool]
+  keepBackup = false  # Do not leave *.orig files after manual conflict resolution
+  prompt = false      # Open configured mergetool without an extra prompt
+
+[mergetool "nvimdiff2"]
+  trustExitCode = false  # Require Git to verify whether conflicts were resolved
+
+[merge "mergiraf"]
+  name = mergiraf
+  driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
+
+[difftool]
+  prompt = false  # Run difftool directly without per-file confirmation
+
+[pager]
+  difftool = true  # Page difftool output
+
+[difftool "difftastic"]
+  cmd = difft --color=always "$MERGED" "$LOCAL" abcdef1 100644 "$REMOTE" abcdef2 100644
 
 [pull]
   rebase = true  # Rebase instead of merge to maintain linear history
