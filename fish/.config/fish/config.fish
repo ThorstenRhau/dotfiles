@@ -23,8 +23,6 @@ end
 # Environment Variables
 # =============================================================================
 
-# Global Variables
-set -gx CXXFLAGS "-std=gnu++20"
 set -gx LANG "en_US.UTF-8"
 set -gx LC_CTYPE "en_US.UTF-8"
 set -gx XDG_CONFIG_HOME "$HOME/.config"
@@ -69,7 +67,6 @@ if status is-interactive
     abbr gl 'git pull'
     abbr glg 'git log --oneline --graph --decorate -n 20'
     abbr gp 'git push'
-    abbr gpristine 'git reset --hard && git clean --force -dfx'
     abbr gst 'git status'
 
     if type -q lazygit
@@ -114,7 +111,8 @@ if status is-interactive
     # Carapace
     if type -q carapace
         set -gx CARAPACE_BRIDGES bash,zsh,fish,inshellisense,cobra
-        carapace _carapace | source
+        # Local workaround for carapace-bin 1.6.5 startup stderr with bare shell detection.
+        carapace _carapace fish | source
     end
 
     # FZF

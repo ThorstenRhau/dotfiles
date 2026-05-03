@@ -13,7 +13,9 @@ zsh/.config/zsh/local.zsh
 zsh/.config/zsh/secrets.zsh
 zsh/.config/zsh/.zsh_history
 zsh/.config/zsh/.zcompdump
+zsh/.config/zsh/.zcompcache/
 zsh/.config/zsh/.zsh_sessions
+**/__pycache__/
 
 # Google Gemini-cli specific local files that are ignored
 gemini/.gemini/google_accounts.json

@@ -13,10 +13,12 @@ cp "$script_dir/base.toml" "$out_dir/starship.toml"
 # Extract palette name from palette file, insert after schema line, then append palette definition
 for variant in dark light; do
   palette=$(grep '^palette = ' "$script_dir/palette_${variant}.toml" | head -1)
-  head -1 "$script_dir/base.toml" > "$out_dir/starship_${variant}.toml"
-  printf '%s\n' "$palette" >> "$out_dir/starship_${variant}.toml"
-  tail -n +2 "$script_dir/base.toml" >> "$out_dir/starship_${variant}.toml"
-  sed -n '/^\[palettes\./,$p' "$script_dir/palette_${variant}.toml" >> "$out_dir/starship_${variant}.toml"
+  {
+    head -1 "$script_dir/base.toml"
+    printf '%s\n' "$palette"
+    tail -n +2 "$script_dir/base.toml"
+    sed -n '/^\[palettes\./,$p' "$script_dir/palette_${variant}.toml"
+  } >"$out_dir/starship_${variant}.toml"
 done
 
 printf 'Generated starship configs in %s\n' "$out_dir"

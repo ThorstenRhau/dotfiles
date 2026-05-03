@@ -12,7 +12,7 @@ function _appearance_change_handler --on-variable SYSTEM_APPEARANCE
         set suffix dark
     end
 
-    fish_config theme choose token
+    fish_config theme choose token --color-theme="$suffix"
     set -gx BAT_THEME "token-$suffix"
     set -gx DELTA_FEATURES "token-$suffix"
     set -gx LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/token-$suffix.yml"

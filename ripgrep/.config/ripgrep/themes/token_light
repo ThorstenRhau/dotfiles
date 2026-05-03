@@ -1,5 +1,4 @@
 --smart-case
---follow
 --hidden
 --glob=!.git/
 --glob=!.svn/

@@ -2,12 +2,17 @@
 # History
 # =============================================================================
 
-HISTFILE="$ZDOTDIR/.zsh_history"
+ZSH_STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/zsh"
+ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+[[ -d "$ZSH_STATE_DIR" ]] || mkdir -m 700 -p "$ZSH_STATE_DIR"
+[[ -d "$ZSH_CACHE_DIR" ]] || mkdir -m 700 -p "$ZSH_CACHE_DIR"
+chmod 700 "$ZSH_STATE_DIR" "$ZSH_CACHE_DIR" 2>/dev/null
+
+export HISTFILE="$ZSH_STATE_DIR/.zsh_history"
 HISTSIZE=50000
 SAVEHIST=50000
 setopt HIST_IGNORE_DUPS HIST_IGNORE_SPACE SHARE_HISTORY HIST_REDUCE_BLANKS
 
-# Keep shell history private even though it lives under the repo-managed config tree.
 [[ -e "$HISTFILE" ]] || : >| "$HISTFILE"
 chmod 600 "$HISTFILE" 2>/dev/null
 
@@ -25,16 +30,16 @@ fpath=("$ZDOTDIR/functions" $fpath)
 autoload -Uz "$ZDOTDIR/functions"/*(.:t)
 
 autoload -Uz compinit
-compinit -d "$ZDOTDIR/.zcompdump"
-chmod 600 "$ZDOTDIR/.zcompdump" 2>/dev/null
+compinit -d "$ZSH_CACHE_DIR/.zcompdump"
+chmod 600 "$ZSH_CACHE_DIR/.zcompdump" 2>/dev/null
 
-[[ -d "$ZDOTDIR/.zcompcache" ]] || mkdir -m 700 -p "$ZDOTDIR/.zcompcache"
-chmod 700 "$ZDOTDIR/.zcompcache" 2>/dev/null
+[[ -d "$ZSH_CACHE_DIR/.zcompcache" ]] || mkdir -m 700 -p "$ZSH_CACHE_DIR/.zcompcache"
+chmod 700 "$ZSH_CACHE_DIR/.zcompcache" 2>/dev/null
 
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' use-cache yes
-zstyle ':completion:*' cache-path "$ZDOTDIR/.zcompcache"
+zstyle ':completion:*' cache-path "$ZSH_CACHE_DIR/.zcompcache"
 
 # =============================================================================
 # Key Bindings
@@ -80,7 +85,6 @@ alias gd='git diff'
 alias gl='git pull'
 alias glg='git log --oneline --graph --decorate -n 20'
 alias gp='git push'
-alias gpristine='git reset --hard && git clean --force -dfx'
 alias gst='git status'
 
 # =============================================================================
@@ -125,7 +129,8 @@ fi
 
 if (($+commands[carapace])); then
   export CARAPACE_BRIDGES='cobra'
-  source <(carapace _carapace)
+  # Local workaround for carapace-bin 1.6.5 startup stderr with bare shell detection.
+  source <(carapace _carapace zsh)
 fi
 
 # =============================================================================
@@ -140,7 +145,7 @@ fi
 # FZF
 # =============================================================================
 
-if (($+commands[fzf])); then
+if (($+commands[fzf])) && [[ -o zle ]] && [[ -t 0 ]]; then
   source <(fzf --zsh)
 
   # Base options (layout, behavior) preserved across theme changes
@@ -182,7 +187,7 @@ if (($+commands[fzf])); then
 --scheme=history --with-nth=2.. \
 --header='shift-del: delete | ctrl-y: copy' \
 --bind='ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' \
---bind='shift-delete:execute-silent($HOME/.config/zsh/scripts/fzf-history-delete $HOME/.config/zsh/.zsh_history {2..})+down'"
+--bind='shift-delete:execute-silent($HOME/.config/zsh/scripts/fzf-history-delete \"$HISTFILE\" {2..})+down'"
 fi
 
 # =============================================================================

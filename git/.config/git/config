@@ -99,6 +99,7 @@
 
 [user]
   name = Thorsten Rhau
+  useConfigOnly = true
 
 [rerere]
   enabled = true  # Remember how conflicts were resolved and auto-apply in future
@@ -138,8 +139,26 @@
 [includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
   path = ~/.config/git/github.inc #GitHub specific settings
 
+[includeIf "hasconfig:remote.*.url:ssh://git@github.com/*/**"]
+  path = ~/.config/git/github.inc #GitHub specific settings
+
+[includeIf "hasconfig:remote.*.url:https://github.com/*/**"]
+  path = ~/.config/git/github.inc #GitHub specific settings
+
 [includeIf "hasconfig:remote.*.url:*@*ericsson.com:*/**"]
   path = ~/.config/git/gitlab.inc #GitLab specific settings
 
+[includeIf "hasconfig:remote.*.url:ssh://*@*ericsson.com/*/**"]
+  path = ~/.config/git/gitlab.inc #GitLab specific settings
+
+[includeIf "hasconfig:remote.*.url:https://*ericsson.com/*/**"]
+  path = ~/.config/git/gitlab.inc #GitLab specific settings
+
 [includeIf "hasconfig:remote.*.url:*@forge.3gpp.org:*/**"]
+  path = ~/.config/git/forge.3gpp.org.inc #Forge specific settings
+
+[includeIf "hasconfig:remote.*.url:ssh://*@forge.3gpp.org/*/**"]
+  path = ~/.config/git/forge.3gpp.org.inc #Forge specific settings
+
+[includeIf "hasconfig:remote.*.url:https://forge.3gpp.org/*/**"]
   path = ~/.config/git/forge.3gpp.org.inc #Forge specific settings

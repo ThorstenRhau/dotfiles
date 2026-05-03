@@ -1,0 +1,25 @@
+if [[ "$1" == "--force" ]]; then
+  shift
+  if (( $# )); then
+    print -ru2 "usage: gpristine [--force]"
+    return 2
+  fi
+
+  git reset --hard && git clean --force -dfx
+  return
+fi
+
+if (( $# )); then
+  print -ru2 "usage: gpristine [--force]"
+  return 2
+fi
+
+print -ru2 "This will discard all uncommitted changes and remove ignored/untracked files."
+local reply
+read -r "reply?Type 'gpristine' to continue: "
+if [[ "$reply" != "gpristine" ]]; then
+  print -ru2 "Aborted."
+  return 1
+fi
+
+git reset --hard && git clean --force -dfx
