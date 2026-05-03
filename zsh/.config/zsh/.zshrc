@@ -128,7 +128,7 @@ fi
 # =============================================================================
 
 if (($+commands[carapace])); then
-  export CARAPACE_BRIDGES='cobra'
+  export CARAPACE_BRIDGES='fish,bash,cobra'
   # Local workaround for carapace-bin 1.6.5 startup stderr with bare shell detection.
   source <(carapace _carapace zsh)
 fi
