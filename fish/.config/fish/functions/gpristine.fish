@@ -10,7 +10,7 @@ function gpristine --description "Reset tracked changes and remove untracked fil
             return 2
         end
 
-        git reset --hard; and git clean --force -dfx
+        git reset --hard; and git clean --force -df
         return
     end
 
@@ -21,5 +21,5 @@ function gpristine --description "Reset tracked changes and remove untracked fil
         return 1
     end
 
-    git reset --hard; and git clean --force -dfx
+    git reset --hard; and git clean --force -df
 end

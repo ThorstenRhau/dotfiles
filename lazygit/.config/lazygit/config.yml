@@ -1,7 +1,7 @@
 gui:
   showIcons: true
   nerdFontsVersion: "3"
-  timeFormat: '2 Jan 2025 15:35:10 CET'
+  timeFormat: '2006-01-02 15:04:05 MST'
 git:
   pagers:
     - colorArg: always

@@ -1,0 +1,6 @@
+^/\.config/zsh/local\.zsh$
+^/\.config/zsh/secrets\.zsh$
+^/\.config/zsh/\.zcompdump$
+^/\.config/zsh/\.zcompcache$
+^/\.config/zsh/\.zsh_history$
+^/\.config/zsh/\.zsh_sessions$
