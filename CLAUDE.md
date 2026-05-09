@@ -19,7 +19,7 @@ Symlink with `stow <package>` or `./stow_all.sh`.
 
 - `zsh/.config/zsh/.zshrc` - Zsh shell configuration (primary shell)
 - `fish/.config/fish/config.fish` - Fish shell configuration (legacy, maintained)
-- `ghostty/.config/ghostty/config` - Terminal emulator configuration
+- `ghostty/.config/ghostty/config.ghostty` - Terminal emulator configuration
 - `starship/.config/src/` - Starship theme source files
 - `Brewfile` - Homebrew package dependencies
 

@@ -5,7 +5,7 @@ if [[ "$1" == "--force" ]]; then
     return 2
   fi
 
-  git reset --hard && git clean --force -dfx
+  git reset --hard && git clean --force -df
   return
 fi
 
@@ -22,4 +22,4 @@ if [[ "$reply" != "gpristine" ]]; then
   return 1
 fi
 
-git reset --hard && git clean --force -dfx
+git reset --hard && git clean --force -df

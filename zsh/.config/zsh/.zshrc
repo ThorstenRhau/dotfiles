@@ -27,7 +27,7 @@ fi
 
 # Autoloaded functions
 fpath=("$ZDOTDIR/functions" $fpath)
-autoload -Uz "$ZDOTDIR/functions"/*(.:t)
+autoload -Uz "$ZDOTDIR/functions"/*(-.:t)
 
 autoload -Uz compinit
 compinit -d "$ZSH_CACHE_DIR/.zcompdump"
