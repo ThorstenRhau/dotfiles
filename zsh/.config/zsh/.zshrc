@@ -36,7 +36,7 @@ chmod 600 "$ZSH_CACHE_DIR/.zcompdump" 2>/dev/null
 [[ -d "$ZSH_CACHE_DIR/.zcompcache" ]] || mkdir -m 700 -p "$ZSH_CACHE_DIR/.zcompcache"
 chmod 700 "$ZSH_CACHE_DIR/.zcompcache" 2>/dev/null
 
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' use-cache yes
 zstyle ':completion:*' cache-path "$ZSH_CACHE_DIR/.zcompcache"
@@ -129,6 +129,7 @@ fi
 
 if (($+commands[carapace])); then
   export CARAPACE_BRIDGES='fish,bash,cobra'
+  export CARAPACE_MATCH=1
   # Local workaround for carapace-bin 1.6.5 startup stderr with bare shell detection.
   source <(carapace _carapace zsh)
 fi
