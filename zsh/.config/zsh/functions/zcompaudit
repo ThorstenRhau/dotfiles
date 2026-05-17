@@ -1,0 +1,33 @@
+emulate -L zsh
+
+autoload -Uz compaudit
+
+local -a insecure_dirs
+insecure_dirs=("${(@f)$(compaudit 2>/dev/null)}")
+
+if (( ! ${#insecure_dirs} )); then
+  print "No insecure zsh completion directories found."
+  return 0
+fi
+
+print -ru2 "Insecure zsh completion directories:"
+
+local dir mode owner group
+for dir in "${insecure_dirs[@]}"; do
+  if [[ -e "$dir" ]]; then
+    mode=$(stat -f "%Sp" "$dir" 2>/dev/null)
+    owner=$(stat -f "%Su" "$dir" 2>/dev/null)
+    group=$(stat -f "%Sg" "$dir" 2>/dev/null)
+    print -ru2 "  $dir  ${mode:-unknown} ${owner:-unknown}:${group:-unknown}"
+  else
+    print -ru2 "  $dir  missing"
+  fi
+done
+
+print -ru2
+print -ru2 "Suggested repair commands:"
+for dir in "${insecure_dirs[@]}"; do
+  print -ru2 "  chmod go-w ${(q)dir}"
+done
+
+return 1
