@@ -76,9 +76,9 @@ export LSCOLORS='ExfxcxdxBxgxgxBxDxCxex'
 
 # Completion
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}" "ma=48;2;221;220;214;38;2;42;41;32"
-zstyle ':completion:*:descriptions' format '%F{#6c675f}-- %d --%f'
-zstyle ':completion:*:messages' format '%F{#6c675f}-- %d --%f'
-zstyle ':completion:*:warnings' format '%F{#b05555}-- no matches --%f'
+zstyle ':completion:*:descriptions' format '%d'
+zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*:warnings' format 'no matches'
 
 # fzf-tab
 zstyle ':fzf-tab:*' fzf-flags \
@@ -89,6 +89,7 @@ zstyle ':fzf-tab:*' fzf-flags \
   '--color=pointer:#9a4929,marker:#3f643c,prompt:#9a4929'
 zstyle ':fzf-tab:*' default-color $'\033[38;2;42;41;32m'
 zstyle ':fzf-tab:*' group-colors $'\033[38;2;82;117;148m' $'\033[38;2;63;100;60m' $'\033[38;2;135;96;50m' $'\033[38;2;124;97;154m' $'\033[38;2;45;108;108m' $'\033[38;2;154;73;41m' $'\033[38;2;110;92;32m' $'\033[38;2;176;85;85m'
+zstyle ':fzf-tab:*' prefix ' '
 
 # Prompt helpers
 export TOKEN_FG='#2a2920'
