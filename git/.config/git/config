@@ -52,10 +52,6 @@
   required = true
   smudge = git-lfs smudge -- %f
 
-[github]
-  user = ThorstenRhau
-  email = thorsten@rhau.se
-
 [init]
   defaultbranch = main  # Use 'main' instead of 'master' for new repos
 
