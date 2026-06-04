@@ -37,7 +37,6 @@
   editor = nvim         # Use Neovim for commit messages and interactive operations
   excludesfile = ~/.config/git/ignore  # Global gitignore file
   pager = delta         # Use delta for enhanced diff viewing
-  safecrlf = true       # Warn about irreversible line ending conversions
 
 [delta]
   line-numbers = true     # Show line numbers in diffs
@@ -145,14 +144,25 @@
 [includeIf "hasconfig:remote.*.url:https://github.com/*/**"]
   path = ~/.config/git/github.inc #GitHub specific settings
 
-[includeIf "hasconfig:remote.*.url:*@*ericsson.com:*/**"]
+# GitLab internal (gitlab.internal.ericsson.com)
+[includeIf "hasconfig:remote.*.url:*@gitlab.internal.ericsson.com:*/**"]
   path = ~/.config/git/gitlab.inc #GitLab specific settings
 
-[includeIf "hasconfig:remote.*.url:ssh://*@*ericsson.com/*/**"]
+[includeIf "hasconfig:remote.*.url:ssh://*@gitlab.internal.ericsson.com/*/**"]
   path = ~/.config/git/gitlab.inc #GitLab specific settings
 
-[includeIf "hasconfig:remote.*.url:https://*ericsson.com/*/**"]
+[includeIf "hasconfig:remote.*.url:https://gitlab.internal.ericsson.com/*/**"]
   path = ~/.config/git/gitlab.inc #GitLab specific settings
+
+# GitLab dedicated (gitlab-dedicated.ericsson.net)
+[includeIf "hasconfig:remote.*.url:*@gitlab-dedicated.ericsson.net:*/**"]
+  path = ~/.config/git/gitlab-dedicated.inc #GitLab dedicated settings
+
+[includeIf "hasconfig:remote.*.url:ssh://*@gitlab-dedicated.ericsson.net/*/**"]
+  path = ~/.config/git/gitlab-dedicated.inc #GitLab dedicated settings
+
+[includeIf "hasconfig:remote.*.url:https://gitlab-dedicated.ericsson.net/*/**"]
+  path = ~/.config/git/gitlab-dedicated.inc #GitLab dedicated settings
 
 [includeIf "hasconfig:remote.*.url:*@forge.3gpp.org:*/**"]
   path = ~/.config/git/forge.3gpp.org.inc #Forge specific settings
