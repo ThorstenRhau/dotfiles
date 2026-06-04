@@ -37,7 +37,6 @@
   editor = nvim         # Use Neovim for commit messages and interactive operations
   excludesfile = ~/.config/git/ignore  # Global gitignore file
   pager = delta         # Use delta for enhanced diff viewing
-  safecrlf = true       # Warn about irreversible line ending conversions
 
 [delta]
   line-numbers = true     # Show line numbers in diffs
@@ -144,6 +143,9 @@
 
 [includeIf "hasconfig:remote.*.url:https://github.com/*/**"]
   path = ~/.config/git/github.inc #GitHub specific settings
+
+
+
 
 
 
