@@ -11,7 +11,7 @@ success_symbol = "[❯❯](bold green)"
 [hostname]
 format     = "[$hostname  ](bold yellow)"
 ssh_only   = true
-ssh_symbol = " "
+ssh_symbol = "⇄"
 
 [username]
 detect_env_vars = ["SSH_CLIENT", "SSH_CONNECTION", "SSH_TTY", "SUDO_USER"]
