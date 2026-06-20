@@ -9,7 +9,7 @@ error_symbol   = "[❯❯](bold red)"
 success_symbol = "[❯❯](bold green)"
 
 [hostname]
-format     = "[$hostname](bold yellow)"
+format     = "[$hostname $ssh_symbol ](bold yellow)"
 ssh_only   = true
 ssh_symbol = "⇄"
 
