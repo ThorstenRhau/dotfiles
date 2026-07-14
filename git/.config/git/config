@@ -91,6 +91,7 @@
   autoSetupRemote = true  # Automatically set up remote tracking for new branches
 
 [rebase]
+  autoSquash = true  # Automatically arrange fixup!/squash! commits during interactive rebases
   autoStash = true  # Automatically stash and unstash changes when rebasing
 
 [user]
@@ -101,8 +102,10 @@
   enabled = true  # Remember how conflicts were resolved and auto-apply in future
 
 [diff]
-  algorithm = histogram  # Better diff algorithm (more intuitive results)
-  colorMoved = default   # Highlight moved code blocks in diffs
+  algorithm = histogram                        # Better diff algorithm (more intuitive results)
+  colorMoved = default                         # Highlight moved code blocks in diffs
+  colorMovedWS = allow-indentation-change      # Recognize moved blocks after uniform indentation changes
+  mnemonicPrefix = true                        # Label diff sides as commit, index, or worktree
 
 [log]
   date = iso  # Use ISO 8601 format for consistent timestamps
@@ -121,6 +124,7 @@
   ui = auto  # Display branch/tag lists in columns when terminal is wide enough
 
 [tag]
+  gpgSign = true          # Sign tags by default
   sort = version:refname  # Sort tags using semantic versioning (v1.2.3)
 
 [transfer]
