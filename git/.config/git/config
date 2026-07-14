@@ -29,7 +29,8 @@
   ui = true  # Enable colors in git output
 
 [commit]
-  verbose = 2  # Show full diff when writing commit messages (helps write better messages)
+  gpgsign = true # Sign commits with gpg/ssh
+  verbose = 2    # Show full diff when writing commit messages (helps write better messages)
 
 [core]
   autocrlf = input      # Convert CRLF to LF on commit (Unix line endings)
