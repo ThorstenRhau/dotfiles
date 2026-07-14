@@ -1,3 +1,5 @@
+notARepository: "quit"
+promptToReturnFromSubprocess: false
 gui:
   showIcons: true
   nerdFontsVersion: "3"
