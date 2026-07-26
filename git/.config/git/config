@@ -144,3 +144,6 @@
 
 [includeIf "hasconfig:remote.*.url:https://github.com/*/**"]
   path = ~/.config/git/github.inc #GitHub specific settings
+
+[includeIf "hasconfig:remote.*.url:git@github-codex:*/**"]
+  path = ~/.config/git/github-codex.inc # GitHub settings with Codex signing
