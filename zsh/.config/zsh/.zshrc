@@ -139,6 +139,7 @@ fi
 
 if [[ -f /opt/homebrew/opt/fzf-tab/share/fzf-tab/fzf-tab.zsh ]]; then
   source /opt/homebrew/opt/fzf-tab/share/fzf-tab/fzf-tab.zsh
+  zstyle ':fzf-tab:*' query-string prefix
 fi
 
 # =============================================================================
