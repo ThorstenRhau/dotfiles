@@ -58,6 +58,43 @@ fi
 
 require_dir "$CONTRIB" || exit 1
 
+required_sources='
+bat/token-dark.tmTheme
+bat/token-light.tmTheme
+carapace/token-dark.json
+carapace/token-light.json
+delta/token.gitconfig
+fzf/token-dark.zsh
+fzf/token-light.zsh
+ghostty/token-dark
+ghostty/token-light
+lazygit/token-dark.yml
+lazygit/token-light.yml
+ripgrep/token-dark.ripgreprc
+ripgrep/token-light.ripgreprc
+starship/token-dark.toml
+starship/token-light.toml
+tmux/token-dark.conf
+tmux/token-light.conf
+zsh/token-dark.zsh
+zsh/token-light.zsh
+'
+
+for source in $required_sources; do
+  if ! require_file "$CONTRIB/$source"; then
+    :
+  fi
+done
+
+if ! require_file "$DOTFILES_DIR/ripgrep/.config/ripgrep/config"; then
+  :
+fi
+
+if [ "$errors" -gt 0 ]; then
+  printf "Finished with %d error(s).\n" "$errors" >&2
+  exit 1
+fi
+
 printf "Syncing token themes from %s\n" "$CONTRIB"
 printf "Into dotfiles at %s\n\n" "$DOTFILES_DIR"
 
@@ -88,45 +125,6 @@ copy_file "$CONTRIB/carapace/token-light.json" \
 printf "delta:\n"
 copy_file "$CONTRIB/delta/token.gitconfig" \
   "$DOTFILES_DIR/git/.config/git/delta_themes.inc"
-
-# ------------------------------------------------------------------
-# Fish
-# ------------------------------------------------------------------
-
-printf "fish:\n"
-copy_file "$CONTRIB/fish/token.theme" \
-  "$DOTFILES_DIR/fish/.config/fish/themes/token.theme"
-
-# ------------------------------------------------------------------
-# FZF (adapted: use _FZF_THEME_OPTS instead of FZF_DEFAULT_OPTS)
-# ------------------------------------------------------------------
-
-printf "fzf:\n"
-for variant in dark light; do
-  src="$CONTRIB/fzf/token-${variant}.fish"
-  dst="$DOTFILES_DIR/fzf/.config/fzf/themes/token_${variant}.fish"
-  if ! require_file "$src"; then
-    continue
-  fi
-
-  # Extract --color lines from token contrib, format with line continuations
-  colors=$(grep -o "'--color=[^']*'" "$src" | tr -d "'")
-  if [ -z "$colors" ]; then
-    err "no color values found in $src"
-    continue
-  fi
-
-  mkdir -p "$(dirname "$dst")"
-  {
-    printf '# Token %s theme for FZF (synced from token contrib)\n\n' "$variant"
-    printf 'set -gx _FZF_THEME_OPTS "\\\n'
-    echo "$colors" | while IFS= read -r line; do
-      printf '%s \\\n' "$line"
-    done | sed '$ s/ \\$//'
-    printf '"\n'
-  } >"$dst"
-  info "$dst"
-done
 
 # ------------------------------------------------------------------
 # FZF (zsh variants)
@@ -174,25 +172,19 @@ copy_file "$CONTRIB/lazygit/token-light.yml" \
 
 printf "ripgrep:\n"
 rg_base="$DOTFILES_DIR/ripgrep/.config/ripgrep/config"
-if require_file "$rg_base"; then
-  # Base config = everything except --color* lines
-  rg_base_lines=$(grep -v '^--color' "$rg_base")
+rg_base_lines=$(grep -v '^--color' "$rg_base")
 
-  for variant in dark light; do
-    src="$CONTRIB/ripgrep/token-${variant}.ripgreprc"
-    dst="$DOTFILES_DIR/ripgrep/.config/ripgrep/themes/token_${variant}"
-    if ! require_file "$src"; then
-      continue
-    fi
+for variant in dark light; do
+  src="$CONTRIB/ripgrep/token-${variant}.ripgreprc"
+  dst="$DOTFILES_DIR/ripgrep/.config/ripgrep/themes/token_${variant}"
 
-    # Token contrib color lines (skip comment header)
-    rg_colors=$(grep '^--' "$src")
+  # Token contrib color lines (skip comment header)
+  rg_colors=$(grep '^--' "$src")
 
-    mkdir -p "$(dirname "$dst")"
-    printf "%s\n%s\n" "$rg_base_lines" "$rg_colors" >"$dst"
-    info "$dst"
-  done
-fi
+  mkdir -p "$(dirname "$dst")"
+  printf "%s\n%s\n" "$rg_base_lines" "$rg_colors" >"$dst"
+  info "$dst"
+done
 
 # ------------------------------------------------------------------
 # Starship (adapted: prepend palette = "token" directive)
@@ -208,7 +200,7 @@ for variant in dark light; do
 
   # Token contrib has [palettes.token] section but no top-level palette directive.
   # The generate.sh script expects a palette = "..." line at the top.
-  palette_section=$(grep -A 100 '^\[palettes\.' "$src")
+  palette_section=$(sed -n '/^\[palettes\./,$p' "$src")
   if [ -z "$palette_section" ]; then
     err "no [palettes.*] section found in $src"
     continue

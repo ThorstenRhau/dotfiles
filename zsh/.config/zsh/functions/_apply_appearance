@@ -1,5 +1,4 @@
 # Apply token theme to all tools based on $SYSTEM_APPEARANCE.
-# Mirrors fish/_appearance_change_handler.fish
 
 if [[ "$_OS_TYPE" != "Darwin" ]]; then
   export STARSHIP_CONFIG="$HOME/.config/starship.toml"
