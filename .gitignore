@@ -3,11 +3,6 @@ starship/.config/starship.toml
 starship/.config/starship_dark.toml
 starship/.config/starship_light.toml
 
-# Fish specific local files that are ignored
-fish/.config/fish/fish_variables
-fish/.config/fish/local.fish
-fish/.config/fish/secrets.fish
-
 # Zsh specific local files that are ignored
 zsh/.config/zsh/local.zsh
 zsh/.config/zsh/secrets.zsh

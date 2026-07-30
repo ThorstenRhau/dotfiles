@@ -14,12 +14,11 @@ $RECYCLE.BIN/
 *~                                  # backup/temp files
 *.swp                               # vim swap files
 
-# ── Shell scripts (bash, fish) ────────────────────────────────────────────────
+# ── Shell scripts ─────────────────────────────────────────────────────────────
 *.tmp
 *.bak
 # session/history
 command.log
-fish_history
 bash_history
 
 # ── Python ────────────────────────────────────────────────────────────────────
@@ -57,5 +56,3 @@ yarn-error.log*
 
 # Assorted dot files that are not to be handled in this repo
 **/.claude/settings.local.json
-fish/.config/fish/conf.d/00_fig_pre.fish
-fish/.config/fish/conf.d/99_fig_post.fish

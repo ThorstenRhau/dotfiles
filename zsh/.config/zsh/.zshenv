@@ -2,7 +2,7 @@
 # OS Detection (must be first, used by functions below)
 # =============================================================================
 
-export _OS_TYPE=$(uname)
+typeset -gr _OS_TYPE="$(uname)"
 
 # =============================================================================
 # Environment Variables

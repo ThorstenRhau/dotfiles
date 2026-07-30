@@ -48,12 +48,12 @@ unfold_config_dir() {
 
   if [ -n "$link_target" ] && [ "$link_target" = "$expected_target" ]; then
     tmp_dir=$(mktemp -d "${TMPDIR:-/tmp}/dotfiles-local.XXXXXX")
-    for private_file do
+    for private_file; do
       copy_private_file "$target_dir/$private_file" "$tmp_dir/$private_file"
     done
     rm -f "$target_dir"
     mkdir -p "$target_dir"
-    for private_file do
+    for private_file; do
       copy_private_file "$tmp_dir/$private_file" "$target_dir/$private_file"
     done
     rm -rf "$tmp_dir"
@@ -85,7 +85,6 @@ migrate_local_file() {
 
 migrate_runtime_state() {
   zsh_config_dir="$DOTFILES_DIR/zsh/.config/zsh"
-  fish_config_dir="$DOTFILES_DIR/fish/.config/fish"
   zsh_state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/zsh"
   zsh_cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
   old_history="$zsh_config_dir/.zsh_history"
@@ -122,13 +121,8 @@ migrate_runtime_state() {
   fi
 
   unfold_config_dir "$HOME/.config/zsh" "$zsh_config_dir" local.zsh secrets.zsh
-  unfold_config_dir "$HOME/.config/fish" "$fish_config_dir" local.fish secrets.fish fish_variables
-  mkdir -p "$HOME/.config/fish"
   migrate_local_file "$zsh_config_dir/local.zsh" "$HOME/.config/zsh/local.zsh"
   migrate_local_file "$zsh_config_dir/secrets.zsh" "$HOME/.config/zsh/secrets.zsh"
-  migrate_local_file "$fish_config_dir/fish_variables" "$HOME/.config/fish/fish_variables"
-  migrate_local_file "$fish_config_dir/local.fish" "$HOME/.config/fish/local.fish"
-  migrate_local_file "$fish_config_dir/secrets.fish" "$HOME/.config/fish/secrets.fish"
 
   src_link="$HOME/.config/src"
   starship_src="$DOTFILES_DIR/starship/.config/src"
@@ -153,7 +147,6 @@ sh starship/.config/src/generate.sh
 
 packages="
 bat
-fish
 fzf
 ghostty
 git
@@ -173,8 +166,8 @@ is_group_or_world_writable() {
   group=${mode_without_other#"${mode_without_other%?}"}
 
   case "$group$other" in
-  *[2367]*) return 0 ;;
-  *) return 1 ;;
+    *[2367]*) return 0 ;;
+    *) return 1 ;;
   esac
 }
 
@@ -182,12 +175,12 @@ migrate_runtime_state
 
 for package in $packages; do
   case "$package" in
-  fish | zsh)
-    stow --target "$HOME" --restow --no-folding -v "$package"
-    ;;
-  *)
-    stow --target "$HOME" --restow -v "$package"
-    ;;
+    zsh)
+      stow --target "$HOME" --restow --no-folding -v "$package"
+      ;;
+    *)
+      stow --target "$HOME" --restow -v "$package"
+      ;;
   esac
 done
 

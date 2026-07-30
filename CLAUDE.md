@@ -1,96 +1,55 @@
 # AI Assistant Instructions
 
-Personal dotfiles for macOS Tahoe 26.2, managed with GNU Stow.
+Personal macOS dotfiles for an Apple Silicon machine, managed with GNU Stow.
 
-## Repository Structure
+## Packages and deployment
 
-Packages: `bat`, `fish`, `fzf`, `ghostty`, `git`, `lazygit`, `ripgrep`,
-`starship`, `tmux`, `zsh`
+Packages are `bat`, `fzf`, `ghostty`, `git`, `lazygit`, `ripgrep`, `starship`,
+`tmux`, and `zsh`. They mirror the target home directory, for example:
 
-Each package mirrors `$HOME/.config/` structure:
-
-```
-zsh/.config/zsh/.zshrc → ~/.config/zsh/.zshrc
+```text
+zsh/.config/zsh/.zshrc -> ~/.config/zsh/.zshrc
 ```
 
-Symlink with `stow <package>` or `./stow_all.sh`.
+Use `./stow_all.sh` for the supported full deployment. For an individual
+package, run `stow --target "$HOME" --restow <package>`; generate Starship
+configs first when deploying `starship` alone.
 
-## Key Files
+## Zsh
 
-- `zsh/.config/zsh/.zshrc` - Zsh shell configuration (primary shell)
-- `fish/.config/fish/config.fish` - Fish shell configuration (legacy, maintained)
-- `ghostty/.config/ghostty/config.ghostty` - Terminal emulator configuration
-- `starship/.config/src/` - Starship theme source files
-- `Brewfile` - Homebrew package dependencies
+- ZDOTDIR is `~/.config/zsh`, bootstrapped by `~/.zshenv`.
+- Plugins are sourced from Homebrew. Keep fast syntax highlighting as the final
+  sourced plugin in `.zshrc`.
+- Put autoloaded functions in `zsh/.config/zsh/functions/`.
+- Keep private `local.zsh` and `secrets.zsh` outside the repository.
+- Validate syntax with `zsh -n <file>` and start changed behavior in an isolated
+  shell before deployment.
 
-## Starship Theme Generation
+## Token colors
 
-Theme configs are generated from source files in `starship/.config/src/`:
+Token is the source of truth for every application color. Do not edit generated
+theme files manually. After Token contrib files change, run:
 
+```sh
+./sync_token_themes.sh /Users/thorre/github/token
 ```
-base.toml         # Shared config (symbols, settings)
-palette_dark.toml # Dark theme palette (defines palette name + colors)
-palette_light.toml# Light theme palette (defines palette name + colors)
-generate.sh       # Combines base + palette into final configs
-```
 
-**To change color themes:**
+The script updates tracked theme assets and regenerates the ignored Starship
+configs from `starship/.config/src/`. It must not modify the Token checkout.
 
-1. Update `palette_dark.toml` and/or `palette_light.toml` with new palette name
-   and colors (the `palette = "name"` line is extracted automatically)
-2. Run `sh starship/.config/src/generate.sh`
-3. Regenerated files appear in `starship/.config/`
+## Standalone scripts and safety
 
-The generator extracts the palette name from each palette file, so only the
-palette files need updating when switching themes.
+- Write utility scripts in POSIX sh or bash.
+- Preserve Stow-compatible paths and local-file migration behavior.
+- Never commit secrets, local state, generated Starship configs, or credentials.
+- Add dependencies to `Brewfile` only when they have a documented purpose.
+- Prefer validation in temporary homes and repositories. Do not run destructive
+  helpers against a real checkout while testing.
 
-## Development Guidelines
+## Validation
 
-### Zsh Shell (primary)
-
-- ZDOTDIR is `~/.config/zsh`, bootstrapped via `~/.zshenv`
-- Plugins sourced from Homebrew (`/opt/homebrew/share/` and `/opt/homebrew/opt/`)
-- Autoloaded functions go in `zsh/.config/zsh/functions/`
-- Fast-syntax-highlighting must be sourced last in `.zshrc`
-- FZF theme files have both `.fish` and `.zsh` variants in `fzf/.config/fzf/themes/`
-- Zsh syntax highlighting themes in `zsh/.config/zsh/themes/` (synced from token contrib)
-- Validate syntax: `zsh -n <file>`
-
-### Fish Shell (legacy, maintained)
-
-- Use event-driven patterns (see `fish_prompt.fish`, `on_variable_PWD.fish`)
-- Keep functions focused and single-purpose in separate files
-- Prefer `command -v` over `which` for command existence checks
-- Use proper error handling for external commands
-- Test shell changes with `fish -c "source ~/.config/fish/config.fish"`
-
-### Standalone Scripts
-
-- Write in POSIX sh or bash, not fish or zsh
-- Keep portable: avoid shell-specific syntax in utility scripts
-
-### File Modifications
-
-- Preserve stow-compatible directory structure
-- Maintain existing color scheme logic (Modus Vivendi/Operandi auto-switching)
-- Zsh autoloaded functions go in `zsh/.config/zsh/functions/`
-- Fish function files go in `fish/.config/fish/functions/` with `.fish` extension
-
-### Security
-
-- NEVER commit secrets - use git-ignored `secrets.fish`/`local.fish` or `secrets.zsh`/`local.zsh`
-- Check for hard coded credentials before any git operations
-- Use environment variables for sensitive configuration
-
-### Dependencies
-
-- Only add to `Brewfile` if truly necessary
-- Verify package availability via Homebrew before adding
-- Document any non-obvious package purposes
-
-### Testing
-
-- Validate zsh syntax: `zsh -n <file>`
-- Validate fish syntax: `fish -n <file>`
-- Test functions in isolated shell before committing
-- Verify stow symlinks don't conflict: `stow -n <package>`
+- Shell: `sh -n`, `shellcheck`, `shfmt -d`, and `zsh -n` as appropriate.
+- Data: TOML, JSON, and YAML parsing with the installed tooling.
+- Deployment: `stow --simulate --restow <package>` before a live restow.
+- Tool configs: use the installed CLI's validation command or schema where one
+  exists.

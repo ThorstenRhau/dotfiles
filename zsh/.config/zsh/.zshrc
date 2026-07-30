@@ -128,9 +128,8 @@ fi
 # =============================================================================
 
 if (($+commands[carapace])); then
-  export CARAPACE_BRIDGES='fish,bash,cobra'
+  export CARAPACE_BRIDGES='zsh,bash,inshellisense'
   export CARAPACE_MATCH=1
-  # Local workaround for carapace-bin 1.6.5 startup stderr with bare shell detection.
   source <(carapace _carapace zsh)
 fi
 
@@ -218,9 +217,11 @@ fi
 # Plugins
 # =============================================================================
 
-# Autosuggestions (fish-like ghost text)
+# Local configuration can define aliases and widgets before plugins bind ZLE.
+[[ -r "$ZDOTDIR/local.zsh" ]] && source "$ZDOTDIR/local.zsh"
+
+# Autosuggestions
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=25
 local _plugin_dir="/opt/homebrew/share"
 [[ -r "$_plugin_dir/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] &&
   source "$_plugin_dir/zsh-autosuggestions/zsh-autosuggestions.zsh"
@@ -228,9 +229,3 @@ local _plugin_dir="/opt/homebrew/share"
 # Fast syntax highlighting (must be sourced last among plugins)
 local _fsh="/opt/homebrew/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 [[ -r "$_fsh" ]] && source "$_fsh"
-
-# =============================================================================
-# Local Configuration
-# =============================================================================
-
-[[ -r "$ZDOTDIR/local.zsh" ]] && source "$ZDOTDIR/local.zsh"
