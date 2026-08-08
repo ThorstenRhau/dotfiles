@@ -130,6 +130,8 @@ fi
 if (($+commands[carapace])); then
   export CARAPACE_BRIDGES='zsh,bash,inshellisense'
   export CARAPACE_MATCH=1
+  # Keep native file matching for open; Carapace filters names case-sensitively.
+  export CARAPACE_EXCLUDES='open'
   source <(carapace _carapace zsh)
 fi
 
