@@ -1,17 +1,28 @@
 "$schema" = "https://starship.rs/config-schema.json"
 
-add_newline     = true
-command_timeout = 1000
-right_format    = "$cmd_duration"
+add_newline         = true
+command_timeout     = 1000
+continuation_prompt = "[.](bright-black) "
+right_format        = "$cmd_duration"
 
 [character]
-error_symbol   = "[❯❯](bold red)"
-success_symbol = "[❯❯](bold green)"
+error_symbol              = "[▶](bold red)"
+success_symbol            = "[▶](bold green)"
+vimcmd_replace_one_symbol = "[◀](bold purple)"
+vimcmd_replace_symbol     = "[◀](bold purple)"
+vimcmd_symbol             = "[◀](bold green)"
+vimcmd_visual_symbol      = "[◀](bold yellow)"
+
+[claude_cost]
+symbol = "cost "
+
+[claude_model]
+symbol = "claude "
 
 [hostname]
 format     = "[$ssh_symbol $hostname ](bold yellow)"
 ssh_only   = true
-ssh_symbol = "⇄"
+ssh_symbol = "↔"
 
 [username]
 detect_env_vars = ["SSH_CLIENT", "SSH_CONNECTION", "SSH_TTY", "SUDO_USER"]
@@ -21,178 +32,288 @@ style_root      = "red bold"
 style_user      = "green bold"
 
 [git_branch]
-symbol = " "
+symbol            = " "
+truncation_symbol = "..."
 
 [cmd_duration]
 format = "took [$duration]($style)"
 
 [git_commit]
 tag_disabled = false
-tag_symbol   = '  '
+tag_symbol   = " tag "
 
 [git_status]
-ahead             = "[ ](green)"
-behind            = "[ ](red)"
-conflicted        = "[ ](red bold)"
-deleted           = "[ ](red)"
+ahead             = "[↑](green)"
+behind            = "[↓](red)"
+conflicted        = "[=](red bold)"
+deleted           = "[x](red)"
 disabled          = false
-diverged          = "[ ](yellow)"
+diverged          = "[↕](yellow)"
 format            = "($all_status$ahead_behind )"
 ignore_submodules = true
-modified          = "[ ](yellow)"
-renamed           = "[ ](purple)"
-staged            = "[ ](green)"
-stashed           = "[ ](dimmed)"
+modified          = "[!](yellow)"
+renamed           = "[r](purple)"
+staged            = "[+](green)"
+stashed           = "[$](dimmed)"
 style             = "red"
-untracked         = "[ ](blue)"
+untracked         = "[?](blue)"
 
 [git_metrics]
 added_style   = "green"
 deleted_style = "red"
 disabled      = false
-format        = "([ $added]($added_style) )([ $deleted]($deleted_style) )"
+format        = "([+$added]($added_style) )([-$deleted]($deleted_style) )"
 
 [aws]
-symbol = " "
+symbol = "aws "
+
+[azure]
+symbol = "az "
+
+[battery]
+charging_symbol    = "charging "
+discharging_symbol = "discharging "
+empty_symbol       = "empty "
+full_symbol        = "full "
+unknown_symbol     = "unknown "
 
 [buf]
-symbol = " "
+symbol = "buf "
 
 [bun]
-symbol = " "
+symbol = "bun "
 
 [c]
-symbol = " "
+symbol = "C "
 
 [cpp]
-symbol = " "
+symbol = "C++ "
+
+[cobol]
+symbol = "cobol "
 
 [cmake]
-symbol = " "
+symbol = "cmake "
 
 [conda]
-symbol = " "
+symbol = "conda "
+
+[container]
+symbol = "container "
 
 [crystal]
-symbol = " "
+symbol = "cr "
+
+[daml]
+symbol = "daml "
 
 [dart]
-symbol = " "
+symbol = "dart "
 
 [deno]
-symbol = " "
+symbol = "deno "
 
 [directory]
-read_only = " 󰌾"
+read_only = " ro"
 
 [docker_context]
-symbol = " "
+symbol = "docker "
+
+[dotnet]
+format = "via [$symbol($version )(target $tfm )]($style)"
+symbol = ".NET "
 
 [elixir]
-symbol = " "
+symbol = "exs "
 
 [elm]
-symbol = " "
+symbol = "elm "
+
+[erlang]
+symbol = "erl "
 
 [fennel]
-symbol = " "
+symbol = "fnl "
+
+[fortran]
+symbol = "fortran "
 
 [fossil_branch]
-symbol = " "
+symbol            = "fossil "
+truncation_symbol = "..."
 
 [gcloud]
-symbol = " "
+symbol = "gcp "
+
+[gleam]
+symbol = "gleam "
 
 [golang]
-symbol = " "
+symbol = "go "
 
 [gradle]
-symbol = " "
+symbol = "gradle "
 
 [guix_shell]
-symbol = " "
+symbol = "guix "
 
 [haskell]
-symbol = " "
+symbol = "haskell "
 
 [haxe]
-symbol = " "
+symbol = "hx "
+
+[helm]
+symbol = "helm "
 
 [hg_branch]
-symbol = " "
+symbol            = "hg "
+truncation_symbol = "..."
 
 [java]
-symbol = " "
+symbol = "java "
+
+[jobs]
+symbol = "*"
 
 [julia]
-symbol = " "
+symbol = "jl "
 
 [kotlin]
-symbol = " "
+symbol = "kt "
+
+[kubernetes]
+symbol = "kubernetes "
 
 [lua]
-symbol   = " "
+symbol = "lua "
+
+[maven]
+symbol = "maven "
 
 [memory_usage]
-symbol = "󰍛 "
+symbol = "memory "
 
 [meson]
-symbol = "󰔷 "
+symbol            = "meson "
+truncation_symbol = "..."
+
+[mojo]
+symbol = "mojo "
+
+[nats]
+symbol = "nats "
+
+[netns]
+symbol = "netns "
 
 [nim]
-symbol = "󰆥 "
+symbol = "nim "
 
 [nix_shell]
-symbol = " "
+symbol = "nix "
 
 [nodejs]
-symbol = " "
+symbol = "nodejs "
 
 [ocaml]
-symbol = " "
+symbol = "ml "
+
+[odin]
+symbol = "odin "
+
+[opa]
+symbol = "opa "
+
+[openstack]
+symbol = "openstack "
 
 [os]
 disabled = true
 
 [package]
-symbol = "󰏗 "
+symbol = "pkg "
 
 [perl]
-symbol = " "
+symbol = "pl "
 
 [php]
-symbol = " "
+symbol = "php "
 
 [pijul_channel]
-symbol = " "
+symbol            = "pijul "
+truncation_symbol = "..."
 
 [pixi]
-symbol = "󰏗 "
+symbol = "pixi "
+
+[pulumi]
+symbol = "pulumi "
+
+[purescript]
+symbol = "purs "
 
 [python]
 detect_extensions = []
 detect_folders    = []
 format            = "[$symbol$virtualenv ($version)]($style) "
-symbol            = " "
+symbol            = "py "
+
+[quarto]
+symbol = "quarto "
+
+[raku]
+symbol = "raku "
+
+[red]
+symbol = "red "
 
 [rlang]
-symbol = "󰟔 "
+symbol = "r "
 
 [ruby]
-symbol = " "
+symbol = "rb "
 
 [rust]
-symbol = "󱘗 "
+symbol = "rs "
 
 [scala]
-symbol = " "
+symbol = "scala "
+
+[shlvl]
+symbol = "shlvl "
+
+[spack]
+symbol = "spack "
+
+[solidity]
+symbol = "solidity "
 
 [status]
-disabled = false
-symbol   = " "
+disabled              = false
+not_executable_symbol = "noexec"
+not_found_symbol      = "notfound"
+sigint_symbol         = "sigint"
+signal_symbol         = "sig"
+symbol                = "[x](bold red) "
+
+[sudo]
+symbol = "sudo "
 
 [swift]
-symbol = " "
+symbol = "swift "
+
+[terraform]
+symbol = "terraform "
+
+[typst]
+symbol = "typst "
+
+[vagrant]
+symbol = "vagrant "
+
+[xmake]
+symbol = "xmake "
 
 [zig]
-symbol = " "
+symbol = "zig "
