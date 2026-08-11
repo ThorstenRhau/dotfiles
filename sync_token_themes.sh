@@ -154,7 +154,6 @@ for variant in dark light; do
     ! muted=$(palette_value "$src" muted) ||
     ! subtle=$(palette_value "$src" subtle) ||
     ! accent=$(palette_value "$src" accent) ||
-    ! accent2=$(palette_value "$src" accent2) ||
     ! blue=$(palette_value "$src" blue) ||
     ! green=$(palette_value "$src" green) ||
     ! red=$(palette_value "$src" red) ||
@@ -193,28 +192,8 @@ for variant in dark light; do
 	tag = "bold $orange"
 
 [color "diff"]
+	# Keep glg's commit colour, but let delta style diff bodies.
 	commit = "$blue"
-	context = "$fg"
-	contextBold = "bold $fg"
-	contextDimmed = "$muted"
-	frag = "bold $purple"
-	func = "$cyan"
-	meta = "$blue"
-	new = "$green"
-	newBold = "bold $green"
-	newDimmed = "$muted"
-	newMoved = "$cyan"
-	newMovedAlternative = "$blue"
-	newMovedAlternativeDimmed = "$muted"
-	newMovedDimmed = "$muted"
-	old = "$red"
-	oldBold = "bold $red"
-	oldDimmed = "$muted"
-	oldMoved = "$yellow"
-	oldMovedAlternative = "$accent2"
-	oldMovedAlternativeDimmed = "$muted"
-	oldMovedDimmed = "$muted"
-	whitespace = "bold reverse $red"
 
 [color "grep"]
 	column = "$cyan"
@@ -247,7 +226,7 @@ for variant in dark light; do
 [color "status"]
 	added = "$green"
 	branch = "bold $accent"
-	changed = "$yellow"
+	changed = "bold $yellow"
 	header = "$muted"
 	localBranch = "$blue"
 	noBranch = "bold $red"

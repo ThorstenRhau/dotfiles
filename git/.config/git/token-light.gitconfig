@@ -23,28 +23,8 @@
 	tag = "bold #9a5f22"
 
 [color "diff"]
+	# Keep glg's commit colour, but let delta style diff bodies.
 	commit = "#527594"
-	context = "#2a2920"
-	contextBold = "bold #2a2920"
-	contextDimmed = "#6c675f"
-	frag = "bold #7c619a"
-	func = "#2d6c6c"
-	meta = "#527594"
-	new = "#3f643c"
-	newBold = "bold #3f643c"
-	newDimmed = "#6c675f"
-	newMoved = "#2d6c6c"
-	newMovedAlternative = "#527594"
-	newMovedAlternativeDimmed = "#6c675f"
-	newMovedDimmed = "#6c675f"
-	old = "#b05555"
-	oldBold = "bold #b05555"
-	oldDimmed = "#6c675f"
-	oldMoved = "#6e5c20"
-	oldMovedAlternative = "#876032"
-	oldMovedAlternativeDimmed = "#6c675f"
-	oldMovedDimmed = "#6c675f"
-	whitespace = "bold reverse #b05555"
 
 [color "grep"]
 	column = "#2d6c6c"
@@ -77,7 +57,7 @@
 [color "status"]
 	added = "#3f643c"
 	branch = "bold #9a4929"
-	changed = "#6e5c20"
+	changed = "bold #6e5c20"
 	header = "#6c675f"
 	localBranch = "#527594"
 	noBranch = "bold #b05555"
