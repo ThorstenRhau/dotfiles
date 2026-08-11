@@ -1,0 +1,90 @@
+# Generated from the Token light palette. Do not edit manually.
+
+[color "advice"]
+	hint = "#2d6c6c"
+
+[color "blame"]
+	repeatedLines = "#858179"
+
+[color "branch"]
+	current = "bold #9a4929"
+	local = "bold #527594"
+	plain = "#2a2920"
+	remote = "bold #2d6c6c"
+	upstream = "bold #2d6c6c"
+	worktree = "bold #7c619a"
+
+[color "decorate"]
+	HEAD = "bold #9a4929"
+	branch = "bold #3f643c"
+	grafted = "#6c675f"
+	remoteBranch = "bold #2d6c6c"
+	stash = "#7c619a"
+	tag = "bold #9a5f22"
+
+[color "diff"]
+	commit = "#527594"
+	context = "#2a2920"
+	contextBold = "bold #2a2920"
+	contextDimmed = "#6c675f"
+	frag = "bold #7c619a"
+	func = "#2d6c6c"
+	meta = "#527594"
+	new = "#3f643c"
+	newBold = "bold #3f643c"
+	newDimmed = "#6c675f"
+	newMoved = "#2d6c6c"
+	newMovedAlternative = "#527594"
+	newMovedAlternativeDimmed = "#6c675f"
+	newMovedDimmed = "#6c675f"
+	old = "#b05555"
+	oldBold = "bold #b05555"
+	oldDimmed = "#6c675f"
+	oldMoved = "#6e5c20"
+	oldMovedAlternative = "#876032"
+	oldMovedAlternativeDimmed = "#6c675f"
+	oldMovedDimmed = "#6c675f"
+	whitespace = "bold reverse #b05555"
+
+[color "grep"]
+	column = "#2d6c6c"
+	context = "#6c675f"
+	filename = "bold #527594"
+	function = "#7c619a"
+	lineNumber = "#6e5c20"
+	match = "bold #9a4929"
+	matchContext = "bold #9a4929"
+	matchSelected = "bold #9a4929"
+	selected = "#2a2920"
+	separator = "#858179"
+
+[color "interactive"]
+	error = "bold #b05555"
+	header = "bold #7c619a"
+	help = "#6c675f"
+	plain = "#2a2920"
+	prompt = "bold #9a4929"
+
+[color "push"]
+	error = "bold #b05555"
+
+[color "remote"]
+	error = "bold #b05555"
+	hint = "#2d6c6c"
+	success = "#3f643c"
+	warning = "#6e5c20"
+
+[color "status"]
+	added = "#3f643c"
+	branch = "bold #9a4929"
+	changed = "#6e5c20"
+	header = "#6c675f"
+	localBranch = "#527594"
+	noBranch = "bold #b05555"
+	remoteBranch = "#2d6c6c"
+	unmerged = "bold #b05555"
+	untracked = "#2d6c6c"
+	updated = "#3f643c"
+
+[color "transport"]
+	rejected = "bold #b05555"

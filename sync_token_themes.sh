@@ -46,6 +46,21 @@ copy_file() {
   info "$dst"
 }
 
+palette_value() {
+  palette_file="$1"
+  palette_key="$2"
+
+  awk -v key="$palette_key" '
+    $1 == key && $2 == "=" {
+      gsub(/"/, "", $3)
+      print $3
+      found = 1
+      exit
+    }
+    END { if (!found) exit 1 }
+  ' "$palette_file"
+}
+
 # ------------------------------------------------------------------
 # Preflight
 # ------------------------------------------------------------------
@@ -125,6 +140,127 @@ copy_file "$CONTRIB/carapace/token-light.json" \
 printf "delta:\n"
 copy_file "$CONTRIB/delta/token.gitconfig" \
   "$DOTFILES_DIR/git/.config/git/delta_themes.inc"
+
+# ------------------------------------------------------------------
+# Git (adapted from the Token Starship palette)
+# ------------------------------------------------------------------
+
+printf "git:\n"
+for variant in dark light; do
+  src="$CONTRIB/starship/token-${variant}.toml"
+  dst="$DOTFILES_DIR/git/.config/git/token-${variant}.gitconfig"
+
+  if ! fg=$(palette_value "$src" fg) ||
+    ! muted=$(palette_value "$src" muted) ||
+    ! subtle=$(palette_value "$src" subtle) ||
+    ! accent=$(palette_value "$src" accent) ||
+    ! accent2=$(palette_value "$src" accent2) ||
+    ! blue=$(palette_value "$src" blue) ||
+    ! green=$(palette_value "$src" green) ||
+    ! red=$(palette_value "$src" red) ||
+    ! yellow=$(palette_value "$src" yellow) ||
+    ! purple=$(palette_value "$src" purple) ||
+    ! cyan=$(palette_value "$src" cyan) ||
+    ! orange=$(palette_value "$src" orange); then
+    err "incomplete palette in $src"
+    continue
+  fi
+
+  mkdir -p "$(dirname "$dst")"
+  cat >"$dst" <<EOF
+# Generated from the Token $variant palette. Do not edit manually.
+
+[color "advice"]
+	hint = "$cyan"
+
+[color "blame"]
+	repeatedLines = "$subtle"
+
+[color "branch"]
+	current = "bold $accent"
+	local = "bold $blue"
+	plain = "$fg"
+	remote = "bold $cyan"
+	upstream = "bold $cyan"
+	worktree = "bold $purple"
+
+[color "decorate"]
+	HEAD = "bold $accent"
+	branch = "bold $green"
+	grafted = "$muted"
+	remoteBranch = "bold $cyan"
+	stash = "$purple"
+	tag = "bold $orange"
+
+[color "diff"]
+	commit = "$blue"
+	context = "$fg"
+	contextBold = "bold $fg"
+	contextDimmed = "$muted"
+	frag = "bold $purple"
+	func = "$cyan"
+	meta = "$blue"
+	new = "$green"
+	newBold = "bold $green"
+	newDimmed = "$muted"
+	newMoved = "$cyan"
+	newMovedAlternative = "$blue"
+	newMovedAlternativeDimmed = "$muted"
+	newMovedDimmed = "$muted"
+	old = "$red"
+	oldBold = "bold $red"
+	oldDimmed = "$muted"
+	oldMoved = "$yellow"
+	oldMovedAlternative = "$accent2"
+	oldMovedAlternativeDimmed = "$muted"
+	oldMovedDimmed = "$muted"
+	whitespace = "bold reverse $red"
+
+[color "grep"]
+	column = "$cyan"
+	context = "$muted"
+	filename = "bold $blue"
+	function = "$purple"
+	lineNumber = "$yellow"
+	match = "bold $accent"
+	matchContext = "bold $accent"
+	matchSelected = "bold $accent"
+	selected = "$fg"
+	separator = "$subtle"
+
+[color "interactive"]
+	error = "bold $red"
+	header = "bold $purple"
+	help = "$muted"
+	plain = "$fg"
+	prompt = "bold $accent"
+
+[color "push"]
+	error = "bold $red"
+
+[color "remote"]
+	error = "bold $red"
+	hint = "$cyan"
+	success = "$green"
+	warning = "$yellow"
+
+[color "status"]
+	added = "$green"
+	branch = "bold $accent"
+	changed = "$yellow"
+	header = "$muted"
+	localBranch = "$blue"
+	noBranch = "bold $red"
+	remoteBranch = "$cyan"
+	unmerged = "bold $red"
+	untracked = "$cyan"
+	updated = "$green"
+
+[color "transport"]
+	rejected = "bold $red"
+EOF
+  info "$dst"
+done
 
 # ------------------------------------------------------------------
 # FZF (zsh variants)
