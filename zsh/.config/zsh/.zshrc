@@ -83,7 +83,7 @@ alias gc='git commit'
 alias gca='git commit -a'
 alias gd='git diff'
 alias gl='git pull'
-(($+commands[serie])) && alias glg='serie --max-count 20 --order topo --graph-width single --graph-style rounded'
+alias glg='git log --oneline --graph --decorate -n 20'
 alias gp='git push'
 alias gst='git status'
 
