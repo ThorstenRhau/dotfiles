@@ -1,0 +1,16 @@
+palette = "token-flint"
+
+[palettes.token-flint]
+bg      = "#F5F7F8"
+fg      = "#28313A"
+muted   = "#65717D"
+subtle  = "#828E9A"
+accent  = "#B64E2E"
+accent2 = "#946409"
+blue    = "#34779D"
+green   = "#5A772B"
+red     = "#BE3E50"
+yellow  = "#946409"
+purple  = "#B64E2E"
+cyan    = "#34779D"
+orange  = "#5A772B"

@@ -1,0 +1,21 @@
+# Write a generated Token adapter atomically when its contents change.
+
+local destination="$1"
+local content="$2"
+local directory="${destination:h}"
+local temporary="$destination.tmp.$$"
+
+[[ -d "$directory" ]] || mkdir -m 700 -p "$directory" || return 1
+
+if [[ -r "$destination" && "$(<"$destination")" == "$content" ]]; then
+  return 0
+fi
+
+if ! (umask 077; print -r -- "$content" >|"$temporary"); then
+  command rm -f -- "$temporary"
+  return 1
+fi
+if ! command mv -f -- "$temporary" "$destination"; then
+  command rm -f -- "$temporary"
+  return 1
+fi

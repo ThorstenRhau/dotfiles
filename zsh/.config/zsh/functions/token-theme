@@ -1,0 +1,52 @@
+# Persist and apply a Token appearance family.
+
+local usage='Usage: token-theme [token|token-flint|token-temper|next|--help]'
+local requested current state_dir state_file stored temporary
+current="$(_token_appearance)"
+state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/token"
+state_file="$state_dir/appearance"
+[[ -r "$state_file" ]] && stored="$(<"$state_file")"
+
+case "$#:$1" in
+  0:) print -r -- "$current"; return 0 ;;
+  1:--help | 1:-h)
+    print -r -- "$usage"
+    return 0
+    ;;
+  1:next)
+    case "$current" in
+      token) requested=token-flint ;;
+      token-flint) requested=token-temper ;;
+      token-temper) requested=token ;;
+    esac
+    ;;
+  1:token | 1:token-flint | 1:token-temper) requested="$1" ;;
+  *)
+    print -u2 -r -- "$usage"
+    return 2
+    ;;
+esac
+
+if [[ "$requested" == "$current" ]]; then
+  if [[ ! -e "$state_file" || "$stored" == "$requested" ]]; then
+    print -r -- "$current"
+    return 0
+  fi
+fi
+
+temporary="$state_file.tmp.$$"
+
+mkdir -m 700 -p "$state_dir" || return 1
+chmod 700 "$state_dir" || return 1
+if ! (umask 077; print -r -- "$requested" >|"$temporary"); then
+  command rm -f -- "$temporary"
+  return 1
+fi
+if ! command mv -f -- "$temporary" "$state_file"; then
+  command rm -f -- "$temporary"
+  return 1
+fi
+
+_apply_appearance
+print -r -- "$requested"
+print -r -- 'Reload Ghostty with Cmd+Shift+, to update existing windows.'

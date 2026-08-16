@@ -1,0 +1,13 @@
+# Print the persisted Token appearance, falling back to classic Token.
+
+local state_file="${XDG_STATE_HOME:-$HOME/.local/state}/token/appearance"
+local appearance=token
+
+if [[ -r "$state_file" ]]; then
+  appearance="$(<"$state_file")"
+fi
+
+case "$appearance" in
+  token | token-flint | token-temper) print -r -- "$appearance" ;;
+  *) print -r -- token ;;
+esac
