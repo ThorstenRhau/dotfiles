@@ -1,0 +1,5 @@
+#compdef token-theme
+
+_arguments -s \
+  '1:Token appearance:(token token-flint token-temper next --help)' \
+  '*: :_message "no more arguments"'

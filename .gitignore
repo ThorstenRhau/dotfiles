@@ -1,7 +1,10 @@
 # Starship generated configs (built from src/)
 starship/.config/starship.toml
-starship/.config/starship_dark.toml
-starship/.config/starship_light.toml
+starship/.config/starship-*.toml
+
+# Local Token appearance adapters
+ghostty/.config/ghostty/token-active.ghostty
+tmux/.config/tmux/token-active.conf
 
 # Zsh specific local files that are ignored
 zsh/.config/zsh/local.zsh

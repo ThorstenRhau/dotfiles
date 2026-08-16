@@ -7,8 +7,9 @@
 ((_appearance_prompt_count < 3)) && return
 _appearance_prompt_count=0
 
-local val new_appearance
+local val new_appearance new_token_appearance
 val=$(defaults read -g AppleInterfaceStyle 2>/dev/null)
+new_token_appearance="$(_token_appearance)"
 
 if [[ "$val" == "Dark" ]]; then
   new_appearance=dark
@@ -16,7 +17,8 @@ else
   new_appearance=light
 fi
 
-if [[ "$new_appearance" != "$SYSTEM_APPEARANCE" ]]; then
+if [[ "$new_appearance" != "$SYSTEM_APPEARANCE" ||
+  "$new_token_appearance" != "$TOKEN_APPEARANCE" ]]; then
   export SYSTEM_APPEARANCE="$new_appearance"
   _apply_appearance
 fi
