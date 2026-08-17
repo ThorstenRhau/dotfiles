@@ -20,7 +20,7 @@
 	grafted = "#6d675f"
 	remoteBranch = "bold #2d6c6c"
 	stash = "#7c619a"
-	tag = "bold #356f69"
+	tag = "bold #2c706a"
 
 [color "diff"]
 	# Keep glg's commit colour, but let delta style diff bodies.
@@ -31,7 +31,7 @@
 	context = "#6d675f"
 	filename = "bold #536f88"
 	function = "#7c619a"
-	lineNumber = "#806021"
+	lineNumber = "#835f10"
 	match = "bold #a44e31"
 	matchContext = "bold #a44e31"
 	matchSelected = "bold #a44e31"
@@ -52,12 +52,12 @@
 	error = "bold #aa4e55"
 	hint = "#2d6c6c"
 	success = "#4f714b"
-	warning = "#806021"
+	warning = "#835f10"
 
 [color "status"]
 	added = "#4f714b"
 	branch = "bold #a44e31"
-	changed = "bold #806021"
+	changed = "bold #835f10"
 	header = "#6d675f"
 	localBranch = "#536f88"
 	noBranch = "bold #aa4e55"
