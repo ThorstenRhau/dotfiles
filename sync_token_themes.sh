@@ -73,7 +73,7 @@ fi
 
 require_dir "$CONTRIB" || exit 1
 
-appearances='token token-flint token-temper'
+appearances='token token-flint token-temper token-ultra'
 modes='dark light'
 
 for appearance in $appearances; do

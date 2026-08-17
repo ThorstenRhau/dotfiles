@@ -8,6 +8,6 @@ if [[ -r "$state_file" ]]; then
 fi
 
 case "$appearance" in
-  token | token-flint | token-temper) print -r -- "$appearance" ;;
+  token | token-flint | token-temper | token-ultra) print -r -- "$appearance" ;;
   *) print -r -- token ;;
 esac
