@@ -8,7 +8,7 @@ set -eu
 script_dir="$(cd "$(dirname "$0")" && pwd)"
 out_dir="$(dirname "$script_dir")"
 palette_dir="$script_dir/palettes"
-appearances='token token-flint token-temper token-ultra'
+appearances='token token-flint token-temper token-ultra token-meridian'
 modes='dark light'
 
 if [ ! -r "$script_dir/base.toml" ]; then
