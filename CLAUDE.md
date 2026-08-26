@@ -29,7 +29,7 @@ configs first when deploying `starship` alone.
 
 Token is the source of truth for every application color. Do not edit generated
 theme files manually. The `token-theme` Zsh command selects `token`,
-`token-flint`, `token-temper`, or `token-ultra`; macOS continues to select light
+`token-flint`, `token-temper`, `token-ultra`, or `token-meridian`; macOS continues to select light
 or dark mode.
 The local selection and generated Ghostty/tmux adapters must remain untracked.
 After Token contrib files change, run:
@@ -38,7 +38,7 @@ After Token contrib files change, run:
 ./sync_token_themes.sh /Users/thorre/github/token
 ```
 
-The script updates all four tracked theme families and regenerates the eight
+The script updates all five tracked theme families and regenerates the ten
 ignored Starship family/mode configs from `starship/.config/src/`. It must not
 modify the Token checkout.
 

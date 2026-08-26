@@ -1,6 +1,6 @@
 # Persist and apply a Token appearance family.
 
-local usage='Usage: token-theme [token|token-flint|token-temper|token-ultra|next|--help]'
+local usage='Usage: token-theme [token|token-flint|token-temper|token-ultra|token-meridian|next|--help]'
 local requested current state_dir state_file stored temporary
 current="$(_token_appearance)"
 state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/token"
@@ -18,10 +18,11 @@ case "$#:$1" in
       token) requested=token-flint ;;
       token-flint) requested=token-temper ;;
       token-temper) requested=token-ultra ;;
-      token-ultra) requested=token ;;
+      token-ultra) requested=token-meridian ;;
+      token-meridian) requested=token ;;
     esac
     ;;
-  1:token | 1:token-flint | 1:token-temper | 1:token-ultra) requested="$1" ;;
+  1:token | 1:token-flint | 1:token-temper | 1:token-ultra | 1:token-meridian) requested="$1" ;;
   *)
     print -u2 -r -- "$usage"
     return 2
