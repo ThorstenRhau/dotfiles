@@ -5,6 +5,7 @@
 if [[ -x /opt/homebrew/bin/brew ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
   export ARCHFLAGS="-arch arm64"
+  export HOMEBREW_AUTO_UPDATE_SECS=300
   export HOMEBREW_BAT=1
   export HOMEBREW_DOWNLOAD_CONCURRENCY=auto
   export HOMEBREW_EDITOR=nvim
