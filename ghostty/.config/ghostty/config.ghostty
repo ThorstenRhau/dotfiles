@@ -49,7 +49,7 @@ font-variation-bold-italic     = wght = 700
 font-variation-bold-italic     = slnt = -12
 font-variation-italic          = wght = 450
 font-variation-italic          = slnt = -12
-macos-icon                     = xray
+macos-icon                     = official
 macos-non-native-fullscreen    = visible-menu
 macos-option-as-alt            = left
 macos-titlebar-style           = transparent
