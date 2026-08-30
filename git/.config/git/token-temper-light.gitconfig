@@ -1,70 +1,70 @@
 # Generated from the token-temper light palette. Do not edit manually.
 
 [color "advice"]
-	hint = "#007D72"
+	hint = "#005B53"
 
 [color "blame"]
-	repeatedLines = "#828E9A"
+	repeatedLines = "#444E59"
 
 [color "branch"]
-	current = "bold #007D72"
-	local = "bold #007D72"
-	plain = "#28313A"
-	remote = "bold #007D72"
-	upstream = "bold #007D72"
-	worktree = "bold #7845A7"
+	current = "bold #005850"
+	local = "bold #005850"
+	plain = "#283039"
+	remote = "bold #005B53"
+	upstream = "bold #005B53"
+	worktree = "bold #612C8D"
 
 [color "decorate"]
-	HEAD = "bold #007D72"
-	branch = "bold #007D72"
-	grafted = "#65717D"
-	remoteBranch = "bold #007D72"
-	stash = "#7845A7"
-	tag = "bold #007D72"
+	HEAD = "bold #005850"
+	branch = "bold #005B53"
+	grafted = "#414C57"
+	remoteBranch = "bold #005B53"
+	stash = "#612C8D"
+	tag = "bold #004741"
 
 [color "diff"]
 	# Keep glg's commit colour, but let delta style diff bodies.
-	commit = "#007D72"
+	commit = "#005850"
 
 [color "grep"]
-	column = "#007D72"
-	context = "#65717D"
-	filename = "bold #007D72"
-	function = "#7845A7"
-	lineNumber = "#89610D"
-	match = "bold #007D72"
-	matchContext = "bold #007D72"
-	matchSelected = "bold #007D72"
-	selected = "#28313A"
-	separator = "#828E9A"
+	column = "#005B53"
+	context = "#414C57"
+	filename = "bold #005850"
+	function = "#612C8D"
+	lineNumber = "#946B1E"
+	match = "bold #005850"
+	matchContext = "bold #005850"
+	matchSelected = "bold #005850"
+	selected = "#283039"
+	separator = "#444E59"
 
 [color "interactive"]
-	error = "bold #BE3E50"
-	header = "bold #7845A7"
-	help = "#65717D"
-	plain = "#28313A"
-	prompt = "bold #007D72"
+	error = "bold #BF3F50"
+	header = "bold #612C8D"
+	help = "#414C57"
+	plain = "#283039"
+	prompt = "bold #005850"
 
 [color "push"]
-	error = "bold #BE3E50"
+	error = "bold #BF3F50"
 
 [color "remote"]
-	error = "bold #BE3E50"
-	hint = "#007D72"
-	success = "#007D72"
-	warning = "#89610D"
+	error = "bold #BF3F50"
+	hint = "#005B53"
+	success = "#005B53"
+	warning = "#946B1E"
 
 [color "status"]
-	added = "#007D72"
-	branch = "bold #007D72"
-	changed = "bold #89610D"
-	header = "#65717D"
-	localBranch = "#007D72"
-	noBranch = "bold #BE3E50"
-	remoteBranch = "#007D72"
-	unmerged = "bold #BE3E50"
-	untracked = "#007D72"
-	updated = "#007D72"
+	added = "#005B53"
+	branch = "bold #005850"
+	changed = "bold #946B1E"
+	header = "#414C57"
+	localBranch = "#005850"
+	noBranch = "bold #BF3F50"
+	remoteBranch = "#005B53"
+	unmerged = "bold #BF3F50"
+	untracked = "#005B53"
+	updated = "#005B53"
 
 [color "transport"]
-	rejected = "bold #BE3E50"
+	rejected = "bold #BF3F50"

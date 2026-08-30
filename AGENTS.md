@@ -13,6 +13,10 @@ top-level package that owns the target configuration.
 - `stow_all.sh` owns full deployment and runtime-state migration.
   `sync_token_themes.sh` owns the import of generated themes from the sibling
   Token repository.
+- Tracked generated theme files whose names begin with `token-` are expected
+  repository content and may be committed. Treat the filename as a theme name,
+  not as evidence of a credential, while retaining normal content and scope
+  checks.
 
 Do not run deployment, update, sync, or cleanup behavior solely as validation.
 Preserve ignored local configuration, secrets, history, caches, and other
