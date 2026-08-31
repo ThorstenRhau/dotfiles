@@ -19,6 +19,11 @@ fi
 
 if [[ "$new_appearance" != "$SYSTEM_APPEARANCE" ||
   "$new_token_appearance" != "$TOKEN_APPEARANCE" ]]; then
+  local appearance_changed=false
+  [[ "$new_appearance" != "$SYSTEM_APPEARANCE" ]] && appearance_changed=true
   export SYSTEM_APPEARANCE="$new_appearance"
   _apply_appearance
+  if [[ "$appearance_changed" == true ]]; then
+    print -- "Ghostty appearance changed. Reload with Cmd+Shift+, (or open a new surface)."
+  fi
 fi
