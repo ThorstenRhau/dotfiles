@@ -86,7 +86,7 @@ alias gl='git pull'
 alias glg='git log --oneline --graph --decorate -n 20'
 # Show annotated tags, newest first, with their release notes.
 alias gta="git for-each-ref refs/tags --sort=-taggerdate --color=auto --format='%(if)%(taggerdate)%(then)%(color:bold yellow)%(refname:short)%(color:reset) %(color:dim cyan)%(taggerdate:short)%(color:reset)%0a  %(contents:subject)%0a%(if)%(contents:body)%(then)  %(contents:body)%0a%(end)%0a%(end)'"
-alias gp='git push'
+alias gp='git push --follow-tags'
 alias gst='git status'
 
 # =============================================================================
