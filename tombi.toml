@@ -1,5 +1,5 @@
 [format.rules]
-comment-style                   = "preserve"
+comment-style                   = "normalize"
 key-value-equals-sign-alignment = true
 trailing-comment-alignment      = true
 
