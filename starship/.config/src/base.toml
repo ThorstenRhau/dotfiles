@@ -3,7 +3,11 @@
 add_newline         = true
 command_timeout     = 1000
 continuation_prompt = "[.](bright-black) "
+format              = "$username$hostname$directory$git_branch$git_commit$git_state$git_status$package$golang$lua$nodejs$python$claude_cost$claude_model$line_break$jobs$battery$status$character"
 right_format        = "$cmd_duration"
+
+[cmd_duration]
+format = "[$duration]($style)"
 
 [character]
 error_symbol              = "[▶](bold red)"
@@ -14,306 +18,96 @@ vimcmd_symbol             = "[◀](bold green)"
 vimcmd_visual_symbol      = "[◀](bold yellow)"
 
 [claude_cost]
+format = ' [·](bright-black) [$symbol(\$$cost)]($style)'
 symbol = "cost "
 
 [claude_model]
+format = " [·](bright-black) [$symbol$model]($style)"
 symbol = "claude "
 
 [hostname]
-format     = "[$ssh_symbol $hostname ](bold yellow)"
+format     = "[$ssh_symbol$hostname](bold yellow)[ · ](bright-black) "
 ssh_only   = true
-ssh_symbol = "@"
+ssh_symbol = " "
 
 [username]
 detect_env_vars = ["SSH_CLIENT", "SSH_CONNECTION", "SSH_TTY", "SUDO_USER"]
-format          = "[$user]($style) "
+format          = "[$user]($style)[ · ](bright-black) "
 show_always     = false
 style_root      = "red bold"
 style_user      = "green bold"
 
+[directory]
+format    = "[$path]($style)[$read_only]($read_only_style)"
+read_only = " 󰌾"
+
 [git_branch]
+format            = " [·](bright-black) [$symbol$branch]($style)"
 symbol            = " "
 truncation_symbol = "..."
 
-[cmd_duration]
-format = "took [$duration]($style)"
-
 [git_commit]
+format       = " [·](bright-black) [$hash$tag]($style)"
 tag_disabled = false
-tag_symbol   = " tag "
+tag_symbol   = "  "
+
+[git_state]
+format = " [·](bright-black) [$state( $progress_current/$progress_total)]($style)"
 
 [git_status]
-ahead             = "[↑](green)"
-behind            = "[↓](red)"
-conflicted        = "[=](red bold)"
-deleted           = "[x](red)"
-disabled          = false
-diverged          = "[↕](yellow)"
-format            = "($all_status$ahead_behind )"
+ahead             = " [↑${count}](green)"
+behind            = " [↓${count}](red)"
+conflicted        = " [=${count}](red bold)"
+deleted           = " [x${count}](red)"
+diverged          = " [↕↑${ahead_count}↓${behind_count}](yellow)"
+format            = "($all_status$ahead_behind)"
 ignore_submodules = true
-modified          = "[!](yellow)"
-renamed           = "[r](purple)"
-staged            = "[+](green)"
-stashed           = "[$](dimmed)"
+modified          = " [!${count}](yellow)"
+renamed           = " [r${count}](purple)"
+staged            = " [+${count}](green)"
+stashed           = " [\\$${count}](bright-black)"
 style             = "red"
-untracked         = "[?](blue)"
-
-[git_metrics]
-added_style   = "green"
-deleted_style = "red"
-disabled      = false
-format        = "([+$added]($added_style) )([-$deleted]($deleted_style) )"
-
-[aws]
-symbol = "aws "
-
-[azure]
-symbol = "az "
-
-[battery]
-charging_symbol    = "charging "
-discharging_symbol = "discharging "
-empty_symbol       = "empty "
-full_symbol        = "full "
-unknown_symbol     = "unknown "
-
-[buf]
-symbol = "buf "
-
-[bun]
-symbol = "bun "
-
-[c]
-symbol = "C "
-
-[cpp]
-symbol = "C++ "
-
-[cobol]
-symbol = "cobol "
-
-[cmake]
-symbol = "cmake "
-
-[conda]
-symbol = "conda "
-
-[container]
-symbol = "container "
-
-[crystal]
-symbol = "cr "
-
-[daml]
-symbol = "daml "
-
-[dart]
-symbol = "dart "
-
-[deno]
-symbol = "deno "
-
-[directory]
-read_only = " ro"
-
-[docker_context]
-symbol = "docker "
-
-[dotnet]
-format = "via [$symbol($version )(target $tfm )]($style)"
-symbol = ".NET "
-
-[elixir]
-symbol = "exs "
-
-[elm]
-symbol = "elm "
-
-[erlang]
-symbol = "erl "
-
-[fennel]
-symbol = "fnl "
-
-[fortran]
-symbol = "fortran "
-
-[fossil_branch]
-symbol            = "fossil "
-truncation_symbol = "..."
-
-[gcloud]
-symbol = "gcp "
-
-[gleam]
-symbol = "gleam "
-
-[golang]
-symbol = "go "
-
-[gradle]
-symbol = "gradle "
-
-[guix_shell]
-symbol = "guix "
-
-[haskell]
-symbol = "haskell "
-
-[haxe]
-symbol = "hx "
-
-[helm]
-symbol = "helm "
-
-[hg_branch]
-symbol            = "hg "
-truncation_symbol = "..."
-
-[java]
-symbol = "java "
-
-[jobs]
-symbol = "*"
-
-[julia]
-symbol = "jl "
-
-[kotlin]
-symbol = "kt "
-
-[kubernetes]
-symbol = "kubernetes "
-
-[lua]
-symbol = "lua "
-
-[maven]
-symbol = "maven "
-
-[memory_usage]
-symbol = "memory "
-
-[meson]
-symbol            = "meson "
-truncation_symbol = "..."
-
-[mojo]
-symbol = "mojo "
-
-[nats]
-symbol = "nats "
-
-[netns]
-symbol = "netns "
-
-[nim]
-symbol = "nim "
-
-[nix_shell]
-symbol = "nix "
-
-[nodejs]
-symbol = "nodejs "
-
-[ocaml]
-symbol = "ml "
-
-[odin]
-symbol = "odin "
-
-[opa]
-symbol = "opa "
-
-[openstack]
-symbol = "openstack "
-
-[os]
-disabled = true
+untracked         = " [?${count}](blue)"
 
 [package]
-symbol = "pkg "
+format = " [·](bright-black) [$symbol$version]($style)"
+symbol = "󰏗 "
+style  = "bold purple"
 
-[perl]
-symbol = "pl "
+[golang]
+format = " [·](bright-black) [$symbol$version]($style)"
+symbol = " "
 
-[php]
-symbol = "php "
+[lua]
+format = " [·](bright-black) [$symbol$version]($style)"
+symbol = " "
 
-[pijul_channel]
-symbol            = "pijul "
-truncation_symbol = "..."
-
-[pixi]
-symbol = "pixi "
-
-[pulumi]
-symbol = "pulumi "
-
-[purescript]
-symbol = "purs "
+[nodejs]
+format = " [·](bright-black) [$symbol$version]($style)"
+symbol = " "
 
 [python]
 detect_extensions = []
 detect_folders    = []
-format            = "[$symbol$virtualenv ($version)]($style) "
-symbol            = "py "
+format            = " [·](bright-black) [$symbol$version]($style)( [$virtualenv]($style))"
+symbol            = " "
 
-[quarto]
-symbol = "quarto "
+[jobs]
+symbol = "*"
 
-[raku]
-symbol = "raku "
-
-[red]
-symbol = "red "
-
-[rlang]
-symbol = "r "
-
-[ruby]
-symbol = "rb "
-
-[rust]
-symbol = "rs "
-
-[scala]
-symbol = "scala "
-
-[shlvl]
-symbol = "shlvl "
-
-[spack]
-symbol = "spack "
-
-[solidity]
-symbol = "solidity "
+[battery]
+charging_symbol    = "󰂄 "
+discharging_symbol = "󰂃 "
+empty_symbol       = "󰂎 "
+full_symbol        = "󰁹 "
+unknown_symbol     = "󰂑 "
 
 [status]
 disabled              = false
-not_executable_symbol = "noexec"
-not_found_symbol      = "notfound"
-sigint_symbol         = "sigint"
+format                = "[$symbol$status]($style) "
+map_symbol            = true
+not_executable_symbol = "x!"
+not_found_symbol      = "x?"
+sigint_symbol         = "^C"
 signal_symbol         = "sig"
-symbol                = "[x](bold red) "
-
-[sudo]
-symbol = "sudo "
-
-[swift]
-symbol = "swift "
-
-[terraform]
-symbol = "terraform "
-
-[typst]
-symbol = "typst "
-
-[vagrant]
-symbol = "vagrant "
-
-[xmake]
-symbol = "xmake "
-
-[zig]
-symbol = "zig "
+symbol                = "x"
