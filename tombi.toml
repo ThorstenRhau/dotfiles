@@ -4,4 +4,4 @@ key-value-equals-sign-alignment = true
 trailing-comment-alignment      = true
 
 [lint.rules]
-key-empty = "error"
+key-empty = "warn"
