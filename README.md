@@ -15,6 +15,16 @@ brew bundle
 The managed packages are `bat`, `fzf`, `ghostty`, `git`, `lazygit`, `ripgrep`,
 `starship`, `tmux`, and `zsh`.
 
+## Typography
+
+Ghostty uses the licensed `MonoLisaCode` family for terminal cells and
+`MonoLisaText` for window and tab titles. `Symbols Nerd Font Mono`, installed
+through the declared Homebrew cask, is the fallback for semantic prompt and UI
+icons that MonoLisa does not provide. After a macOS light/dark appearance
+change, reload Ghostty with `Cmd+Shift+,`; if CoreText does not refresh the
+grade in an existing surface, open a new surface or restart Ghostty. Font files
+are installed locally and are not part of this repository.
+
 To deploy an individual package, run:
 
 ```sh

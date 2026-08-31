@@ -157,7 +157,7 @@ if (($+commands[fzf])) && [[ -o zle ]] && [[ -t 0 ]]; then
   export _FZF_BASE_OPTS="\
 --height=40% --layout=reverse --info=inline --cycle \
 --border=sharp --scrollbar='│' \
---prompt='❯ ' --pointer='▶' --marker='✓' \
+--prompt='› ' --pointer='▶' --marker='✓' \
 --ghost='Type to search...' \
 --bind='ctrl-/:toggle-preview'"
 

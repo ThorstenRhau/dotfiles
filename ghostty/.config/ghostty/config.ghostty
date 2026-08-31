@@ -3,29 +3,12 @@
 # ghostty +list-themes
 # ghostty +list-fonts
 #
-# ## Font sample
-# abcdefghijklmnopqrstuvwxyz
-# ABCDEFGHIJKLMNOPQRSTUVWXYZ
-# 0123456789 (){}[]
-# +-/= .,;:!? #&$%@ß|^~
-#
-# ## Ligatures:
-# <!-- -- != := === >= >- >=>
-# |-> -> <$> </> #[ ||> |=
-# ~@ ~- ~=
-#
-# ##Berkeley Mono Stylistic Sets:
-# calt: Ligatures
-# ss01: Slashed zero (0 with slash)
-# ss02: Dotted zero (0 with dot)
-# ss03: Gap zero (0 with gap/opening)
-# ss04: Slashed zero + slashed 7
-# ss05: Dotted zero + slashed 7
-# ss06: Gap zero + slashed 7
-#
-# wght 100-900
-# wdth 60-100
-# slnt 0 -16
+# MonoLisa v3 sample
+# Il1| O0o 5S 8B 6G 7Z (){}[] +-/= .,;:!? #&$%@ß|^~
+# Regular, *italic*, **bold**, and ***bold italic***
+# != === >= -> </> ## ..=  |>   ▶ ◀ ↑ ↓ ↕   󰌾 󰏗
+# `wght` is 450 for regular/italic and 700 for bold styles. The generated
+# Token adapter supplies `GRAD` for the current macOS appearance.
 
 adjust-box-thickness           = -1
 adjust-cursor-thickness        = 2
@@ -38,17 +21,17 @@ clipboard-read                 = ask
 copy-on-select                 = clipboard
 cursor-color                   = cell-foreground
 cursor-text                    = cell-background
-font-family                    = Berkeley Mono Variable
+font-family                    = MonoLisaCode
 font-family                    = Symbols Nerd Font Mono
-font-feature                   = +calt
+font-feature                   = +liga,+calt,+dlig
 font-size                      = 14
-font-variation                 = wdth = 100
+font-synthetic-style           = false
 font-variation                 = wght = 450
 font-variation-bold            = wght = 700
 font-variation-bold-italic     = wght = 700
-font-variation-bold-italic     = slnt = -12
 font-variation-italic          = wght = 450
-font-variation-italic          = slnt = -12
+# `Comma` is Ghostty's layout-independent W3C physical key code.
+keybind                        = cmd+shift+Comma=reload_config
 macos-icon                     = official
 macos-non-native-fullscreen    = visible-menu
 macos-option-as-alt            = left
@@ -69,4 +52,5 @@ window-padding-balance         = true
 window-save-state              = always
 window-step-resize             = true
 window-theme                   = system
+window-title-font-family       = MonoLisaText
 window-width                   = 120
