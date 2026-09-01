@@ -10,47 +10,108 @@
 # `wght` is 450 for regular/italic and 700 for bold styles. The generated
 # Token adapter supplies `GRAD` for the current macOS appearance.
 
-adjust-box-thickness           = -1
-adjust-cursor-thickness        = 2
-adjust-overline-thickness      = -1
-adjust-strikethrough-thickness = -1
-adjust-underline-thickness     = -1
-auto-update                    = check
-bold-color                     = bright
-clipboard-read                 = ask
-copy-on-select                 = clipboard
-cursor-color                   = cell-foreground
-cursor-text                    = cell-background
-font-family                    = MonoLisaCode
-font-family                    = Symbols Nerd Font Mono
-font-feature                   = +liga,+calt,+dlig
-font-size                      = 14
-font-synthetic-style           = false
-font-variation                 = wght = 450
-font-variation-bold            = wght = 700
-font-variation-bold-italic     = wght = 700
-font-variation-italic          = wght = 450
-# `Comma` is Ghostty's layout-independent W3C physical key code.
-keybind                        = cmd+shift+Comma=reload_config
-macos-icon                     = official
-macos-non-native-fullscreen    = visible-menu
-macos-option-as-alt            = left
-macos-titlebar-style           = transparent
-mouse-hide-while-typing        = true
-mouse-shift-capture            = false
-notify-on-command-finish       = unfocused
-quick-terminal-position        = center
-quick-terminal-size            = 500px
-quit-after-last-window-closed  = true
-scrollback-limit               = 25000000
-shell-integration-features     = cursor,sudo,title,ssh-env,ssh-terminfo,path
-theme                          = dark:token-dark,light:token-light
-config-file                    = ?token-active.ghostty
-unfocused-split-opacity        = 1
-window-height                  = 42
-window-padding-balance         = true
-window-save-state              = always
-window-step-resize             = true
-window-theme                   = system
-window-title-font-family       = MonoLisaText
-window-width                   = 120
+### General configuration
+adjust-cursor-thickness       = 2
+auto-update                   = check
+bold-color                    = bright
+clipboard-read                = ask
+copy-on-select                = clipboard
+cursor-color                  = cell-foreground
+cursor-opacity                = 0.65
+cursor-text                   = cell-background
+macos-non-native-fullscreen   = visible-menu
+macos-option-as-alt           = left
+macos-titlebar-style          = transparent
+mouse-hide-while-typing       = true
+mouse-shift-capture           = false
+notify-on-command-finish      = unfocused
+quit-after-last-window-closed = true
+scrollback-limit              = 25000000
+shell-integration-features    = cursor,sudo,title,ssh-env,ssh-terminfo,path
+theme                         = dark:token-dark,light:token-light
+config-file                   = ?token-active.ghostty
+unfocused-split-opacity       = 1
+window-height                 = 42
+window-padding-balance        = true
+window-step-resize            = true
+window-theme                  = system
+window-title-font-family      = MonoLisaText
+window-width                  = 120
+
+### Font configuration
+font-family                = MonoLisaCode
+font-family                = Symbols Nerd Font Mono
+font-size                  = 14
+font-synthetic-style       = false
+font-variation             = wght = 450
+font-variation-bold        = wght = 700
+font-variation-bold-italic = wght = 700
+font-variation-italic      = wght = 450
+
+### OpenType features
+# Enable or disable each feature with + or -.
+# Documentation: https://www.monolisa.dev/tester/code
+#
+# calt  Contextual alternatives: 1:1
+# cv01  Markdown headings: ##
+# cv02  Less, slash, greater: </>
+# cv03  Less, bar, greater: <|>
+# cv04  Less, hyphen, greater: <->
+# cv05  Less, equal, greater: <=>
+# cv06  Alternative ≥ ≤ ligatures 1: >=
+# cv07  Alternative ≥ ≤ ligatures 2: >=
+# cv08  Arrows: ->
+# cv09  Equal combinations: ==
+# cv10  Alternative .= … = ligatures: .=
+# cv11  Tilde combinations: <~>
+# cv12  Ampersand combinations: &>
+# dlig  Coding ligatures: ===
+# liga  Whitespace ligatures: {|
+# ss01  Script variant, italic only: f
+# ss02  Alternative i and r: i r
+# ss03  Alternative g 1, upright only: g
+# ss04  Alternative g 2, upright only: g
+# ss05  Alternative at sign: @
+# ss06  Traditional at sign: @
+# ss07  Traditional asterisk: *
+# ss08  Alternative currency symbols: $ ฿ ¢
+# ss09  Alternative ampersand: &
+# ss10  Alternative parentheses: ()
+# ss11  Alternative braces: {}
+# ss12  Thin double backslash: \\
+# ss13  Hexadecimal multiplication sign: 0xF
+# ss14  Alternative seven: 7
+# ss15  Plain zero: 0
+# zero  Slashed zero: 0
+
+font-feature = +calt
+font-feature = +cv01
+font-feature = +cv02
+font-feature = +cv03
+font-feature = +cv04
+font-feature = +cv05
+font-feature = -cv06
+font-feature = +cv07
+font-feature = +cv08
+font-feature = +cv09
+font-feature = +cv10
+font-feature = +cv11
+font-feature = +cv12
+font-feature = +dlig
+font-feature = +liga
+font-feature = -ss01
+font-feature = +ss02
+font-feature = +ss03
+font-feature = -ss04
+font-feature = -ss05
+font-feature = +ss06
+font-feature = +ss07
+font-feature = +ss08
+font-feature = +ss09
+font-feature = +ss10
+font-feature = +ss11
+font-feature = +ss12
+font-feature = +ss13
+font-feature = +ss14
+font-feature = -ss15
+font-feature = -zero

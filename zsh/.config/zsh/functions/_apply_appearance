@@ -47,8 +47,8 @@ export FZF_DEFAULT_OPTS="$_FZF_BASE_OPTS $_FZF_THEME_OPTS"
 local config_home="${XDG_CONFIG_HOME:-$HOME/.config}"
 local ghostty_adapter="$config_home/ghostty/token-active.ghostty"
 local tmux_adapter="$config_home/tmux/token-active.conf"
-local ghostty_grade=25
-[[ "$mode" == "dark" ]] && ghostty_grade=-25
+local ghostty_grade=15
+[[ "$mode" == "dark" ]] && ghostty_grade=-15
 
 _write_token_adapter "$ghostty_adapter" \
   "theme = dark:$appearance-dark,light:$appearance-light
