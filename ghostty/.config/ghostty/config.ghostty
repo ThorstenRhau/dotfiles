@@ -41,7 +41,7 @@ window-width                  = 120
 ### Font configuration
 font-family                = MonoLisaCode
 font-family                = Symbols Nerd Font Mono
-font-size                  = 14
+font-size                  = 13
 font-synthetic-style       = false
 font-variation             = wght = 450
 font-variation-bold        = wght = 700
