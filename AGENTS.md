@@ -8,6 +8,9 @@ top-level package that owns the target configuration.
 - `README.md` owns the installation overview, managed-package list, and Token
   theme synchronization entry point.
 - `Brewfile` owns the declared Homebrew package set.
+- `ghostty/.config/ghostty/config.ghostty` owns the active typography. Validate
+  terminal-cell and prompt glyphs against `MonoLisaCode`, window and tab titles
+  against `MonoLisaText`, and fallback icons against `Symbols Nerd Font Mono`.
 - Each top-level package directory owns the files deployed to the matching paths
   under the user's home directory.
 - `stow_all.sh` owns full deployment and runtime-state migration.

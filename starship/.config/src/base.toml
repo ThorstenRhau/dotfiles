@@ -28,7 +28,7 @@ symbol = "claude "
 [hostname]
 format     = "[$ssh_symbol$hostname](bold yellow)[ · ](bright-black) "
 ssh_only   = true
-ssh_symbol = " "
+ssh_symbol = "󰣀 "
 
 [username]
 detect_env_vars = ["SSH_CLIENT", "SSH_CONNECTION", "SSH_TTY", "SUDO_USER"]
