@@ -3,6 +3,9 @@
 Personal macOS dotfiles for an Apple Silicon machine, managed with
 [GNU Stow](https://www.gnu.org/software/stow/).
 
+Durable architecture and decision records are indexed in
+[`docs/index.md`](docs/index.md).
+
 ## Install
 
 Install the declared tools, then deploy every package:
@@ -40,9 +43,9 @@ sh starship/.config/src/generate.sh
 ## Colors
 
 [Token](https://github.com/ThorstenRhau/token) is the color source of truth.
-Classic Token, Token Flint, Token Temper, Token Ultra, and Token Meridian are all available,
-with macOS continuing to select the matching light or dark mode automatically.
-Classic Token is used until another appearance is selected:
+Classic Token, Token Flint, Token Temper, Token Ultra, and Token Meridian are
+all available, with macOS continuing to select the matching light or dark mode
+automatically. Classic Token is used until another appearance is selected:
 
 ```sh
 token-theme token
