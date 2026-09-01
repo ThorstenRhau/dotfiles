@@ -26,12 +26,12 @@ format = " [·](bright-black) [$symbol$model]($style)"
 symbol = "claude "
 
 [hostname]
-format   = "[ssh@$hostname](bold yellow)[ · ](bright-black) "
+format   = "[ssh@$hostname](bold yellow) [·](bright-black) "
 ssh_only = true
 
 [username]
 detect_env_vars = ["SSH_CLIENT", "SSH_CONNECTION", "SSH_TTY", "SUDO_USER"]
-format          = "[$user]($style)[ · ](bright-black) "
+format          = "[$user]($style) [·](bright-black) "
 show_always     = false
 style_root      = "red bold"
 style_user      = "green bold"
