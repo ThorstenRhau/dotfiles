@@ -65,5 +65,5 @@ this repository without modifying Token:
 ./sync_token_themes.sh /Users/thorre/github/token
 ```
 
-The sync script also regenerates the eight ignored family/mode Starship configs
-and the unthemed fallback from tracked source files.
+The sync script also regenerates the ten ignored family/mode Starship configs
+and the ignored unthemed fallback from tracked source files.
