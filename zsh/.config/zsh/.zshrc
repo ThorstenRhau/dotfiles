@@ -192,7 +192,9 @@ if (($+commands[fzf])) && [[ -o zle ]] && [[ -t 0 ]]; then
 --scheme=history --with-nth=2.. \
 --header='shift-del: delete | ctrl-y: copy' \
 --bind='ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' \
---bind='shift-delete:execute-silent($HOME/.config/zsh/scripts/fzf-history-delete \"$HISTFILE\" {2..})+down'"
+--bind='shift-delete:clear-multi+select+print(dotfiles-delete-history)+accept'"
+  source "$ZDOTDIR/scripts/fzf-history-delete"
+  zle -N fzf-history-widget _fzf-history-widget
 fi
 
 # =============================================================================

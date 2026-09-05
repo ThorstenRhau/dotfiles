@@ -11,8 +11,10 @@ $RECYCLE.BIN/
 *.lnk
 
 # Linux
-*~                                  # backup/temp files
-*.swp                               # vim swap files
+# backup/temp files
+*~
+# vim swap files
+*.swp
 
 # ── Shell scripts ─────────────────────────────────────────────────────────────
 *.tmp

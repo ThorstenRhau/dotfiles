@@ -55,6 +55,15 @@ Delta/Git, FZF, LazyGit, Ripgrep, Starship, Zsh, and Carapace configuration.
 It also writes ignored adapters for Ghostty and tmux, which long-running
 applications consume when reloaded.
 
+The Git theme include preserves inherited environment configuration and reuses
+its existing entry when the appearance changes. Tmux follows the selected
+family but retains its manually selected light/dark mode.
+
+Ctrl-R history deletion runs in the parent Zsh widget. Zsh reads and writes
+complete history events, then the widget loads a replacement history context
+and reopens the finder. Subsequent deletions reuse that context. Other running
+shells retain their own in-memory history lists.
+
 Private configuration, shell history, caches, generated appearance adapters,
 and deployable Starship outputs are intentionally outside version control.
 The relevant boundaries are enforced by `.gitignore`, package-local
