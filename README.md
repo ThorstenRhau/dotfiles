@@ -28,11 +28,20 @@ change, reload Ghostty with `Cmd+Shift+,`; if CoreText does not refresh the
 grade in an existing surface, open a new surface or restart Ghostty. Font files
 are installed locally and are not part of this repository.
 
-To deploy an individual package, run:
+To deploy an individual package other than `zsh`, run:
 
 ```sh
 stow --target "$HOME" --restow <package>
 ```
+
+For Zsh, keep local files outside the repository by disabling directory folding:
+
+```sh
+stow --target "$HOME" --restow --no-folding zsh
+```
+
+Use `./stow_all.sh` when migrating an older folded Zsh deployment; it preserves
+and moves existing local state before restowing.
 
 Generate Starship configurations first when deploying `starship` alone:
 
@@ -44,8 +53,9 @@ sh starship/.config/src/generate.sh
 
 [Token](https://github.com/ThorstenRhau/token) is the color source of truth.
 Classic Token, Token Flint, Token Temper, Token Ultra, and Token Meridian are
-all available, with macOS continuing to select the matching light or dark mode
-automatically. Classic Token is used until another appearance is selected:
+all available. Shell tools and Ghostty follow the macOS light or dark mode.
+Tmux defaults to dark; use its prefix followed by `T` to toggle light/dark mode.
+Classic Token is used until another appearance is selected:
 
 ```sh
 token-theme token
@@ -58,8 +68,9 @@ token-theme token-meridian
 Run `token-theme` without an argument to print the current appearance, or use
 `token-theme next` to cycle through all five. The selection is stored under
 `${XDG_STATE_HOME:-$HOME/.local/state}` rather than in Git. Existing shells
-update at their next appearance check, tmux reloads when running, and Ghostty
-windows can be updated with `Cmd+Shift+,`.
+update at their next appearance check, tmux reloads the selected family while
+retaining its light/dark mode, and Ghostty windows can be updated with
+`Cmd+Shift+,`.
 
 After Token contrib files are regenerated, sync all five appearances into
 this repository without modifying Token:

@@ -4,6 +4,7 @@ autoload -Uz compaudit
 
 local -a insecure_dirs
 insecure_dirs=("${(@f)$(compaudit 2>/dev/null)}")
+insecure_dirs=("${(@)insecure_dirs:#}")
 
 if (( ! ${#insecure_dirs} )); then
   print "No insecure zsh completion directories found."

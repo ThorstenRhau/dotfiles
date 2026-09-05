@@ -40,6 +40,8 @@ Run only checks relevant to the changed package.
 - POSIX shell: `sh -n <files>`, `shellcheck <files>`, and
   `shfmt -d -ci -i 2 <files>`.
 - Zsh: `zsh -n <files>`.
+- Zsh regression tests:
+  `uv run --no-project --offline python -m unittest discover -s tests -v`.
 - TOML: `tombi lint --offline --error-on-warnings .` and
   `tombi format --check --offline .`.
 - Ghostty:
