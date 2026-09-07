@@ -55,6 +55,14 @@ Delta/Git, FZF, LazyGit, Ripgrep, Starship, Zsh, and Carapace configuration.
 It also writes ignored adapters for Ghostty and tmux, which long-running
 applications consume when reloaded.
 
+The macOS appearance check runs every third prompt. When the Ghostty adapter
+contents change, Zsh writes it atomically and then sends `SIGUSR2` to this user's
+processes named exactly `ghostty`, including the shell's ancestor process.
+Ghostty reloads its configuration for both mode and Token family changes.
+Identical adapters do not trigger another reload; Ghostty being absent is silent.
+Idle terminals and active editors wait until a shell reaches the check. Reloading
+has the same font-refresh limitations as the manual reload action.
+
 The Git theme include preserves inherited environment configuration and reuses
 its existing entry when the appearance changes. Tmux follows the selected
 family but retains its manually selected light/dark mode.

@@ -12,15 +12,23 @@ FUNCTIONS = ROOT / "zsh/.config/zsh/functions"
 
 class ZshTests(unittest.TestCase):
     def run_zsh(self, script, *args):
-        result = subprocess.run(
-            ["zsh", "-dfi", "-c", script, "test", str(FUNCTIONS), *map(str, args)],
-            env={**os.environ, "ZDOTDIR": "/nonexistent"},
-            capture_output=True,
-            text=True,
-            timeout=10,
-            check=False,
-        )
+        with tempfile.TemporaryDirectory(prefix="dotfiles-zsh-") as home:
+            result = subprocess.run(
+                ["zsh", "-dfi", "-c", script, "test", str(FUNCTIONS), *map(str, args)],
+                env={
+                    "PATH": os.environ["PATH"],
+                    "HOME": home,
+                    "ZDOTDIR": home + "/.config/zsh",
+                    "XDG_CONFIG_HOME": home + "/.config",
+                    "XDG_STATE_HOME": home + "/.local/state",
+                },
+                capture_output=True,
+                text=True,
+                timeout=10,
+                check=False,
+            )
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertEqual(result.stderr, "")
         return result.stdout
 
     def test_git_configuration_survives_appearance_changes(self):
@@ -29,6 +37,7 @@ class ZshTests(unittest.TestCase):
             autoload -Uz _apply_appearance
             _token_appearance() { print -r -- "$test_appearance"; }
             _write_token_adapter() { return 0; }
+            pkill() { return 1; }
             tmux() { return 1; }
             _OS_TYPE=Darwin
             SYSTEM_APPEARANCE=light
@@ -48,6 +57,107 @@ class ZshTests(unittest.TestCase):
             _apply_appearance
             [[ $GIT_CONFIG_COUNT == 3 && $GIT_CONFIG_VALUE_0 == first ]] || exit 2
         """)
+
+    appearance_setup = r"""
+        fpath=("$1" $fpath)
+        autoload -Uz _apply_appearance _write_token_adapter _token_appearance
+        autoload -Uz _check_appearance token-theme
+        _OS_TYPE=Darwin
+        SYSTEM_APPEARANCE=light
+        TOKEN_APPEARANCE=token
+        tmux() { return 1; }
+        adapter="$XDG_CONFIG_HOME/ghostty/token-active.ghostty"
+        signal_count=0
+        signal_status=0
+        pkill() {
+          [[ "$*" == "-USR2 -a -x -u $EUID ghostty" ]] || exit 90
+          # Inspect the complete on-disk adapter at the moment of delivery.
+          local grade=15
+          [[ $SYSTEM_APPEARANCE == dark ]] && grade=-15
+          local expected="theme = dark:$TOKEN_APPEARANCE-dark,light:$TOKEN_APPEARANCE-light
+font-variation = GRAD = $grade
+font-variation-bold = GRAD = $grade
+font-variation-italic = GRAD = $grade
+font-variation-bold-italic = GRAD = $grade"
+          [[ -f $adapter && "$(<"$adapter")" == "$expected" ]] || exit 91
+          [[ ! -e "$adapter.tmp.$$" ]] || exit 92
+          ((signal_count++))
+          return $signal_status
+        }
+    """
+
+    def test_ghostty_reload_on_mode_changes_and_missing_adapter(self):
+        output = self.run_zsh(self.appearance_setup + r"""
+            _apply_appearance
+            [[ $signal_count == 1 ]] || exit 1
+            for SYSTEM_APPEARANCE in dark light; do
+              _apply_appearance
+            done
+            [[ $signal_count == 3 ]] || exit 2
+            _apply_appearance
+            [[ $signal_count == 3 ]] || exit 3
+            # A later shell sharing the adapter must not deliver another signal.
+            (pkill() { exit 94; }; _apply_appearance) || exit 4
+            rm "$adapter"
+            _apply_appearance
+            [[ $signal_count == 4 ]] || exit 5
+        """)
+        self.assertEqual(output, "")
+
+    def test_ghostty_write_failure_does_not_signal(self):
+        self.run_zsh(self.appearance_setup + r"""
+            _apply_appearance
+            original=$(<"$adapter")
+            # A file in place of the parent directory forces the real writer to fail.
+            XDG_CONFIG_HOME="$HOME/blocked"
+            print -r -- blocked > "$XDG_CONFIG_HOME"
+            SYSTEM_APPEARANCE=dark
+            _apply_appearance 2> "$HOME/errors"
+            [[ $signal_count == 1 && "$(<"$adapter")" == "$original" ]] || exit 1
+            [[ "$(<"$HOME/errors")" == *"Unable to update $XDG_CONFIG_HOME/ghostty/token-active.ghostty"* ]] || exit 2
+        """)
+
+    def test_ghostty_absent_is_silent_and_signal_errors_are_reported(self):
+        self.run_zsh(self.appearance_setup + r"""
+            signal_status=1
+            _apply_appearance > "$HOME/output" 2> "$HOME/errors"
+            [[ $signal_count == 1 && ! -s "$HOME/output" && ! -s "$HOME/errors" ]] || exit 1
+            signal_status=3
+            SYSTEM_APPEARANCE=dark
+            _apply_appearance 2> "$HOME/errors"
+            [[ $signal_count == 2 && "$(<"$HOME/errors")" == *"Unable to reload Ghostty (pkill status 3)"* ]] || exit 2
+            [[ $BAT_THEME == token-dark ]] || exit 3
+        """)
+
+    def test_ghostty_reload_on_token_family_changes(self):
+        output = self.run_zsh(self.appearance_setup + r"""
+            _apply_appearance
+            for family in token-flint token-temper token-ultra token-meridian token; do
+              token-theme "$family"
+              [[ $TOKEN_APPEARANCE == $family ]] || exit 1
+            done
+            [[ $signal_count == 6 ]] || exit 2
+            token-theme token
+            [[ $signal_count == 6 ]] || exit 3
+        """)
+        self.assertEqual(output.splitlines(), [
+            "token-flint", "token-temper", "token-ultra", "token-meridian", "token", "token"
+        ])
+
+    def test_ghostty_reload_waits_for_third_prompt(self):
+        output = self.run_zsh(self.appearance_setup + r"""
+            _apply_appearance
+            defaults() { print -r -- Dark; }
+            _appearance_prompt_count=0
+            _check_appearance
+            _check_appearance
+            [[ $signal_count == 1 && $SYSTEM_APPEARANCE == light ]] || exit 1
+            _check_appearance
+            [[ $signal_count == 2 && $SYSTEM_APPEARANCE == dark ]] || exit 2
+            repeat 3 _check_appearance
+            [[ $signal_count == 2 ]] || exit 3
+        """)
+        self.assertEqual(output, "")
 
     def test_completion_audit_handles_empty_and_spaced_paths(self):
         self.run_zsh(r"""

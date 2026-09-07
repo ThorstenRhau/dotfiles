@@ -51,4 +51,3 @@ fi
 
 _apply_appearance
 print -r -- "$requested"
-print -r -- 'Reload Ghostty with Cmd+Shift+, to update existing windows.'
