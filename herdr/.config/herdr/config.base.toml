@@ -11,26 +11,36 @@ focus_pane_up    = ["prefix+k", "alt+up"]
 focus_pane_right = ["prefix+l", "alt+right"]
 
 [ui]
-sidebar_start_collapsed      = false
-sidebar_collapsed_mode       = "compact"
-mouse_capture                = true
-copy_on_select               = true
-prompt_new_tab_name          = false
-prompt_new_workspace_name    = false
-pane_borders                 = "auto"
-pane_outer_borders           = false
-pane_scrollbars              = false
-pane_gaps                    = false
-hide_tab_bar_when_single_tab = true
-tab_bar_position             = "bottom"
-agent_panel_sort             = "priority"
-status_indicators            = "symbols"
+agent_panel_sort                  = "priority"
+copy_on_select                    = true
+hide_tab_bar_when_single_tab      = true
+mouse_capture                     = true
+pane_borders                      = "always"
+pane_gaps                         = true
+pane_outer_borders                = true
+pane_scrollbars                   = false
+prompt_new_tab_name               = true
+prompt_new_workspace_name         = true
+show_agent_labels_on_pane_borders = true
+sidebar_collapsed_mode            = "hidden"
+sidebar_start_collapsed           = true
+status_indicators                 = "symbols"
+tab_bar_position                  = "bottom"
+window_title                      = "{hostname}: {workspace}"
 
 [ui.sidebar.agents]
 row_gap = 0
+rows    = [
+  ["state_icon", "machine", { token = "workspace", bold = true }, "tab"],
+  [{ token = "agent", dim = true }],
+]
 
 [ui.sidebar.spaces]
 row_gap = 0
+rows    = [
+  ["state_icon", { token = "workspace", bold = true }],
+  [{ token = "branch", dim = true }, "git_status"],
+]
 
 [ui.toast]
 delivery      = "terminal"

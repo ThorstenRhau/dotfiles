@@ -59,11 +59,14 @@ sh starship/.config/src/generate.sh
 
 ## Herdr
 
-Herdr starts with its expanded compact sidebar, attention-priority agent
-ordering, status symbols, internal split borders, and a bottom tab bar that is
-hidden for a single tab. `Ctrl-B` retains the standard prefix actions, while
+Herdr starts with its sidebar hidden; `Ctrl-B`, then `B` toggles it. The sidebar
+uses attention-priority agent ordering and status symbols. Panes have outer frames
+with agent labels and Herdr's built-in gaps between them. A single pane is also
+framed. The bottom tab bar is hidden for a single tab. Expanded sidebar rows
+use bold workspace names and dim secondary details.
+`Ctrl-B` retains the standard prefix actions, while
 `Alt` plus an arrow focuses an adjacent pane directly. New tabs and workspaces
-use inferred names. Herdr's worktree creation binding is disabled.
+prompt for names. Herdr's worktree creation binding is disabled.
 
 Background-agent notifications use Ghostty's terminal notification support
 after a one-second delay, without sounds. Experimental pane-history persistence
