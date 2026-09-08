@@ -77,6 +77,10 @@ appearances='token token-flint token-temper token-ultra token-meridian'
 modes='dark light'
 
 for appearance in $appearances; do
+  if ! require_file "$CONTRIB/herdr/$appearance.toml"; then
+    :
+  fi
+
   if ! require_file "$CONTRIB/delta/$appearance.gitconfig"; then
     :
   fi
@@ -110,6 +114,16 @@ fi
 
 printf "Syncing token themes from %s\n" "$CONTRIB"
 printf "Into dotfiles at %s\n\n" "$DOTFILES_DIR"
+
+# ------------------------------------------------------------------
+# Herdr
+# ------------------------------------------------------------------
+
+printf "herdr:\n"
+for appearance in $appearances; do
+  copy_file "$CONTRIB/herdr/$appearance.toml" \
+    "$DOTFILES_DIR/herdr/.config/herdr/themes/$appearance.toml"
+done
 
 # ------------------------------------------------------------------
 # Bat

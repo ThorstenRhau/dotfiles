@@ -150,6 +150,7 @@ bat
 fzf
 ghostty
 git
+herdr
 lazygit
 ripgrep
 starship
@@ -175,7 +176,7 @@ migrate_runtime_state
 
 for package in $packages; do
   case "$package" in
-    zsh)
+    herdr | zsh)
       stow --target "$HOME" --restow --no-folding -v "$package"
       ;;
     *)

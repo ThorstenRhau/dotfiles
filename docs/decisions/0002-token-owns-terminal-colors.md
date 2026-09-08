@@ -24,7 +24,9 @@ checkout during synchronization.
 
 Persist the selected appearance family in XDG state. Let Zsh combine that
 family with the current macOS light or dark mode, export tool-specific selectors,
-and create ignored adapters for long-running Ghostty and tmux processes.
+create ignored adapters for long-running Ghostty and tmux processes, and
+compose Herdr's tracked base with the selected family fragment. Herdr's fragment
+contains both modes and follows the host terminal's reported appearance.
 
 ## Consequences
 
@@ -48,5 +50,5 @@ but it does not document other alternatives as having been evaluated.
 - `zsh/.config/zsh/functions/token-theme`: validated persistent family choice
 - `zsh/.config/zsh/functions/_apply_appearance`: per-tool selection and local
   adapter generation
-- `.gitignore`: ignored Ghostty and tmux adapters
+- `.gitignore`: ignored Ghostty, Herdr, and tmux runtime configuration
 - Git commits `52d1661` and `bc7b503`

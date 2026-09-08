@@ -17,6 +17,12 @@ owns the deployed file.
 - Edit Starship's tracked sources under `starship/.config/src/`;
   `generate.sh` creates the ignored deployable configs. Do not hand-edit
   those outputs.
+- Herdr's tracked non-theme preferences live in
+  `herdr/.config/herdr/config.base.toml`; synchronized Token fragments live
+  under `themes/`. Zsh composes the ignored `config.toml`. Do not track Herdr
+  logs, sockets, sessions, pane history, or other runtime state. Tombi linting
+  applies to the imported fragments, but formatting is disabled so they remain
+  byte-identical to Token.
 - `token` in a generated theme filename names the theme, not a credential.
   Retain normal content and scope checks.
 - In `ghostty/.config/ghostty/config.ghostty`, validate terminal and prompt
@@ -46,8 +52,10 @@ Run only checks relevant to the changed package.
   `tombi format --check --offline .`.
 - Ghostty:
   `ghostty +validate-config --config-file=ghostty/.config/ghostty/config.ghostty`.
+- Herdr: compose `config.base.toml` with each theme fragment and run
+  `HERDR_CONFIG_PATH=<composed-file> herdr config check`.
 - Markdown: `markdownlint <files>`.
 - Stow layout:
   `stow --simulate --restow --target <temporary-home> <package>`; add
-  `--no-folding` for `zsh`. Never point validation at the live home
+  `--no-folding` for `herdr` and `zsh`. Never point validation at the live home
   directory.
