@@ -20,8 +20,8 @@ it difficult for local files to coexist safely.
 
 Organize deployed configuration as GNU Stow packages whose contents mirror
 their target paths below `$HOME`. Keep private and runtime state outside the
-repository. Use `--no-folding` for the Zsh package and migrate legacy Zsh
-state into XDG state, cache, or local target paths before deployment.
+repository. Use `--no-folding` for the Herdr and Zsh packages and migrate
+legacy Zsh state into XDG state, cache, or local target paths before deployment.
 
 Treat `stow_all.sh` as an operational deployment boundary. Validate package
 layout against a temporary target instead of restowing the live home solely
@@ -41,8 +41,8 @@ No alternatives are documented in repository evidence.
 
 ## Verification anchors
 
-- `stow_all.sh`: package list, state migration, Zsh `--no-folding`, and Bat
-  cache rebuild
+- `stow_all.sh`: package list, state migration, Herdr/Zsh `--no-folding`, and
+  Bat cache rebuild
 - `.gitignore`: ignored local state and generated adapters
 - `zsh/.stow-local-ignore`: Zsh package exclusions
 - `README.md`: supported package set and deployment commands

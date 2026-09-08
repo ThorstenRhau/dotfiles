@@ -15,8 +15,12 @@ brew bundle
 ./stow_all.sh
 ```
 
-The managed packages are `bat`, `fzf`, `ghostty`, `git`, `lazygit`, `ripgrep`,
-`starship`, `tmux`, and `zsh`.
+The managed packages are `bat`, `fzf`, `ghostty`, `git`, `herdr`, `lazygit`,
+`ripgrep`, `starship`, `tmux`, and `zsh`.
+
+Herdr is the primary persistent terminal workspace manager. The existing tmux
+package remains available as a fallback, but tmux itself is not declared in the
+`Brewfile`.
 
 ## Typography
 
@@ -29,20 +33,23 @@ check. Idle terminals and active editors wait for that check. If CoreText does
 not refresh the grade in an existing surface, open a new surface or restart
 Ghostty. Font files are installed locally and are not part of this repository.
 
-To deploy an individual package other than `zsh`, run:
+To deploy an individual package other than `herdr` or `zsh`, run:
 
 ```sh
 stow --target "$HOME" --restow <package>
 ```
 
-For Zsh, keep local files outside the repository by disabling directory folding:
+For Herdr and Zsh, keep runtime and local files outside the repository by
+disabling directory folding:
 
 ```sh
+stow --target "$HOME" --restow --no-folding herdr
 stow --target "$HOME" --restow --no-folding zsh
 ```
 
 Use `./stow_all.sh` when migrating an older folded Zsh deployment; it preserves
-and moves existing local state before restowing.
+and moves existing local state before restowing. After deploying Herdr, Zsh
+creates its active configuration at the next appearance check.
 
 Generate Starship configurations first when deploying `starship` alone:
 
@@ -50,13 +57,37 @@ Generate Starship configurations first when deploying `starship` alone:
 sh starship/.config/src/generate.sh
 ```
 
+## Herdr
+
+Herdr starts with its expanded compact sidebar, attention-priority agent
+ordering, status symbols, internal split borders, and a bottom tab bar that is
+hidden for a single tab. `Ctrl-B` retains the standard prefix actions, while
+`Alt` plus an arrow focuses an adjacent pane directly. New tabs and workspaces
+use inferred names. Herdr's worktree creation binding is disabled.
+
+Background-agent notifications use Ghostty's terminal notification support
+after a one-second delay, without sounds. Experimental pane-history persistence
+is explicitly disabled because saved terminal output may contain sensitive
+data. The Codex integration is not installed, so Codex panes do not natively
+resume their conversations after a full Herdr restart.
+
+`~/.config/herdr/config.toml` is generated from the tracked
+`config.base.toml` and selected Token fragment because Herdr does not support
+configuration includes. Zsh only replaces files carrying its generated header,
+writes the result privately, and reloads a running default Herdr server after
+the content changes. Settings UI edits to this generated file are temporary;
+durable preferences belong in the tracked base and durable colors belong in
+Token.
+
 ## Colors
 
 [Token](https://github.com/ThorstenRhau/token) is the color source of truth.
 Classic Token, Token Flint, Token Temper, Token Ultra, and Token Meridian are
 all available. Shell tools and Ghostty follow the macOS light or dark mode.
-Tmux defaults to dark; use its prefix followed by `T` to toggle light/dark mode.
-Classic Token is used until another appearance is selected:
+Herdr follows the appearance reported by Ghostty and uses both modes from the
+selected family fragment. Tmux defaults to dark; use its prefix followed by `T`
+to toggle light/dark mode. Classic Token is used until another appearance is
+selected:
 
 ```sh
 token-theme token
@@ -69,9 +100,10 @@ token-theme token-meridian
 Run `token-theme` without an argument to print the current appearance, or use
 `token-theme next` to cycle through all five. The selection is stored under
 `${XDG_STATE_HOME:-$HOME/.local/state}` rather than in Git. Existing shells
-update at their next appearance check, tmux reloads the selected family while
-retaining its light/dark mode, and Ghostty automatically reloads when its adapter
-changes, including immediately after a `token-theme` family change.
+update at their next appearance check, Herdr replaces its active family fragment,
+tmux reloads the selected family while retaining its light/dark mode, and Ghostty
+automatically reloads when its adapter changes, including immediately after a
+`token-theme` family change.
 
 After Token contrib files are regenerated, sync all five appearances into
 this repository without modifying Token:

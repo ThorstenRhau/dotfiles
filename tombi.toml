@@ -5,3 +5,10 @@ trailing-comment-alignment      = true
 
 [lint.rules]
 key-empty = "warn"
+
+[[overrides]]
+files.include = ["herdr/.config/herdr/themes/*.toml"]
+
+# Preserve canonical formatting in Token's imported generated fragments.
+[overrides.format]
+enabled = false

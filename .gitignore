@@ -4,6 +4,10 @@ starship/.config/starship-*.toml
 
 # Local Token appearance adapters
 ghostty/.config/ghostty/token-active.ghostty
+herdr/.config/herdr/config.toml
+herdr/.config/herdr/*.log
+herdr/.config/herdr/*.sock
+herdr/.config/herdr/sessions/
 tmux/.config/tmux/token-active.conf
 
 # Zsh specific local files that are ignored
