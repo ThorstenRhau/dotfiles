@@ -1,0 +1,22 @@
+if (( $# != 1 )); then
+  print -ru2 "usage: whichapp <file>"
+  return 2
+fi
+
+FILE="$1" command swift -e '
+    import AppKit
+    import Foundation
+
+    guard let path = ProcessInfo.processInfo.environment["FILE"] else {
+        exit(1)
+    }
+
+    let file = URL(fileURLWithPath: path)
+
+    if let app = NSWorkspace.shared.urlForApplication(toOpen: file) {
+        print(app.path)
+    } else {
+        print("No default application")
+        exit(1)
+    }
+'
