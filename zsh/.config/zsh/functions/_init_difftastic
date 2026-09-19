@@ -1,0 +1,29 @@
+# Keep one optional include, preserving the order of unrelated Git entries.
+local git_count="${GIT_CONFIG_COUNT:-0}"
+[[ "$git_count" == <-> ]] || return 0
+
+local fragment="$HOME/.config/git/difftastic.inc"
+local git_index git_key git_value
+local -i next_index=0 included=0 available=$+commands[difft]
+for ((git_index = 0; git_index < git_count; git_index++)); do
+  git_key="GIT_CONFIG_KEY_$git_index"
+  git_value="GIT_CONFIG_VALUE_$git_index"
+  if [[ "${(P)git_key}" == include.path && "${(P)git_value}" == "$fragment" ]]; then
+    ((available && !included)) || continue
+    included=1
+  fi
+  if ((next_index != git_index)); then
+    export "GIT_CONFIG_KEY_$next_index=${(P)git_key}"
+    export "GIT_CONFIG_VALUE_$next_index=${(P)git_value}"
+  fi
+  ((next_index++))
+done
+for ((git_index = next_index; git_index < git_count; git_index++)); do
+  unset "GIT_CONFIG_KEY_$git_index" "GIT_CONFIG_VALUE_$git_index"
+done
+if ((available && !included)); then
+  export "GIT_CONFIG_KEY_$next_index=include.path"
+  export "GIT_CONFIG_VALUE_$next_index=$fragment"
+  ((next_index++))
+fi
+export GIT_CONFIG_COUNT=$next_index

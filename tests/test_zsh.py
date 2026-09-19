@@ -59,6 +59,78 @@ class ZshTests(unittest.TestCase):
             [[ $GIT_CONFIG_COUNT == 3 && $GIT_CONFIG_VALUE_0 == first ]] || exit 2
         """)
 
+    def test_difftastic_initialization_and_nested_shells(self):
+        self.run_zsh(r"""
+            fpath=("$1" $fpath)
+            autoload -Uz _init_difftastic
+            mkdir -p "$HOME/bin" "$HOME/.config/git"
+            print -r -- '#!/bin/sh' > "$HOME/bin/difft"
+            chmod +x "$HOME/bin/difft"
+            cp "$2" "$HOME/.config/git/difftastic.inc"
+            # Control executable discovery independently of the host install.
+            path=("$HOME/bin" /usr/bin /bin)
+            export GIT_CONFIG_COUNT=2
+            export GIT_CONFIG_KEY_0=review.value GIT_CONFIG_VALUE_0=first
+            export GIT_CONFIG_KEY_1=review.value GIT_CONFIG_VALUE_1=last
+            repeat 2 _init_difftastic
+            [[ $GIT_CONFIG_COUNT == 3 &&
+              $(git config --get review.value) == last &&
+              $(git config --get alias.difft) == *diff.external=difft* ]] || exit 1
+            zsh -dfi -c '
+              fpath=("$1" $fpath)
+              autoload -Uz _init_difftastic
+              _init_difftastic
+              [[ $GIT_CONFIG_COUNT == 3 ]] || exit 2
+              # Include unrelated trailing configuration to test compaction.
+              export GIT_CONFIG_KEY_3=review.tail GIT_CONFIG_VALUE_3="with spaces"
+              export GIT_CONFIG_KEY_4=include.path GIT_CONFIG_VALUE_4=$GIT_CONFIG_VALUE_2
+              export GIT_CONFIG_COUNT=5
+              _init_difftastic
+              [[ $GIT_CONFIG_COUNT == 4 && ! -v GIT_CONFIG_KEY_4 &&
+                $(git config --get review.tail) == "with spaces" ]] || exit 3
+              path=(/usr/bin /bin)
+              repeat 2 _init_difftastic
+              [[ $GIT_CONFIG_COUNT == 3 && ! -v GIT_CONFIG_KEY_3 &&
+                ! -v GIT_CONFIG_VALUE_3 &&
+                $(git config --get-all review.value) == $'"'"'first\nlast'"'"' &&
+                $(git config --get review.tail) == "with spaces" ]] || exit 4
+              git config --get alias.difft >/dev/null && exit 5
+              exit 0
+            ' test "$1" || exit 6
+            [[ $GIT_CONFIG_COUNT == 3 ]] || exit 7
+            path=(/usr/bin /bin)
+            unset GIT_CONFIG_COUNT
+            _init_difftastic
+            [[ $GIT_CONFIG_COUNT == 0 ]] || exit 8
+            export GIT_CONFIG_COUNT=invalid
+            _init_difftastic
+            [[ $GIT_CONFIG_COUNT == invalid ]] || exit 9
+        """, ROOT / "git/.config/git/difftastic.inc")
+
+    def test_difftastic_background_follows_third_prompt(self):
+        self.run_zsh(self.appearance_setup + r"""
+            mkdir -p "$HOME/bin"
+            print -r -- '#!/bin/sh' > "$HOME/bin/difft"
+            chmod +x "$HOME/bin/difft"
+            path=("$HOME/bin" /usr/bin /bin)
+            _apply_appearance
+            [[ $DFT_BACKGROUND == light ]] || exit 1
+            defaults() { print -r -- "$test_mode"; }
+            for test_mode in Dark Light; do
+              previous=$DFT_BACKGROUND
+              _appearance_prompt_count=0
+              repeat 2 _check_appearance
+              [[ $DFT_BACKGROUND == $previous ]] || exit 2
+              _check_appearance
+              [[ $DFT_BACKGROUND == ${test_mode:l} ]] || exit 3
+              [[ $(/bin/sh -c 'printf %s "$DFT_BACKGROUND"') == $DFT_BACKGROUND ]] || exit 4
+            done
+            path=(/usr/bin /bin)
+            unset DFT_BACKGROUND
+            _apply_appearance
+            [[ ! -v DFT_BACKGROUND ]] || exit 5
+        """)
+
     appearance_setup = r"""
         fpath=("$1" $fpath)
         autoload -Uz _apply_appearance _write_token_adapter _token_appearance
