@@ -16,6 +16,8 @@ local mode=light
 [[ "$SYSTEM_APPEARANCE" == "dark" ]] && mode=dark
 local theme="$appearance-$mode"
 
+(($+commands[difft])) && export DFT_BACKGROUND="$mode"
+
 export BAT_THEME="$theme"
 export DELTA_FEATURES="$theme"
 # Reuse our include across prompts and nested shells without replacing callers'

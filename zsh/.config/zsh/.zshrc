@@ -79,6 +79,7 @@ alias ls='ls -G'
 (($+commands[python3])) && alias python=python3
 
 # Git
+_init_difftastic
 alias gc='git commit'
 alias gca='git commit -a'
 alias gd='git diff'

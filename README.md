@@ -57,6 +57,37 @@ Generate Starship configurations first when deploying `starship` alone:
 sh starship/.config/src/generate.sh
 ```
 
+## Git structural diffs
+
+Delta remains the normal Git pager and interactive staging filter. Interactive
+Zsh enables these optional commands when `difft` is on `PATH` at startup:
+
+```sh
+git difft                         # Working tree diff
+git dshow HEAD                    # Commit with structural diff
+git dlog -5                       # History with structural patches
+git difftool -t difftastic        # Explicit difftool selection
+```
+
+Open a new shell after installing or removing difftastic. The optional include
+is inherited by child processes; a nested Zsh removes it if `difft` is absent.
+Difftastic uses its native adaptive side-by-side layout, syntax highlighting,
+three context lines, and automatic terminal width. The commands use `less -FRX`
+to preserve colors, exit for short output, and leave the result visible.
+Automatic color detection keeps redirected output plain. Ghostty's existing
+Token ANSI palette supplies terminal colors; no extra theme export is needed.
+
+On macOS, Zsh sets `DFT_BACKGROUND` at startup and updates it at the next
+scheduled appearance check, every third prompt. Changes affect subsequent
+difftastic invocations; idle shells wait until another prompt.
+Override display options for individual commands as needed:
+
+```sh
+DFT_DISPLAY=inline git difft
+DFT_DISPLAY=side-by-side-show-both DFT_CONTEXT=5 git dshow HEAD
+DFT_WIDTH=120 DFT_BACKGROUND=light git difft
+```
+
 ## Herdr
 
 Herdr starts with its sidebar hidden; `Ctrl-B`, then `B` toggles it. The sidebar

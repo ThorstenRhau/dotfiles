@@ -77,6 +77,22 @@ The Git theme include preserves inherited environment configuration and reuses
 its existing entry when the appearance changes. Tmux follows the selected
 family but retains its manually selected light/dark mode.
 
+Interactive Zsh calls `_init_difftastic` once at startup. When `difft` is on
+`PATH`, it includes `~/.config/git/difftastic.inc` through `GIT_CONFIG_COUNT`.
+The helper preserves unrelated entries and their order, deduplicates its own
+include in nested shells, and removes inherited copies when `difft` is absent.
+Availability changes take effect in a new shell and apply to its child processes.
+The fragment owns `git difft`, `git dshow`, `git dlog`, and the explicitly selected
+`git difftool -t difftastic`; Delta remains the default viewer and staging filter.
+
+On macOS, `_apply_appearance` exports `DFT_BACKGROUND=light` or `dark` when
+`difft` is available, both at startup and after a detected change at the
+three-prompt check. Subsequent invocations use the updated value. Difftastic's
+native display, context, syntax, width, and automatic color defaults remain
+unforced; per-command `DFT_DISPLAY`, `DFT_CONTEXT`, `DFT_WIDTH`, and
+`DFT_BACKGROUND` overrides are documented in `README.md`. Its pager is
+`less -FRX`, and colors use Ghostty's existing Token ANSI palette.
+
 Ctrl-R history deletion runs in the parent Zsh widget. Zsh reads and writes
 complete history events, then the widget loads a replacement history context
 and reopens the finder. Subsequent deletions reuse that context. Other running

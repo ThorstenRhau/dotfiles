@@ -16,15 +16,6 @@
     # Log with changed files listed for each commit
   files = log --pretty=format:'%h %ad | %s%d [%an]' --date=short --name-status
 
-    # Structural diff using difftastic
-  difft = -c core.pager='less -R' -c diff.external='difft --color=always' diff
-
-    # Show commit with difftastic
-  dshow = -c core.pager='less -R' -c diff.external='difft --color=always' show --ext-diff
-
-    # Log patches with difftastic
-  dlog = -c core.pager='less -R' -c diff.external='difft --color=always' log -p --ext-diff
-
 [color]
   ui = true  # Enable colors in git output
 
@@ -73,15 +64,6 @@
 [merge "mergiraf"]
   name = mergiraf
   driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
-
-[difftool]
-  prompt = false  # Run difftool directly without per-file confirmation
-
-[pager]
-  difftool = true  # Page difftool output
-
-[difftool "difftastic"]
-  cmd = difft --color=always "$MERGED" "$LOCAL" abcdef1 100644 "$REMOTE" abcdef2 100644
 
 [pull]
   rebase = true  # Rebase instead of merge to maintain linear history
