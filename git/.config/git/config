@@ -63,7 +63,11 @@
 
 [merge "mergiraf"]
   name = mergiraf
-  driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
+  driver = "if command -v mergiraf >/dev/null 2>&1; then \
+    exec mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L; \
+    else \
+    exec git merge-file --marker-size=%L -L %X -L %S -L %Y -- %A %O %B; \
+    fi"
 
 [pull]
   rebase = true  # Rebase instead of merge to maintain linear history

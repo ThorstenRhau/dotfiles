@@ -48,8 +48,8 @@ stow --target "$HOME" --restow --no-folding zsh
 ```
 
 Use `./stow_all.sh` when migrating an older folded Zsh deployment; it preserves
-and moves existing local state before restowing. After deploying Herdr, Zsh
-creates its active configuration at the next appearance check.
+and moves existing local state before restowing. After deploying Herdr, open a
+new interactive Zsh shell to generate its active configuration.
 
 Generate Starship configurations first when deploying `starship` alone:
 
@@ -88,6 +88,14 @@ DFT_DISPLAY=side-by-side-show-both DFT_CONTEXT=5 git dshow HEAD
 DFT_WIDTH=120 DFT_BACKGROUND=light git difft
 ```
 
+## Git merges
+
+Mergiraf handles Git merges for all files and detects supported languages
+automatically. Other text files use ordinary text merging. If `mergiraf` is
+missing from `PATH`, the driver uses `git merge-file` with the configured
+conflict style, labels, and marker size. Conflicts and errors from an available
+Mergiraf are returned directly.
+
 ## Herdr
 
 Herdr starts with its sidebar hidden; `Ctrl-B`, then `B` toggles it. The sidebar
@@ -111,7 +119,8 @@ configuration includes. Zsh only replaces files carrying its generated header,
 writes the result privately, and reloads a running default Herdr server after
 the content changes. Settings UI edits to this generated file are temporary;
 durable preferences belong in the tracked base and durable colors belong in
-Token.
+Token. After editing `config.base.toml` or synchronizing themes, open a new
+interactive Zsh shell to regenerate the active configuration.
 
 ## Colors
 
