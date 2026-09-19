@@ -71,7 +71,10 @@ atomically with file mode `0600` under a `0700` directory. Existing files
 without the fixed generated header are not overwritten. A changed file reloads
 the default server only when `herdr status server` reports it running. Herdr
 logs, sockets, sessions, and pane history remain local; pane-history persistence
-is disabled because terminal output may contain sensitive data.
+is disabled because terminal output may contain sensitive data. Zsh composes the
+configuration at interactive startup and when the Token family or macOS
+appearance changes. Base and theme-fragment edits take effect when a new
+interactive shell starts.
 
 The Git theme include preserves inherited environment configuration and reuses
 its existing entry when the appearance changes. Tmux follows the selected
