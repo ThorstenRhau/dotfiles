@@ -1,5 +1,6 @@
 """Check merge-driver availability and conflicts in a disposable repository."""
 
+import shlex
 import shutil
 import subprocess
 import tempfile
@@ -46,6 +47,8 @@ class MergirafTests(unittest.TestCase):
                 ("ours", b"FIRST\nmiddle\nlast\n"),
                 ("theirs", b"first\nmiddle\nLAST\n"),
                 ("conflict", b"OTHER\nmiddle\nlast\n"),
+                ("binary-ours", b"\x00ours\n"),
+                ("binary-theirs", b"\x00theirs\n"),
             ], start=1):
                 history += (
                     f"commit refs/heads/{branch}\nmark :{number}\n"
@@ -59,19 +62,42 @@ class MergirafTests(unittest.TestCase):
                 ).encode() + content + b"\n"
             run("fast-import", "--quiet", input=history)
 
-            for branch, expected_status in [("theirs", 0), ("conflict", 1)]:
+            for ours, branch, expected_status in [
+                ("ours", "theirs", 0),
+                ("ours", "conflict", 1),
+                ("binary-ours", "binary-theirs", 1),
+            ]:
                 with self.subTest(missing=True, branch=branch):
-                    result = run("merge-tree", "--write-tree", "ours", branch, check=False)
+                    result = run("merge-tree", "--write-tree", ours, branch, check=False)
                     self.assertEqual(result.returncode, expected_status, result.stderr)
                     tree = result.stdout.splitlines()[0].decode()
                     merged = run("show", f"{tree}:{filename}").stdout
                     if branch == "theirs":
                         self.assertEqual(merged, b"FIRST\nmiddle\nLAST\n")
+                    elif branch == "binary-theirs":
+                        self.assertEqual(merged, b"\x00ours\n")
+                        for stage in (1, 2, 3):
+                            self.assertIn(f" {stage}\t{filename}\n".encode(), result.stdout)
                     else:
                         self.assertIn(b"<<<<<<<<< ours\nFIRST\n", merged)
                         self.assertIn(b"||||||||| ", merged)
                         self.assertIn(b"\nfirst\n=========\nOTHER\n", merged)
                         self.assertIn(b">>>>>>>>> conflict\n", merged)
+
+            # A binary input must not hide a different, unreadable input.
+            driver = run("config", "--get", "merge.mergiraf.driver").stdout.decode()
+            (home / "binary").write_bytes(b"\x00ours\n")
+            for placeholder, value in {
+                "%O": "binary", "%A": "missing", "%B": "binary",
+                "%S": "base", "%X": "ours", "%Y": "theirs",
+                "%P": filename, "%L": "9",
+            }.items():
+                driver = driver.replace(placeholder, shlex.quote(value))
+            failure = subprocess.run(
+                ["/bin/sh", "-c", driver], cwd=home, env=env,
+                capture_output=True, timeout=10, check=False,
+            )
+            self.assertEqual(failure.returncode, 255, failure.stderr)
 
             executable = bin_dir / "mergiraf"
             executable.write_text(

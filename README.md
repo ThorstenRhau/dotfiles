@@ -94,7 +94,9 @@ Mergiraf handles Git merges for all files and detects supported languages
 automatically. Other text files use ordinary text merging. If `mergiraf` is
 missing from `PATH`, the driver uses `git merge-file` with the configured
 conflict style, labels, and marker size. Conflicts and errors from an available
-Mergiraf are returned directly.
+Mergiraf are returned directly. Without Mergiraf, binary conflicts retain the
+current branch's version and remain unresolved for manual resolution; other
+merge errors still fail.
 
 ## Herdr
 

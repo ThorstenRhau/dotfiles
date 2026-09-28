@@ -192,7 +192,7 @@ if (($+commands[fzf])) && [[ -o zle ]] && [[ -t 0 ]]; then
   export FZF_CTRL_R_OPTS="\
 --scheme=history --with-nth=2.. \
 --header='shift-del: delete | ctrl-y: copy' \
---bind='ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' \
+--bind='ctrl-y:execute-silent(printf %s {2..} | pbcopy)+abort' \
 --bind='shift-delete:clear-multi+select+print(dotfiles-delete-history)+accept'"
   source "$ZDOTDIR/scripts/fzf-history-delete"
   zle -N fzf-history-widget _fzf-history-widget
