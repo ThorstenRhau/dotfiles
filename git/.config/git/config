@@ -63,10 +63,21 @@
 
 [merge "mergiraf"]
   name = mergiraf
+  # Only binary merge-file failures become ordinary unresolved conflicts.
   driver = "if command -v mergiraf >/dev/null 2>&1; then \
     exec mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L; \
     else \
-    exec git merge-file --marker-size=%L -L %X -L %S -L %Y -- %A %O %B; \
+    git merge-file --marker-size=%L -L %X -L %S -L %Y -- %A %O %B; \
+    result=$?; \
+    [ \"$result\" -eq 255 ] || exit \"$result\"; \
+    binary=false; \
+    for input in %O %A %B; do \
+      stats=$(git diff --no-index --numstat --no-ext-diff --no-textconv -- /dev/null \"$input\") || \
+        { [ \"$?\" -eq 1 ] && [ -n \"$stats\" ]; } || exit \"$result\"; \
+      case \"$stats\" in -[[:space:]]-*) binary=true ;; esac; \
+    done; \
+    if [ \"$binary\" = true ]; then exit 1; fi; \
+    exit \"$result\"; \
     fi"
 
 [pull]
