@@ -130,6 +130,14 @@
 [receive]
   fsckObjects = true  # Validate pushed objects (prevents corruption)
 
+[credential "https://github.com"]
+  helper =  # Reset inherited helpers (osxkeychain from Homebrew)
+  helper = !gh auth git-credential  # GitHub CLI token
+
+[credential "https://gist.github.com"]
+  helper =  # Reset inherited helpers (osxkeychain from Homebrew)
+  helper = !gh auth git-credential  # GitHub CLI token
+
 [include]
   path = ~/.config/git/delta_themes.inc  # Delta color themes
 
