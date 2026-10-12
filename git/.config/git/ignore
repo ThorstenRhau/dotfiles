@@ -1,4 +1,6 @@
-# ── OS ─────────────────────────────────────────────────────────────────────────
+# Global Git ignore: operating system and editor junk plus local secrets.
+# Language and build patterns belong in each project's own .gitignore.
+
 # macOS
 .DS_Store
 .AppleDouble
@@ -10,51 +12,16 @@ desktop.ini
 $RECYCLE.BIN/
 *.lnk
 
-# Linux
-# backup/temp files
+# Editor backup and swap files
 *~
-# vim swap files
-*.swp
+*.sw?
 
-# ── Shell scripts ─────────────────────────────────────────────────────────────
-*.tmp
-*.bak
-# session/history
-command.log
-bash_history
-
-# ── Python ────────────────────────────────────────────────────────────────────
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-*.egg-info/
-build/
-dist/
-*.egg
-env/
+# Local environment files that hold secrets
 .env
 .env.*
 !.env.example
 !.env.sample
 !.env.template
-venv/
-.venv/
-
-# ── Lua ───────────────────────────────────────────────────────────────────────
-*.luac
-luac.out
-
-# ── General ───────────────────────────────────────────────────────────────────
-# lock files
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# editor swap files
-*.sw?
-*.swo
-*.swn
 
 # Assorted dot files that are not to be handled in this repo
 **/.claude/settings.local.json
