@@ -22,5 +22,7 @@ path=(
   "$HOME/bin"
   "$HOME/.local/bin"
   /usr/local/bin
+  # Ghostty CLI for shells outside Ghostty; (N) drops the entry when absent.
+  /Applications/Ghostty.app/Contents/MacOS(N)
   $path
 )
