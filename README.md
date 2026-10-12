@@ -154,7 +154,7 @@ After Token contrib files are regenerated, sync all five appearances into
 this repository without modifying Token:
 
 ```sh
-./sync_token_themes.sh /Users/thorre/github/token
+./sync_token_themes.sh ~/github/token
 ```
 
 The sync script also regenerates the ten ignored family/mode Starship configs
