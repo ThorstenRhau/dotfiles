@@ -11,8 +11,7 @@ package set is declared by `stow_all.sh`: `bat`, `fzf`, `ghostty`, `git`,
 `herdr`, `lazygit`, `ripgrep`, `starship`, `tmux`, and `zsh`.
 
 `stow_all.sh` is the full deployment boundary. Before restowing packages it
-generates Starship configurations and migrates Zsh history, caches, local
-configuration, and secrets out of repository-owned paths. It uses
+generates Starship configurations. It uses
 `--no-folding` for Herdr and Zsh so local files can coexist in their
 configuration directories without becoming repository content. It also
 rebuilds Bat's cache after deployment when Bat is installed.
@@ -104,8 +103,9 @@ shells retain their own in-memory history lists.
 Private configuration, shell history, caches, generated appearance adapters,
 Herdr runtime state, and deployable Starship outputs are intentionally outside
 version control.
-The relevant boundaries are enforced by `.gitignore`, package-local
-`.stow-local-ignore` files, and the migrations in `stow_all.sh`.
+The relevant boundaries are enforced by `.gitignore` and package-local
+`.stow-local-ignore` files; the Zsh startup files create the XDG state and
+cache directories.
 
 ## Validation boundaries
 

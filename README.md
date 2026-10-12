@@ -47,9 +47,8 @@ stow --target "$HOME" --restow --no-folding herdr
 stow --target "$HOME" --restow --no-folding zsh
 ```
 
-Use `./stow_all.sh` when migrating an older folded Zsh deployment; it preserves
-and moves existing local state before restowing. After deploying Herdr, open a
-new interactive Zsh shell to generate its active configuration.
+After deploying Herdr, open a new interactive Zsh shell to generate its active
+configuration.
 
 Generate Starship configurations first when deploying `starship` alone:
 

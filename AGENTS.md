@@ -8,9 +8,8 @@ owns the deployed file.
 
 - `README.md` owns installation, managed-package, typography, and Token
   synchronization guidance. `Brewfile` owns Homebrew declarations.
-- `stow_all.sh` is the live full-deployment entry point. It also migrates
-  private and runtime state and rebuilds the Bat cache. Do not run it solely
-  for validation.
+- `stow_all.sh` is the live full-deployment entry point. It also rebuilds
+  the Bat cache. Do not run it solely for validation.
 - The sibling Token repository is the color source of truth.
   `sync_token_themes.sh` imports its generated contrib files and must not
   modify that checkout. Do not hand-edit imported theme exports.
