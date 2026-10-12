@@ -1,6 +1,6 @@
-palette = "token-flint"
+palette = "token-flint-light"
 
-[palettes.token-flint]
+[palettes.token-flint-light]
 bg      = "#F5F7F8"
 fg      = "#283039"
 muted   = "#414C57"

@@ -28,7 +28,7 @@ for appearance in $appearances; do
     fi
 
     palette=$(sed -n '/^palette = /{p;q;}' "$input")
-    if [ "$palette" != "palette = \"$appearance\"" ]; then
+    if [ "$palette" != "palette = \"$appearance-$mode\"" ]; then
       printf 'ERROR: invalid palette declaration: %s\n' "$input" >&2
       exit 1
     fi

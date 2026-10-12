@@ -142,9 +142,9 @@ for appearance in $appearances; do
 
     starship_src="$CONTRIB/starship/$appearance-$mode.toml"
     if require_file "$starship_src"; then
-      require_line "$starship_src" "^\[palettes\.$appearance\]\$" \
-        "no [palettes.$appearance] section found in" || :
-      palette_vars "$starship_src" "$appearance" >/dev/null ||
+      require_line "$starship_src" "^\[palettes\.$appearance-$mode\]\$" \
+        "no [palettes.$appearance-$mode] section found in" || :
+      palette_vars "$starship_src" "$appearance-$mode" >/dev/null ||
         errors=$((errors + 1))
     fi
   done
@@ -210,7 +210,7 @@ for appearance in $appearances; do
 
     # Sets fg, muted, accent and the other palette keys. eval is safe here:
     # palette_vars only prints fixed key names with #rrggbb values.
-    palette=$(palette_vars "$src" "$appearance")
+    palette=$(palette_vars "$src" "$appearance-$mode")
     eval "$palette"
 
     mkdir -p "$(dirname "$dst")"
@@ -323,10 +323,10 @@ for appearance in $appearances; do
     dst="$DOTFILES_DIR/starship/.config/src/palettes/$appearance-$mode.toml"
 
     # Token contrib has a palette section but no top-level palette directive.
-    palette_section=$(sed -n "/^\[palettes\.$appearance\]\$/,\$p" "$src")
+    palette_section=$(sed -n "/^\[palettes\.$appearance-$mode\]\$/,\$p" "$src")
 
     mkdir -p "$(dirname "$dst")"
-    printf 'palette = "%s"\n\n%s\n' "$appearance" "$palette_section" >"$dst"
+    printf 'palette = "%s"\n\n%s\n' "$appearance-$mode" "$palette_section" >"$dst"
     info "$dst"
   done
 done
