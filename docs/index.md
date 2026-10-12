@@ -22,9 +22,11 @@ decision records preserve accepted rationale.
 - [ADR-0003](decisions/0003-generate-starship-from-tracked-sources.md): build
   deployable Starship configurations from tracked sources and an explicit
   prompt layout.
+- [ADR-0004](decisions/0004-retire-legacy-state-migrations.md): retire the
+  one-time legacy state migrations so `stow_all.sh` is a plain deploy step.
 
-All three records are accepted and retrospective. No records are currently
-superseded, deprecated, or proposed.
+All four records are accepted; the first three are retrospective. No records
+are currently superseded, deprecated, or proposed.
 
 ## Active work
 

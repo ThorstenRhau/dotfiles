@@ -4,6 +4,7 @@ Status: accepted
 Recorded: 2026-09-01
 Supersedes: none
 Related: `stow_all.sh`, `.gitignore`, `zsh/.stow-local-ignore`
+Amended by: ADR-0004 retired the legacy state migrations on 2026-10-12
 
 This record is retrospective. It documents the boundary implemented by the
 current repository and its retained history.
