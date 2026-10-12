@@ -28,6 +28,10 @@ require_file() {
     err "missing source: $1"
     return 1
   fi
+  if [ ! -s "$1" ]; then
+    err "empty source: $1"
+    return 1
+  fi
 }
 
 require_dir() {
@@ -53,19 +57,57 @@ copy_file() {
   info "$dst"
 }
 
-palette_value() {
-  palette_file="$1"
-  palette_key="$2"
-
-  awk -v key="$palette_key" '
-    $1 == key && $2 == "=" {
-      gsub(/"/, "", $3)
-      print $3
-      found = 1
-      exit
+# Print "key=#rrggbb" for every palette key in the [palettes.NAME] section.
+# Report each missing or malformed key and fail if any.
+palette_vars() {
+  awk -v section="[palettes.$2]" -v keys="$palette_keys" -v file="$1" '
+    BEGIN { count = split(keys, wanted, " ") }
+    /^\[/ { in_section = ($0 == section); next }
+    in_section && NF == 3 && $2 == "=" && $3 ~ /^"#[0-9A-Fa-f]{6}"$/ {
+      value[$1] = substr($3, 2, 7)
     }
-    END { if (!found) exit 1 }
-  ' "$palette_file"
+    END {
+      for (i = 1; i <= count; i++) {
+        key = wanted[i]
+        if (key in value) {
+          print key "=" value[key]
+        } else {
+          printf "ERROR: palette key %s missing or invalid in %s\n", key, file > "/dev/stderr"
+          failed = 1
+        }
+      }
+      exit failed
+    }
+  ' "$1"
+}
+
+# Run "$1 SOURCE DESTINATION" for every Token file copied unchanged.
+# SOURCE is relative to $CONTRIB and DESTINATION to $DOTFILES_DIR.
+for_each_copy() {
+  action="$1"
+  for appearance in $appearances; do
+    "$action" "herdr/$appearance.toml" \
+      "herdr/.config/herdr/themes/$appearance.toml"
+    for mode in $modes; do
+      theme="$appearance-$mode"
+      "$action" "bat/$theme.tmTheme" "bat/.config/bat/themes/$theme.tmTheme"
+      "$action" "carapace/$theme.json" \
+        "zsh/.config/zsh/themes/carapace-$theme.json"
+      "$action" "fzf/$theme.zsh" "fzf/.config/fzf/themes/$theme.zsh"
+      "$action" "zsh/$theme.zsh" "zsh/.config/zsh/themes/$theme.zsh"
+      "$action" "ghostty/$theme" "ghostty/.config/ghostty/themes/$theme"
+      "$action" "lazygit/$theme.yml" "lazygit/.config/lazygit/$theme.yml"
+      "$action" "tmux/$theme.conf" "tmux/.config/tmux/$theme.conf"
+    done
+  done
+}
+
+check_copy() {
+  require_file "$CONTRIB/$1" || :
+}
+
+sync_copy() {
+  copy_file "$CONTRIB/$1" "$DOTFILES_DIR/$2"
 }
 
 # ------------------------------------------------------------------
@@ -84,60 +126,40 @@ appearances='token token-flint token-temper token-ultra token-meridian'
 modes='dark light'
 palette_keys='fg muted subtle accent blue green red yellow purple cyan orange'
 
-for appearance in $appearances; do
-  if ! require_file "$CONTRIB/herdr/$appearance.toml"; then
-    :
-  fi
+for_each_copy check_copy
 
+for appearance in $appearances; do
   delta_src="$CONTRIB/delta/$appearance.gitconfig"
   if require_file "$delta_src"; then
     require_line "$delta_src" '^\[delta ' "no [delta ...] section found in" || :
   fi
 
   for mode in $modes; do
-    for source in \
-      "bat/$appearance-$mode.tmTheme" \
-      "carapace/$appearance-$mode.json" \
-      "fzf/$appearance-$mode.zsh" \
-      "ghostty/$appearance-$mode" \
-      "lazygit/$appearance-$mode.yml" \
-      "ripgrep/$appearance-$mode.ripgreprc" \
-      "starship/$appearance-$mode.toml" \
-      "tmux/$appearance-$mode.conf" \
-      "zsh/$appearance-$mode.zsh"; do
-      if ! require_file "$CONTRIB/$source"; then
-        :
-      fi
-    done
-
     rg_src="$CONTRIB/ripgrep/$appearance-$mode.ripgreprc"
-    if [ -f "$rg_src" ]; then
+    if require_file "$rg_src"; then
       require_line "$rg_src" '^--' "no color options found in" || :
     fi
 
     starship_src="$CONTRIB/starship/$appearance-$mode.toml"
-    if [ -f "$starship_src" ]; then
-      require_line "$starship_src" '^\[palettes\.' \
-        "no [palettes.*] section found in" || :
-      for key in $palette_keys; do
-        if ! palette_value "$starship_src" "$key" >/dev/null; then
-          err "palette key '$key' missing in $starship_src"
-        fi
-      done
+    if require_file "$starship_src"; then
+      require_line "$starship_src" "^\[palettes\.$appearance\]\$" \
+        "no [palettes.$appearance] section found in" || :
+      palette_vars "$starship_src" "$appearance" >/dev/null ||
+        errors=$((errors + 1))
     fi
   done
 done
 
 rg_base="$DOTFILES_DIR/ripgrep/.config/ripgrep/config"
 if require_file "$rg_base"; then
-  if ! grep -qv '^--color' "$rg_base"; then
+  if ! grep -v '^--color' "$rg_base" | grep -q '^-'; then
     err "no non-color options found in $rg_base"
   fi
 fi
 
-if ! require_file "$DOTFILES_DIR/starship/.config/src/generate.sh"; then
-  :
-fi
+# generate.sh runs mid-sync, so check its inputs before writing anything.
+require_file "$DOTFILES_DIR/starship/.config/src/generate.sh" || :
+require_file "$DOTFILES_DIR/starship/.config/src/base.toml" || :
 
 if [ "$errors" -gt 0 ]; then
   printf "Finished with %d error(s).\n" "$errors" >&2
@@ -148,38 +170,11 @@ printf "Syncing token themes from %s\n" "$CONTRIB"
 printf "Into dotfiles at %s\n\n" "$DOTFILES_DIR"
 
 # ------------------------------------------------------------------
-# Herdr
+# Unchanged copies (herdr, bat, carapace, fzf, zsh, ghostty, lazygit, tmux)
 # ------------------------------------------------------------------
 
-printf "herdr:\n"
-for appearance in $appearances; do
-  copy_file "$CONTRIB/herdr/$appearance.toml" \
-    "$DOTFILES_DIR/herdr/.config/herdr/themes/$appearance.toml"
-done
-
-# ------------------------------------------------------------------
-# Bat
-# ------------------------------------------------------------------
-
-printf "bat:\n"
-for appearance in $appearances; do
-  for mode in $modes; do
-    copy_file "$CONTRIB/bat/$appearance-$mode.tmTheme" \
-      "$DOTFILES_DIR/bat/.config/bat/themes/$appearance-$mode.tmTheme"
-  done
-done
-
-# ------------------------------------------------------------------
-# Carapace (completion styling)
-# ------------------------------------------------------------------
-
-printf "carapace:\n"
-for appearance in $appearances; do
-  for mode in $modes; do
-    copy_file "$CONTRIB/carapace/$appearance-$mode.json" \
-      "$DOTFILES_DIR/zsh/.config/zsh/themes/carapace-$appearance-$mode.json"
-  done
-done
+printf "copies:\n"
+for_each_copy sync_copy
 
 # ------------------------------------------------------------------
 # Delta (git)
@@ -187,7 +182,8 @@ done
 
 printf "delta:\n"
 delta_dst="$DOTFILES_DIR/git/.config/git/delta_themes.inc"
-{
+# Build in memory so a failed read cannot leave a partial include behind.
+delta_content=$(
   printf '%s\n\n' '# Generated by token colorscheme. Do not edit manually.'
   first_delta=1
   for appearance in $appearances; do
@@ -197,7 +193,9 @@ delta_dst="$DOTFILES_DIR/git/.config/git/delta_themes.inc"
     sed -n '/^\[delta /,$p' "$CONTRIB/delta/$appearance.gitconfig"
     first_delta=0
   done
-} >"$delta_dst"
+)
+mkdir -p "$(dirname "$delta_dst")"
+printf '%s\n' "$delta_content" >"$delta_dst"
 info "$delta_dst"
 
 # ------------------------------------------------------------------
@@ -210,20 +208,13 @@ for appearance in $appearances; do
     src="$CONTRIB/starship/$appearance-$mode.toml"
     dst="$DOTFILES_DIR/git/.config/git/$appearance-$mode.gitconfig"
 
-    # Preflight verified that every key is present.
-    fg=$(palette_value "$src" fg)
-    muted=$(palette_value "$src" muted)
-    subtle=$(palette_value "$src" subtle)
-    accent=$(palette_value "$src" accent)
-    blue=$(palette_value "$src" blue)
-    green=$(palette_value "$src" green)
-    red=$(palette_value "$src" red)
-    yellow=$(palette_value "$src" yellow)
-    purple=$(palette_value "$src" purple)
-    cyan=$(palette_value "$src" cyan)
-    orange=$(palette_value "$src" orange)
+    # Sets fg, muted, accent and the other palette keys. eval is safe here:
+    # palette_vars only prints fixed key names with #rrggbb values.
+    palette=$(palette_vars "$src" "$appearance")
+    eval "$palette"
 
     mkdir -p "$(dirname "$dst")"
+    # shellcheck disable=SC2154 # The palette variables come from eval above.
     cat >"$dst" <<EOF
 # Generated from the $appearance $mode palette. Do not edit manually.
 
@@ -301,54 +292,6 @@ EOF
 done
 
 # ------------------------------------------------------------------
-# FZF (zsh variants)
-# ------------------------------------------------------------------
-
-printf "fzf (zsh):\n"
-for appearance in $appearances; do
-  for mode in $modes; do
-    copy_file "$CONTRIB/fzf/$appearance-$mode.zsh" \
-      "$DOTFILES_DIR/fzf/.config/fzf/themes/$appearance-$mode.zsh"
-  done
-done
-
-# ------------------------------------------------------------------
-# Zsh (syntax highlighting + completion theme)
-# ------------------------------------------------------------------
-
-printf "zsh:\n"
-for appearance in $appearances; do
-  for mode in $modes; do
-    copy_file "$CONTRIB/zsh/$appearance-$mode.zsh" \
-      "$DOTFILES_DIR/zsh/.config/zsh/themes/$appearance-$mode.zsh"
-  done
-done
-
-# ------------------------------------------------------------------
-# Ghostty
-# ------------------------------------------------------------------
-
-printf "ghostty:\n"
-for appearance in $appearances; do
-  for mode in $modes; do
-    copy_file "$CONTRIB/ghostty/$appearance-$mode" \
-      "$DOTFILES_DIR/ghostty/.config/ghostty/themes/$appearance-$mode"
-  done
-done
-
-# ------------------------------------------------------------------
-# Lazygit
-# ------------------------------------------------------------------
-
-printf "lazygit:\n"
-for appearance in $appearances; do
-  for mode in $modes; do
-    copy_file "$CONTRIB/lazygit/$appearance-$mode.yml" \
-      "$DOTFILES_DIR/lazygit/.config/lazygit/$appearance-$mode.yml"
-  done
-done
-
-# ------------------------------------------------------------------
 # Ripgrep (adapted: prepend base config, append token colors)
 # ------------------------------------------------------------------
 
@@ -380,7 +323,7 @@ for appearance in $appearances; do
     dst="$DOTFILES_DIR/starship/.config/src/palettes/$appearance-$mode.toml"
 
     # Token contrib has a palette section but no top-level palette directive.
-    palette_section=$(sed -n '/^\[palettes\./,$p' "$src")
+    palette_section=$(sed -n "/^\[palettes\.$appearance\]\$/,\$p" "$src")
 
     mkdir -p "$(dirname "$dst")"
     printf 'palette = "%s"\n\n%s\n' "$appearance" "$palette_section" >"$dst"
@@ -392,25 +335,4 @@ done
 sh "$DOTFILES_DIR/starship/.config/src/generate.sh"
 info "starship configs regenerated"
 
-# ------------------------------------------------------------------
-# Tmux
-# ------------------------------------------------------------------
-
-printf "tmux:\n"
-for appearance in $appearances; do
-  for mode in $modes; do
-    copy_file "$CONTRIB/tmux/$appearance-$mode.conf" \
-      "$DOTFILES_DIR/tmux/.config/tmux/$appearance-$mode.conf"
-  done
-done
-
-# ------------------------------------------------------------------
-# Summary
-# ------------------------------------------------------------------
-
-printf "\n"
-if [ "$errors" -gt 0 ]; then
-  printf "Finished with %d error(s).\n" "$errors" >&2
-  exit 1
-fi
-printf "All token themes synced successfully.\n"
+printf "\nAll token themes synced successfully.\n"
