@@ -1,6 +1,6 @@
-palette = "token-temper"
+palette = "token-temper-dark"
 
-[palettes.token-temper]
+[palettes.token-temper-dark]
 bg      = "#272C33"
 fg      = "#C3C8CC"
 muted   = "#9AA4AE"

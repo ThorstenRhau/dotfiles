@@ -1,6 +1,6 @@
-palette = "token-meridian"
+palette = "token-meridian-light"
 
-[palettes.token-meridian]
+[palettes.token-meridian-light]
 bg      = "#fbf9f4"
 fg      = "#28323a"
 muted   = "#524b42"

@@ -1,6 +1,6 @@
-palette = "token-ultra"
+palette = "token-ultra-light"
 
-[palettes.token-ultra]
+[palettes.token-ultra-light]
 bg      = "#fbf9f4"
 fg      = "#31312b"
 muted   = "#514b44"

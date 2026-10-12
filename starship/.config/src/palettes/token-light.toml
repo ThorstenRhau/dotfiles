@@ -1,6 +1,6 @@
-palette = "token"
+palette = "token-light"
 
-[palettes.token]
+[palettes.token-light]
 bg      = "#faf9f5"
 fg      = "#323128"
 muted   = "#504b44"
