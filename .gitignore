@@ -21,14 +21,5 @@ zsh/.config/zsh/.zsh_sessions
 *.py[cod]
 *$py.class
 
-# Google Gemini-cli specific local files that are ignored
-gemini/.gemini/google_accounts.json
-gemini/.gemini/history/
-gemini/.gemini/oauth_creds.json
-gemini/.gemini/tmp/
-
 # macOS specific
 **/.DS_Store
-
-# Tasks directory
-tasks/
