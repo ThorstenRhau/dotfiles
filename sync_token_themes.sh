@@ -37,6 +37,13 @@ require_dir() {
   fi
 }
 
+require_line() {
+  if ! grep -q "$2" "$1"; then
+    err "$3 $1"
+    return 1
+  fi
+}
+
 copy_file() {
   src="$1"
   dst="$2"
@@ -75,14 +82,16 @@ require_dir "$CONTRIB" || exit 1
 
 appearances='token token-flint token-temper token-ultra token-meridian'
 modes='dark light'
+palette_keys='fg muted subtle accent blue green red yellow purple cyan orange'
 
 for appearance in $appearances; do
   if ! require_file "$CONTRIB/herdr/$appearance.toml"; then
     :
   fi
 
-  if ! require_file "$CONTRIB/delta/$appearance.gitconfig"; then
-    :
+  delta_src="$CONTRIB/delta/$appearance.gitconfig"
+  if require_file "$delta_src"; then
+    require_line "$delta_src" '^\[delta ' "no [delta ...] section found in" || :
   fi
 
   for mode in $modes; do
@@ -100,10 +109,33 @@ for appearance in $appearances; do
         :
       fi
     done
+
+    rg_src="$CONTRIB/ripgrep/$appearance-$mode.ripgreprc"
+    if [ -f "$rg_src" ]; then
+      require_line "$rg_src" '^--' "no color options found in" || :
+    fi
+
+    starship_src="$CONTRIB/starship/$appearance-$mode.toml"
+    if [ -f "$starship_src" ]; then
+      require_line "$starship_src" '^\[palettes\.' \
+        "no [palettes.*] section found in" || :
+      for key in $palette_keys; do
+        if ! palette_value "$starship_src" "$key" >/dev/null; then
+          err "palette key '$key' missing in $starship_src"
+        fi
+      done
+    fi
   done
 done
 
-if ! require_file "$DOTFILES_DIR/ripgrep/.config/ripgrep/config"; then
+rg_base="$DOTFILES_DIR/ripgrep/.config/ripgrep/config"
+if require_file "$rg_base"; then
+  if ! grep -qv '^--color' "$rg_base"; then
+    err "no non-color options found in $rg_base"
+  fi
+fi
+
+if ! require_file "$DOTFILES_DIR/starship/.config/src/generate.sh"; then
   :
 fi
 
@@ -178,20 +210,18 @@ for appearance in $appearances; do
     src="$CONTRIB/starship/$appearance-$mode.toml"
     dst="$DOTFILES_DIR/git/.config/git/$appearance-$mode.gitconfig"
 
-    if ! fg=$(palette_value "$src" fg) ||
-      ! muted=$(palette_value "$src" muted) ||
-      ! subtle=$(palette_value "$src" subtle) ||
-      ! accent=$(palette_value "$src" accent) ||
-      ! blue=$(palette_value "$src" blue) ||
-      ! green=$(palette_value "$src" green) ||
-      ! red=$(palette_value "$src" red) ||
-      ! yellow=$(palette_value "$src" yellow) ||
-      ! purple=$(palette_value "$src" purple) ||
-      ! cyan=$(palette_value "$src" cyan) ||
-      ! orange=$(palette_value "$src" orange); then
-      err "incomplete palette in $src"
-      continue
-    fi
+    # Preflight verified that every key is present.
+    fg=$(palette_value "$src" fg)
+    muted=$(palette_value "$src" muted)
+    subtle=$(palette_value "$src" subtle)
+    accent=$(palette_value "$src" accent)
+    blue=$(palette_value "$src" blue)
+    green=$(palette_value "$src" green)
+    red=$(palette_value "$src" red)
+    yellow=$(palette_value "$src" yellow)
+    purple=$(palette_value "$src" purple)
+    cyan=$(palette_value "$src" cyan)
+    orange=$(palette_value "$src" orange)
 
     mkdir -p "$(dirname "$dst")"
     cat >"$dst" <<EOF
@@ -323,7 +353,6 @@ done
 # ------------------------------------------------------------------
 
 printf "ripgrep:\n"
-rg_base="$DOTFILES_DIR/ripgrep/.config/ripgrep/config"
 rg_base_lines=$(grep -v '^--color' "$rg_base")
 
 for appearance in $appearances; do
@@ -349,16 +378,9 @@ for appearance in $appearances; do
   for mode in $modes; do
     src="$CONTRIB/starship/$appearance-$mode.toml"
     dst="$DOTFILES_DIR/starship/.config/src/palettes/$appearance-$mode.toml"
-    if ! require_file "$src"; then
-      continue
-    fi
 
     # Token contrib has a palette section but no top-level palette directive.
     palette_section=$(sed -n '/^\[palettes\./,$p' "$src")
-    if [ -z "$palette_section" ]; then
-      err "no [palettes.*] section found in $src"
-      continue
-    fi
 
     mkdir -p "$(dirname "$dst")"
     printf 'palette = "%s"\n\n%s\n' "$appearance" "$palette_section" >"$dst"
