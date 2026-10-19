@@ -10,6 +10,7 @@ if [[ -x /opt/homebrew/bin/brew ]]; then
   export HOMEBREW_DOWNLOAD_CONCURRENCY=auto
   export HOMEBREW_EDITOR=nvim
   export HOMEBREW_NO_ANALYTICS=1
+  export HOMEBREW_NO_ENV_HINTS=1
   export HOMEBREW_UPGRADE_GREEDY=1
 fi
 
