@@ -14,6 +14,7 @@
 adjust-cursor-thickness       = 2
 auto-update                   = check
 bold-color                    = bright
+config-file                   = ?token-active.ghostty
 copy-on-select                = clipboard
 cursor-color                  = cell-foreground
 cursor-opacity                = 0.65
@@ -25,7 +26,6 @@ notify-on-command-finish      = unfocused
 quit-after-last-window-closed = true
 shell-integration-features    = cursor,sudo,title,ssh-env,ssh-terminfo,path
 theme                         = dark:token-dark,light:token-light
-config-file                   = ?token-active.ghostty
 unfocused-split-opacity       = 1
 window-height                 = 42
 window-padding-balance        = equal
@@ -35,13 +35,14 @@ window-title-font-family      = MonoLisaText
 window-width                  = 120
 
 ### Font configuration
-font-family                = MonoLisaCode
-font-family                = Symbols Nerd Font Mono
-font-synthetic-style       = false
-font-variation             = wght = 450
-font-variation-bold        = wght = 700
-font-variation-bold-italic = wght = 700
-font-variation-italic      = wght = 450
+font-family                   = MonoLisaCode
+font-family                   = Symbols Nerd Font Mono
+font-size                     = 13
+font-synthetic-style          = false
+font-variation                = wght = 450
+font-variation-bold           = wght = 700
+font-variation-bold-italic    = wght = 700
+font-variation-italic         = wght = 450
 
 ### OpenType features
 # Enable or disable each feature with + or -.
