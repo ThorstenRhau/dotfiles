@@ -14,25 +14,21 @@
 adjust-cursor-thickness       = 2
 auto-update                   = check
 bold-color                    = bright
-clipboard-read                = ask
 copy-on-select                = clipboard
 cursor-color                  = cell-foreground
 cursor-opacity                = 0.65
 cursor-text                   = cell-background
 macos-non-native-fullscreen   = visible-menu
 macos-option-as-alt           = left
-macos-titlebar-style          = transparent
 mouse-hide-while-typing       = true
-mouse-shift-capture           = false
 notify-on-command-finish      = unfocused
 quit-after-last-window-closed = true
-scrollback-limit              = 25000000
 shell-integration-features    = cursor,sudo,title,ssh-env,ssh-terminfo,path
 theme                         = dark:token-dark,light:token-light
 config-file                   = ?token-active.ghostty
 unfocused-split-opacity       = 1
 window-height                 = 42
-window-padding-balance        = true
+window-padding-balance        = equal
 window-step-resize            = true
 window-theme                  = system
 window-title-font-family      = MonoLisaText
@@ -41,7 +37,6 @@ window-width                  = 120
 ### Font configuration
 font-family                = MonoLisaCode
 font-family                = Symbols Nerd Font Mono
-font-size                  = 13
 font-synthetic-style       = false
 font-variation             = wght = 450
 font-variation-bold        = wght = 700
