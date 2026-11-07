@@ -12,15 +12,15 @@
 	plain = "#28323a"
 	remote = "bold #095b62"
 	upstream = "bold #095b62"
-	worktree = "bold #7a1f7a"
+	worktree = "bold #832882"
 
 [color "decorate"]
 	HEAD = "bold #0048b3"
 	branch = "bold #005f2f"
 	grafted = "#524b42"
 	remoteBranch = "bold #095b62"
-	stash = "#7a1f7a"
-	tag = "bold #4b1fa3"
+	stash = "#832882"
+	tag = "bold #843900"
 
 [color "diff"]
 	# Keep glg's commit colour, but let delta style diff bodies.
@@ -30,7 +30,7 @@
 	column = "#095b62"
 	context = "#524b42"
 	filename = "bold #0048b3"
-	function = "#7a1f7a"
+	function = "#832882"
 	lineNumber = "#926e25"
 	match = "bold #0048b3"
 	matchContext = "bold #0048b3"
@@ -40,7 +40,7 @@
 
 [color "interactive"]
 	error = "bold #ae5158"
-	header = "bold #7a1f7a"
+	header = "bold #832882"
 	help = "#524b42"
 	plain = "#28323a"
 	prompt = "bold #0048b3"

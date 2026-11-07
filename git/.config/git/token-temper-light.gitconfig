@@ -20,7 +20,7 @@
 	grafted = "#414C57"
 	remoteBranch = "bold #005B53"
 	stash = "#612C8D"
-	tag = "bold #004741"
+	tag = "bold #683495"
 
 [color "diff"]
 	# Keep glg's commit colour, but let delta style diff bodies.
