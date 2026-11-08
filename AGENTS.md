@@ -53,7 +53,7 @@ Run only checks relevant to the changed package.
   `ghostty +validate-config --config-file=ghostty/.config/ghostty/config.ghostty`.
 - Herdr: compose `config.base.toml` with each theme fragment and run
   `HERDR_CONFIG_PATH=<composed-file> herdr config check`.
-- Markdown: `markdownlint <files>`.
+- Markdown: `rumdl check <files>`.
 - Stow layout:
   `stow --simulate --restow --target <temporary-home> <package>`; add
   `--no-folding` for `herdr` and `zsh`. Never point validation at the live home
