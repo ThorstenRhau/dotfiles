@@ -10,6 +10,10 @@
 cask "basictex"
 cask "font-symbols-only-nerd-font"
 
+brew "pyrefly"
+brew "rumdl"
+brew "actionlint"
+
 brew "basedpyright"
 brew "bash"
 brew "bash-language-server"
@@ -40,7 +44,6 @@ brew "lazygit"
 brew "libgit2"
 brew "luacheck"
 brew "markdownlint-cli"
-brew "marksman"
 brew "mergiraf"
 brew "mole"
 brew "mosh"
