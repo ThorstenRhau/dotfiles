@@ -28,6 +28,7 @@ lazygit
 ripgrep
 starship
 tmux
+yamllint
 zsh
 "
 

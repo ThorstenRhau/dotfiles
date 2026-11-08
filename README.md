@@ -16,7 +16,7 @@ brew bundle
 ```
 
 The managed packages are `bat`, `fzf`, `ghostty`, `git`, `herdr`, `lazygit`,
-`ripgrep`, `starship`, `tmux`, and `zsh`.
+`ripgrep`, `starship`, `tmux`, `yamllint`, and `zsh`.
 
 Herdr is the primary persistent terminal workspace manager. The existing tmux
 package remains available as a fallback, but tmux itself is not declared in the

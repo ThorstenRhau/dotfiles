@@ -8,7 +8,7 @@ commands remain in `README.md`, and maintenance constraints remain in
 
 Each deployed top-level package mirrors its path below `$HOME`. The supported
 package set is declared by `stow_all.sh`: `bat`, `fzf`, `ghostty`, `git`,
-`herdr`, `lazygit`, `ripgrep`, `starship`, `tmux`, and `zsh`.
+`herdr`, `lazygit`, `ripgrep`, `starship`, `tmux`, `yamllint`, and `zsh`.
 
 `stow_all.sh` is the full deployment boundary. Before restowing packages it
 generates Starship configurations. It uses
