@@ -1,0 +1,13 @@
+---
+# User-wide yamllint defaults, used when a project has no yamllint config.
+# Match prettier's YAML output: one space before inline comments and no
+# document start marker. GitHub Actions requires the `on:` key, which the
+# truthy rule would flag, so check values only.
+extends: default
+
+rules:
+  comments:
+    min-spaces-from-content: 1
+  document-start: disable
+  truthy:
+    check-keys: false
