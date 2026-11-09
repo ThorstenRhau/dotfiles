@@ -63,6 +63,8 @@ if (($+commands[nvim])); then
   export EDITOR=nvim
   export VISUAL="$EDITOR"
   export SUDO_EDITOR="$EDITOR"
+  export MANPAGER="nvim +Man! -"
+  export MANCOLOR=true
   alias nv=nvim
 fi
 
