@@ -4,7 +4,7 @@
 	hint = "#095b62"
 
 [color "blame"]
-	repeatedLines = "#43505c"
+	repeatedLines = "#616f7c"
 
 [color "branch"]
 	current = "bold #0048b3"
@@ -17,7 +17,7 @@
 [color "decorate"]
 	HEAD = "bold #0048b3"
 	branch = "bold #005f2f"
-	grafted = "#524b42"
+	grafted = "#6c645b"
 	remoteBranch = "bold #095b62"
 	stash = "#832882"
 	tag = "bold #843900"
@@ -28,20 +28,20 @@
 
 [color "grep"]
 	column = "#095b62"
-	context = "#524b42"
+	context = "#6c645b"
 	filename = "bold #0048b3"
 	function = "#832882"
-	lineNumber = "#926e25"
+	lineNumber = "#89661b"
 	match = "bold #0048b3"
 	matchContext = "bold #0048b3"
 	matchSelected = "bold #0048b3"
 	selected = "#28323a"
-	separator = "#43505c"
+	separator = "#616f7c"
 
 [color "interactive"]
 	error = "bold #ae5158"
 	header = "bold #832882"
-	help = "#524b42"
+	help = "#6c645b"
 	plain = "#28323a"
 	prompt = "bold #0048b3"
 
@@ -52,13 +52,13 @@
 	error = "bold #ae5158"
 	hint = "#095b62"
 	success = "#005f2f"
-	warning = "#926e25"
+	warning = "#89661b"
 
 [color "status"]
 	added = "#005f2f"
 	branch = "bold #0048b3"
-	changed = "bold #926e25"
-	header = "#524b42"
+	changed = "bold #89661b"
+	header = "#6c645b"
 	localBranch = "#0048b3"
 	noBranch = "bold #ae5158"
 	remoteBranch = "#095b62"

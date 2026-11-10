@@ -1,7 +1,7 @@
 # Generated from the token-flint dark palette. Do not edit manually.
 
 [color "advice"]
-	hint = "#98BBD4"
+	hint = "#81C2C2"
 
 [color "blame"]
 	repeatedLines = "#858F9B"
@@ -10,15 +10,15 @@
 	current = "bold #EB9E83"
 	local = "bold #88ACC4"
 	plain = "#C3C8CC"
-	remote = "bold #98BBD4"
-	upstream = "bold #98BBD4"
+	remote = "bold #81C2C2"
+	upstream = "bold #81C2C2"
 	worktree = "bold #E09478"
 
 [color "decorate"]
 	HEAD = "bold #EB9E83"
 	branch = "bold #A9B98C"
 	grafted = "#9AA4AE"
-	remoteBranch = "bold #98BBD4"
+	remoteBranch = "bold #81C2C2"
 	stash = "#E09478"
 	tag = "bold #F8D28A"
 
@@ -27,7 +27,7 @@
 	commit = "#88ACC4"
 
 [color "grep"]
-	column = "#98BBD4"
+	column = "#81C2C2"
 	context = "#9AA4AE"
 	filename = "bold #88ACC4"
 	function = "#E09478"
@@ -50,7 +50,7 @@
 
 [color "remote"]
 	error = "bold #E3888C"
-	hint = "#98BBD4"
+	hint = "#81C2C2"
 	success = "#A9B98C"
 	warning = "#C5A15A"
 
@@ -61,9 +61,9 @@
 	header = "#9AA4AE"
 	localBranch = "#88ACC4"
 	noBranch = "bold #E3888C"
-	remoteBranch = "#98BBD4"
+	remoteBranch = "#81C2C2"
 	unmerged = "bold #E3888C"
-	untracked = "#98BBD4"
+	untracked = "#81C2C2"
 	updated = "#A9B98C"
 
 [color "transport"]
