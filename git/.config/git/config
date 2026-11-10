@@ -34,6 +34,7 @@
   line-numbers = true     # Show line numbers in diffs
   navigate = true         # Enable n/N navigation between diff sections
   side-by-side = true     # Display diffs in split view
+  wrap-max-lines = unlimited  # Wrap long lines fully; the default cuts them off after two wraps
 
 [fetch]
   prune = true  # Automatically remove deleted remote branches (keeps local clean)
@@ -49,6 +50,7 @@
 
 [interactive]
   diffFilter = delta --color-only  # Use delta for git add -p and similar commands
+  singleKey = true                 # Answer git add -p prompts with one keypress, no Enter
 
 [merge]
   conflictStyle = diff3  # Required for mergiraf merge driver compatibility
