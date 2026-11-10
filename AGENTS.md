@@ -143,8 +143,8 @@ shell to regenerate the active configuration.
 ## Colors
 
 [Token](https://github.com/ThorstenRhau/token) is the color source of truth.
-Classic Token, Token Flint, Token Temper, Token Ultra, and Token Meridian are
-all available. Shell tools and Ghostty follow the macOS light or dark mode.
+Classic Token, Token Flint, Token Temper, Token Ultra, Token Meridian, and Token
+Melange are all available. Shell tools and Ghostty follow the macOS light or dark mode.
 Herdr follows the appearance reported by Ghostty and uses both modes from the
 selected family fragment. Tmux defaults to dark; use its prefix followed by `T`
 to toggle light/dark mode. Classic Token is used until another appearance is
@@ -156,17 +156,18 @@ token-theme token-flint
 token-theme token-temper
 token-theme token-ultra
 token-theme token-meridian
+token-theme token-melange
 ```
 
 Run `token-theme` without an argument to print the current appearance, or use
-`token-theme next` to cycle through all five. The selection is stored under
+`token-theme next` to cycle through all six. The selection is stored under
 `${XDG_STATE_HOME:-$HOME/.local/state}` rather than in Git. Existing shells
 update at their next appearance check, Herdr replaces its active family
 fragment, tmux reloads the selected family while retaining its light/dark mode,
 and Ghostty automatically reloads when its adapter changes, including
 immediately after a `token-theme` family change.
 
-After Token contrib files are regenerated, sync all five appearances into this
+After Token contrib files are regenerated, sync all six appearances into this
 repository without modifying Token:
 
 ```sh

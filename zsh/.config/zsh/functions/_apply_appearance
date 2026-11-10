@@ -28,7 +28,7 @@ if [[ "$git_count" == <-> ]]; then
     git_key="GIT_CONFIG_KEY_$git_index"
     git_value="GIT_CONFIG_VALUE_$git_index"
     if [[ "${(P)git_key}" == include.path &&
-      "${(P)git_value}" == "$HOME/.config/git/"(token|token-flint|token-temper|token-ultra|token-meridian)-(dark|light).gitconfig ]]; then
+      "${(P)git_value}" == "$HOME/.config/git/"(token|token-flint|token-temper|token-ultra|token-meridian|token-melange)-(dark|light).gitconfig ]]; then
       break
     fi
   done
