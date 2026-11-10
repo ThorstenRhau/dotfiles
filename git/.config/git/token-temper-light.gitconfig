@@ -4,11 +4,11 @@
 	hint = "#005B53"
 
 [color "blame"]
-	repeatedLines = "#444E59"
+	repeatedLines = "#636D79"
 
 [color "branch"]
 	current = "bold #005850"
-	local = "bold #005850"
+	local = "bold #055667"
 	plain = "#283039"
 	remote = "bold #005B53"
 	upstream = "bold #005B53"
@@ -16,32 +16,32 @@
 
 [color "decorate"]
 	HEAD = "bold #005850"
-	branch = "bold #005B53"
-	grafted = "#414C57"
+	branch = "bold #2B5A39"
+	grafted = "#5A6571"
 	remoteBranch = "bold #005B53"
 	stash = "#612C8D"
 	tag = "bold #683495"
 
 [color "diff"]
 	# Keep glg's commit colour, but let delta style diff bodies.
-	commit = "#005850"
+	commit = "#055667"
 
 [color "grep"]
 	column = "#005B53"
-	context = "#414C57"
-	filename = "bold #005850"
+	context = "#5A6571"
+	filename = "bold #055667"
 	function = "#612C8D"
-	lineNumber = "#946B1E"
+	lineNumber = "#8C6312"
 	match = "bold #005850"
 	matchContext = "bold #005850"
 	matchSelected = "bold #005850"
 	selected = "#283039"
-	separator = "#444E59"
+	separator = "#636D79"
 
 [color "interactive"]
 	error = "bold #BF3F50"
 	header = "bold #612C8D"
-	help = "#414C57"
+	help = "#5A6571"
 	plain = "#283039"
 	prompt = "bold #005850"
 
@@ -51,20 +51,20 @@
 [color "remote"]
 	error = "bold #BF3F50"
 	hint = "#005B53"
-	success = "#005B53"
-	warning = "#946B1E"
+	success = "#2B5A39"
+	warning = "#8C6312"
 
 [color "status"]
-	added = "#005B53"
+	added = "#2B5A39"
 	branch = "bold #005850"
-	changed = "bold #946B1E"
-	header = "#414C57"
-	localBranch = "#005850"
+	changed = "bold #8C6312"
+	header = "#5A6571"
+	localBranch = "#055667"
 	noBranch = "bold #BF3F50"
 	remoteBranch = "#005B53"
 	unmerged = "bold #BF3F50"
 	untracked = "#005B53"
-	updated = "#005B53"
+	updated = "#2B5A39"
 
 [color "transport"]
 	rejected = "bold #BF3F50"
