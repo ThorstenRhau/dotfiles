@@ -32,7 +32,9 @@ class StarshipTests(unittest.TestCase):
                         path.name: path.read_bytes()
                         for path in source.parent.glob("starship*.toml")
                     }
-                    self.assertEqual(len(configs), 11)
+                    # One config per palette, plus the unthemed fallback.
+                    palettes = list((source / "palettes").glob("*.toml"))
+                    self.assertEqual(len(configs), len(palettes) + 1)
                     for content in configs.values():
                         tomllib.loads(content.decode())
                     if expected is None:
