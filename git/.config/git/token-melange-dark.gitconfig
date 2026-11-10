@@ -1,0 +1,70 @@
+# Generated from the token-melange dark palette. Do not edit manually.
+
+[color "advice"]
+	hint = "#86aeb1"
+
+[color "blame"]
+	repeatedLines = "#988573"
+
+[color "branch"]
+	current = "bold #cda44f"
+	local = "bold #a2a9d0"
+	plain = "#c9beb2"
+	remote = "bold #86aeb1"
+	upstream = "bold #86aeb1"
+	worktree = "bold #d59ec6"
+
+[color "decorate"]
+	HEAD = "bold #cda44f"
+	branch = "bold #84b894"
+	grafted = "#af997d"
+	remoteBranch = "bold #86aeb1"
+	stash = "#d59ec6"
+	tag = "bold #fcc493"
+
+[color "diff"]
+	# Keep glg's commit colour, but let delta style diff bodies.
+	commit = "#a2a9d0"
+
+[color "grep"]
+	column = "#86aeb1"
+	context = "#af997d"
+	filename = "bold #a2a9d0"
+	function = "#d59ec6"
+	lineNumber = "#c19a47"
+	match = "bold #cda44f"
+	matchContext = "bold #cda44f"
+	matchSelected = "bold #cda44f"
+	selected = "#c9beb2"
+	separator = "#988573"
+
+[color "interactive"]
+	error = "bold #c88b8f"
+	header = "bold #d59ec6"
+	help = "#af997d"
+	plain = "#c9beb2"
+	prompt = "bold #cda44f"
+
+[color "push"]
+	error = "bold #c88b8f"
+
+[color "remote"]
+	error = "bold #c88b8f"
+	hint = "#86aeb1"
+	success = "#84b894"
+	warning = "#c19a47"
+
+[color "status"]
+	added = "#84b894"
+	branch = "bold #cda44f"
+	changed = "bold #c19a47"
+	header = "#af997d"
+	localBranch = "#a2a9d0"
+	noBranch = "bold #c88b8f"
+	remoteBranch = "#86aeb1"
+	unmerged = "bold #c88b8f"
+	untracked = "#86aeb1"
+	updated = "#84b894"
+
+[color "transport"]
+	rejected = "bold #c88b8f"

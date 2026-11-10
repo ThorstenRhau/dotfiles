@@ -325,16 +325,16 @@ $(<"$herdr_dir/themes/token.toml")"
     def test_ghostty_reload_on_token_family_changes(self):
         output = self.run_zsh(self.appearance_setup + r"""
             _apply_appearance
-            for family in token-flint token-temper token-ultra token-meridian token; do
+            for family in token-flint token-temper token-ultra token-meridian token-melange token; do
               token-theme "$family"
               [[ $TOKEN_APPEARANCE == $family ]] || exit 1
             done
-            [[ $signal_count == 6 ]] || exit 2
+            [[ $signal_count == 7 ]] || exit 2
             token-theme token
-            [[ $signal_count == 6 ]] || exit 3
+            [[ $signal_count == 7 ]] || exit 3
         """)
         self.assertEqual(output.splitlines(), [
-            "token-flint", "token-temper", "token-ultra", "token-meridian", "token", "token"
+            "token-flint", "token-temper", "token-ultra", "token-meridian", "token-melange", "token", "token"
         ])
 
     def test_ghostty_reload_waits_for_third_prompt(self):

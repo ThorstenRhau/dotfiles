@@ -122,7 +122,7 @@ fi
 
 require_dir "$CONTRIB" || exit 1
 
-appearances='token token-flint token-temper token-ultra token-meridian'
+appearances='token token-flint token-temper token-ultra token-meridian token-melange'
 modes='dark light'
 palette_keys='fg muted subtle accent blue green red yellow purple cyan orange'
 

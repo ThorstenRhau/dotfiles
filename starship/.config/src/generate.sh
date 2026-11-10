@@ -11,7 +11,7 @@ script_dir=$(
 )
 out_dir="$(dirname "$script_dir")"
 palette_dir="$script_dir/palettes"
-appearances='token token-flint token-temper token-ultra token-meridian'
+appearances='token token-flint token-temper token-ultra token-meridian token-melange'
 modes='dark light'
 
 if [ ! -r "$script_dir/base.toml" ]; then
