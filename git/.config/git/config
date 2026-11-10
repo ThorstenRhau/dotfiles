@@ -13,6 +13,10 @@
     # Simple tree view of all branches
   tree = log --graph --oneline --decorate --all
 
+    # Review a changeset side by side in Neovim, with the changed files in the
+    # quickfix list
+  dt = difftool -d
+
     # Log with changed files listed for each commit
   files = log --pretty=format:'%h %ad | %s%d [%an]' --date=short --name-status
 
@@ -35,6 +39,13 @@
   navigate = true         # Enable n/N navigation between diff sections
   side-by-side = true     # Display diffs in split view
   wrap-max-lines = unlimited  # Wrap long lines fully; the default cuts them off after two wraps
+
+[difftool]
+  prompt = false  # Open the difftool without asking for each file
+
+[difftool "nvim_difftool"]
+  # Neovim's built-in difftool: file by file, or a whole changeset with -d
+  cmd = nvim -c \"packadd nvim.difftool\" -d \"$LOCAL\" \"$REMOTE\"
 
 [fetch]
   prune = true  # Automatically remove deleted remote branches (keeps local clean)
@@ -105,6 +116,7 @@
   colorMoved = default                         # Highlight moved code blocks in diffs
   colorMovedWS = allow-indentation-change      # Recognize moved blocks after uniform indentation changes
   mnemonicPrefix = true                        # Label diff sides as commit, index, or worktree
+  tool = nvim_difftool                         # git difftool opens Neovim's built-in difftool
 
 [log]
   date = iso  # Use ISO 8601 format for consistent timestamps

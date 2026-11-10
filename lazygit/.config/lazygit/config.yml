@@ -4,9 +4,16 @@ gui:
   nerdFontsVersion: "3"
   timeFormat: "2006-01-02 15:04:05 MST"
 git:
+  # Cycle renderers with |.
   diffRenderers:
-    - colorArg: always
-      command: delta --paging=never
+    # Git config turns delta's side-by-side on; switch it off when the diff
+    # view is too narrow for two columns.
+    - name: delta
+      command: >-
+        {{if lt .width 160}}GIT_CONFIG_PARAMETERS="'delta.side-by-side=false'" {{end}}delta --paging=never
+    - name: difftastic
+      type: extDiff
+      command: difft --color=always --background={{colorScheme}} --context={{diffContext}}
 update:
   method: prompt
   days: 14
