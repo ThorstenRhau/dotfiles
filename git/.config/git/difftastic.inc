@@ -4,11 +4,11 @@
   dshow = -c core.pager='less -FRX' -c diff.external=difft show --ext-diff
   dlog = -c core.pager='less -FRX' -c diff.external=difft log -p --ext-diff
 
-[difftool]
-  prompt = false
-
-[pager]
-  difftool = less -FRX
-
 [difftool "difftastic"]
-  cmd = difft \"$MERGED\" \"$LOCAL\" abcdef1 100644 \"$REMOTE\" abcdef2 100644
+  # Page only this tool. A pager for every difftool would take the terminal
+  # away from the Neovim difftool.
+  cmd = "if [ -t 1 ]; then \
+    difft --color=always \"$MERGED\" \"$LOCAL\" abcdef1 100644 \"$REMOTE\" abcdef2 100644 | less -FRX; \
+    else \
+    difft \"$MERGED\" \"$LOCAL\" abcdef1 100644 \"$REMOTE\" abcdef2 100644; \
+    fi"
