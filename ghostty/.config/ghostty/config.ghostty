@@ -18,8 +18,6 @@ config-file                   = ?token-active.ghostty
 copy-on-select                = clipboard
 # shaders/smooth-caret.glsl relies on cursor-color and cursor-text swapping
 # the cell's colors; change the shader too if these change.
-cursor-color                  = cell-foreground
-cursor-opacity                = 1
 cursor-style-blink            = false
 cursor-text                   = cell-background
 custom-shader                 = shaders/smooth-caret.glsl
