@@ -213,6 +213,9 @@ Run only checks relevant to the changed package.
   `tombi format --check --offline .`.
 - Ghostty:
   `ghostty +validate-config --config-file=ghostty/.config/ghostty/config.ghostty`.
+  It does not compile the custom shaders under `shaders/`; Ghostty skips a
+  shader that fails and reports it only in its log
+  (`log show --last 5m --predicate 'process == "ghostty"'`).
 - Kitty: parse the config with `kitty +runpy` and
   `kitty.config.load_config(path, accumulate_bad_lines=bad)`; `bad` must be
   empty.
