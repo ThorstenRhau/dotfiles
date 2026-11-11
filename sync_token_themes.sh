@@ -96,6 +96,7 @@ for_each_copy() {
       "$action" "fzf/$theme.zsh" "fzf/.config/fzf/themes/$theme.zsh"
       "$action" "zsh/$theme.zsh" "zsh/.config/zsh/themes/$theme.zsh"
       "$action" "ghostty/$theme" "ghostty/.config/ghostty/themes/$theme"
+      "$action" "kitty/$theme.conf" "kitty/.config/kitty/themes/$theme.conf"
       "$action" "lazygit/$theme.yml" "lazygit/.config/lazygit/$theme.yml"
       "$action" "tmux/$theme.conf" "tmux/.config/tmux/$theme.conf"
     done
@@ -170,7 +171,7 @@ printf "Syncing token themes from %s\n" "$CONTRIB"
 printf "Into dotfiles at %s\n\n" "$DOTFILES_DIR"
 
 # ------------------------------------------------------------------
-# Unchanged copies (herdr, bat, carapace, fzf, zsh, ghostty, lazygit, tmux)
+# Unchanged copies (herdr, bat, carapace, fzf, zsh, ghostty, kitty, lazygit, tmux)
 # ------------------------------------------------------------------
 
 printf "copies:\n"
