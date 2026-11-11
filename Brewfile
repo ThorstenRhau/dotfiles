@@ -9,6 +9,7 @@
 
 cask "basictex"
 cask "font-symbols-only-nerd-font"
+cask "kitty"
 
 brew "actionlint"
 brew "bash"
