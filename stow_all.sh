@@ -24,6 +24,7 @@ fzf
 ghostty
 git
 herdr
+kitty
 lazygit
 ripgrep
 starship

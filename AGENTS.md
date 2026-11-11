@@ -23,8 +23,8 @@ owns the deployed file.
 
 ## Deployment
 
-The managed packages are `bat`, `fzf`, `ghostty`, `git`, `herdr`, `lazygit`,
-`ripgrep`, `starship`, `tmux`, `yamllint`, and `zsh`. Herdr is the primary
+The managed packages are `bat`, `fzf`, `ghostty`, `git`, `herdr`, `kitty`,
+`lazygit`, `ripgrep`, `starship`, `tmux`, `yamllint`, and `zsh`. Herdr is the primary
 persistent terminal workspace manager. The tmux package remains as a fallback,
 but tmux itself is not declared in the `Brewfile`.
 
@@ -213,6 +213,9 @@ Run only checks relevant to the changed package.
   `tombi format --check --offline .`.
 - Ghostty:
   `ghostty +validate-config --config-file=ghostty/.config/ghostty/config.ghostty`.
+- Kitty: parse the config with `kitty +runpy` and
+  `kitty.config.load_config(path, accumulate_bad_lines=bad)`; `bad` must be
+  empty.
 - Herdr: compose `config.base.toml` with each theme fragment and run
   `HERDR_CONFIG_PATH=<composed-file> herdr config check`.
 - Markdown: `rumdl check <files>`.
