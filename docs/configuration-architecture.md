@@ -8,12 +8,12 @@ commands remain in `README.md`, and maintenance constraints remain in
 
 Each deployed top-level package mirrors its path below `$HOME`. The supported
 package set is declared by `stow_all.sh`: `bat`, `fzf`, `ghostty`, `git`,
-`herdr`, `kitty`, `lazygit`, `ripgrep`, `starship`, `tmux`, `yamllint`, and
-`zsh`.
+`herdr`, `kitty`, `lazygit`, `ripgrep`, `starship`, `tmux`, `tuicr`,
+`yamllint`, and `zsh`.
 
 `stow_all.sh` is the full deployment boundary. Before restowing packages it
 generates Starship configurations. It uses
-`--no-folding` for Herdr and Zsh so local files can coexist in their
+`--no-folding` for Herdr, tuicr, and Zsh so local files can coexist in their
 configuration directories without becoming repository content. It also
 rebuilds Bat's cache after deployment when Bat is installed.
 
@@ -28,7 +28,7 @@ Token contrib exports
 sync_token_themes.sh
         |
         +--> tracked themes for Bat, FZF, Ghostty, Git/Delta,
-        |    Herdr, Kitty, LazyGit, Ripgrep, tmux, and Zsh/Carapace
+        |    Herdr, Kitty, LazyGit, Ripgrep, tmux, tuicr, and Zsh/Carapace
         |
         +--> tracked Starship palettes
                     |
@@ -56,6 +56,13 @@ It also writes ignored adapters for Ghostty and tmux, which long-running
 applications consume when reloaded. Because Herdr has no include directive,
 Zsh composes its tracked `config.base.toml` and selected mode-independent Token
 family fragment into an ignored `config.toml`.
+
+tuicr reads only its config file, and Neovim starts it directly, so Zsh writes
+an ignored `~/.config/tuicr/config.toml` that sets `theme_dark` and
+`theme_light` to the selected family. tuicr chooses between them from the
+terminal background at startup, so a running review keeps its theme until
+tuicr restarts. The file uses the same generated header and unmanaged-file
+protection as Herdr's configuration and has no tracked base yet.
 
 The macOS appearance check runs every third prompt. When the Ghostty adapter
 contents change, Zsh writes it atomically and then sends `SIGUSR2` to this user's

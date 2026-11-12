@@ -24,24 +24,25 @@ owns the deployed file.
 ## Deployment
 
 The managed packages are `bat`, `fzf`, `ghostty`, `git`, `herdr`, `kitty`,
-`lazygit`, `ripgrep`, `starship`, `tmux`, `yamllint`, and `zsh`. Herdr is the primary
-persistent terminal workspace manager. The tmux package remains as a fallback,
-but tmux itself is not declared in the `Brewfile`.
+`lazygit`, `ripgrep`, `starship`, `tmux`, `tuicr`, `yamllint`, and `zsh`.
+Herdr is the primary persistent terminal workspace manager. The tmux package
+remains as a fallback, but tmux itself is not declared in the `Brewfile`.
 
 `stow_all.sh` is the live full-deployment entry point. It also rebuilds the Bat
 cache.
 
-To deploy an individual package other than `herdr` or `zsh`:
+To deploy an individual package other than `herdr`, `tuicr`, or `zsh`:
 
 ```sh
 stow --target "$HOME" --restow <package>
 ```
 
-Herdr and Zsh keep runtime and local files outside the repository by disabling
-directory folding:
+Herdr, tuicr, and Zsh keep runtime and local files outside the repository by
+disabling directory folding:
 
 ```sh
 stow --target "$HOME" --restow --no-folding herdr
+stow --target "$HOME" --restow --no-folding tuicr
 stow --target "$HOME" --restow --no-folding zsh
 ```
 
@@ -224,5 +225,5 @@ Run only checks relevant to the changed package.
 - Markdown: `rumdl check <files>`.
 - Stow layout:
   `stow --simulate --restow --target <temporary-home> <package>`; add
-  `--no-folding` for `herdr` and `zsh`. Never point validation at the live home
-  directory.
+  `--no-folding` for `herdr`, `tuicr`, and `zsh`. Never point validation at
+  the live home directory.
