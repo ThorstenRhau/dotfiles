@@ -9,6 +9,7 @@ herdr/.config/herdr/*.log
 herdr/.config/herdr/*.sock
 herdr/.config/herdr/sessions/
 tmux/.config/tmux/token-active.conf
+tuicr/.config/tuicr/config.toml
 
 # Zsh specific local files that are ignored
 zsh/.config/zsh/local.zsh

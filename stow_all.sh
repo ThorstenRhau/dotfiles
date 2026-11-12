@@ -29,6 +29,7 @@ lazygit
 ripgrep
 starship
 tmux
+tuicr
 yamllint
 zsh
 "
@@ -49,7 +50,7 @@ is_group_or_world_writable() {
 
 for package in $packages; do
   case "$package" in
-    herdr | zsh)
+    herdr | tuicr | zsh)
       stow --target "$HOME" --restow --no-folding -v "$package"
       ;;
     *)
