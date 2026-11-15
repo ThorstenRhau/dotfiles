@@ -4,9 +4,9 @@
 
 This index maps durable knowledge for the dotfiles repository. The current
 repository is authoritative: `AGENTS.md` owns maintenance rules, `README.md`
-owns installation and user-facing operations, `Brewfile` owns Homebrew
-declarations, current-state documents describe implemented behavior, and
-decision records preserve accepted rationale.
+owns installation guidance, `Brewfile` owns Homebrew declarations,
+current-state documents describe implemented behavior, and decision records
+preserve accepted rationale.
 
 ## Current-state documentation
 
@@ -36,9 +36,9 @@ this documentation.
 
 ## Release and operational evidence
 
-- `README.md` documents installation, individual package deployment,
-  typography, appearance selection, and Token synchronization.
-- `AGENTS.md` defines source ownership and package-specific validation.
+- `README.md` documents installation.
+- `AGENTS.md` defines source ownership, deployment, appearance selection,
+  Token synchronization, typography, and package-specific validation.
 - Git history retains dated implementation evidence. It is not a substitute
   for current repository state.
 
