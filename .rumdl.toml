@@ -2,4 +2,4 @@
 # file, not from the language server options in lua/lsp.lua.
 [MD060]
 enabled = true
-style = "aligned"
+style   = "aligned"

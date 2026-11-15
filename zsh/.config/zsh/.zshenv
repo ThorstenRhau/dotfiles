@@ -2,7 +2,12 @@
 # OS Detection (must be first, used by functions below)
 # =============================================================================
 
-typeset -gr _OS_TYPE="$(uname)"
+# $OSTYPE is built in, so this costs no fork in every zsh process.
+case "$OSTYPE" in
+  darwin*) typeset -g _OS_TYPE=Darwin ;;
+  linux*) typeset -g _OS_TYPE=Linux ;;
+  *) typeset -g _OS_TYPE="$(uname)" ;;
+esac
 
 # =============================================================================
 # Environment Variables

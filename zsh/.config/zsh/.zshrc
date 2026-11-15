@@ -175,7 +175,7 @@ if (($+commands[fzf])) && [[ -o zle ]] && [[ -t 0 ]]; then
   # Base options (layout, behavior) preserved across theme changes
   export _FZF_BASE_OPTS="\
 --height=40% --layout=reverse --info=inline --cycle \
---border=sharp --scrollbar='│' \
+--border=rounded --scrollbar='│' \
 --prompt='› ' --pointer='▶' --marker='✓' \
 --ghost='Type to search...' \
 --bind='ctrl-/:toggle-preview'"

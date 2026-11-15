@@ -4,9 +4,6 @@
 # To dump your current Homebrew setup to a Brewfile, run:
 # brew bundle dump
 
-# Taps (Homebrew repositories)
-# Uncomment if you use any cask applications
-
 # macOS only: casks and formulae without Linux support. On WSL2 Ubuntu, install
 # fonts on the Windows side.
 if OS.mac?
