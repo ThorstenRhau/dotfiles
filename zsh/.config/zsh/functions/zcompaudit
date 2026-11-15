@@ -13,12 +13,15 @@ fi
 
 print -ru2 "Insecure zsh completion directories:"
 
+# zsh's builtin stat works the same on macOS (BSD stat) and Linux (GNU stat).
+zmodload -F zsh/stat b:zstat
+
 local dir mode owner group
 for dir in "${insecure_dirs[@]}"; do
   if [[ -e "$dir" ]]; then
-    mode=$(stat -f "%Sp" "$dir" 2>/dev/null)
-    owner=$(stat -f "%Su" "$dir" 2>/dev/null)
-    group=$(stat -f "%Sg" "$dir" 2>/dev/null)
+    mode=$(zstat -s +mode -- "$dir" 2>/dev/null)
+    owner=$(zstat -s +uid -- "$dir" 2>/dev/null)
+    group=$(zstat -s +gid -- "$dir" 2>/dev/null)
     print -ru2 "  $dir  ${mode:-unknown} ${owner:-unknown}:${group:-unknown}"
   else
     print -ru2 "  $dir  missing"

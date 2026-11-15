@@ -1,8 +1,8 @@
 # AGENTS.md - dotfiles
 
-Personal macOS configuration managed with GNU Stow. Each top-level package
-mirrors its target path under `$HOME`; keep changes within the package that
-owns the deployed file.
+Personal macOS configuration managed with GNU Stow, also used on WSL2 Ubuntu
+with Homebrew on Linux. Each top-level package mirrors its target path under
+`$HOME`; keep changes within the package that owns the deployed file.
 
 ## Rules
 
@@ -20,6 +20,9 @@ owns the deployed file.
   Retain normal content and scope checks.
 - Keep existing repository automation POSIX `sh`; keep Zsh-specific behavior
   under `zsh/`.
+- Keep Zsh working on both macOS and WSL2 Ubuntu. Take Homebrew paths from
+  `HOMEBREW_PREFIX`, guard macOS-only commands with `_OS_TYPE`, and on WSL2
+  use only commands that ship with Windows or the Ubuntu base system.
 
 ## Deployment
 
@@ -55,7 +58,8 @@ first with `sh starship/.config/src/generate.sh`.
 [Token](https://github.com/ThorstenRhau/token) is the color source of truth.
 Its six appearances are Classic Token, Token Flint, Token Temper, Token Ultra,
 Token Meridian, and Token Melange. Shell tools and Ghostty follow the macOS
-light or dark mode. Herdr follows the appearance reported by Ghostty and uses
+light or dark mode. On WSL2, shell tools read the Windows app mode when an
+interactive shell starts. Herdr follows the appearance reported by Ghostty and uses
 both modes from the selected family fragment. Tmux defaults to dark; use its
 prefix followed by `T` to toggle light/dark mode. Classic Token is used until
 another appearance is selected:
@@ -119,7 +123,7 @@ Token ANSI palette supplies terminal colors; no extra theme export is needed.
 The difftastic difftool pages its own output. Do not set `pager.difftool`: it
 applies to every difftool and takes the terminal away from Neovim.
 
-On macOS, Zsh sets `DFT_BACKGROUND` at startup and updates it at the next
+Zsh sets `DFT_BACKGROUND` at startup. On macOS it also updates it at the next
 scheduled appearance check, every third prompt. Changes affect subsequent
 difftastic invocations; idle shells wait until another prompt. Override display
 options for individual commands as needed:

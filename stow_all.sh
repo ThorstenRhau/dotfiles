@@ -37,7 +37,8 @@ zsh
 is_group_or_world_writable() {
   [ -d "$1" ] || return 1
 
-  mode=$(stat -f %Lp "$1" 2>/dev/null || stat -c %a "$1" 2>/dev/null) || return 1
+  # GNU stat first: its -f prints filesystem info and would pollute $mode.
+  mode=$(stat -c %a "$1" 2>/dev/null || stat -f %Lp "$1" 2>/dev/null) || return 1
   other=${mode#"${mode%?}"}
   mode_without_other=${mode%?}
   group=${mode_without_other#"${mode_without_other%?}"}
@@ -60,7 +61,8 @@ for package in $packages; do
 done
 
 # Warn if Homebrew completion directories may trigger zsh compinit warnings.
-if is_group_or_world_writable /opt/homebrew/share || is_group_or_world_writable /opt/homebrew/share/zsh; then
+brew_share="${HOMEBREW_PREFIX:-/opt/homebrew}/share"
+if is_group_or_world_writable "$brew_share" || is_group_or_world_writable "$brew_share/zsh"; then
   echo "Warning: Homebrew share directories are group/world-writable; zsh compinit may complain."
   echo "         Review permissions manually instead of changing them recursively here."
 fi

@@ -1,0 +1,22 @@
+# Print the host OS light or dark mode: macOS, Windows under WSL2, or the
+# inherited value (default dark) elsewhere.
+
+if [[ "$_OS_TYPE" == "Darwin" ]]; then
+  if [[ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" == "Dark" ]]; then
+    print dark
+  else
+    print light
+  fi
+  return
+fi
+
+if [[ -n "$WSL_DISTRO_NAME" ]] && (($+commands[reg.exe])); then
+  local value
+  value="$(reg.exe query 'HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize' /v AppsUseLightTheme 2>/dev/null)"
+  case "$value" in
+    *0x1*) print light; return ;;
+    *0x0*) print dark; return ;;
+  esac
+fi
+
+print -r -- "${SYSTEM_APPEARANCE:-dark}"

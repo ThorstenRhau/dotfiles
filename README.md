@@ -15,3 +15,10 @@ Install the declared tools, then deploy every package:
 brew bundle
 ./stow_all.sh
 ```
+
+The same steps work on WSL2 Ubuntu with
+[Homebrew on Linux](https://docs.brew.sh/Homebrew-on-Linux) installed under
+`/home/linuxbrew/.linuxbrew`. Clone the repository into the Linux file system,
+such as `~/github/dotfiles`, not under `/mnt/c`. `brew bundle` skips the
+macOS-only entries, so install the fonts in Windows and set them in Windows
+Terminal.

@@ -7,9 +7,16 @@
 # Taps (Homebrew repositories)
 # Uncomment if you use any cask applications
 
-cask "basictex"
-cask "font-symbols-only-nerd-font"
-cask "kitty"
+# macOS only: casks and formulae without Linux support. On WSL2 Ubuntu, install
+# fonts on the Windows side.
+if OS.mac?
+  cask "basictex"
+  cask "font-symbols-only-nerd-font"
+  cask "kitty"
+
+  brew "mole"
+  brew "swiftlint"
+end
 
 brew "actionlint"
 brew "bash"
@@ -44,7 +51,6 @@ brew "lazygit"
 brew "libgit2"
 brew "luacheck"
 brew "mergiraf"
-brew "mole"
 brew "mosh"
 brew "neovim"
 brew "node"
@@ -67,7 +73,6 @@ brew "shfmt"
 brew "starship"
 brew "stow"
 brew "stylua"
-brew "swiftlint"
 brew "tealdeer"
 brew "tombi"
 brew "tree"

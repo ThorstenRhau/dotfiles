@@ -20,9 +20,12 @@ chmod 600 "$HISTFILE" 2>/dev/null
 # Completion
 # =============================================================================
 
+# Homebrew prefix: /opt/homebrew on macOS, /home/linuxbrew/.linuxbrew on Linux
+local _brew_prefix="${HOMEBREW_PREFIX:-/opt/homebrew}"
+
 # Additional completions from Homebrew
-if [[ -d /opt/homebrew/share/zsh-completions ]]; then
-  fpath=(/opt/homebrew/share/zsh-completions $fpath)
+if [[ -d "$_brew_prefix/share/zsh-completions" ]]; then
+  fpath=("$_brew_prefix/share/zsh-completions" $fpath)
 fi
 
 # Autoloaded functions
@@ -72,7 +75,26 @@ fi
 # Aliases
 # =============================================================================
 
-alias ls='ls -G'
+# GNU ls reads -G as --no-group, so Linux needs its own color flag.
+if [[ "$_OS_TYPE" == "Darwin" ]]; then
+  alias ls='ls -G'
+else
+  alias ls='ls --color=auto'
+fi
+
+# WSL2: open files and URLs with Windows' default applications.
+if [[ -n "$WSL_DISTRO_NAME" ]] && (($+commands[explorer.exe])); then
+  export BROWSER=explorer.exe
+  function open() {
+    local target
+    for target in "$@"; do
+      [[ -e "$target" ]] && target="$(wslpath -w -a "$target")"
+      # explorer.exe exits with 1 even after it opens the target.
+      explorer.exe "$target"
+    done
+    return 0
+  }
+fi
 (($+commands[bat])) && alias cat=bat
 (($+commands[lazygit])) && alias lg=lazygit
 (($+commands[pip3])) && alias pip=pip3
@@ -95,15 +117,7 @@ alias gst='git status --short --branch'
 # =============================================================================
 
 # Query actual system appearance instead of inheriting from parent shell
-if [[ "$_OS_TYPE" == "Darwin" ]]; then
-  if [[ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" == "Dark" ]]; then
-    export SYSTEM_APPEARANCE=dark
-  else
-    export SYSTEM_APPEARANCE=light
-  fi
-else
-  export SYSTEM_APPEARANCE="${SYSTEM_APPEARANCE:-dark}"
-fi
+export SYSTEM_APPEARANCE="$(_system_appearance)"
 
 typeset -gi _appearance_prompt_count=2
 
@@ -142,8 +156,8 @@ fi
 # fzf-tab (must be after compinit and carapace)
 # =============================================================================
 
-if [[ -f /opt/homebrew/opt/fzf-tab/share/fzf-tab/fzf-tab.zsh ]]; then
-  source /opt/homebrew/opt/fzf-tab/share/fzf-tab/fzf-tab.zsh
+if [[ -f "$_brew_prefix/opt/fzf-tab/share/fzf-tab/fzf-tab.zsh" ]]; then
+  source "$_brew_prefix/opt/fzf-tab/share/fzf-tab/fzf-tab.zsh"
   zstyle ':fzf-tab:*' query-string prefix
 fi
 
@@ -188,11 +202,16 @@ if (($+commands[fzf])) && [[ -o zle ]] && [[ -t 0 ]]; then
 --preview-label=' Directory ' \
 --header='ctrl-/ toggle preview'"
 
-  # Ctrl-R: history search
+  # Ctrl-R: history search. clip.exe reads UTF-16LE; UTF-8 input garbles
+  # non-ASCII text.
+  local clip_cmd=pbcopy
+  if ! (($+commands[pbcopy])) && (($+commands[clip.exe])); then
+    clip_cmd='iconv -f UTF-8 -t UTF-16LE | clip.exe'
+  fi
   export FZF_CTRL_R_OPTS="\
 --scheme=history --with-nth=2.. \
 --header='shift-del: delete | ctrl-y: copy' \
---bind='ctrl-y:execute-silent(printf %s {2..} | pbcopy)+abort' \
+--bind='ctrl-y:execute-silent(printf %s {2..} | $clip_cmd)+abort' \
 --bind='shift-delete:clear-multi+select+print(dotfiles-delete-history)+accept'"
   source "$ZDOTDIR/scripts/fzf-history-delete"
   zle -N fzf-history-widget _fzf-history-widget
@@ -230,10 +249,10 @@ fi
 
 # Autosuggestions
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-local _plugin_dir="/opt/homebrew/share"
+local _plugin_dir="$_brew_prefix/share"
 [[ -r "$_plugin_dir/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] &&
   source "$_plugin_dir/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # Fast syntax highlighting (must be sourced last among plugins)
-local _fsh="/opt/homebrew/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+local _fsh="$_brew_prefix/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 [[ -r "$_fsh" ]] && source "$_fsh"

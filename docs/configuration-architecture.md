@@ -47,7 +47,11 @@ refreshed through `sync_token_themes.sh`, not edited individually.
 
 ## Runtime appearance and local state
 
-Zsh coordinates the selected Token family and the macOS light or dark mode.
+Zsh coordinates the selected Token family and the host light or dark mode.
+`zsh/.config/zsh/functions/_system_appearance` reads the mode from macOS
+`defaults`, or under WSL2 from the Windows `AppsUseLightTheme` registry value
+through `reg.exe`. Elsewhere, or when the query fails, it keeps the inherited
+`SYSTEM_APPEARANCE`, defaulting to dark.
 `zsh/.config/zsh/functions/token-theme` persists the family under
 `${XDG_STATE_HOME:-$HOME/.local/state}/token/appearance`.
 `zsh/.config/zsh/functions/_apply_appearance` selects the matching Bat,
@@ -64,9 +68,12 @@ terminal background at startup, so a running review keeps its theme until
 tuicr restarts. The file uses the same generated header and unmanaged-file
 protection as Herdr's configuration and has no tracked base yet.
 
-The macOS appearance check runs every third prompt. When the Ghostty adapter
-contents change, Zsh writes it atomically and then sends `SIGUSR2` to this user's
-processes named exactly `ghostty`, including the shell's ancestor process.
+The appearance check runs every third prompt. It picks up Token family changes
+on every platform but re-reads the system mode only on macOS; WSL2 reads the
+Windows mode once at shell startup, because each `reg.exe` call crosses the
+Windows interop boundary. When the Ghostty adapter contents change, Zsh writes
+it atomically and, on macOS only, sends `SIGUSR2` to this user's processes
+named exactly `ghostty`, including the shell's ancestor process.
 Ghostty reloads its configuration for both mode and Token family changes.
 Identical adapters do not trigger another reload; Ghostty being absent is silent.
 Idle terminals and active editors wait until a shell reaches the check. Reloading
@@ -95,9 +102,9 @@ Availability changes take effect in a new shell and apply to its child processes
 The fragment owns `git difft`, `git dshow`, `git dlog`, and the explicitly selected
 `git difftool -t difftastic`; Delta remains the default viewer and staging filter.
 
-On macOS, `_apply_appearance` exports `DFT_BACKGROUND=light` or `dark` when
-`difft` is available, both at startup and after a detected change at the
-three-prompt check. Subsequent invocations use the updated value. Difftastic's
+`_apply_appearance` exports `DFT_BACKGROUND=light` or `dark` when `difft` is
+available, both at startup and after a detected change at the three-prompt
+check. Subsequent invocations use the updated value. Difftastic's
 native display, context, syntax, width, and automatic color defaults remain
 unforced; per-command `DFT_DISPLAY`, `DFT_CONTEXT`, `DFT_WIDTH`, and
 `DFT_BACKGROUND` overrides are documented in `README.md`. Its pager is
@@ -114,6 +121,17 @@ version control.
 The relevant boundaries are enforced by `.gitignore` and package-local
 `.stow-local-ignore` files; the Zsh startup files create the XDG state and
 cache directories.
+
+## Platform differences
+
+Zsh and `stow_all.sh` take Homebrew paths from `HOMEBREW_PREFIX`:
+`/opt/homebrew` on macOS and `/home/linuxbrew/.linuxbrew` on WSL2 Ubuntu. The
+`Brewfile` installs casks and macOS-only formulae only under `OS.mac?`. On
+WSL2, Zsh uses commands that ship with Windows. Ctrl-Y in the Ctrl-R finder
+copies through `clip.exe`, converting to UTF-16LE with `iconv` first, and
+`open` and `BROWSER` use `explorer.exe`, converting existing paths with
+`wslpath -w`. The macOS-only `whichapp` function and the Ghostty and Kitty
+packages have no WSL2 counterpart.
 
 ## Validation boundaries
 

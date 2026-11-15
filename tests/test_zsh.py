@@ -135,7 +135,7 @@ class ZshTests(unittest.TestCase):
     appearance_setup = r"""
         fpath=("$1" $fpath)
         autoload -Uz _apply_appearance _write_token_adapter _token_appearance
-        autoload -Uz _check_appearance token-theme
+        autoload -Uz _check_appearance _system_appearance token-theme
         _OS_TYPE=Darwin
         SYSTEM_APPEARANCE=light
         TOKEN_APPEARANCE=token
