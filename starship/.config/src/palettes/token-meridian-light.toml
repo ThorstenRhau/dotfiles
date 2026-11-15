@@ -1,5 +1,3 @@
-palette = "token-meridian-light"
-
 [palettes.token-meridian-light]
 bg      = "#fbf9f4"
 fg      = "#28323a"

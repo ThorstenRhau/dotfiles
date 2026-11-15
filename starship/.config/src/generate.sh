@@ -27,9 +27,8 @@ for appearance in $appearances; do
       exit 1
     fi
 
-    palette=$(sed -n '/^palette = /{p;q;}' "$input")
-    if [ "$palette" != "palette = \"$appearance-$mode\"" ]; then
-      printf 'ERROR: invalid palette declaration: %s\n' "$input" >&2
+    if ! grep -qx "\[palettes\.$appearance-$mode\]" "$input"; then
+      printf 'ERROR: no [palettes.%s] section in %s\n' "$appearance-$mode" "$input" >&2
       exit 1
     fi
   done
@@ -38,21 +37,13 @@ done
 # Base config (no palette, fallback for non-macOS)
 cp "$script_dir/base.toml" "$out_dir/starship.toml"
 
-# Remove outputs superseded by the family-aware naming scheme.
-for legacy in "$out_dir/starship_dark.toml" "$out_dir/starship_light.toml"; do
-  if [ -f "$legacy" ]; then
-    rm -f "$legacy"
-  fi
-done
-
 for appearance in $appearances; do
   for mode in $modes; do
     input="$palette_dir/$appearance-$mode.toml"
     output="$out_dir/starship-$appearance-$mode.toml"
-    palette=$(sed -n '/^palette = /{p;q;}' "$input")
     {
       head -1 "$script_dir/base.toml"
-      printf '%s\n' "$palette"
+      printf 'palette = "%s"\n' "$appearance-$mode"
       tail -n +2 "$script_dir/base.toml"
       sed -n '/^\[palettes\./,$p' "$input"
     } >"$output"

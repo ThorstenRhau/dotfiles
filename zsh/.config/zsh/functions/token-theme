@@ -1,7 +1,7 @@
 # Persist and apply a Token appearance family.
 
-local usage='Usage: token-theme [token|token-flint|token-temper|token-ultra|token-meridian|token-melange|next|--help]'
-local requested current state_dir state_file stored temporary
+local usage="Usage: token-theme [${(j:|:)_token_appearances}|next|--help]"
+local requested current state_dir state_file stored
 current="$(_token_appearance)"
 state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/token"
 state_file="$state_dir/appearance"
@@ -14,21 +14,15 @@ case "$#:$1" in
     return 0
     ;;
   1:next)
-    case "$current" in
-      token) requested=token-flint ;;
-      token-flint) requested=token-temper ;;
-      token-temper) requested=token-ultra ;;
-      token-ultra) requested=token-meridian ;;
-      token-meridian) requested=token-melange ;;
-      token-melange) requested=token ;;
-    esac
+    local -i index=${_token_appearances[(Ie)$current]}
+    requested="${_token_appearances[index % $#_token_appearances + 1]}"
     ;;
-  1:token | 1:token-flint | 1:token-temper | 1:token-ultra | 1:token-meridian | 1:token-melange) requested="$1" ;;
-  *)
-    print -u2 -r -- "$usage"
-    return 2
-    ;;
+  1:*) ((${_token_appearances[(Ie)$1]})) && requested="$1" ;;
 esac
+if [[ -z "$requested" ]]; then
+  print -u2 -r -- "$usage"
+  return 2
+fi
 
 if [[ "$requested" == "$current" ]]; then
   if [[ ! -e "$state_file" || "$stored" == "$requested" ]]; then
@@ -37,18 +31,9 @@ if [[ "$requested" == "$current" ]]; then
   fi
 fi
 
-temporary="$state_file.tmp.$$"
-
 mkdir -m 700 -p "$state_dir" || return 1
 chmod 700 "$state_dir" || return 1
-if ! (umask 077; print -r -- "$requested" >|"$temporary"); then
-  command rm -f -- "$temporary"
-  return 1
-fi
-if ! command mv -f -- "$temporary" "$state_file"; then
-  command rm -f -- "$temporary"
-  return 1
-fi
+_write_token_adapter "$state_file" "$requested" || return 1
 
 _apply_appearance
 print -r -- "$requested"

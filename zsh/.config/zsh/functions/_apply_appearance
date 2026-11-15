@@ -14,20 +14,9 @@ export BAT_THEME="$theme"
 export DELTA_FEATURES="$theme"
 # Reuse our include across prompts and nested shells without replacing callers'
 # Git configuration entries.
-local git_count="${GIT_CONFIG_COUNT:-0}" git_index git_key git_value
-if [[ "$git_count" == <-> ]]; then
-  for ((git_index = 0; git_index < git_count; git_index++)); do
-    git_key="GIT_CONFIG_KEY_$git_index"
-    git_value="GIT_CONFIG_VALUE_$git_index"
-    if [[ "${(P)git_key}" == include.path &&
-      "${(P)git_value}" == "$HOME/.config/git/"(token|token-flint|token-temper|token-ultra|token-meridian|token-melange)-(dark|light).gitconfig ]]; then
-      break
-    fi
-  done
-  export "GIT_CONFIG_KEY_$git_index=include.path"
-  export "GIT_CONFIG_VALUE_$git_index=$HOME/.config/git/$theme.gitconfig"
-  export GIT_CONFIG_COUNT=$((git_index == git_count ? git_count + 1 : git_count))
-fi
+_git_env_include \
+  "${(b)HOME}/.config/git/(${(j:|:)_token_appearances})-(dark|light).gitconfig" \
+  "$HOME/.config/git/$theme.gitconfig"
 export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/$theme.yml"
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/themes/$theme"
 export STARSHIP_CONFIG="$HOME/.config/starship-$theme.toml"
@@ -88,36 +77,27 @@ fi
 if [[ -r "$herdr_base" ]]; then
   if [[ ! -r "$herdr_theme" ]]; then
     print -u2 -- "Unable to update Herdr: missing $herdr_theme"
+  elif ! _is_generated_file "$herdr_config" "$generated_header"; then
+    print -u2 -- "Refusing to overwrite unmanaged $herdr_config"
   else
-    local herdr_managed=true herdr_first_line herdr_content
-    if [[ -e "$herdr_config" || -L "$herdr_config" ]]; then
-      IFS= read -r herdr_first_line <"$herdr_config" 2>/dev/null || herdr_first_line=
-      if [[ "$herdr_first_line" != "$generated_header" ]]; then
-        herdr_managed=false
-        print -u2 -- "Refusing to overwrite unmanaged $herdr_config"
-      fi
-    fi
-
-    if [[ "$herdr_managed" == true ]]; then
-      herdr_content="$generated_header
+    local herdr_content="$generated_header
 $(<"$herdr_base")
 
 $(<"$herdr_theme")"
-      if [[ ! -r "$herdr_config" || "$(<"$herdr_config")" != "$herdr_content" ]]; then
-        if mkdir -m 700 -p "$herdr_dir" && chmod 700 "$herdr_dir" &&
-          _write_token_adapter "$herdr_config" "$herdr_content" &&
-          chmod 600 "$herdr_config"; then
-          if (($+commands[herdr] || $+functions[herdr])); then
-            local herdr_status
-            herdr_status="$(herdr status server 2>/dev/null)"
-            if [[ "$herdr_status" == "status: running"* ]]; then
-              herdr server reload-config 2>/dev/null ||
-                print -u2 -- "Unable to reload Herdr configuration"
-            fi
+    # Compare first: only a changed file reloads the server.
+    if [[ ! -r "$herdr_config" || "$(<"$herdr_config")" != "$herdr_content" ]]; then
+      if mkdir -m 700 -p "$herdr_dir" && chmod 700 "$herdr_dir" &&
+        _write_token_adapter "$herdr_config" "$herdr_content"; then
+        if (($+commands[herdr] || $+functions[herdr])); then
+          local herdr_status
+          herdr_status="$(herdr status server 2>/dev/null)"
+          if [[ "$herdr_status" == "status: running"* ]]; then
+            herdr server reload-config 2>/dev/null ||
+              print -u2 -- "Unable to reload Herdr configuration"
           fi
-        else
-          print -u2 -- "Unable to update $herdr_config"
         fi
+      else
+        print -u2 -- "Unable to update $herdr_config"
       fi
     fi
   fi
@@ -133,13 +113,9 @@ if [[ -d "$tuicr_themes" ]]; then
   for tuicr_theme in "$tuicr_themes/$appearance-"{dark,light}.toml; do
     [[ -r "$tuicr_theme" ]] || tuicr_missing="$tuicr_theme"
   done
-  local tuicr_first_line=
   if [[ -n "$tuicr_missing" ]]; then
     print -u2 -- "Unable to update tuicr: missing $tuicr_missing"
-  elif [[ -e "$tuicr_config" || -L "$tuicr_config" ]] && {
-    ! IFS= read -r tuicr_first_line <"$tuicr_config" 2>/dev/null ||
-      [[ "$tuicr_first_line" != "$generated_header" ]]
-  }; then
+  elif ! _is_generated_file "$tuicr_config" "$generated_header"; then
     print -u2 -- "Refusing to overwrite unmanaged $tuicr_config"
   else
     _write_token_adapter "$tuicr_config" "$generated_header

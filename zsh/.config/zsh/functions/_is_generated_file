@@ -1,0 +1,7 @@
+# Succeed when $1 is absent or its first line is the generated header $2, so
+# callers never overwrite a file they did not write.
+
+[[ -e "$1" || -L "$1" ]] || return 0
+local first_line
+IFS= read -r first_line <"$1" 2>/dev/null
+[[ "$first_line" == "$2" ]]

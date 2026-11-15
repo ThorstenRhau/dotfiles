@@ -318,7 +318,8 @@ for appearance in $appearances; do
 done
 
 # ------------------------------------------------------------------
-# Starship (adapted: prepend the selected palette directive)
+# Starship (adapted: keep only the palette section; generate.sh adds the
+# palette directive)
 # ------------------------------------------------------------------
 
 printf "starship:\n"
@@ -327,11 +328,10 @@ for appearance in $appearances; do
     src="$CONTRIB/starship/$appearance-$mode.toml"
     dst="$DOTFILES_DIR/starship/.config/src/palettes/$appearance-$mode.toml"
 
-    # Token contrib has a palette section but no top-level palette directive.
     palette_section=$(sed -n "/^\[palettes\.$appearance-$mode\]\$/,\$p" "$src")
 
     mkdir -p "$(dirname "$dst")"
-    printf 'palette = "%s"\n\n%s\n' "$appearance-$mode" "$palette_section" >"$dst"
+    printf '%s\n' "$palette_section" >"$dst"
     info "$dst"
   done
 done

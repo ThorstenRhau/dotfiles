@@ -116,6 +116,10 @@ alias gst='git status --short --branch'
 # Appearance & Theming
 # =============================================================================
 
+# Token families, in `token-theme next` order. sync_token_themes.sh and
+# starship/.config/src/generate.sh keep their own POSIX sh copies.
+typeset -ga _token_appearances=(token token-flint token-temper token-ultra token-meridian token-melange)
+
 # Query actual system appearance instead of inheriting from parent shell
 export SYSTEM_APPEARANCE="$(_system_appearance)"
 

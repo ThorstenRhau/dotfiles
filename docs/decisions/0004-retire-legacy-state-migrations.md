@@ -5,6 +5,9 @@ Recorded: 2026-10-12
 Supersedes: none
 Superseded by: none
 Related: `stow_all.sh`, ADR-0001
+Amended: 2026-11-15, `stow_all.sh` no longer warns about group- or
+world-writable Homebrew share directories; `compinit` reports them at shell
+startup and `zcompaudit` lists them with repair commands
 
 This record amends the deployment description in ADR-0001. The package
 layout and the external runtime state boundary from that record are

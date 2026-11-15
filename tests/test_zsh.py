@@ -10,13 +10,19 @@ ROOT = Path(__file__).resolve().parents[1]
 FUNCTIONS = ROOT / "zsh/.config/zsh/functions"
 HERDR_SOURCE = ROOT / "herdr/.config/herdr"
 TUICR_SOURCE = ROOT / "tuicr/.config/tuicr"
+# .zshrc defines the family list; these shells skip it.
+TOKEN_APPEARANCES = (
+    "typeset -ga _token_appearances="
+    "(token token-flint token-temper token-ultra token-meridian token-melange)\n"
+)
 
 
 class ZshTests(unittest.TestCase):
     def run_zsh(self, script, *args):
         with tempfile.TemporaryDirectory(prefix="dotfiles-zsh-") as home:
             result = subprocess.run(
-                ["zsh", "-dfi", "-c", script, "test", str(FUNCTIONS), *map(str, args)],
+                ["zsh", "-dfi", "-c", TOKEN_APPEARANCES + script, "test", str(FUNCTIONS),
+                 *map(str, args)],
                 env={
                     "PATH": os.environ["PATH"],
                     "HOME": home,
@@ -36,7 +42,7 @@ class ZshTests(unittest.TestCase):
     def test_git_configuration_survives_appearance_changes(self):
         self.run_zsh(r"""
             fpath=("$1" $fpath)
-            autoload -Uz _apply_appearance
+            autoload -Uz _apply_appearance _git_env_include _is_generated_file
             _token_appearance() { print -r -- "$test_appearance"; }
             _write_token_adapter() { return 0; }
             pkill() { return 1; }
@@ -63,7 +69,7 @@ class ZshTests(unittest.TestCase):
     def test_difftastic_initialization_and_nested_shells(self):
         self.run_zsh(r"""
             fpath=("$1" $fpath)
-            autoload -Uz _init_difftastic
+            autoload -Uz _init_difftastic _git_env_include
             mkdir -p "$HOME/bin" "$HOME/.config/git"
             print -r -- '#!/bin/sh' > "$HOME/bin/difft"
             chmod +x "$HOME/bin/difft"
@@ -79,7 +85,7 @@ class ZshTests(unittest.TestCase):
               $(git config --get alias.difft) == *diff.external=difft* ]] || exit 1
             zsh -dfi -c '
               fpath=("$1" $fpath)
-              autoload -Uz _init_difftastic
+              autoload -Uz _init_difftastic _git_env_include
               _init_difftastic
               [[ $GIT_CONFIG_COUNT == 3 ]] || exit 2
               # Include unrelated trailing configuration to test compaction.
@@ -134,7 +140,7 @@ class ZshTests(unittest.TestCase):
 
     appearance_setup = r"""
         fpath=("$1" $fpath)
-        autoload -Uz _apply_appearance _write_token_adapter _token_appearance
+        autoload -Uz _apply_appearance _write_token_adapter _git_env_include _is_generated_file _token_appearance
         autoload -Uz _check_appearance _system_appearance token-theme
         _OS_TYPE=Darwin
         SYSTEM_APPEARANCE=light
@@ -162,7 +168,7 @@ font-variation-bold-italic = GRAD = $grade"
 
     herdr_setup = r"""
         fpath=("$1" $fpath)
-        autoload -Uz _apply_appearance _write_token_adapter
+        autoload -Uz _apply_appearance _write_token_adapter _git_env_include _is_generated_file
         _token_appearance() { print -r -- "$test_appearance"; }
         _OS_TYPE=Darwin
         SYSTEM_APPEARANCE=light
@@ -268,7 +274,7 @@ $(<"$herdr_dir/themes/token.toml")"
     def test_herdr_is_silent_when_base_package_is_absent(self):
         self.run_zsh(r"""
             fpath=("$1" $fpath)
-            autoload -Uz _apply_appearance _write_token_adapter
+            autoload -Uz _apply_appearance _write_token_adapter _git_env_include _is_generated_file
             _token_appearance() { print -r -- token; }
             _OS_TYPE=Darwin
             SYSTEM_APPEARANCE=light
@@ -282,7 +288,7 @@ $(<"$herdr_dir/themes/token.toml")"
 
     tuicr_setup = r"""
         fpath=("$1" $fpath)
-        autoload -Uz _apply_appearance _write_token_adapter
+        autoload -Uz _apply_appearance _write_token_adapter _git_env_include _is_generated_file
         _token_appearance() { print -r -- "$test_appearance"; }
         _OS_TYPE=Darwin
         SYSTEM_APPEARANCE=light

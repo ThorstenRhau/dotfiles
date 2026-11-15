@@ -1,5 +1,3 @@
-palette = "token-meridian-dark"
-
 [palettes.token-meridian-dark]
 bg      = "#272724"
 fg      = "#c9c0b1"

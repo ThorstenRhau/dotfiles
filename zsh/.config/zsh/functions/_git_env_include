@@ -1,0 +1,38 @@
+# Own one include.path entry in the GIT_CONFIG_* environment.
+# Usage: _git_env_include <pattern> [<path>]
+# Keeps the first include.path whose value matches <pattern>, sets it to <path>,
+# drops further matches, and appends <path> when none matches. Without <path>,
+# removes every match. Unrelated entries keep their order.
+
+local pattern="$1" target="$2"
+local git_count="${GIT_CONFIG_COUNT:-0}"
+[[ "$git_count" == <-> ]] || return 0
+
+local git_index git_key git_value
+local -i next_index=0 included=0
+for ((git_index = 0; git_index < git_count; git_index++)); do
+  git_key="GIT_CONFIG_KEY_$git_index"
+  git_value="GIT_CONFIG_VALUE_$git_index"
+  if [[ "${(P)git_key}" == include.path && "${(P)git_value}" == ${~pattern} ]]; then
+    [[ -n "$target" ]] && ((!included)) || continue
+    included=1
+    # An entry already in place with the target value needs no export.
+    if ((next_index != git_index)) || [[ "${(P)git_value}" != "$target" ]]; then
+      export "GIT_CONFIG_KEY_$next_index=include.path"
+      export "GIT_CONFIG_VALUE_$next_index=$target"
+    fi
+  elif ((next_index != git_index)); then
+    export "GIT_CONFIG_KEY_$next_index=${(P)git_key}"
+    export "GIT_CONFIG_VALUE_$next_index=${(P)git_value}"
+  fi
+  ((next_index++))
+done
+for ((git_index = next_index; git_index < git_count; git_index++)); do
+  unset "GIT_CONFIG_KEY_$git_index" "GIT_CONFIG_VALUE_$git_index"
+done
+if [[ -n "$target" ]] && ((!included)); then
+  export "GIT_CONFIG_KEY_$next_index=include.path"
+  export "GIT_CONFIG_VALUE_$next_index=$target"
+  ((next_index++))
+fi
+[[ "$GIT_CONFIG_COUNT" == "$next_index" ]] || export GIT_CONFIG_COUNT=$next_index

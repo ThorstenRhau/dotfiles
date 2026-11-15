@@ -7,7 +7,5 @@ if [[ -r "$state_file" ]]; then
   appearance="$(<"$state_file")"
 fi
 
-case "$appearance" in
-  token | token-flint | token-temper | token-ultra | token-meridian | token-melange) print -r -- "$appearance" ;;
-  *) print -r -- token ;;
-esac
+((${_token_appearances[(Ie)$appearance]})) || appearance=token
+print -r -- "$appearance"

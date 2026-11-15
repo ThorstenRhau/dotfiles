@@ -34,21 +34,6 @@ yamllint
 zsh
 "
 
-is_group_or_world_writable() {
-  [ -d "$1" ] || return 1
-
-  # GNU stat first: its -f prints filesystem info and would pollute $mode.
-  mode=$(stat -c %a "$1" 2>/dev/null || stat -f %Lp "$1" 2>/dev/null) || return 1
-  other=${mode#"${mode%?}"}
-  mode_without_other=${mode%?}
-  group=${mode_without_other#"${mode_without_other%?}"}
-
-  case "$group$other" in
-    *[2367]*) return 0 ;;
-    *) return 1 ;;
-  esac
-}
-
 for package in $packages; do
   case "$package" in
     herdr | tuicr | zsh)
@@ -59,13 +44,6 @@ for package in $packages; do
       ;;
   esac
 done
-
-# Warn if Homebrew completion directories may trigger zsh compinit warnings.
-brew_share="${HOMEBREW_PREFIX:-/opt/homebrew}/share"
-if is_group_or_world_writable "$brew_share" || is_group_or_world_writable "$brew_share/zsh"; then
-  echo "Warning: Homebrew share directories are group/world-writable; zsh compinit may complain."
-  echo "         Review permissions manually instead of changing them recursively here."
-fi
 
 # Rebuild bat cache so custom themes are available
 if command -v bat >/dev/null; then
