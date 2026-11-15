@@ -65,7 +65,7 @@ and keep their own copies of the list.
 `${XDG_STATE_HOME:-$HOME/.local/state}/token/appearance`.
 `zsh/.config/zsh/functions/_apply_appearance` selects the matching Bat,
 Delta/Git, FZF, LazyGit, Ripgrep, Starship, Zsh, and Carapace configuration.
-It also writes ignored adapters for Ghostty and tmux, which long-running
+It also writes ignored adapters for Ghostty, Kitty, and tmux, which long-running
 applications consume when reloaded. Because Herdr has no include directive,
 Zsh composes its tracked `config.base.toml` and selected mode-independent Token
 family fragment into an ignored `config.toml`.
@@ -76,7 +76,7 @@ an ignored `~/.config/tuicr/config.toml` that sets `theme_dark` and
 terminal background at startup, so a running review keeps its theme until
 tuicr restarts. The file uses the same generated header and unmanaged-file
 protection as Herdr's configuration and has no tracked base yet. Both checks
-go through `_is_generated_file`, and both files, the Ghostty and tmux adapters,
+go through `_is_generated_file`, and both files, the Ghostty, Kitty, and tmux adapters,
 and the `token-theme` state file are written by `_write_token_adapter`, which
 writes atomically, privately, and only when the content changes.
 
@@ -88,6 +88,12 @@ it atomically and, on macOS only, sends `SIGUSR2` to this user's processes
 named exactly `ghostty`, including the shell's ancestor process.
 Ghostty reloads its configuration for both mode and Token family changes.
 Identical adapters do not trigger another reload; Ghostty being absent is silent.
+Kitty's tracked `dark-theme.auto.conf` and `light-theme.auto.conf` load Classic
+Token and then optionally include `token-active-dark.conf` and
+`token-active-light.conf`. Zsh writes both when the Kitty package is deployed,
+and when either changes on macOS it sends `SIGUSR1` to this user's `kitty`
+processes in the same way, so Kitty reloads for family changes. Kitty switches
+between the two modes itself.
 Idle terminals and active editors wait until a shell reaches the check. Reloading
 has the same font-refresh limitations as the manual reload action.
 
@@ -121,7 +127,7 @@ available, both at startup and after a detected change at the three-prompt
 check. Subsequent invocations use the updated value. Difftastic's
 native display, context, syntax, width, and automatic color defaults remain
 unforced; per-command `DFT_DISPLAY`, `DFT_CONTEXT`, `DFT_WIDTH`, and
-`DFT_BACKGROUND` overrides are documented in `README.md`. Its pager is
+`DFT_BACKGROUND` overrides are documented in `AGENTS.md`. Its pager is
 `less -FRX`, and colors use Ghostty's existing Token ANSI palette.
 
 Ctrl-R history deletion runs in the parent Zsh widget. Zsh reads and writes

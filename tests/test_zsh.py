@@ -401,6 +401,42 @@ theme_light = \"$1-light\""
             "token-flint", "token-temper", "token-ultra", "token-meridian", "token-melange", "token", "token"
         ])
 
+    def test_kitty_adapters_follow_family_and_reload_on_change(self):
+        self.run_zsh(r"""
+            fpath=("$1" $fpath)
+            autoload -Uz _apply_appearance _write_token_adapter _git_env_include _is_generated_file
+            _token_appearance() { print -r -- "$test_appearance"; }
+            _OS_TYPE=Darwin
+            SYSTEM_APPEARANCE=light
+            TOKEN_APPEARANCE=token
+            test_appearance=token
+            tmux() { return 1; }
+            kitty_dir="$XDG_CONFIG_HOME/kitty"
+            mkdir -p "$kitty_dir/themes"
+            kitty_signals=0
+            pkill() {
+              [[ "$*" == *ghostty ]] && return 1
+              [[ "$*" == "-USR1 -a -x -u $EUID kitty" ]] || exit 90
+              [[ "$(<"$kitty_dir/token-active-dark.conf")" == "include themes/$test_appearance-dark.conf" &&
+                "$(<"$kitty_dir/token-active-light.conf")" == "include themes/$test_appearance-light.conf" ]] || exit 91
+              ((kitty_signals++))
+              return 1
+            }
+            _apply_appearance
+            [[ $kitty_signals == 1 ]] || exit 1
+            SYSTEM_APPEARANCE=dark
+            _apply_appearance
+            [[ $kitty_signals == 1 ]] || exit 2
+            test_appearance=token-ultra
+            _apply_appearance
+            [[ $kitty_signals == 2 ]] || exit 3
+            _OS_TYPE=Linux
+            test_appearance=token
+            _apply_appearance
+            [[ $kitty_signals == 2 &&
+              "$(<"$kitty_dir/token-active-dark.conf")" == "include themes/token-dark.conf" ]] || exit 4
+        """)
+
     def test_ghostty_reload_waits_for_third_prompt(self):
         output = self.run_zsh(self.appearance_setup + r"""
             _apply_appearance

@@ -4,6 +4,7 @@ starship/.config/starship-*.toml
 
 # Local Token appearance adapters
 ghostty/.config/ghostty/token-active.ghostty
+kitty/.config/kitty/token-active-*.conf
 herdr/.config/herdr/config.toml
 herdr/.config/herdr/*.log
 herdr/.config/herdr/*.sock

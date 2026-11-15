@@ -72,6 +72,30 @@ if [[ ! -r "$ghostty_adapter" || "$(<"$ghostty_adapter")" != "$ghostty_content" 
   fi
 fi
 
+# Kitty's tracked auto theme files include one adapter per mode, so each mode
+# selects the chosen family.
+local kitty_dir="$config_home/kitty"
+if [[ -d "$kitty_dir/themes" ]]; then
+  local kitty_mode kitty_adapter kitty_content kitty_changed=false
+  for kitty_mode in dark light; do
+    kitty_adapter="$kitty_dir/token-active-$kitty_mode.conf"
+    kitty_content="include themes/$appearance-$kitty_mode.conf"
+    [[ -r "$kitty_adapter" && "$(<"$kitty_adapter")" == "$kitty_content" ]] && continue
+    if _write_token_adapter "$kitty_adapter" "$kitty_content"; then
+      kitty_changed=true
+    else
+      print -u2 -- "Unable to update $kitty_adapter"
+    fi
+  done
+  if [[ "$kitty_changed" == true && "$_OS_TYPE" == "Darwin" ]]; then
+    # SIGUSR1 reloads Kitty's configuration, including its auto theme files.
+    pkill -USR1 -a -x -u "$EUID" kitty || {
+      local reload_status=$?
+      ((reload_status == 1)) || print -u2 -- "Unable to reload Kitty (pkill status $reload_status)"
+    }
+  fi
+fi
+
 # Herdr has one config file, so combine its tracked preferences and selected
 # Token family into a protected local runtime file.
 if [[ -r "$herdr_base" ]]; then

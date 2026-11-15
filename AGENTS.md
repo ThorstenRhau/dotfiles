@@ -78,8 +78,8 @@ Run `token-theme` without an argument to print the current appearance, or use
 `${XDG_STATE_HOME:-$HOME/.local/state}` rather than in Git. Existing shells
 update at their next appearance check, Herdr replaces its active family
 fragment, tmux reloads the selected family while retaining its light/dark mode,
-and Ghostty automatically reloads when its adapter changes, including
-immediately after a `token-theme` family change.
+and Ghostty and Kitty automatically reload when their adapters change,
+including immediately after a `token-theme` family change.
 
 After Token contrib files are regenerated, sync all six appearances into this
 repository:
