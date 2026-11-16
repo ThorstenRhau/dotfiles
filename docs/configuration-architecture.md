@@ -135,6 +135,11 @@ complete history events, then the widget loads a replacement history context
 and reopens the finder. Subsequent deletions reuse that context. Other running
 shells retain their own in-memory history lists.
 
+Git signing is machine-local. The tracked Git configuration defines the
+signing profiles `1password.inc` and `ssh-key.inc` but enables neither; an
+untracked `~/.gitconfig` on each signing machine includes one and may set that
+machine's identity. Without it, commits are unsigned (ADR-0005).
+
 Private configuration, shell history, caches, generated appearance adapters,
 Herdr runtime state, and deployable Starship outputs are intentionally outside
 version control.

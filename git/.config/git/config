@@ -24,8 +24,7 @@
   ui = true  # Enable colors in git output
 
 [commit]
-  gpgsign = true # Sign commits with gpg/ssh
-  verbose = 2    # Show full diff when writing commit messages (helps write better messages)
+  verbose = 2   # Show full diff when writing commit messages (helps write better messages)
 
 [core]
   autocrlf = input      # Convert CRLF to LF on commit (Unix line endings)
@@ -135,7 +134,6 @@
   ui = auto  # Display branch/tag lists in columns when terminal is wide enough
 
 [tag]
-  gpgSign = true          # Sign tags by default
   sort = version:refname  # Sort tags using semantic versioning (v1.2.3)
 
 [transfer]
@@ -151,6 +149,12 @@
 [credential "https://gist.github.com"]
   helper =  # Reset inherited helpers (osxkeychain from Homebrew)
   helper = !gh auth git-credential  # GitHub CLI token
+
+[gpg]
+  format = ssh  # Signing profiles in 1password.inc and ssh-key.inc use SSH keys
+
+[gpg "ssh"]
+  allowedSignersFile = ~/.config/git/allowed_signers  # Verify signatures from every host
 
 [include]
   path = ~/.config/git/delta_themes.inc  # Delta color themes

@@ -97,6 +97,23 @@ plus an unthemed fallback.
 
 ## Git
 
+### Identity and signing
+
+The tracked configuration never requires 1Password or a key, so Git works on
+any machine. `github.inc` sets the personal author email for GitHub remotes.
+Signing is off until the untracked `~/.gitconfig`, which Git reads after
+`~/.config/git/config`, includes a signing profile:
+
+- `1password.inc`: the 1Password key through `op-ssh-sign`. Used on
+  tesseract.home.
+- `ssh-key.inc`: `~/.ssh/id_ed25519.pub` through the default `ssh-keygen`.
+  Used on mighty.home, whose `~/.gitconfig` also sets the MightyHome identity
+  so its commits verify on GitHub.
+
+Both profiles sign every commit and annotated tag. `allowed_signers` lists
+the public key of every signing host. A repository's own `.git/config` still
+overrides all of this.
+
 ### Diffs in the terminal
 
 Delta is the Git pager and the interactive staging filter. It shows diffs side

@@ -24,8 +24,11 @@ preserve accepted rationale.
   prompt layout.
 - [ADR-0004](decisions/0004-retire-legacy-state-migrations.md): retire the
   one-time legacy state migrations so `stow_all.sh` is a plain deploy step.
+- [ADR-0005](decisions/0005-machine-local-git-signing.md): enable Git signing
+  per machine through an untracked `~/.gitconfig` that includes a tracked
+  signing profile.
 
-All four records are accepted; the first three are retrospective. No records
+All five records are accepted; the first three are retrospective. No records
 are currently superseded, deprecated, or proposed.
 
 ## Active work
