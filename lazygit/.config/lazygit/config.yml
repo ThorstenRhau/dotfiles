@@ -17,6 +17,3 @@ git:
       command: >-
         difft --color=always --background={{colorScheme}}
         --context={{diffContext}}
-update:
-  method: prompt
-  days: 14
