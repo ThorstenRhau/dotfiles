@@ -11,7 +11,8 @@ preserve accepted rationale.
 ## Current-state documentation
 
 - [Configuration architecture](configuration-architecture.md) describes
-  package ownership, generation flows, deployment, and runtime state.
+  package ownership, generation flows, deployment, runtime appearance and
+  state, Git signing and diffs, Herdr composition, and typography.
 
 ## Decision history
 
@@ -40,8 +41,8 @@ this documentation.
 ## Release and operational evidence
 
 - `README.md` documents installation.
-- `AGENTS.md` defines source ownership, deployment, appearance selection,
-  Token synchronization, typography, and package-specific validation.
+- `AGENTS.md` defines agent rules: source ownership, deployment commands,
+  Token synchronization, and package-specific validation.
 - Git history retains dated implementation evidence. It is not a substitute
   for current repository state.
 
