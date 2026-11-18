@@ -9,7 +9,6 @@
 if OS.mac?
   cask "basictex"
   cask "font-symbols-only-nerd-font"
-  cask "kitty"
 
   brew "mole"
   brew "swiftlint"
