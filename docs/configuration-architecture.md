@@ -168,7 +168,8 @@ overrides all of this. Without the include, commits are unsigned.
 ### Diffs in the terminal
 
 Delta is the Git pager and the interactive staging filter. It shows diffs side
-by side and wraps long lines in full.
+by side when the terminal is at least 160 columns wide (`side-by-side = 160`)
+and unified below that, and wraps long lines in full.
 
 Interactive Zsh adds structural diff commands through an optional Git include,
 `~/.config/git/difftastic.inc`. `_init_difftastic` runs once at startup: when
@@ -228,8 +229,9 @@ diff.
 ### Lazygit
 
 Lazygit renders diffs with delta, unified when the diff view is narrower than
-160 columns and side by side above that. `|` cycles to difftastic. Zsh points
-`LG_CONFIG_FILE` at the tracked `config.yml` plus the selected
+160 columns and side by side above that. Below 160 it passes
+`--side-by-side=false`, which overrides the Git config. `|` cycles to
+difftastic. Zsh points `LG_CONFIG_FILE` at the tracked `config.yml` plus the selected
 `<family>-<mode>.yml` theme.
 
 ### Merges

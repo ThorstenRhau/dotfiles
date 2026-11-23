@@ -6,12 +6,11 @@ gui:
 git:
   # Cycle renderers with |.
   diffRenderers:
-    # Git config turns delta's side-by-side on; switch it off when the diff
-    # view is too narrow for two columns.
+    # Git config turns delta's side-by-side on; the CLI flag switches it off
+    # when the diff view is too narrow for two columns.
     - name: delta
       command: >-
-        {{if lt .width 160}}GIT_CONFIG_PARAMETERS="'delta.side-by-side=false'"
-        {{end}}delta --paging=never
+        delta --paging=never {{if lt .width 160}}--side-by-side=false{{end}}
     - name: difftastic
       type: extDiff
       command: >-

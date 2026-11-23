@@ -36,7 +36,7 @@
 [delta]
   line-numbers = true     # Show line numbers in diffs
   navigate = true         # Enable n/N navigation between diff sections
-  side-by-side = true     # Display diffs in split view
+  side-by-side = 160      # Split view only when the terminal is at least 160 columns wide
   wrap-max-lines = unlimited  # Wrap long lines fully; the default cuts them off after two wraps
 
 [difftool]
